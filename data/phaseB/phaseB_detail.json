@@ -1,0 +1,436 @@
+[
+  {
+    "peptide": "LPPQ",
+    "seq": "LPPQ",
+    "dg_vina": -7.472,
+    "dE_MM": 2.452,
+    "E_complex": -304.38,
+    "E_pocket": -325.13,
+    "E_lig": 18.3,
+    "n_pocket_res": 39,
+    "pocket_residues": [
+      "ALA130",
+      "ARG147",
+      "ARG184",
+      "ASN119",
+      "ASN150",
+      "ASN151",
+      "ASN169",
+      "ASN170",
+      "ASN179",
+      "ASP133",
+      "ASP171",
+      "GLN153",
+      "GLU145",
+      "GLU146",
+      "ILE143",
+      "ILE148",
+      "ILE172",
+      "ILE185",
+      "LEU180",
+      "LYS175",
+      "NAG1201",
+      "PRO149",
+      "PRO178",
+      "PRO181",
+      "SER131",
+      "SER182",
+      "THR129",
+      "THR144",
+      "THR152",
+      "THR186",
+      "TRP168",
+      "TRP187",
+      "TYR118",
+      "TYR132",
+      "TYR166",
+      "TYR173",
+      "TYR183",
+      "VAL167",
+      "VAL174"
+    ],
+    "contact_total": 92,
+    "contact_per_position": [
+      [
+        1,
+        "L",
+        9
+      ],
+      [
+        2,
+        "P",
+        21
+      ],
+      [
+        3,
+        "P",
+        25
+      ],
+      [
+        4,
+        "Q",
+        37
+      ]
+    ],
+    "contact_top_atoms": [
+      [
+        "C",
+        8
+      ],
+      [
+        "C",
+        8
+      ],
+      [
+        "C",
+        8
+      ],
+      [
+        "C",
+        5
+      ],
+      [
+        "C",
+        5
+      ],
+      [
+        "C",
+        5
+      ],
+      [
+        "O",
+        4
+      ],
+      [
+        "C",
+        4
+      ]
+    ],
+    "fingerprint": {
+      "hbonds": 10,
+      "hydrophobics": 72,
+      "ionic_like": 0,
+      "hbond_lig_atoms": [
+        "O",
+        "N",
+        "O",
+        "O",
+        "N",
+        "O",
+        "N",
+        "N",
+        "O",
+        "N"
+      ],
+      "hbond_pocket_residues": [
+        "GLU146",
+        "GLU146",
+        "GLU146",
+        "GLU146",
+        "GLU146",
+        "PRO149",
+        "GLU146",
+        "LYS175",
+        "NAG1201",
+        "TYR166"
+      ]
+    }
+  },
+  {
+    "peptide": "APSPE",
+    "seq": "APSPE",
+    "dg_vina": -7.15,
+    "dE_MM": 2.929,
+    "E_complex": -254.11,
+    "E_pocket": -313.08,
+    "E_lig": 56.04,
+    "n_pocket_res": 39,
+    "pocket_residues": [
+      "ALA130",
+      "ARG147",
+      "ARG184",
+      "ASN150",
+      "ASN151",
+      "ASN169",
+      "ASN179",
+      "ASP171",
+      "GLU145",
+      "GLU146",
+      "GLU177",
+      "ILE134",
+      "ILE143",
+      "ILE148",
+      "ILE172",
+      "ILE176",
+      "ILE185",
+      "LEU164",
+      "LEU180",
+      "LYS175",
+      "NAG1201",
+      "PRO149",
+      "PRO178",
+      "PRO181",
+      "SER131",
+      "SER182",
+      "THR144",
+      "THR152",
+      "THR280",
+      "TRP168",
+      "TRP187",
+      "TYR118",
+      "TYR132",
+      "TYR166",
+      "TYR173",
+      "TYR183",
+      "VAL167",
+      "VAL174",
+      "NAG1"
+    ],
+    "contact_total": 119,
+    "contact_per_position": [
+      [
+        1,
+        "A",
+        2
+      ],
+      [
+        2,
+        "P",
+        8
+      ],
+      [
+        3,
+        "S",
+        0
+      ],
+      [
+        4,
+        "P",
+        0
+      ],
+      [
+        5,
+        "E",
+        109
+      ]
+    ],
+    "contact_top_atoms": [
+      [
+        "C",
+        9
+      ],
+      [
+        "C",
+        9
+      ],
+      [
+        "C",
+        9
+      ],
+      [
+        "C",
+        8
+      ],
+      [
+        "C",
+        8
+      ],
+      [
+        "C",
+        8
+      ],
+      [
+        "C",
+        8
+      ],
+      [
+        "C",
+        8
+      ]
+    ],
+    "fingerprint": {
+      "hbonds": 13,
+      "hydrophobics": 81,
+      "ionic_like": 0,
+      "hbond_lig_atoms": [
+        "O",
+        "N",
+        "O",
+        "N",
+        "N",
+        "O",
+        "N",
+        "O",
+        "O",
+        "N",
+        "O",
+        "N",
+        "N"
+      ],
+      "hbond_pocket_residues": [
+        "GLU146",
+        "SER182",
+        "SER182",
+        "TYR183",
+        "SER182",
+        "GLU146",
+        "GLU146",
+        "ARG147",
+        "GLU145",
+        "GLU145",
+        "THR144",
+        "PRO178",
+        "GLU146"
+      ]
+    }
+  },
+  {
+    "peptide": "LAPSP",
+    "seq": "LAPSP",
+    "dg_vina": -7.087,
+    "dE_MM": 2.84,
+    "E_complex": -291.6,
+    "E_pocket": -333.57,
+    "E_lig": 39.12,
+    "n_pocket_res": 40,
+    "pocket_residues": [
+      "ALA130",
+      "ARG147",
+      "ARG184",
+      "ASN119",
+      "ASN150",
+      "ASN151",
+      "ASN169",
+      "ASN179",
+      "ASP133",
+      "ASP171",
+      "GLU145",
+      "GLU146",
+      "GLU177",
+      "ILE134",
+      "ILE143",
+      "ILE148",
+      "ILE172",
+      "ILE185",
+      "LEU164",
+      "LEU180",
+      "LYS175",
+      "NAG1201",
+      "PRO149",
+      "PRO178",
+      "PRO181",
+      "SER131",
+      "SER182",
+      "THR144",
+      "THR152",
+      "THR280",
+      "TRP168",
+      "TRP187",
+      "TYR118",
+      "TYR132",
+      "TYR166",
+      "TYR173",
+      "TYR183",
+      "VAL167",
+      "VAL174",
+      "NAG1"
+    ],
+    "contact_total": 101,
+    "contact_per_position": [
+      [
+        1,
+        "L",
+        6
+      ],
+      [
+        2,
+        "A",
+        7
+      ],
+      [
+        3,
+        "P",
+        22
+      ],
+      [
+        4,
+        "S",
+        16
+      ],
+      [
+        5,
+        "P",
+        50
+      ]
+    ],
+    "contact_top_atoms": [
+      [
+        "C",
+        9
+      ],
+      [
+        "C",
+        7
+      ],
+      [
+        "C",
+        7
+      ],
+      [
+        "C",
+        6
+      ],
+      [
+        "C",
+        5
+      ],
+      [
+        "C",
+        5
+      ],
+      [
+        "C",
+        5
+      ],
+      [
+        "C",
+        5
+      ]
+    ],
+    "fingerprint": {
+      "hbonds": 13,
+      "hydrophobics": 80,
+      "ionic_like": 0,
+      "hbond_lig_atoms": [
+        "O",
+        "N",
+        "O",
+        "O",
+        "O",
+        "N",
+        "O",
+        "O",
+        "O",
+        "N",
+        "O",
+        "N",
+        "N"
+      ],
+      "hbond_pocket_residues": [
+        "GLU146",
+        "GLU146",
+        "GLU146",
+        "GLU146",
+        "ASN151",
+        "ASN151",
+        "ASN151",
+        "ASN150",
+        "LEU180",
+        "GLU146",
+        "GLU146",
+        "ASN179",
+        "GLU146"
+      ]
+    }
+  }
+]

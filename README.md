@@ -46,6 +46,44 @@
 
 ---
 
+## 2.5 Phase A — 官方服务器过滤（替代原代理打分）
+
+> PeptideRanker 官方服务器长期 503 不可用；以经同行验证的 **ToxinPred 3.0 批量提交 + AlgPred 2.0 (AAC-RF)** 替代过敏/毒性过滤层。
+
+| 阶段 | 过滤 | 剩余 |
+|---|---|---|
+| 母集（2–6 aa 短肽） | — | **4,950** |
+| AlgPred 2.0（ML score < 0.6） | −270 | 4,680 |
+| ToxinPred 3.0（Non-Toxin） | −6 | **4,674** |
+| PeptideRanker（PR ≥ 0.5） | 跳过（服务器 503，待恢复后补） | — |
+
+- 全部 **60 条对接队列肽均通过** ToxinPred + AlgPred（0 条被拒）。
+- 产物：`data/phaseA_inputs/results_toxinpred.csv`、`results_algpred.csv`、`official_candidates.tsv`（4,674 条）。
+- 脚本：`scripts/phaseA/phaseA_run_toxinpred.py`、`phaseA_run_algpred.py`、`phaseA_merge.py`。
+- 详见 `docs/phaseA_README.md`。
+
+---
+
+## 2.6 Phase B — 纯计算结合验证（静态 MM，无 MD）
+
+> 本机**无 GROMACS / 无 conda**，无法运行 100–150 ns MD。采用 **单构象端点法静态 MMFF94s 验证** + 几何接触剖面，作为湿实验/MD 的可行性替代。
+
+| 肽（序列） | dG_Vina | ΔE_MM* | 口袋残基 | 总接触 | 氢键 | 关键接触位置 |
+|---|---|---|---|---|---|---|
+| LPPQ (Leu-Pro-Pro-Gln) | −7.472 | +2.45 | 39 | 92 | 10 | **Gln4:37**（C 端主导），Pro2/3 各 ~21–25 |
+| APSPE (Ala-Pro-Ser-Pro-Glu) | −7.150 | +2.93 | 39 | 119 | 13 | **Glu5:109**（S1′ 压倒性） |
+| LAPSP (Leu-Ala-Pro-Ser-Pro) | −7.087 | +2.84 | 40 | 101 | 13 | **Pro5:50**（C 端 Pro） |
+
+> \* ΔE_MM 为气相单点能量差，**非真实 ΔG**（无显式溶剂化/熵），三肽量级相近、不具区分度；结合强弱排序仍以 Vina dG 为主判据。
+
+- **生物学一致性**：APSPE 的 C 端谷氨酸在 S1′ 口袋的极端接触偏好，与 DPP4“偏好底物 C 端带负电残基占据 S1′”机制吻合；双 Pro 核心符合 S1′/S2′ 对 Pro 的偏好。
+- **氢键伙伴**：三肽均富集 **GLU146**（S2′ 区），并分别触及 PRO149 / SER182 / TYR183 / ASN151 —— 均位于 DPP4 已知活性中心腔体。
+- 产物：`data/phaseB/phaseB_results.tsv`、`phaseB_detail.json`。
+- 脚本：`scripts/phaseB/phaseB_validation.py`。
+- 局限与复现：详见 `docs/phaseB_README.md`。
+
+---
+
 ## 3. 目录结构
 
 ```
@@ -103,19 +141,21 @@ bash scripts/batch_dock.sh
 
 ## 5. 必须如实披露的局限
 
-1. **过滤打分是代理启发式**（基于文献理化特征），非官方 PeptideRanker / AllerTOP / ToxinPred 服务器输出，正式稿件须替换并注明。
+1. **过滤层**：PeptideRanker 官方服务器 503 不可用，已以 **ToxinPred 3.0 + AlgPred 2.0** 官方输出替代过敏/毒性过滤（Phase A，4,674 候选）；PR 层待服务器恢复补全。原"代理启发式"打分仅用于早期 2,019→60 对接队列收窄，不应作为最终发表判据。
 2. **对接为静态 dG 估计**，需经 GROMACS MD / MM-PBSA + 体外实验确认，不能直接作为活性结论。
 3. **毛竹 0 条人工审阅条目（全 TrEMBL 预测）**，Methods 须如实披露来源与预测性质（模板大蒜论文同样约 95% 为 TrEMBL，可接受）。
 4. **WPHY/WPQY/VAPGW 是大蒜肽**，不应用于毛竹真值校验。
 
 ---
 
-## 6. 后续待办（按模板全程）
+## 6. 后续待办（按模板全程；本项目为纯计算，无湿实验）
 
-- [ ] 官方 PeptideRanker / AllerTOP / ToxinPred 服务器验证 Top 候选
-- [ ] GROMACS MD（50→150 ns）+ MM/PBSA 精算 Top 肽结合自由能
-- [ ] 网络药理学：SwissTargetPrediction → STRING → DAVID
-- [ ] 体外活性验证：Gly-Pro-pNA DPP4 抑制（IC₅₀）+ Caco-2 原位抑制
+- [x] **Phase A** 官方 ToxinPred 3.0 + AlgPred 2.0 过滤（4,674 候选；PeptideRanker 服务器 503 待恢复补）
+- [x] **Phase B（静态近似）** 单构象 MMFF94s 松弛 + 几何接触剖面（Top3 已完成）
+- [ ] **Phase B 升级** 若在 HPC 获 GROMACS：补 100–150 ns MD + MM-PBSA（含 GB 溶剂化与熵项），得定量 ΔG 与收敛残基分解
+- [ ] PeptideRanker 恢复后补 PR ≥ 0.5 过滤层（scripts/phaseA/phaseA_merge.py 已支持自动并入）
+- [ ] 网络药理学：SwissTargetPrediction → STRING → DAVID（计算上下文，替代 Caco-2 转运）
+- [ ] 稿件定位 *in silico* 发现；Methods 如实披露 ①官方过滤已做 ②Vina 为静态 dG ③毛竹 0 条人工审阅全 TrEMBL ④本 Phase B 为静态近似、湿实验未做
 
 ---
 
