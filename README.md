@@ -72,7 +72,7 @@ moso-bamboo-DPP4-peptides/
 │   ├── moso_dock_run.py
 │   ├── moso_report_results.py
 │   ├── batch_dock.cmd / batch_dock.sh   # 一键批量对接
-│   └── aux/                   # 报告生成脚本
+│   └── reports/                # 报告生成脚本
 └── docs/
     └── 毛竹DPP4抑制肽_项目总结.docx   # 项目完整总结
 ```
