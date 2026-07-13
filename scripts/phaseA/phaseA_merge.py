@@ -1,172 +1,238 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
-Phase A - Step 3: 合并三个官方服务器的返回结果，得到"官方过滤"候选集。
+Phase A — Step 3: 合并三个官方服务器的返回结果，得到"官方过滤"候选集。
 
 流程:
-  母集 (4,950 条 2-6aa) ── PeptideRanker (PR >= THR_PR)
-                         ── AllerTOP v2  (非过敏原)
-                         ── ToxinPred3   (Non-Toxin)
-        └─> 三者交集 = 官方过滤候选集  ->  data/phaseA_inputs/official_candidates.tsv
+  母集 (4,950 条 2-6aa)
+    ── [可选] PeptideRanker (PR >= THR_PR)  — 服务器暂不可用，手动提交后回填
+    ── AlgPred 2.0  (ML Score < THR_ALGPRED) — 自动提交
+    ── ToxinPred3   (Non-Toxin)               — 自动提交
+    └─> 交集 = 官方过滤候选集
 
 用法:
-  1. 把三个服务器的结果另存为 CSV/TSV（列名见 CONFIG 区注释）。
-  2. 在 CONFIG 区填好文件路径与列名（或保持自动探测默认值）。
+  1. 确保以下文件存在：
+     data/phaseA_inputs/results_toxinpred.csv   (由 phaseA_run_toxinpred.py 生成)
+     data/phaseA_inputs/results_algpred.csv     (由 phaseA_run_algpred.py 生成)
+  2. (可选) 放 results_peptideranker.tsv 到同一目录
   3. 运行: python phaseA_merge.py
-  4. 查看输出的漏斗计数与 official_candidates.tsv。
+  4. 查看漏斗计数与 official_candidates.tsv
 
-说明:
-  - 服务器返回格式可能略有差异，本脚本对每类结果用"序列列 + 分值/标签列"
-    做通用加载；列名可用 CONFIG 显式指定，未指定时按关键词自动探测。
-  - 任一结果文件缺失时，该阶段会被跳过并在漏斗中标注 (skipped)，便于分阶段回填。
-  - 仅用标准库 (csv)，无需额外依赖。
+注意:
+  - PeptideRanker 服务器当前 503（peptide.ucd.ie），恢复后手动提交并在下方
+    取消掉 PR_FILE 路径前的注释即可启用。
+  - AlgPred 对短肽（2-6aa）的过敏原预测阈值需结合 ML Score 定量使用，
+    默认 THR_ALGPRED=0.6（ML Score < 0.6 视为非过敏原）。
+    若所有肽均被判为 Allergen，可调高阈值；若希望收紧，调低阈值。
+  - ToxinPred 返回的预测标签是 "Non-Toxin" / "Toxin"。
 """
 import os
 import csv
 
-BASE = r"E:/workbuddy/moso-bamboo-DPP4-peptides/data/phaseA_inputs"
+BASE = os.path.normpath(r"E:/workbuddy/moso-bamboo-DPP4-peptides/data/phaseA_inputs")
 MASTER = os.path.join(BASE, "moso_short_2to6.txt")
 OUT = os.path.join(BASE, "official_candidates.tsv")
 
 # ============================== CONFIG ==============================
-# 三个服务器结果文件路径（把网页/邮件结果另存为 csv 或 tsv 后填这里）
-PR_FILE = os.path.join(BASE, "results_peptideranker.tsv")        # PeptideRanker 结果
-ALLER_FILE = os.path.join(BASE, "results_allertop.tsv")         # AllerTOP v2 结果
-TOX_FILE = os.path.join(BASE, "results_toxinpred.csv")           # ToxinPred3 结果
+# --- 结果文件路径 ---
+# PeptideRanker（手动提交后取消注释）
+# PR_FILE = os.path.join(BASE, "results_peptideranker.tsv")
 
-# 阈值 / 标签
-THR_PR = 0.5                       # PeptideRanker: 生物活性概率 >= 0.5 视为有活性
-NON_ALLERGEN_LABELS = ("non-allergen", "non_allergen", "nonallergen",
-                         "non allergen", "0", "no", "negative")   # AllerTOP 阴性标签（小写匹配）
+# AlgPred 2.0（自动生成）
+ALG_FILE = os.path.join(BASE, "results_algpred.csv")
+
+# ToxinPred3（自动生成）
+TOX_FILE = os.path.join(BASE, "results_toxinpred.csv")
+
+# --- 阈值 ---
+THR_PR = 0.5                     # PeptideRanker bioactivity threshold
+THR_ALGPRED = 0.6               # AlgPred ML Score cutoff (< 0.6 = non-allergen)
 TOXIN_NEG_LABELS = ("non-toxin", "nontoxin", "non_toxin",
-                      "0", "no", "negative")                      # ToxinPred 阴性标签（小写匹配）
-
-# 列名自动探测关键词
-SEQ_HINTS = ("sequence", "peptide", "seq", "pep")
-PR_SCORE_HINTS = ("score", "prob", "probability", "rank", "pr")
-ALLER_HINTS = ("allerg", "class", "prediction", "label", "result")
-TOX_HINTS = ("prediction", "label", "class", "result", "toxin")
-
-# 若自动探测不准，可在下方显式指定（留空 "" 则用自动探测）
-PR_SEQ_COL = ""
-PR_SCORE_COL = ""
-ALLER_SEQ_COL = ""
-ALLER_LABEL_COL = ""
-TOX_SEQ_COL = ""
-TOX_LABEL_COL = ""
+                    "0", "no", "negative")
 # ====================================================================
 
 
-def _find_col(header, hints, explicit):
-    if explicit:
-        return explicit
-    hl = [h.lower() for h in header]
-    for h in hints:
-        for i, name in enumerate(hl):
-            if h in name:
-                return header[i]
-    return None
-
-
-def load_table(path):
+def load_csv(path):
+    """Load CSV file, return (header, rows) or (None, None) if missing."""
     if not os.path.exists(path):
         return None, None
     with open(path, encoding="utf-8-sig", newline="") as f:
-        sample = f.read(4096)
-        f.seek(0)
-        delim = "\t" if sample.count("\t") >= sample.count(",") else ","
-        reader = csv.DictReader(f, delimiter=delim)
+        reader = csv.DictReader(f)
         rows = list(reader)
         return reader.fieldnames, rows
 
 
-def load_pr(path, universe):
-    fn, rows = load_table(path)
-    if fn is None:
+def build_seq_map(header, rows, seq_col_hints, value_col, convert=None):
+    """Build {sequence_upper: value} map from CSV rows."""
+    if header is None:
         return None
-    seqc = _find_col(fn, SEQ_HINTS, PR_SEQ_COL)
-    scrc = _find_col(fn, PR_SCORE_HINTS, PR_SCORE_COL)
-    if seqc is None or scrc is None:
-        print(f"  [PR] 列探测失败 header={fn}")
+
+    hl = [h.lower() for h in header]
+    seq_col = None
+    for hint in seq_col_hints:
+        for i, name in enumerate(hl):
+            if hint in name:
+                seq_col = header[i]
+                break
+        if seq_col:
+            break
+
+    if seq_col is None:
+        print(f"  [WARN] 找不到序列列 (hints={seq_col_hints}, header={header})")
         return None
+
     out = {}
     for r in rows:
-        seq = (r.get(seqc) or "").strip().upper()
-        try:
-            val = float(r.get(scrc))
-        except (TypeError, ValueError):
+        seq = (r.get(seq_col) or "").strip().upper()
+        if not seq:
             continue
-        if seq:
-            out[seq] = val
-    print(f"  [PR] 读入 {len(out)} 条; 阈值 >= {THR_PR}")
+        # Also try peptide_id column if seq is short (e.g., from numbering)
+        if len(seq) < 2 and r.get("sequence", "").strip():
+            seq = r["sequence"].strip().upper()
+        val_str = r.get(value_col, "").strip()
+        if convert:
+            try:
+                val = convert(val_str)
+            except (ValueError, TypeError):
+                continue
+        else:
+            val = val_str.lower()
+        out[seq] = val
+
     return out
 
 
-def load_label(path, hints, explicit, neg_labels, name):
-    fn, rows = load_table(path)
+def build_toxinpred_map():
+    """Load ToxinPred results. Returns {sequence: prediction_label}."""
+    fn, rows = load_csv(TOX_FILE)
     if fn is None:
         return None
-    seqc = _find_col(fn, SEQ_HINTS, explicit[0])
-    labc = _find_col(fn, hints, explicit[1])
-    if seqc is None or labc is None:
-        print(f"  [{name}] 列探测失败 header={fn}")
-        return None
+
+    # Columns: peptide_id, sequence, svm_score, prediction
     out = {}
     for r in rows:
-        seq = (r.get(seqc) or "").strip().upper()
-        lab = (r.get(labc) or "").strip().lower()
-        if seq:
-            out[seq] = lab
-    print(f"  [{name}] 读入 {len(out)} 条")
+        seq = (r.get("sequence") or "").strip().upper()
+        pred = (r.get("prediction") or "").strip()
+        if seq and pred:
+            out[seq] = pred.lower()
+    print(f"  [ToxinPred] 读入 {len(out)} 条")
+    return out
+
+
+def build_algpred_map():
+    """
+    Load AlgPred results.
+    AlgPred doesn't return sequence in results, only peptide_id and ML score.
+    We need to map pep_XXXXX IDs back to the sequences from the master FASTA.
+    Returns {sequence: ml_score_float}
+    """
+    fn, rows = load_csv(ALG_FILE)
+    if fn is None:
+        return None
+
+    # Build ID→seq map from master FASTA
+    id_to_seq = {}
+    with open(os.path.join(BASE, "moso_short_2to6.fasta")) as f:
+        lines = f.read().strip().split("\n")
+    cur_id = None
+    for line in lines:
+        if line.startswith(">"):
+            cur_id = line[1:].strip()
+        elif cur_id:
+            id_to_seq[cur_id] = line.strip().upper()
+            cur_id = None
+
+    out = {}
+    for r in rows:
+        pid = (r.get("peptide_id") or "").strip()
+        score_str = (r.get("ml_score") or "").strip()
+        seq = id_to_seq.get(pid, "")
+        if seq and score_str:
+            try:
+                out[seq] = float(score_str)
+            except ValueError:
+                pass
+    print(f"  [AlgPred] 读入 {len(out)} 条, 阈値 ML Score < {THR_ALGPRED}")
     return out
 
 
 def main():
-    with open(MASTER, encoding="utf-8") as f:
+    with open(MASTER) as f:
         universe = [l.strip() for l in f if l.strip()]
     print(f"[母集] 2-6aa 短肽共 {len(universe)} 条\n")
 
     print("[加载结果]")
-    pr = load_pr(PR_FILE, universe)
-    aller = load_label(ALLER_FILE, ALLER_HINTS,
-                       (ALLER_SEQ_COL, ALLER_LABEL_COL), NON_ALLERGEN_LABELS, "AllerTOP")
-    tox = load_label(TOX_FILE, TOX_HINTS,
-                     (TOX_SEQ_COL, TOX_LABEL_COL), TOXIN_NEG_LABELS, "ToxinPred")
 
+    # ToxinPred (automated)
+    tox = build_toxinpred_map()
+    if tox is None:
+        print("  [ToxinPred] 文件缺失 -> 跳过")
+
+    # AlgPred (automated)
+    alg = build_algpred_map()
+    if alg is None:
+        print("  [AlgPred] 文件缺失 -> 跳过")
+
+    # PeptideRanker (manual, optional)
+    pr = None
+    pr_file_path = None
+    for candidate in ["results_peptideranker.tsv", "results_peptideranker.csv"]:
+        p = os.path.join(BASE, candidate)
+        if os.path.exists(p):
+            pr_file_path = p
+            break
+
+    if pr_file_path:
+        print(f"  [PR] 找到文件: {pr_file_path}")
+        fn, rows = load_csv(pr_file_path)
+        if fn:
+            seq_col = None
+            score_col = None
+            hl = [h.lower() for h in fn]
+            for h, name in zip(hl, fn):
+                if any(x in h for x in ("sequence", "peptide", "seq", "pep")):
+                    seq_col = name
+                if any(x in h for x in ("score", "prob", "probability", "rank")):
+                    score_col = name
+            if seq_col and score_col:
+                pr = {}
+                for r in rows:
+                    seq = (r.get(seq_col) or "").strip().upper()
+                    try:
+                        val = float(r.get(score_col))
+                    except (TypeError, ValueError):
+                        continue
+                    if seq:
+                        pr[seq] = val
+                print(f"  [PR] 读入 {len(pr)} 条, 阈值 >= {THR_PR}")
+    else:
+        print("  [PR] 文件缺失 -> 跳过 (PeptideRanker 服务器暂不可用)")
+
+    # ── Funnel ──
     survivors = set(universe)
     funnel = [("母集 (2-6aa)", len(universe))]
 
-    # PeptideRanker
-    if pr is None:
-        print("  [PR] 文件缺失 -> 跳过该阶段 (skipped)\n")
-    else:
+    if pr is not None:
         passed = {s for s in survivors if pr.get(s, -1) >= THR_PR}
         survivors = passed
         funnel.append((f"PeptideRanker >= {THR_PR}", len(survivors)))
 
-    # AllerTOP
-    if aller is None:
-        print("  [AllerTOP] 文件缺失 -> 跳过该阶段 (skipped)\n")
-    else:
-        passed = {s for s in survivors if aller.get(s, "?").lower() in NON_ALLERGEN_LABELS}
+    if alg is not None:
+        passed = {s for s in survivors if alg.get(s, 999) < THR_ALGPRED}
         removed = len(survivors) - len(passed)
         survivors = passed
-        funnel.append((f"AllerTOP 非过敏原 (-{removed})", len(survivors)))
+        funnel.append((f"AlgPred ML < {THR_ALGPRED} (-{removed})", len(survivors)))
 
-    # ToxinPred
-    if tox is None:
-        print("  [ToxinPred] 文件缺失 -> 跳过该阶段 (skipped)\n")
-    else:
-        passed = {s for s in survivors if tox.get(s, "?").lower() in TOXIN_NEG_LABELS}
+    if tox is not None:
+        passed = {s for s in survivors if tox.get(s, "?") in TOXIN_NEG_LABELS}
         removed = len(survivors) - len(passed)
         survivors = passed
         funnel.append((f"ToxinPred Non-Toxin (-{removed})", len(survivors)))
 
     print("\n[漏斗]")
     for stage, n in funnel:
-        print(f"  {stage:32s} : {n}")
+        print(f"  {stage:40s} : {n}")
 
-    # 输出
     survivors = sorted(survivors)
     with open(OUT, "w", encoding="utf-8", newline="") as f:
         w = csv.writer(f, delimiter="\t")
