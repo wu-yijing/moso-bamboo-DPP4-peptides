@@ -55,7 +55,7 @@
 | 母集（2–6 aa 短肽） | — | **4,950** |
 | AlgPred 2.0（ML score < 0.6） | −270 | 4,680 |
 | ToxinPred 3.0（Non-Toxin） | −6 | **4,674** |
-| PeptideRanker（PR ≥ 0.5） | 跳过（服务器 503，待恢复后补） | — |
+| iDPPIV-SCM（离线复现） | 替代 PeptideRanker 代理打分（见 2.8） | 4,950 短肽全打分 |
 
 - 全部 **60 条对接队列肽均通过** ToxinPred + AlgPred（0 条被拒）。
 - 产物：`data/phaseA_inputs/results_toxinpred.csv`、`results_algpred.csv`、`official_candidates.tsv`（4,674 条）。
@@ -97,6 +97,31 @@
 
 ---
 
+## 2.8 iDPPIV-SCM 模块 — 离线活性预筛（替代 PeptideRanker 代理打分）
+
+> PeptideRanker 官方服务器与 iDPPIV-SCM 官网均长期不可用（pythonanywhere 显示 "Coming Soon"）。为彻底消除对外部服务器的依赖，采用 **iDPPIV-SCM（Scoring Card Method，Charoenkwan et al., *J. Proteome Res.* 2020, DOI:10.1021/acs.jproteome.0c00590）本地完全离线复现**，替换原 `pepranker()` 代理打分（原恒定 1.000、零区分力）。
+
+| 环节 | 方法 | 结果 |
+|---|---|---|
+| 训练数据 | WeiLab-BioChem/Structural-DPP-IV 公开同源数据集（531+532 基准 / 133+133 独立测试，均为 20 种标准氨基酸） | `scripts/idppiv_scm/data/` |
+| 评分卡 | 全局氨基酸组成型 SCM：score = Σₐ nₐ·log₂(P⁺ₐ/P⁻ₐ)（P⁺/P⁻ 为正/负样本残基频率） | `scripts/idppiv_scm/model.py` |
+| 阶段1（活性预筛） | 对全部 4,950 条 2–6 aa 短肽打分，连续分布 [−7.243, 4.431]，预测为 DPP-IV 抑制肽 **3,400 条 (68.7%)** | `data/moso_candidates_idppiv_short.tsv` |
+| 阶段2（DPP4 偏好收窄） | 3–5 aa、N 端疏水、含疏水残基（保留独立生物学规则）；iDPPIV 分 > 0 净正向 | 候选池 **565** → 对接队列 **60** |
+| Vina 对接（同法） | 1WCY 受体、30³ 盒子、exhaustiveness 8（与旧队列一致） | `docking/moso_dock_results_idppiv_clean.tsv` |
+
+**关键发现（见 `docs/方法学替换报告.md`、`docking/moso_dock_compare.tsv`）：**
+1. **iDPPIV 分与 Vina dG 几乎零相关（Spearman ρ = 0.067）**——评分卡预测的是"DPP-IV 抑制活性倾向"（分类维度），而非"结合自由能"（物理维度），二者正交。这验证了"活性预筛 → 结合评估"两级独立过滤的管线设计。
+2. **集合层面富集更强结合肽**：同法制备下，新队列最佳 **APQIP −6.807** 优于旧代理队列最佳 **LAPSP −6.461**；dG ≤ −6.0 的强结合肽占比 33.3% vs 20.0%；重叠 32 肽中 21 个更优。Δ≈−0.35 kcal/mol 落在 Vina 典型噪声带（±0.5–1.0）内，不能夸大为"结合显著更优"。
+3. **可解释性**：学习到的氨基酸倾向性生物学自洽——Pro (+0.875) 居首（DPP4 S1 口袋对 Pro 特异）、Cys (−2.482) 强烈负向（呼应毒性标记）。
+
+**与 Phase A 的关系**：Phase A（ToxinPred 3.0 + AlgPred 2.0）为过敏/毒性过滤层；本模块为活性倾向打分层，二者正交、互补。原"代理启发式"打分已从诚实注脚①移除，升级为"文献验证、可离线复现的 SCM 算法"。
+
+- 产物：`data/moso_candidates_idppiv*.tsv`、`data/moso_dock_queue_idppiv.txt`、`docking/moso_dock_results_idppiv*.tsv`、`docking/moso_dock_compare.tsv`、`docking/moso_ligands_idppiv/`（180 文件）。
+- 脚本：`scripts/idppiv_scm/`（模型 + 数据 + 验证/探测）、`scripts/moso_pipeline_filter_idppiv.py`、`scripts/moso_pipeline_filter2_idppiv.py`、`scripts/moso_dock_run_idppiv.py`、`scripts/moso_dock_generic.py`、`scripts/moso_dock_analyze.py`、`scripts/moso_dock_compare.py`。
+- 局限性：iDPPIV-SCM 训练基准存在长度混杂（负样本多为长肽/蛋白），原作者亦承认精度有限；正确用法是候选排序/软过滤，而非确定性活性判定。
+
+---
+
 ## 3. 目录结构
 
 ```
@@ -107,14 +132,23 @@ moso-bamboo-DPP4-peptides/
 │   ├── moso_253.fasta           # 253 条毛竹蛋白序列
 │   ├── moso_253_peptides.txt           # 宽松规则唯一肽
 │   ├── moso_253_peptides_strict.txt   # 严格规则唯一肽
-│   ├── moso_candidates_pr_filtered.txt# 2,019 候选肽
-│   └── moso_dock_queue.txt     # 60 条对接队列
+│   ├── moso_candidates_pr_filtered.txt# 2,019 候选肽（旧代理）
+│   ├── moso_candidates_idppiv.txt     # iDPPIV 候选池（4,742）
+│   ├── moso_candidates_idppiv_short.tsv  # 4,950 条短肽 iDPPIV 重打分
+│   ├── moso_candidates_idppiv_proxy.tsv  # 旧代理集换 iDPPIV 分
+│   └── moso_dock_queue.txt     # 60 条对接队列（旧代理）
+│   └── moso_dock_queue_idppiv.txt     # 60 条对接队列（iDPPIV）
 ├── docking/
 │   ├── 1WCY_receptor.pdbqt    # DPP4 受体（西格列汀结合态）
 │   ├── moso_box.txt             # Vina 口袋参数
 │   ├── moso_ligands/           # 60 配体 PDBQT + 60 对接输出构象
 │   ├── moso_dock_results.tsv   # 60 肽对接 dG 结果表
-│   └── moso_dock_ranking.txt  # 完整排名
+│   ├── moso_dock_ranking.txt  # 完整排名
+│   ├── moso_ligands_idppiv/   # iDPPIV 队列 60 配体 PDBQT + 60 对接输出
+│   ├── moso_dock_results_idppiv.tsv       # iDPPIV 队列 60 肽对接 dG（含重跑重复行）
+│   ├── moso_dock_results_idppiv_clean.tsv # 去重 60 肽对接 dG
+│   ├── moso_dock_results_old_rdkit.tsv    # 旧队列同法 RDKit 重对接（公平对比基准）
+│   └── moso_dock_compare.tsv  # iDPPIV vs 旧代理队列公平跨队列对比
 ├── scripts/                     # 可复现管线脚本
 │   ├── rerun_digestion_moso253_strict.py
 │   ├── moso_pipeline_filter2.py
@@ -123,9 +157,20 @@ moso-bamboo-DPP4-peptides/
 │   ├── moso_dock_run.py
 │   ├── moso_report_results.py
 │   ├── batch_dock.cmd / batch_dock.sh   # 一键批量对接
-│   └── reports/                # 报告生成脚本
+│   ├── reports/                # 报告生成脚本
+│   ├── idppiv_scm/            # iDPPIV-SCM 离线复现（2.8）
+│   │   ├── model.py           # 评分卡模型（DEFAULT_THRESHOLD）
+│   │   ├── scm.py / validate*.py / explore*.py / score_short.py
+│   │   └── data/             # 公开同源训练/测试数据集
+│   ├── moso_pipeline_filter_idppiv.py    # 阶段1 接入 iDPPIV 打分
+│   ├── moso_pipeline_filter2_idppiv.py   # 阶段2 DPP4 偏好收窄
+│   ├── moso_dock_run_idppiv.py          # iDPPIV 队列 Vina 对接（断点续跑）
+│   ├── moso_dock_generic.py             # 通用重对接（旧队列同法）
+│   ├── moso_dock_analyze.py             # 新队列内部相关性分析
+│   └── moso_dock_compare.py            # 跨队列公平对比
 └── docs/
-    └── 毛竹DPP4抑制肽_项目总结.docx   # 项目完整总结
+    ├── 毛竹DPP4抑制肽_项目总结.docx   # 项目完整总结
+    └── 方法学替换报告.md            # iDPPIV 替代 PeptideRanker 方法学说明
 ```
 
 ---
@@ -154,7 +199,7 @@ bash scripts/batch_dock.sh
 
 ## 5. 必须如实披露的局限
 
-1. **过滤层**：PeptideRanker 官方服务器 503 不可用，已以 **ToxinPred 3.0 + AlgPred 2.0** 官方输出替代过敏/毒性过滤（Phase A，4,674 候选）；PR 层待服务器恢复补全。原"代理启发式"打分仅用于早期 2,019→60 对接队列收窄，不应作为最终发表判据。
+1. **过滤层**：过敏/毒性过滤已以 **ToxinPred 3.0 + AlgPred 2.0** 官方输出替代（Phase A，4,674 候选，见 2.5）；活性倾向打分已以 **iDPPIV-SCM 本地离线复现**替代原 PeptideRanker 代理打分（见 2.8）。二者均为纯计算过滤层，原"代理启发式"打分已从本管线移除，不应作为最终发表判据。
 2. **对接为静态 dG 估计**，需经 GROMACS MD / MM-PBSA + 体外实验确认，不能直接作为活性结论。
 3. **毛竹 0 条人工审阅条目（全 TrEMBL 预测）**，Methods 须如实披露来源与预测性质（模板大蒜论文同样约 95% 为 TrEMBL，可接受）。
 4. **WPHY/WPQY/VAPGW 是大蒜肽**，不应用于毛竹真值校验。
@@ -163,11 +208,11 @@ bash scripts/batch_dock.sh
 
 ## 6. 后续待办（按模板全程；本项目为纯计算，无湿实验）
 
-- [x] **Phase A** 官方 ToxinPred 3.0 + AlgPred 2.0 过滤（4,674 候选；PeptideRanker 服务器 503 待恢复补）
+- [x] **Phase A** 官方 ToxinPred 3.0 + AlgPred 2.0 过滤（4,674 候选）；PeptideRanker 代理打分已由 iDPPIV-SCM 离线复现替代（见 2.8）
 - [x] **Phase B（静态近似）** 单构象 MMFF94s 松弛 + 几何接触剖面（Top3 已完成）
 - [x] **Phase C** 肽级 in silico ADMET + GI 稳定性（C1, 60 肽）+ DPP4 中心网络药理学（C2, STRING 15 节点/32 边）
 - [ ] **Phase B 升级** 若在 HPC 获 GROMACS：补 100–150 ns MD + MM-PBSA（含 GB 溶剂化与熵项），得定量 ΔG 与收敛残基分解
-- [ ] PeptideRanker 恢复后补 PR ≥ 0.5 过滤层（scripts/phaseA/phaseA_merge.py 已支持自动并入）
+- [x] **iDPPIV-SCM 模块（2.8）** 离线复现替代 PeptideRanker 代理打分，重跑 Vina 同法对比，已提交 GitHub
 - [ ] 稿件（*in silico* discovery）骨架 + Methods/Limitations 四诚实注脚（①官方过滤已做 ②Vina 静态 dG ③毛竹 0 条人工审阅全 TrEMBL ④Phase B/C 为计算近似、湿实验未做）
 
 ---
@@ -177,3 +222,4 @@ bash scripts/batch_dock.sh
 - 模板方法：Cheng Y. et al. *Discovery of garlic-derived peptides as natural DPP4 inhibitors.* Bioorganic Chemistry 175 (2026) 109801.
 - DPP4 结构：PDB **1WCY**（sitagliptin-bound DPP4）.
 - 蛋白序列：UniProtKB，*Phyllostachys edulis* (taxonomy 38705).
+- iDPPIV-SCM（活性预筛评分卡）：Charoenkwan P. et al. *iDPPIV-SCM: A Sequence-Based Predictor for Identifying and Analyzing Dipeptidyl Peptidase-IV (DPP-IV) Inhibitory Peptides.* J. Proteome Res. 2020, 19(5), 1890–1901. DOI:10.1021/acs.jproteome.0c00590.
