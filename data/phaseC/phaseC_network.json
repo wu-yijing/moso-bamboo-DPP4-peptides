@@ -1,0 +1,455 @@
+{
+  "central_target": "DPP4",
+  "central_target_uniprot": "P27487",
+  "string_params": {
+    "species": 9606,
+    "network_type": "functional",
+    "required_score": 400,
+    "note": "fetched via STRING REST API (network endpoint)"
+  },
+  "nodes": [
+    {
+      "id": "CAV1",
+      "name": "CAV1",
+      "gene": "CAV1",
+      "uniprot": "Q03135",
+      "role": "Caveolin-1 — scaffolds DPP4 at the plasma membrane; co-stimulation of T-cells.",
+      "pathway": "Membrane scaffolding / immune",
+      "source": "string"
+    },
+    {
+      "id": "PTPRC",
+      "name": "PTPRC",
+      "gene": "PTPRC",
+      "uniprot": "P08575",
+      "role": "CD45 tyrosine phosphatase — DPP4-CD45 axis in T-cell signalling.",
+      "pathway": "T-cell signalling",
+      "source": "string"
+    },
+    {
+      "id": "CXCR4",
+      "name": "CXCR4",
+      "gene": "CXCR4",
+      "uniprot": "P61073",
+      "role": "Receptor for CXCL12/SDF-1; DPP4 cleaves CXCL12, modulating haemopoietic stem-cell homing and chemotaxis.",
+      "pathway": "Chemokine / stem-cell homing",
+      "source": "string"
+    },
+    {
+      "id": "FN1",
+      "name": "FN1",
+      "gene": "FN1",
+      "uniprot": "P02751",
+      "role": "Fibronectin — DPP4 adhesion/interaction partner.",
+      "pathway": "Cell adhesion",
+      "source": "string"
+    },
+    {
+      "id": "ITGB1",
+      "name": "ITGB1",
+      "gene": "ITGB1",
+      "uniprot": "P05556",
+      "role": "Integrin beta-1 — adhesion/migration interaction partner.",
+      "pathway": "Cell adhesion / migration",
+      "source": "string"
+    },
+    {
+      "id": "DPP4",
+      "name": "DPP4",
+      "gene": "DPP4",
+      "uniprot": "P27487",
+      "role": "Dipeptidyl peptidase 4 / CD26 — target protease. Trims N-terminal X-Pro/X-Ala dipeptides, inactivating incretin and peptide hormones.",
+      "pathway": "Incretin / glucose homeostasis / immune co-stimulation",
+      "source": "string"
+    },
+    {
+      "id": "ACE2",
+      "name": "ACE2",
+      "gene": "ACE2",
+      "uniprot": "Q9BYF1",
+      "role": "Angiotensin-converting enzyme 2 — renin-angiotensin system; relevant to T2DM cardiovascular comorbidity.",
+      "pathway": "Renin-angiotensin / CVD",
+      "source": "string"
+    },
+    {
+      "id": "GIP",
+      "name": "GIP",
+      "gene": "GIP",
+      "uniprot": "P09681",
+      "role": "Glucose-dependent insulinotropic polypeptide (gastric incretin); a major DPP4 substrate.",
+      "pathway": "Incretin (GIP) signalling",
+      "source": "string"
+    },
+    {
+      "id": "GCG",
+      "name": "GCG",
+      "gene": "GCG",
+      "uniprot": "P01275",
+      "role": "Preproglucagon — source of GLP-1 and GLP-2, the principal DPP4 substrates secreted from intestinal L-cells.",
+      "pathway": "Incretin (GLP-1) signalling",
+      "source": "string"
+    },
+    {
+      "id": "PRCP",
+      "name": "PRCP",
+      "gene": "PRCP",
+      "uniprot": "Q9H3Z3",
+      "role": "Prolyl carboxypeptidase — DPP4-family serine protease homolog.",
+      "pathway": "Protease family",
+      "source": "string"
+    },
+    {
+      "id": "ADA",
+      "name": "ADA",
+      "gene": "ADA",
+      "uniprot": "P00813",
+      "role": "Adenosine deaminase — forms a covalent signalling complex with DPP4/CD26; immune modulation.",
+      "pathway": "T-cell co-stimulation",
+      "source": "string"
+    },
+    {
+      "id": "CXCL12",
+      "name": "CXCL12",
+      "gene": "CXCL12",
+      "uniprot": "P48061",
+      "role": "SDF-1 / CXCL12 — DPP4 substrate; chemotaxis & stem-cell homing.",
+      "pathway": "Chemokine (literature substrate)",
+      "source": "literature_substrate"
+    },
+    {
+      "id": "NPY",
+      "name": "NPY",
+      "gene": "NPY",
+      "uniprot": "P01303",
+      "role": "Neuropeptide Y — DPP4 substrate (appetite / autonomic control).",
+      "pathway": "Peptide hormone (literature substrate)",
+      "source": "literature_substrate"
+    },
+    {
+      "id": "PYY",
+      "name": "PYY",
+      "gene": "PYY",
+      "uniprot": "P10082",
+      "role": "Peptide YY — DPP4 substrate; satiety signalling.",
+      "pathway": "Peptide hormone (literature substrate)",
+      "source": "literature_substrate"
+    },
+    {
+      "id": "TAC1",
+      "name": "TAC1",
+      "gene": "TAC1",
+      "uniprot": "P20366",
+      "role": "Substance P — DPP4 substrate; sensory/inflammatory peptide.",
+      "pathway": "Peptide hormone (literature substrate)",
+      "source": "literature_substrate"
+    }
+  ],
+  "edges": [
+    {
+      "source": "CAV1",
+      "target": "PTPRC",
+      "type": "functional_string",
+      "score": 0.473,
+      "nscore": 0,
+      "tscore": 0.469,
+      "ascore": 0.049,
+      "escore": 0
+    },
+    {
+      "source": "CAV1",
+      "target": "CXCR4",
+      "type": "functional_string",
+      "score": 0.715,
+      "nscore": 0,
+      "tscore": 0.616,
+      "ascore": 0,
+      "escore": 0.289
+    },
+    {
+      "source": "CAV1",
+      "target": "FN1",
+      "type": "functional_string",
+      "score": 0.771,
+      "nscore": 0,
+      "tscore": 0.727,
+      "ascore": 0.195,
+      "escore": 0
+    },
+    {
+      "source": "CAV1",
+      "target": "ITGB1",
+      "type": "functional_string",
+      "score": 0.98,
+      "nscore": 0,
+      "tscore": 0.941,
+      "ascore": 0.109,
+      "escore": 0.076
+    },
+    {
+      "source": "CAV1",
+      "target": "DPP4",
+      "type": "functional_string",
+      "score": 0.991,
+      "nscore": 0,
+      "tscore": 0.991,
+      "ascore": 0.058,
+      "escore": 0
+    },
+    {
+      "source": "FN1",
+      "target": "ACE2",
+      "type": "functional_string",
+      "score": 0.492,
+      "nscore": 0,
+      "tscore": 0.362,
+      "ascore": 0,
+      "escore": 0.236
+    },
+    {
+      "source": "FN1",
+      "target": "PTPRC",
+      "type": "functional_string",
+      "score": 0.842,
+      "nscore": 0,
+      "tscore": 0.84,
+      "ascore": 0.055,
+      "escore": 0
+    },
+    {
+      "source": "FN1",
+      "target": "CXCR4",
+      "type": "functional_string",
+      "score": 0.857,
+      "nscore": 0,
+      "tscore": 0.857,
+      "ascore": 0,
+      "escore": 0
+    },
+    {
+      "source": "FN1",
+      "target": "DPP4",
+      "type": "functional_string",
+      "score": 0.983,
+      "nscore": 0,
+      "tscore": 0.983,
+      "ascore": 0.05,
+      "escore": 0
+    },
+    {
+      "source": "FN1",
+      "target": "ITGB1",
+      "type": "functional_string",
+      "score": 0.999,
+      "nscore": 0,
+      "tscore": 0.998,
+      "ascore": 0.099,
+      "escore": 0.981
+    },
+    {
+      "source": "GIP",
+      "target": "DPP4",
+      "type": "functional_string",
+      "score": 0.98,
+      "nscore": 0,
+      "tscore": 0.926,
+      "ascore": 0,
+      "escore": 0
+    },
+    {
+      "source": "GIP",
+      "target": "GCG",
+      "type": "functional_string",
+      "score": 0.982,
+      "nscore": 0,
+      "tscore": 0.97,
+      "ascore": 0.083,
+      "escore": 0
+    },
+    {
+      "source": "DPP4",
+      "target": "ITGB1",
+      "type": "functional_string",
+      "score": 0.967,
+      "nscore": 0,
+      "tscore": 0.967,
+      "ascore": 0.047,
+      "escore": 0
+    },
+    {
+      "source": "DPP4",
+      "target": "PRCP",
+      "type": "functional_string",
+      "score": 0.967,
+      "nscore": 0,
+      "tscore": 0.693,
+      "ascore": 0,
+      "escore": 0
+    },
+    {
+      "source": "DPP4",
+      "target": "CXCR4",
+      "type": "functional_string",
+      "score": 0.985,
+      "nscore": 0,
+      "tscore": 0.985,
+      "ascore": 0,
+      "escore": 0
+    },
+    {
+      "source": "DPP4",
+      "target": "GCG",
+      "type": "functional_string",
+      "score": 0.987,
+      "nscore": 0,
+      "tscore": 0.947,
+      "ascore": 0.06,
+      "escore": 0
+    },
+    {
+      "source": "DPP4",
+      "target": "PTPRC",
+      "type": "functional_string",
+      "score": 0.99,
+      "nscore": 0,
+      "tscore": 0.987,
+      "ascore": 0.058,
+      "escore": 0.292
+    },
+    {
+      "source": "DPP4",
+      "target": "ACE2",
+      "type": "functional_string",
+      "score": 0.999,
+      "nscore": 0,
+      "tscore": 0.995,
+      "ascore": 0.06,
+      "escore": 0
+    },
+    {
+      "source": "DPP4",
+      "target": "ADA",
+      "type": "functional_string",
+      "score": 0.999,
+      "nscore": 0,
+      "tscore": 0.997,
+      "ascore": 0.067,
+      "escore": 0.972
+    },
+    {
+      "source": "ADA",
+      "target": "PTPRC",
+      "type": "functional_string",
+      "score": 0.56,
+      "nscore": 0,
+      "tscore": 0.525,
+      "ascore": 0.11,
+      "escore": 0
+    },
+    {
+      "source": "PRCP",
+      "target": "ACE2",
+      "type": "functional_string",
+      "score": 0.972,
+      "nscore": 0,
+      "tscore": 0.736,
+      "ascore": 0,
+      "escore": 0
+    },
+    {
+      "source": "ITGB1",
+      "target": "CXCR4",
+      "type": "functional_string",
+      "score": 0.819,
+      "nscore": 0,
+      "tscore": 0.815,
+      "ascore": 0.06,
+      "escore": 0
+    },
+    {
+      "source": "ITGB1",
+      "target": "ACE2",
+      "type": "functional_string",
+      "score": 0.905,
+      "nscore": 0,
+      "tscore": 0.857,
+      "ascore": 0,
+      "escore": 0.363
+    },
+    {
+      "source": "ITGB1",
+      "target": "PTPRC",
+      "type": "functional_string",
+      "score": 0.913,
+      "nscore": 0,
+      "tscore": 0.883,
+      "ascore": 0.25,
+      "escore": 0.095
+    },
+    {
+      "source": "CXCR4",
+      "target": "PTPRC",
+      "type": "functional_string",
+      "score": 0.933,
+      "nscore": 0,
+      "tscore": 0.881,
+      "ascore": 0.268,
+      "escore": 0.292
+    },
+    {
+      "source": "GCG",
+      "target": "ACE2",
+      "type": "functional_string",
+      "score": 0.471,
+      "nscore": 0,
+      "tscore": 0.449,
+      "ascore": 0.08,
+      "escore": 0
+    },
+    {
+      "source": "DPP4",
+      "target": "GCG",
+      "type": "cleavage_substrate_literature",
+      "score": null,
+      "ref": "Mentlein 2009; Drucker 2006"
+    },
+    {
+      "source": "DPP4",
+      "target": "GIP",
+      "type": "cleavage_substrate_literature",
+      "score": null,
+      "ref": "Mentlein 2009; Drucker 2006"
+    },
+    {
+      "source": "DPP4",
+      "target": "CXCL12",
+      "type": "cleavage_substrate_literature",
+      "score": null,
+      "ref": "Christopherson 2002"
+    },
+    {
+      "source": "DPP4",
+      "target": "NPY",
+      "type": "cleavage_substrate_literature",
+      "score": null,
+      "ref": "Mentlein 2009"
+    },
+    {
+      "source": "DPP4",
+      "target": "PYY",
+      "type": "cleavage_substrate_literature",
+      "score": null,
+      "ref": "Mentlein 2009"
+    },
+    {
+      "source": "DPP4",
+      "target": "TAC1",
+      "type": "cleavage_substrate_literature",
+      "score": null,
+      "ref": "Mentlein 2009"
+    }
+  ],
+  "legend": {
+    "functional_string": "STRING DB functional association (combined score 0-1)",
+    "cleavage_substrate_literature": "DPP4 cleaves/inactivates this peptide hormone (primary literature)"
+  }
+}

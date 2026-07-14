@@ -84,6 +84,19 @@
 
 ---
 
+## 2.7 Phase C — In silico ADMET & DPP4 中心网络药理学
+
+> Phase B 之后第二轮纯计算验证层，替代原本依赖体外 ADMET / Caco-2 渗透 / 血清稳定性实验的功能性验证。全部为计算推导，无湿实验。
+
+- **C1 肽级 ADMET + GI 稳定性**（60 条 Vina 对接肽）：BioPython `ProtParam`（MW、pI、GRAVY、脂肪族指数、pH7.4 电荷）+ Boman 蛋白结合指数 + RDKit 描述符（TPSA/HBD/HBA/QED）+ 基于蛋白酶裂解位点规则的 GI 稳定性预测（pepsin/trypsin/chymotrypsin/elastase/羧肽酶/氨肽酶）及 DPP4 自身裂解（X-Pro/X-Ala）判定。
+- **关键发现**：全部 60 候选均携带 X-Pro/X-Ala 基序（与候选筛选"偏好 X-Pro"的 DPP4 结构偏好过滤一致——既支撑结合，也意味着体内会被 DPP4 当作底物快速降解，属已知口服递送局限）。GI 稳定性：Moderate 39 / Low 11 / High 10。
+- **C2 DPP4 中心网络**（STRING DB REST API，Homo sapiens 9606，functional，score≥400）：**15 节点 / 32 边**（STRING 11 节点 26 功能边 + 文献策展 4 底物节点 6 边）。核心邻居含 **GCG（GLP-1/GLP-2 前体）、GIP（胃增泌素）、CXCR4（SDF-1/CXCL12 受体）、ADA、CAV1、PRCP**。机制语境：抑制 DPP4 → 升高活性 GLP-1/GIP → 促进胰岛素分泌 → 改善 T2DM 血糖。
+- 产物：`data/phaseC/phaseC_peptides.tsv`（逐肽）、`data/phaseC/phaseC_network.json`、`phaseC_network_summary.txt`。
+- 脚本：`scripts/phaseC/phaseC_peptides.py`、`phaseC_network.py`。
+- 局限与复现：详见 `docs/phaseC_README.md`。
+
+---
+
 ## 3. 目录结构
 
 ```
@@ -152,10 +165,10 @@ bash scripts/batch_dock.sh
 
 - [x] **Phase A** 官方 ToxinPred 3.0 + AlgPred 2.0 过滤（4,674 候选；PeptideRanker 服务器 503 待恢复补）
 - [x] **Phase B（静态近似）** 单构象 MMFF94s 松弛 + 几何接触剖面（Top3 已完成）
+- [x] **Phase C** 肽级 in silico ADMET + GI 稳定性（C1, 60 肽）+ DPP4 中心网络药理学（C2, STRING 15 节点/32 边）
 - [ ] **Phase B 升级** 若在 HPC 获 GROMACS：补 100–150 ns MD + MM-PBSA（含 GB 溶剂化与熵项），得定量 ΔG 与收敛残基分解
 - [ ] PeptideRanker 恢复后补 PR ≥ 0.5 过滤层（scripts/phaseA/phaseA_merge.py 已支持自动并入）
-- [ ] 网络药理学：SwissTargetPrediction → STRING → DAVID（计算上下文，替代 Caco-2 转运）
-- [ ] 稿件定位 *in silico* 发现；Methods 如实披露 ①官方过滤已做 ②Vina 为静态 dG ③毛竹 0 条人工审阅全 TrEMBL ④本 Phase B 为静态近似、湿实验未做
+- [ ] 稿件（*in silico* discovery）骨架 + Methods/Limitations 四诚实注脚（①官方过滤已做 ②Vina 静态 dG ③毛竹 0 条人工审阅全 TrEMBL ④Phase B/C 为计算近似、湿实验未做）
 
 ---
 

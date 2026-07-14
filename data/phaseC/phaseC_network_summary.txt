@@ -1,0 +1,29 @@
+DPP4-centred network-pharmacology summary
+==================================================
+Central target : DPP4 (UniProt P27487)
+Nodes          : 15
+  STRING      : 11
+  Literature  : 4
+Edges          : 32
+  functional  : 26
+  substrate   : 6
+
+Key pharmacology context (why DPP4 inhibition is glucoregulatory):
+  DPP4 trims N-terminal X-Pro/X-Ala from peptide hormones.
+   - GCG     : Preproglucagon — source of GLP-1 and GLP-2, the principal DPP4 substrates secreted from intestinal L-cells.
+   - GIP     : Glucose-dependent insulinotropic polypeptide (gastric incretin); a major DPP4 substrate.
+   - CXCL12  : SDF-1 / CXCL12 — DPP4 substrate; chemotaxis & stem-cell homing.
+   - NPY     : Neuropeptide Y — DPP4 substrate (appetite / autonomic control).
+   - PYY     : Peptide YY — DPP4 substrate; satiety signalling.
+   - TAC1    : Substance P — DPP4 substrate; sensory/inflammatory peptide.
+
+Representative references:
+  Drucker DJ. Nat Rev Drug Discov 2006 (incretin/DPP4).
+  Mentlein R. Regul Pept 2009 (DPP4 substrates review).
+  Christopherson K et al. PNAS 2002 (CXCL12/SDF-1 cleavage).
+  Szabo et al. / Kameoka et al. (ADA, CAV1 complexes).
+
+HONEST LIMITATION: STRING functional edges are human PPI/
+association background, NOT proof that the bamboo peptides act
+on these nodes. Substrate edges are literature-derived context.
+No wet-lab target-validation was performed (pure in silico).
