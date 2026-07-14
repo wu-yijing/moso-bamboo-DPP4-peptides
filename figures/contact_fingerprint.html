@@ -1,0 +1,16 @@
+<!DOCTYPE html><html lang="zh"><head><meta charset="utf-8">
+<title>LPPGP / APPSQ 接触指纹</title>
+<style>body{font-family:system-ui,Arial,sans-serif;margin:24px;color:#222}
+h1{font-size:20px} .fig{border:1px solid #ddd;border-radius:8px;padding:12px;margin:16px 0}
+.cap{color:#555;font-size:13px;margin-top:8px}</style></head>
+<body><h1>LPPGP / APPSQ 接触指纹可视化</h1>
+<div class="fig"><img src="contact_fingerprint_LPPGP_APPSQ.svg" width="100%">
+<div class="cap">图1. 残基层接触指纹（最小化复合体几何）。每一列为一个与任一肽发生接触的受体残基，
+按残基号排序；上/下两条分别为 LPPGP 与 APPSQ。圆面积∝接触原子对数，颜色深浅同；★标记极性/H-bond 接触；
+外框颜色=残基在 DPP4 口袋中的角色（红=催化核心 Glu146/Arg147，橙=S1/S2 口袋，灰=糖基化偏倚，蓝=界面/口袋壁）。</div></div>
+<div class="fig"><img src="contact_per_position.svg" width="70%">
+<div class="cap">图2. 逐配体位置接触数。横轴为肽的 5 个残基位置（字母+序号），柱高=该位置与口袋的接触原子对数。
+LPPGP 接触集中于 Gly4 + Pro2；APPSQ 集中于 Ser4 + Pro3，足迹更广。</div></div>
+<p style="color:#777;font-size:12px">接触判据：总接触 ≤4.5 Å；疏水（双方碳）≤4.0 Å；极性/H-bond（双方 O/N）≤3.5 Å。
+几何来自 MMFF94s 松弛后的复合体（与 §3.6/§3.7 一致）。</p>
+</body></html>

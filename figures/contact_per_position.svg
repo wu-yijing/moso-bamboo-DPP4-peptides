@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="492" height="320" font-family="DejaVu Sans, Arial, sans-serif" font-size="11">
+<rect width="492" height="320" fill="#fff"/>
+<text x="60" y="26" font-size="15" font-weight="bold">逐配体位置接触数 (最小化复合体)</text>
+<line x1="60" y1="270" x2="472" y2="270" stroke="#333"/>
+<line x1="60" y1="270.0" x2="472" y2="270.0" stroke="#eee"/>
+<text x="54" y="274.0" text-anchor="end" font-size="9" fill="#777">0</text>
+<line x1="60" y1="220.6" x2="472" y2="220.6" stroke="#eee"/>
+<text x="54" y="224.6" text-anchor="end" font-size="9" fill="#777">4</text>
+<line x1="60" y1="171.2" x2="472" y2="171.2" stroke="#eee"/>
+<text x="54" y="175.2" text-anchor="end" font-size="9" fill="#777">8</text>
+<line x1="60" y1="121.8" x2="472" y2="121.8" stroke="#eee"/>
+<text x="54" y="125.8" text-anchor="end" font-size="9" fill="#777">12</text>
+<line x1="60" y1="72.4" x2="472" y2="72.4" stroke="#eee"/>
+<text x="54" y="76.4" text-anchor="end" font-size="9" fill="#777">16</text>
+<text x="145.0" y="288" text-anchor="middle" font-weight="bold" fill="#27ae60">LPPGP</text>
+<rect x="62" y="220.6" width="30" height="49.4" fill="#27ae60" opacity="0.85"/>
+<text x="77.0" y="216.6" text-anchor="middle" font-size="9">4</text>
+<text x="77.0" y="302" text-anchor="middle" font-size="10" font-weight="bold">L1</text>
+<rect x="96" y="134.1" width="30" height="135.9" fill="#27ae60" opacity="0.85"/>
+<text x="111.0" y="130.1" text-anchor="middle" font-size="9">11</text>
+<text x="111.0" y="302" text-anchor="middle" font-size="10" font-weight="bold">P2</text>
+<rect x="130" y="208.2" width="30" height="61.8" fill="#27ae60" opacity="0.85"/>
+<text x="145.0" y="204.2" text-anchor="middle" font-size="9">5</text>
+<text x="145.0" y="302" text-anchor="middle" font-size="10" font-weight="bold">P3</text>
+<rect x="164" y="97.1" width="30" height="172.9" fill="#27ae60" opacity="0.85"/>
+<text x="179.0" y="93.1" text-anchor="middle" font-size="9">14</text>
+<text x="179.0" y="302" text-anchor="middle" font-size="10" font-weight="bold">G4</text>
+<rect x="198" y="257.6" width="30" height="12.4" fill="#27ae60" opacity="0.85"/>
+<text x="213.0" y="253.6" text-anchor="middle" font-size="9">1</text>
+<text x="213.0" y="302" text-anchor="middle" font-size="10" font-weight="bold">P5</text>
+<text x="341.0" y="288" text-anchor="middle" font-weight="bold" fill="#8e44ad">APPSQ</text>
+<rect x="258" y="220.6" width="30" height="49.4" fill="#8e44ad" opacity="0.85"/>
+<text x="273.0" y="216.6" text-anchor="middle" font-size="9">4</text>
+<text x="273.0" y="302" text-anchor="middle" font-size="10" font-weight="bold">A1</text>
+<rect x="292" y="245.3" width="30" height="24.7" fill="#8e44ad" opacity="0.85"/>
+<text x="307.0" y="241.3" text-anchor="middle" font-size="9">2</text>
+<text x="307.0" y="302" text-anchor="middle" font-size="10" font-weight="bold">P2</text>
+<rect x="326" y="109.4" width="30" height="160.6" fill="#8e44ad" opacity="0.85"/>
+<text x="341.0" y="105.4" text-anchor="middle" font-size="9">13</text>
+<text x="341.0" y="302" text-anchor="middle" font-size="10" font-weight="bold">P3</text>
+<rect x="360" y="60.0" width="30" height="210.0" fill="#8e44ad" opacity="0.85"/>
+<text x="375.0" y="56.0" text-anchor="middle" font-size="9">17</text>
+<text x="375.0" y="302" text-anchor="middle" font-size="10" font-weight="bold">S4</text>
+<rect x="394" y="208.2" width="30" height="61.8" fill="#8e44ad" opacity="0.85"/>
+<text x="409.0" y="204.2" text-anchor="middle" font-size="9">5</text>
+<text x="409.0" y="302" text-anchor="middle" font-size="10" font-weight="bold">Q5</text>
+</svg>

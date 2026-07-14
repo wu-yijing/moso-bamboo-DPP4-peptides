@@ -1,0 +1,100 @@
+{
+  "rows": [
+    {
+      "res": "GLU145",
+      "role": "interface",
+      "LPPGP_contacts": 0,
+      "LPPGP_hbond": "",
+      "LPPGP_hydrophobic": 0,
+      "APPSQ_contacts": 1,
+      "APPSQ_hbond": "",
+      "APPSQ_hydrophobic": 1
+    },
+    {
+      "res": "GLU146",
+      "role": "catalytic",
+      "LPPGP_contacts": 19,
+      "LPPGP_hbond": "Y",
+      "LPPGP_hydrophobic": 14,
+      "APPSQ_contacts": 27,
+      "APPSQ_hbond": "Y",
+      "APPSQ_hydrophobic": 21
+    },
+    {
+      "res": "PRO149",
+      "role": "interface",
+      "LPPGP_contacts": 1,
+      "LPPGP_hbond": "",
+      "LPPGP_hydrophobic": 1,
+      "APPSQ_contacts": 8,
+      "APPSQ_hbond": "",
+      "APPSQ_hydrophobic": 8
+    },
+    {
+      "res": "TYR166",
+      "role": "S1S2",
+      "LPPGP_contacts": 9,
+      "LPPGP_hbond": "",
+      "LPPGP_hydrophobic": 9,
+      "APPSQ_contacts": 0,
+      "APPSQ_hbond": "",
+      "APPSQ_hydrophobic": 0
+    },
+    {
+      "res": "TYR173",
+      "role": "S1S2",
+      "LPPGP_contacts": 1,
+      "LPPGP_hbond": "",
+      "LPPGP_hydrophobic": 1,
+      "APPSQ_contacts": 0,
+      "APPSQ_hbond": "",
+      "APPSQ_hydrophobic": 0
+    },
+    {
+      "res": "LYS175",
+      "role": "interface",
+      "LPPGP_contacts": 4,
+      "LPPGP_hbond": "",
+      "LPPGP_hydrophobic": 4,
+      "APPSQ_contacts": 0,
+      "APPSQ_hbond": "",
+      "APPSQ_hydrophobic": 0
+    },
+    {
+      "res": "ARG184",
+      "role": "interface",
+      "LPPGP_contacts": 0,
+      "LPPGP_hbond": "",
+      "LPPGP_hydrophobic": 0,
+      "APPSQ_contacts": 5,
+      "APPSQ_hbond": "Y",
+      "APPSQ_hydrophobic": 4
+    },
+    {
+      "res": "NAG1201",
+      "role": "glycan",
+      "LPPGP_contacts": 1,
+      "LPPGP_hbond": "Y",
+      "LPPGP_hydrophobic": 0,
+      "APPSQ_contacts": 0,
+      "APPSQ_hbond": "",
+      "APPSQ_hydrophobic": 0
+    }
+  ],
+  "summary": {
+    "LPPGP": {
+      "n_total": 35,
+      "hbonds": [
+        "GLU146",
+        "NAG1201"
+      ]
+    },
+    "APPSQ": {
+      "n_total": 41,
+      "hbonds": [
+        "ARG184",
+        "GLU146"
+      ]
+    }
+  }
+}

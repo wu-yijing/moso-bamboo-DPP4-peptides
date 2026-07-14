@@ -1,0 +1,9 @@
+res	role	LPPGP_contacts	LPPGP_hbond	LPPGP_hydrophobic	APPSQ_contacts	APPSQ_hbond	APPSQ_hydrophobic
+GLU145	interface	0		0	1		1
+GLU146	catalytic	19	Y	14	27	Y	21
+PRO149	interface	1		1	8		8
+TYR166	S1S2	9		9	0		0
+TYR173	S1S2	1		1	0		0
+LYS175	interface	4		4	0		0
+ARG184	interface	0		0	5	Y	4
+NAG1201	glycan	1	Y	0	0		0
