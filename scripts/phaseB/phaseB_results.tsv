@@ -1,0 +1,4 @@
+peptide	seq	dG_Vina	dE_complex	dE_MM	n_pocket_res	contact_total	Hbond	hydrophobic
+APQIP	APQIP	-6.807	-287.05	1.733	40	43	8	30
+LPPGP	LPPGP	-6.558	-296.60	2.454	40	56	8	44
+APPSQ	APPSQ	-6.513	-255.18	2.810	37	67	10	51

@@ -27,15 +27,26 @@ from collections import defaultdict
 
 BASE = os.path.dirname(os.path.abspath(__file__))
 PY = sys.executable
-OBABEL = os.path.join(os.path.dirname(PY), "obabel")
+# 必须带 .exe: Python subprocess.run 不走 shell, 不会像 Git Bash 那样按 PATHEXT 自动补后缀
+OBABEL = os.path.join(os.path.dirname(PY), "obabel.exe")
 
-# ---------- Top3 肽定义 (来自 moso_dock_ranking.txt) ----------
+# ---------- 仓库根 (scripts/phaseB/ -> repo root) ----------
+REPO = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
+# ---------- Top3 肽定义 (方案 α: 新 iDPPIV 队列 RDKit 制备下的最优结合肽) ----------
+# 注: 新队列配体 PDBQT(moso_ligands_idppiv/) 为 RDKit 嵌入的输入构象(坐标在原点,
+# 非 Vina docking pose), 不能用于 MM 接触分析。改用旧队列中同肽的合法 docking
+# pose(moso_ligands/dock_XX_*.pdbqt, 坐标在口袋内, 9 个 MODEL), 与对接 dG
+# (idppiv_clean 的 RDKit 值) 一一对应。
 TOP3 = [
-    {"name": "LPPQ", "seq": "LPPQ", "dock": "moso_ligands/dock_40_LPPQ.pdbqt", "dg": -7.472},
-    {"name": "APSPE", "seq": "APSPE", "dock": "moso_ligands/dock_48_APSPE.pdbqt", "dg": -7.150},
-    {"name": "LAPSP", "seq": "LAPSP", "dock": "moso_ligands/dock_53_LAPSP.pdbqt", "dg": -7.087},
+    {"name": "APQIP", "seq": "APQIP",
+     "dock": os.path.join(REPO, "docking", "moso_ligands", "dock_47_APQIP.pdbqt"), "dg": -6.807},
+    {"name": "LPPGP", "seq": "LPPGP",
+     "dock": os.path.join(REPO, "docking", "moso_ligands", "dock_59_LPPGP.pdbqt"), "dg": -6.558},
+    {"name": "APPSQ", "seq": "APPSQ",
+     "dock": os.path.join(REPO, "docking", "moso_ligands", "dock_46_APPSQ.pdbqt"), "dg": -6.513},
 ]
-RECEPTOR = "1WCY_receptor.pdbqt"
+RECEPTOR = os.path.join(REPO, "docking", "1WCY_receptor.pdbqt")
 POCKET_CUTOFF = 9.0   # Å, 配体重原子 8-10 Å 内视为口袋
 DIELECTRIC = 4.0       # 库仑介电常数（蛋白内部近似）
 GAMMA_SA = 0.0072      # kcal/mol/Å² 非极性溶剂化表面张力
@@ -48,6 +59,8 @@ from rdkit.Chem import AllChem
 # ----------------------------------------------------------------------
 def run_obabel(args):
     r = subprocess.run([OBABEL] + args, capture_output=True, text=True)
+    if r.returncode != 0:
+        sys.stderr.write(f"[obabel ERR] args={args}\n{r.stderr}\n")
     return r
 
 # AutoDock 原子类型 → 元素（蛋白中 CA 为 Cα 碳，取首字母即可）
@@ -79,10 +92,18 @@ def ad_element(adtype):
 
 def parse_pdb_atoms(path, model=None):
     """解析 PDB/ PDBQT ATOM/HETATM 行。model=None 取全部；否则取指定 MODEL 之后的块。
-    末列为 AutoDock 原子类型，需映射为元素符号。"""
+    末列为 AutoDock 原子类型，需映射为元素符号。
+    兼容单构象(无 MODEL 记录)与多构象两种 Vina 输出。"""
+    # 预扫描: 文件是否含 MODEL 记录
+    has_model_rec = False
+    with open(path) as _f0:
+        for _l in _f0:
+            if _l[:6].strip() == "MODEL":
+                has_model_rec = True
+                break
     atoms = []
     cur_model = 1
-    in_model = (model is None)
+    in_model = (model is None) or (not has_model_rec)
     with open(path) as f:
         for line in f:
             rec = line[:6].strip()
@@ -96,7 +117,7 @@ def parse_pdb_atoms(path, model=None):
             if rec == "ENDMDL":
                 if model is not None and cur_model == model:
                     break
-                in_model = (model is None)
+                in_model = (model is None) or (not has_model_rec)
                 continue
             if rec in ("ATOM", "HETATM") and in_model:
                 try:
@@ -142,11 +163,21 @@ def build_mol_from_atoms(atoms, add_hs=True):
     return mol
 
 def ligand_from_mol2(dock_path, name):
-    """用 OpenBabel 将 Vina 对接产物(MODEL 1)转为 MOL2（正确感知肽键），
-    再交 RDKit 读取 + 补氢。避免 RDKit 直接读单残基 UNL 块的价键误判。"""
+    """用 OpenBabel 将 Vina 对接产物转为 MOL2（正确感知肽键），
+    再交 RDKit 读取 + 补氢。避免 RDKit 直接读单残基 UNL 块的价键误判。
+    兼容多构象(含 MODEL)与单构象(无 MODEL)两种 Vina 输出。"""
     mol2 = os.path.join(BASE, f"phaseB_lig_{name}.mol2")
-    run_obabel([dock_path, "-O", mol2, "-l", "1"])
-    if not os.path.exists(mol2):
+    args = [dock_path, "-O", mol2]
+    # Vina 多构象输出含 MODEL 记录 -> 取 MODEL 1; 单构象(无 MODEL)不可加 -l
+    try:
+        with open(dock_path) as fh:
+            has_model = any(line.startswith("MODEL") for line in fh)
+    except Exception:
+        has_model = True
+    if has_model:
+        args += ["-l", "1"]
+    run_obabel(args)
+    if not os.path.exists(mol2) or os.path.getsize(mol2) == 0:
         return None
     mol = Chem.MolFromMol2File(mol2, sanitize=True)
     if mol is None:
@@ -405,26 +436,70 @@ def interaction_fingerprint(res):
     }
 
 # ----------------------------------------------------------------------
+
+def _serialize(res):
+    """单肽计算结果 -> 可 JSON 序列化的纯量字典（剥离 RDKit mol 引用）。"""
+    return {
+        "peptide": res["name"], "seq": res["seq"], "dg_vina": res["dg_vina"],
+        "dE_MM": round(res["dE_MM"], 3), "E_complex": round(res["E_complex"], 2),
+        "E_pocket": round(res["E_pocket"], 2), "E_lig": round(res["E_lig"], 2),
+        "n_pocket_res": res["n_pocket_res"],
+        "pocket_residues": ["%s%d" % (k[1], k[2]) for k in res["pocket_keys"]],
+        "contact_total": res["contact_total"],
+        "contact_per_position": [list(x) for x in res["contact_per_pos"]],
+        "contact_top_atoms": res["contact_top_atoms"],
+        "fingerprint": res["fingerprint"],
+    }
+
+
+def _run_single(pep):
+    """单肽独立进程入口：计算 + 接触指纹，写出 phaseB_<NAME>.json。
+
+    独立进程的原因：同进程重复调用 RDKit MMFF mmff_minimize 会在第二条肽
+    触发 C 层段错误（无 Python traceback）；每条肽拆成独立子进程即稳定。
+    """
+    print(">>> 处理 %s (Vina dG=%.3f kcal/mol)" % (pep["name"], pep["dg"]))
+    res = compute_mm_bind(pep)
+    total_ct, per_pos, top_atoms = contact_profile(res)
+    fp = interaction_fingerprint(res)
+    res["contact_total"] = total_ct
+    res["contact_per_pos"] = per_pos
+    res["contact_top_atoms"] = top_atoms
+    res["fingerprint"] = fp
+    out = _serialize(res)
+    with open(os.path.join(BASE, "phaseB_%s.json" % pep["name"]), "w") as f:
+        json.dump(out, f, indent=2, ensure_ascii=False)
+    print("[OK] %s -> phaseB_%s.json (dE_MM=%.3f, contacts=%d)"
+          % (pep["name"], pep["name"], out["dE_MM"], out["contact_total"]))
+    return out
+
+
 def main():
     print("=" * 70)
     print("Phase B — 静态 MM 结合验证 (Top3 DPP4 抑制肽)")
     print("=" * 70)
+    # 每条肽用独立子进程（隔离 RDKit MMFF 同进程状态污染导致第二条肽崩溃）
     results = []
     for pep in TOP3:
-        print(f"\n>>> 处理 {pep['name']} (Vina dG={pep['dg']} kcal/mol)")
         try:
-            res = compute_mm_bind(pep)
-            total_ct, per_pos, top_atoms = contact_profile(res)
-            fp = interaction_fingerprint(res)
-            res["contact_total"] = total_ct
-            res["contact_per_pos"] = per_pos
-            res["contact_top_atoms"] = top_atoms
-            res["fingerprint"] = fp
-            results.append(res)
+            r = subprocess.run(
+                [sys.executable, __file__, "--pep", pep["name"]],
+                capture_output=True, text=True)
+            for line in r.stdout.splitlines():
+                print("  " + line)
+            if r.returncode != 0:
+                sys.stderr.write(r.stderr)
+                print("  [ERROR] %s 子进程失败 (rc=%d)" % (pep["name"], r.returncode))
+                continue
+            jp = os.path.join(BASE, "phaseB_%s.json" % pep["name"])
+            if os.path.exists(jp):
+                with open(jp) as f:
+                    results.append(json.load(f))
+                os.remove(jp)  # 清理中间产物
         except Exception as e:
             import traceback
             traceback.print_exc()
-            print(f"  [ERROR] {pep['name']} 失败: {e}")
+            print("  [ERROR] %s 调度失败: %s" % (pep["name"], e))
 
     # 输出
     out_tsv = os.path.join(BASE, "phaseB_results.tsv")
@@ -433,39 +508,34 @@ def main():
         for r in results:
             fp = r["fingerprint"]
             f.write("%s\t%s\t%.3f\t%.2f\t%.3f\t%d\t%d\t%d\t%d\n" % (
-                r["name"], r["seq"], r["dg_vina"], r["E_complex"], r["dE_MM"],
+                r["peptide"], r["seq"], r["dg_vina"], r["E_complex"], r["dE_MM"],
                 r["n_pocket_res"], r["contact_total"],
                 fp["hbonds"], fp["hydrophobics"]))
-    print(f"\n[OK] 主结果写入 {out_tsv}")
+    print("\n[OK] 主结果写入 %s" % out_tsv)
 
     # 详细 JSON
-    detail = []
-    for r in results:
-        detail.append({
-            "peptide": r["name"], "seq": r["seq"], "dg_vina": r["dg_vina"],
-            "dE_MM": round(r["dE_MM"], 3), "E_complex": round(r["E_complex"], 2),
-            "E_pocket": round(r["E_pocket"], 2), "E_lig": round(r["E_lig"], 2),
-            "n_pocket_res": r["n_pocket_res"],
-            "pocket_residues": ["%s%d" % (k[1], k[2]) for k in r["pocket_keys"]],
-            "contact_total": r["contact_total"],
-            "contact_per_position": [list(x) for x in r["contact_per_pos"]],
-            "contact_top_atoms": r["contact_top_atoms"],
-            "fingerprint": r["fingerprint"],
-        })
     with open(os.path.join(BASE, "phaseB_detail.json"), "w") as f:
-        json.dump(detail, f, indent=2, ensure_ascii=False)
-    print(f"[OK] 详细信息写入 phaseB_detail.json")
+        json.dump(results, f, indent=2, ensure_ascii=False)
+    print("[OK] 详细信息写入 phaseB_detail.json")
 
     print("\n=== 摘要 ===")
     for r in results:
         fp = r["fingerprint"]
-        pp = r["contact_per_pos"]
+        pp = r["contact_per_position"]
         pp_str = " ".join("%s%d:%d" % (L, i, c) for i, L, c in pp)
-        print(f"  {r['name']:6s} dG_Vina={r['dg_vina']:>7.3f}  "
-              f"dE_MM={r['dE_MM']:>7.3f}  pocket_res={r['n_pocket_res']:>3d}  "
-              f"contact={r['contact_total']:>5d}  Hbond={fp['hbonds']}  "
-              f"Hbond_res=[{','.join(fp['hbond_pocket_residues'][:6])}]")
-        print(f"          接触位置剖面: {pp_str}")
+        print("  %-6s dG_Vina=%7.3f  dE_MM=%7.3f  pocket_res=%3d  contact=%5d  Hbond=%d  Hbond_res=[%s]"
+              % (r["peptide"], r["dg_vina"], r["dE_MM"], r["n_pocket_res"],
+                 r["contact_total"], fp["hbonds"],
+                 ",".join(fp["hbond_pocket_residues"][:6])))
+        print("          接触位置剖面: %s" % pp_str)
+
 
 if __name__ == "__main__":
+    # 单肽模式：被子进程调用，计算并写出 phaseB_<NAME>.json 后退出
+    if len(sys.argv) > 2 and sys.argv[1] == "--pep":
+        _name = sys.argv[2]
+        _single = [p for p in TOP3 if p["name"] == _name]
+        if _single:
+            _run_single(_single[0])
+        sys.exit(0)
     main()

@@ -55,32 +55,38 @@ DOCK = os.path.join(REPO, "docking")
 DATA = os.path.join(REPO, "data")
 
 # Docking result file (peptide column = single-letter sequence, plus dG)
-DOCK_TSV = os.path.join(DOCK, "moso_dock_results.tsv")
+# 方案 α: 用 RDKit 制备的 iDPPIV 队列干净结果（含真实 iDPPIV 分 + 校正后 dG）
+DOCK_TSV = os.path.join(DOCK, "moso_dock_results_idppiv_clean.tsv")
 OUT_TSV = os.path.join(DATA, "phaseC", "phaseC_peptides.tsv")
 
-# Top3 from Phase B (for highlight in report)
-TOP3 = {"LPPQ": -7.472, "APSPE": -7.150, "LAPSP": -7.087}
+# Top3 (方案 α): 新 iDPPIV 队列 RDKit 制备下的最优结合肽
+TOP3 = {"APQIP": -6.807, "LPPGP": -6.558, "APPSQ": -6.513}
 
 
 def load_dock():
-    """Parse the docking TSV: col0 = peptide sequence, numeric col = dG."""
+    """Parse the docking TSV: col0 = peptide sequence, dG col by header
+    keyword (dg/dock/affinity/best) with last-numeric fallback."""
     peptides = []
     with open(DOCK_TSV, "r", encoding="utf-8") as fh:
         header = fh.readline().rstrip("\n").split("\t")
+        hl = [h.lower() for h in header]
+        dG_idx = None
+        for i, h in enumerate(hl[1:], start=1):
+            if any(k in h for k in ("dg", "dock", "affinity", "best")):
+                dG_idx = i
+                break
+        if dG_idx is None:  # fallback: last column
+            dG_idx = len(hl) - 1
         for line in fh:
             line = line.rstrip("\n")
             if not line.strip():
                 continue
             f = line.split("\t")
             seq = f[0].strip()
-            dG = None
-            for cell in f[1:]:
-                cell = cell.strip()
-                try:
-                    dG = float(cell)
-                    break
-                except ValueError:
-                    continue
+            try:
+                dG = float(f[dG_idx])
+            except (ValueError, IndexError):
+                dG = None
             peptides.append((seq, dG))
     return peptides
 

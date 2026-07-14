@@ -9,6 +9,9 @@ vina_*
 __pycache__/
 *.pyc
 
+# Phase B 中间产物（脚本运行即重新生成，无需版本控制）
+scripts/phaseB/phaseB_lig_*.mol2
+
 # 系统/IDE
 .DS_Store
 Thumbs.db
