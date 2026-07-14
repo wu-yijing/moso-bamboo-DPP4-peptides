@@ -1,8 +1,11 @@
 # -*- coding: utf-8 -*-
 """新 iDPPIV 队列内部分析: 去重 + iDPPIV 分 vs 实测 dG 相关性 (无制备方法混杂)"""
-import collections, statistics, json
+import collections, statistics, json, os
 
-RAW = "moso_dock_results_idppiv.tsv"
+REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))  # scripts/ -> 仓库根
+DOCK = os.path.join(REPO, "docking")
+
+RAW = os.path.join(DOCK, "moso_dock_results_idppiv.tsv")
 # 按肽聚合所有对接值(多次重跑)
 agg = collections.defaultdict(list)
 for l in open(RAW, encoding="utf-8"):
@@ -53,8 +56,9 @@ print(f"iDPPIV 高分组 dG 中位: {statistics.median(hi):.3f}  (n={len(hi)})")
 print(f"iDPPIV 低分组 dG 中位: {statistics.median(lo):.3f}  (n={len(lo)})")
 
 # 保存干净表
-with open("moso_dock_results_idppiv_clean.tsv", "w", encoding="utf-8") as f:
+_clean_out = os.path.join(DOCK, "moso_dock_results_idppiv_clean.tsv")
+with open(_clean_out, "w", encoding="utf-8") as f:
     f.write("peptide\tiDPPIV_score\tdG_best\tdG_spread\tn_dock\n")
     for seq, sc, best, spread, n in clean:
         f.write(f"{seq}\t{sc:.3f}\t{best:.3f}\t{spread:.3f}\t{n}\n")
-print("\n干净表已写 -> moso_dock_results_idppiv_clean.tsv")
+print(f"\n干净表已写 -> {_clean_out}")

@@ -8,15 +8,44 @@ from rdkit import Chem
 from rdkit.Chem import AllChem
 from openbabel import pybel
 
-HERE = "E:/workbuddy/Claw"
-QUEUE  = os.path.join(HERE, sys.argv[1])
-RESULTS= os.path.join(HERE, sys.argv[2])
-LIGDIR = os.path.join(HERE, sys.argv[3])
-REC    = os.path.join(HERE, "1WCY_receptor.pdbqt")
-BOX    = os.path.join(HERE, "moso_box.txt")
-VINA   = os.path.join(HERE, "vina.exe")
+REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))  # scripts/ -> 仓库根
+DATA = os.path.join(REPO, "data")
+DOCK = os.path.join(REPO, "docking")
+
+def _resolve_in(name, *dirs):
+    """按给定目录顺序解析已存在的输入文件; 绝对路径/已存在则原样返回;
+    都找不到时默认落在第一个目录(用于输出)。"""
+    if os.path.isabs(name) or os.path.exists(name):
+        return name
+    for d in dirs:
+        cand = os.path.join(d, name)
+        if os.path.exists(cand):
+            return cand
+    return os.path.join(dirs[0], name)
+
+QUEUE  = _resolve_in(sys.argv[1], DATA, DOCK)                         # 队列多在 data/
+RESULTS= sys.argv[2] if os.path.isabs(sys.argv[2]) else os.path.join(DOCK, sys.argv[2])
+LIGDIR = sys.argv[3] if os.path.isabs(sys.argv[3]) else os.path.join(DOCK, sys.argv[3])
+REC    = os.path.join(DOCK, "1WCY_receptor.pdbqt")
+BOX    = os.path.join(DOCK, "moso_box.txt")
+# AutoDock Vina 第三方二进制(不纳入版本库): 默认走 PATH; 可用 VINA_EXE 覆盖。
+VINA   = os.environ.get("VINA_EXE", "vina")
 os.makedirs(LIGDIR, exist_ok=True)
-os.environ["BABEL_DATADIR"] = r"C:/Users/Administrator/.workbuddy/binaries/python/envs/default/Lib/site-packages/openbabel/share/openbabel/3.2.1"
+
+def _autolocate_babel_datadir():
+    if os.environ.get("BABEL_DATADIR"):
+        return
+    try:
+        import openbabel as _ob
+        share = os.path.join(os.path.dirname(_ob.__file__), "share", "openbabel")
+        if os.path.isdir(share):
+            vers = [d for d in os.listdir(share) if os.path.isdir(os.path.join(share, d))]
+            if vers:
+                os.environ["BABEL_DATADIR"] = os.path.join(share, sorted(vers)[-1])
+    except Exception:
+        pass
+
+_autolocate_babel_datadir()
 
 def prep_pdbqt(seq, idx):
     m = Chem.MolFromSequence(seq)

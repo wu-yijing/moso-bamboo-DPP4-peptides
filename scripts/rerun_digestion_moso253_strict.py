@@ -7,6 +7,10 @@
   chymotrypsin(spec): 切 F/Y/W 的 C 端 (L 不切；Pro 前不停)
 合并三酶切点 -> 片段；保留 2..20 aa 且不含 X 的唯一肽。
 """
+import os
+REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))  # scripts/ -> 仓库根
+DATA = os.path.join(REPO, "data")
+
 def parse_fasta(path):
     seqs={}; name=None; buf=[]
     for line in open(path):
@@ -18,7 +22,7 @@ def parse_fasta(path):
     if name: seqs[name]="".join(buf)
     return seqs
 
-seqs=parse_fasta("E:/workbuddy/Claw/moso_253.fasta")
+seqs=parse_fasta(os.path.join(DATA, "moso_253.fasta"))
 n=len(seqs); tot=sum(len(s) for s in seqs.values())
 print(f"蛋白={n}  总残基={tot:,}  均={tot/n:.0f}aa")
 
@@ -58,6 +62,7 @@ print(f"{'唯一肽全部':<22}{len(ALL):>14}{5672:>14}")
 print(f"{'唯一 2..6aa':<22}{p26:>14}{1442:>14}")
 print(f"{'PR>0.5候选(估40%)':<22}{int(p26*0.4):>14}{249:>14}")
 
-with open("E:/workbuddy/Claw/moso_253_peptides_strict.txt","w") as f:
+_out = os.path.join(DATA, "moso_253_peptides_strict.txt")
+with open(_out,"w") as f:
     for p in sorted(ALL,key=lambda x:(len(x),x)): f.write(p+"\n")
-print(f"\n-> E:/workbuddy/Claw/moso_253_peptides_strict.txt ({len(ALL)} 条)")
+print(f"\n-> {_out} ({len(ALL)} 条)")

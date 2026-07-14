@@ -49,9 +49,14 @@ HYDROPHOBIC = set('AVLIFMWCY')
 CHARGED = set('DEKRH')
 PROLINE = set('P')
 
+# --- repo-relative paths (scripts/phaseC/ -> repo root) ---
+REPO = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+DOCK = os.path.join(REPO, "docking")
+DATA = os.path.join(REPO, "data")
+
 # Docking result file (peptide column = single-letter sequence, plus dG)
-DOCK_TSV = r"E:/workbuddy/Claw/moso_dock_results.tsv"
-OUT_TSV = r"E:/workbuddy/moso-bamboo-DPP4-peptides/data/phaseC/phaseC_peptides.tsv"
+DOCK_TSV = os.path.join(DOCK, "moso_dock_results.tsv")
+OUT_TSV = os.path.join(DATA, "phaseC", "phaseC_peptides.tsv")
 
 # Top3 from Phase B (for highlight in report)
 TOP3 = {"LPPQ": -7.472, "APSPE": -7.150, "LAPSP": -7.087}

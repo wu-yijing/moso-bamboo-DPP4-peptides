@@ -15,7 +15,10 @@ iDPPIV-SCM (全局氨基酸组成型 Scoring Card Method) 评分。
       官方网页工具, 正式稿件须以官方工具/服务器输出为准。
 """
 import sys, os
-sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "idppiv_scm"))
+_HERE = os.path.dirname(os.path.abspath(__file__))
+REPO = os.path.dirname(_HERE)                      # scripts/ -> 仓库根
+DATA = os.path.join(REPO, "data")
+sys.path.insert(0, os.path.join(_HERE, "idppiv_scm"))
 from model import build_propensity, score, score_mean, predict, DEFAULT_THRESHOLD
 
 # ---- 理化参数(阶段2/3 代理, 沿用原版) ----
@@ -36,7 +39,7 @@ def toxin_pred(seq):
     return False
 
 # ---- 读入 ----
-peps = [l.strip() for l in open("E:/workbuddy/Claw/moso_253_peptides_strict.txt") if l.strip()]
+peps = [l.strip() for l in open(os.path.join(DATA, "moso_253_peptides_strict.txt")) if l.strip()]
 print(f"输入唯一肽 = {len(peps)}")
 
 # ---- 构建 iDPPIV-SCM 评分卡 (基于公开数据集, 离线) ----
@@ -65,18 +68,20 @@ for r in refs:
 
 # ---- 输出 (按 iDPPIV 总分降序) ----
 s3_sorted = sorted(s3, key=lambda x: -x[1])
-with open("E:/workbuddy/Claw/moso_candidates_idppiv.txt","w") as f:
+_cand = os.path.join(DATA, "moso_candidates_idppiv.txt")
+with open(_cand,"w") as f:
     f.write("peptide\tiDPPIV_score\tiDPPIV_mean\tpredicted_DPP4_inhibitory\n")
     for p, sc, mn in s3_sorted:
         f.write(f"{p}\t{sc:.3f}\t{mn:.3f}\t1\n")
-print(f"\n终选候选 -> E:/workbuddy/Claw/moso_candidates_idppiv.txt ({len(s3)} 条, 按 iDPPIV 分降序)")
+print(f"\n终选候选 -> {_cand} ({len(s3)} 条, 按 iDPPIV 分降序)")
 
 # ---- 对接队列 Top-60 (按 iDPPIV 总分) ----
 top60 = s3_sorted[:60]
-with open("E:/workbuddy/Claw/moso_dock_queue_idppiv.txt","w") as f:
+_queue = os.path.join(DATA, "moso_dock_queue_idppiv.txt")
+with open(_queue,"w") as f:
     for p, sc, mn in top60:
         f.write(f"{p}\t{sc:.3f}\n")
-print(f"对接队列 Top-60 -> E:/workbuddy/Claw/moso_dock_queue_idppiv.txt")
+print(f"对接队列 Top-60 -> {_queue}")
 
 # ---- 漏斗对照 ----
 print("\n=== 漏斗对照 ===")

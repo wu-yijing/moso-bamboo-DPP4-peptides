@@ -8,11 +8,14 @@
   moso_candidates_idppiv_proxy.tsv   —— 旧代理候选集(4,289 条)换成 iDPPIV 分
 """
 import os, sys
-sys.path.insert(0, "E:/workbuddy/Claw")
+_HERE = os.path.dirname(os.path.abspath(__file__))          # scripts/idppiv_scm
+_SCRIPTS = os.path.dirname(_HERE)                            # scripts/
+REPO = os.path.dirname(_SCRIPTS)                             # 仓库根
+sys.path.insert(0, _SCRIPTS)                                 # 使 `import idppiv_scm.model` 可用
 from idppiv_scm.model import build_propensity, score, score_mean, predict, DEFAULT_THRESHOLD
 
 AA = set("ACDEFGHIKLMNPQRSTVWY")
-HERE = "E:/workbuddy/Claw"
+HERE = os.path.join(REPO, "data")                           # 输入/输出数据目录
 
 # 1) 训练评分卡
 P, stats = build_propensity()

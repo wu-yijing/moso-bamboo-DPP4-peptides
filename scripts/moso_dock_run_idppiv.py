@@ -20,16 +20,35 @@ from rdkit import Chem
 from rdkit.Chem import AllChem
 from openbabel import pybel
 
-HERE = "E:/workbuddy/Claw"
-QUEUE   = os.path.join(HERE, "moso_dock_queue_idppiv.txt")
-REC     = os.path.join(HERE, "1WCY_receptor.pdbqt")
-BOX     = os.path.join(HERE, "moso_box.txt")
-VINA    = os.path.join(HERE, "vina.exe")
-LIGDIR  = os.path.join(HERE, "moso_ligands_idppiv")
-RESULTS = os.path.join(HERE, "moso_dock_results_idppiv.tsv")
+REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))  # scripts/ -> 仓库根
+DATA = os.path.join(REPO, "data")
+DOCK = os.path.join(REPO, "docking")
+QUEUE   = os.path.join(DATA, "moso_dock_queue_idppiv.txt")
+REC     = os.path.join(DOCK, "1WCY_receptor.pdbqt")
+BOX     = os.path.join(DOCK, "moso_box.txt")
+# AutoDock Vina 为第三方二进制(不纳入版本库): 默认走 PATH 中的 `vina`,
+# 也可用环境变量 VINA_EXE 指定绝对路径(如 Windows 下的 vina.exe)。
+VINA    = os.environ.get("VINA_EXE", "vina")
+LIGDIR  = os.path.join(DOCK, "moso_ligands_idppiv")
+RESULTS = os.path.join(DOCK, "moso_dock_results_idppiv.tsv")
 os.makedirs(LIGDIR, exist_ok=True)
-# 抑制 openbabel 缺失 MMFF94 数据时的报错噪声(转换步骤已不依赖之)
-os.environ["BABEL_DATADIR"] = r"C:/Users/Administrator/.workbuddy/binaries/python/envs/default/Lib/site-packages/openbabel/share/openbabel/3.2.1"
+
+def _autolocate_babel_datadir():
+    """从已安装的 openbabel 包位置自动推导 BABEL_DATADIR(可移植, 免机器特定绝对路径)。
+    本管线仅用 openbabel 做 SDF->PDBQT 格式转换, 不依赖 MMFF94; 设置它只为抑制噪声。"""
+    if os.environ.get("BABEL_DATADIR"):
+        return
+    try:
+        import openbabel as _ob
+        share = os.path.join(os.path.dirname(_ob.__file__), "share", "openbabel")
+        if os.path.isdir(share):
+            vers = [d for d in os.listdir(share) if os.path.isdir(os.path.join(share, d))]
+            if vers:
+                os.environ["BABEL_DATADIR"] = os.path.join(share, sorted(vers)[-1])
+    except Exception:
+        pass
+
+_autolocate_babel_datadir()
 
 def prep_pdbqt(seq, idx):
     """RDKit 生成 3D(SDF) -> openbabel 转 PDBQT(不调 make3D)"""

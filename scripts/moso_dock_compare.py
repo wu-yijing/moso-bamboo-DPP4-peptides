@@ -7,7 +7,10 @@
   moso_dock_results_old_rdkit.tsv    (旧队列 60, 同法重对接, 去重取最优)
 输出: 控制台对比 + moso_dock_compare.tsv
 """
-import collections, statistics
+import collections, statistics, os
+
+REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))  # scripts/ -> 仓库根
+DOCK = os.path.join(REPO, "docking")
 
 def load_best(path, has_score=True):
     agg = collections.defaultdict(list)
@@ -26,8 +29,8 @@ def load_best(path, has_score=True):
         out[seq] = (vals[0][0], min(v[1] for v in vals))  # (score, best_dG)
     return out
 
-new = load_best("moso_dock_results_idppiv_clean.tsv")
-old = load_best("moso_dock_results_old_rdkit.tsv")
+new = load_best(os.path.join(DOCK, "moso_dock_results_idppiv_clean.tsv"))
+old = load_best(os.path.join(DOCK, "moso_dock_results_old_rdkit.tsv"))
 
 print(f"新队列唯一肽: {len(new)}   旧队列唯一肽: {len(old)}")
 
@@ -65,7 +68,7 @@ else:
     print(f"      即 iDPPIV 优先化在本受体/盒子上未带来结合更强肽; 其价值在活性筛选维度(见分析)。")
 
 # 保存
-with open("moso_dock_compare.tsv", "w", encoding="utf-8") as f:
+with open(os.path.join(DOCK, "moso_dock_compare.tsv"), "w", encoding="utf-8") as f:
     f.write("metric\tnew_idppiv\told_proxy\n")
     f.write(f"n\t{len(new)}\t{len(old)}\n")
     f.write(f"best_dG\t{new_best:.3f}\t{old_best:.3f}\n")
@@ -75,4 +78,4 @@ with open("moso_dock_compare.tsv", "w", encoding="utf-8") as f:
     f.write(f"overlap_n\t{len(overlap)}\t\n")
     f.write(f"overlap_better_new\t{better_new}\t\n")
     f.write(f"overlap_better_old\t{better_old}\t\n")
-print("\n对比已写 -> moso_dock_compare.tsv")
+print(f"\n对比已写 -> {os.path.join(DOCK, 'moso_dock_compare.tsv')}")

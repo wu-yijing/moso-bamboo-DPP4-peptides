@@ -1,7 +1,11 @@
 # -*- coding: utf-8 -*-
+import os
 from docx import Document
 from docx.shared import Pt, RGBColor
 from docx.enum.text import WD_ALIGN_PARAGRAPH
+
+# --- repo-relative paths (scripts/reports/ -> repo root) ---
+ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 d=Document()
 d.styles["Normal"].font.name="Calibri"; d.styles["Normal"].font.size=Pt(10.5)
@@ -62,5 +66,7 @@ for f in ["moso_253.fasta (253条蛋白)",
           "脚本: rerun_digestion_moso253_strict.py (消化)"]:
     p("• "+f)
 
-d.save("E:/workbuddy/Claw/毛竹_全流程推进报告.docx")
-print("saved 毛竹_全流程推进报告.docx")
+_out = os.path.join(ROOT, "docs", "毛竹_全流程推进报告.docx")
+os.makedirs(os.path.dirname(_out), exist_ok=True)
+d.save(_out)
+print(f"saved {_out}")

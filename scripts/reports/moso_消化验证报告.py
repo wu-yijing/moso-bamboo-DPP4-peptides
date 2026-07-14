@@ -1,7 +1,11 @@
 # -*- coding: utf-8 -*-
+import os
 from docx import Document
 from docx.shared import Pt, RGBColor
 from docx.enum.text import WD_ALIGN_PARAGRAPH
+
+# --- repo-relative paths (scripts/reports/ -> repo root) ---
+ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 d = Document()
 d.styles["Normal"].font.name = "Calibri"
@@ -55,10 +59,12 @@ para("⚠️ 诚实注脚: 毛竹 0 条人工审阅条目，全部为 TrEMBL 预
 para("▶ 下一步建议: 用 PeptideRanker 对 4,950 条短肽打分 → 疏水性/毒性(AllerTOP/ToxinPred)过滤 → AutoDock Vina 对接 DPP4 (PDB 1WCY) → 体外 Gly-Pro-pNA 活性验证，复刻模板全流程。")
 
 h("5. 交付文件")
-para("• E:/workbuddy/Claw/moso_253.fasta — 毛竹 253 条蛋白 FASTA（可直接用于 PeptideCutter / 重跑）")
-para("• E:/workbuddy/Claw/moso_253_peptides_strict.txt — 7,988 条唯一肽清单")
-para("• E:/workbuddy/Claw/moso_253_peptides.txt — 宽松规则 7,472 条唯一肽清单（敏感性对照）")
-para("• 脚本: rerun_digestion_moso253_strict.py / rerun_digestion_moso253.py")
+para("• data/moso_253.fasta — 毛竹 253 条蛋白 FASTA（可直接用于 PeptideCutter / 重跑）")
+para("• data/moso_253_peptides_strict.txt — 7,988 条唯一肽清单")
+para("• data/moso_253_peptides.txt — 宽松规则 7,472 条唯一肽清单（敏感性对照）")
+para("• 脚本: scripts/rerun_digestion_moso253_strict.py")
 
-d.save("E:/workbuddy/Claw/毛竹_消化验证报告.docx")
-print("saved 毛竹_消化验证报告.docx")
+_out = os.path.join(ROOT, "docs", "毛竹_消化验证报告.docx")
+os.makedirs(os.path.dirname(_out), exist_ok=True)
+d.save(_out)
+print(f"saved {_out}")

@@ -11,10 +11,13 @@
 """
 import os, subprocess, sys
 
-QUEUE = "E:/workbuddy/Claw/moso_dock_queue.txt"
-REC   = "E:/workbuddy/Claw/1WCY_receptor.pdbqt"
-BOX   = "E:/workbuddy/Claw/moso_box.txt"
-OUTDIR= "E:/workbuddy/Claw/dock_out"
+REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))  # scripts/ -> 仓库根
+DATA = os.path.join(REPO, "data")
+DOCK = os.path.join(REPO, "docking")
+QUEUE = os.path.join(DATA, "moso_dock_queue.txt")
+REC   = os.path.join(DOCK, "1WCY_receptor.pdbqt")
+BOX   = os.path.join(DOCK, "moso_box.txt")
+OUTDIR= os.path.join(DOCK, "dock_out")
 N_CONF = 20          # 每个肽生成构象数
 TOP_N  = 50          # 实际跑前 N 条(默认60队列全部)
 
@@ -61,8 +64,9 @@ for i,(seq,score,_tier) in enumerate(rows[:TOP_N]):
     except Exception as e:
         print(f"  {seq:6s} 失败: {e}")
 
-with open("E:/workbuddy/Claw/moso_dock_results.tsv","w") as f:
+_results = os.path.join(DOCK, "moso_dock_results.tsv")
+with open(_results,"w") as f:
     f.write("peptide\tPR_score\tdG_kcal_mol\n")
     for s,sc,a in sorted(results, key=lambda x:(x[2] if x[2] is not None else 9e9)):
         f.write(f"{s}\t{sc:.3f}\t{a if a is not None else 'NA'}\n")
-print(f"\n对接完成 -> E:/workbuddy/Claw/moso_dock_results.tsv ({len(results)} 条)")
+print(f"\n对接完成 -> {_results} ({len(results)} 条)")

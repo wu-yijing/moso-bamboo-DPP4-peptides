@@ -5,9 +5,12 @@
 依赖: AutoDockTools (pythonsh + MGLTools) 或 openbabel(obabel -xr)
 本机无 ADT, 此处生成干净受体 pdb 供用户本机转换。
 """
-import re
-SRC="E:/workbuddy/Claw/1WCY.pdb"
-OUT="E:/workbuddy/Claw/1WCY_clean.pdb"
+import re, os
+REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))  # scripts/ -> 仓库根
+DOCK = os.path.join(REPO, "docking")
+# 1WCY.pdb 需从 RCSB PDB 单独下载后置于 docking/ (不纳入版本库)
+SRC=os.path.join(DOCK, "1WCY.pdb")
+OUT=os.path.join(DOCK, "1WCY_clean.pdb")
 keep=[]
 for line in open(SRC):
     rec=line[:6]

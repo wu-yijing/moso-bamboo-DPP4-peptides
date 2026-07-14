@@ -6,6 +6,10 @@
         DPP4 S1 口袋对 Pro 特异性(第2位 Pro/Ala 最优)。
 在 iDPPIV-SCM 候选(已含 DPP4 抑制倾向性)基础上, 叠加 DPP4 偏好规则 -> 可对接量级。
 """
+import os
+REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))  # scripts/ -> 仓库根
+DATA = os.path.join(REPO, "data")
+
 HYDRO = set("ILVFMWACY")          # 疏水
 
 def dpp4_rules(seq, score):
@@ -16,7 +20,7 @@ def dpp4_rules(seq, score):
     return True
 
 # 读 iDPPIV 候选文件 (首行为表头, 跳过)
-rows = [l.rstrip("\n").split("\t") for l in open("E:/workbuddy/Claw/moso_candidates_idppiv.txt") if l.strip()]
+rows = [l.rstrip("\n").split("\t") for l in open(os.path.join(DATA, "moso_candidates_idppiv.txt")) if l.strip()]
 if rows and rows[0][0].lower().startswith("peptide"):
     rows = rows[1:]
 cands = [(p, float(s)) for p, s, *_ in rows]
@@ -32,16 +36,17 @@ print(f"  其中 第2位P/A(最优): {len(tier1)} | 其余: {len(tier2)}")
 # 输出: 对接优先集(tier1 在前, 均按 iDPPIV 分降序)
 n_top = min(60, len(narrow))
 top = (sorted(tier1, key=lambda x: -x[1]) + sorted(tier2, key=lambda x: -x[1]))[:n_top]
-with open("E:/workbuddy/Claw/moso_dock_queue_idppiv.txt", "w") as f:
+_queue = os.path.join(DATA, "moso_dock_queue_idppiv.txt")
+with open(_queue, "w") as f:
     for p, s in top:
         f.write(f"{p}\t{s:.3f}\t{'P2' if p2(p) else ''}\n")
-print(f"\n对接队列(优先前{n_top}) -> E:/workbuddy/Claw/moso_dock_queue_idppiv.txt")
+print(f"\n对接队列(优先前{n_top}) -> {_queue}")
 print("样例(前15):")
 for p, s in top[:15]:
     print(f"  {p:6s} iDPPIV={s:+.3f} {'[P2]' if p2(p) else ''}")
 
 # ---- 与旧队列对照: 最佳对接肽 LPPQ 是否仍入选, 重叠多少 ----
-old = set(l.split("\t")[0].strip() for l in open("E:/workbuddy/Claw/moso_dock_queue.txt") if l.strip())
+old = set(l.split("\t")[0].strip() for l in open(os.path.join(DATA, "moso_dock_queue.txt")) if l.strip())
 new = set(p for p, _ in top)
 print(f"\n旧对接队列({len(old)}) vs 新对接队列({len(new)}): 重叠 {len(old & new)} 条")
 for key in ["LPPQ", "APSPE", "LAPSP", "LPGP"]:
