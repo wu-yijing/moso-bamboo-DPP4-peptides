@@ -1,0 +1,14 @@
+test_ACC	0.669
+test_Sens	0.571
+test_Spec	0.767
+test_MCC	0.345
+spearman_rho	0.290
+spearman_p	9.02e-93
+candidates_n	4742
+si_pos_n	2061
+top50_overlap	2
+top100_overlap	7
+top200_overlap	19
+final_LPPGP	scm=2.452	si_score=+1.088	si_prob=0.892	rankSI=34/4742	rankSCM=77/4742
+final_APPSQ	scm=0.840	si_score=+0.156	si_prob=0.563	rankSI=1941/4742	rankSCM=714/4742
+final_APQIP	scm=1.565	si_score=-0.528	si_prob=0.249	rankSI=2738/4742	rankSCM=244/4742
