@@ -1,0 +1,846 @@
+MODEL 1
+REMARK VINA RESULT:    -5.227      0.000      0.000
+REMARK INTER + INTRA:         -10.631
+REMARK INTER:                  -9.199
+REMARK INTRA:                  -1.432
+REMARK UNBOUND:                -1.432
+REMARK  Name = 
+REMARK  17 active torsions:
+REMARK  status: ('A' for Active; 'I' for Inactive)
+REMARK    1  A    between atoms: N_1  and  CA_2
+REMARK    2  A    between atoms: CA_2  and  C_3
+REMARK    3  A    between atoms: CA_2  and  CB_5
+REMARK    4  A    between atoms: CB_5  and  CG_6
+REMARK    5  A    between atoms: CG_6  and  SD_7
+REMARK    6  A    between atoms: SD_7  and  CE_8
+REMARK    7  A    between atoms: CA_10  and  C_11
+REMARK    8  A    between atoms: N_16  and  CA_17
+REMARK    9  A    between atoms: CA_17  and  C_18
+REMARK   10  A    between atoms: CA_17  and  CB_20
+REMARK   11  A    between atoms: CB_20  and  CG_21
+REMARK   12  A    between atoms: CG_21  and  SD_22
+REMARK   13  A    between atoms: SD_22  and  CE_23
+REMARK   14  A    between atoms: N_24  and  CA_25
+REMARK   15  A    between atoms: CA_25  and  C_26
+REMARK   16  A    between atoms: CA_25  and  CB_28
+REMARK   17  A    between atoms: C_26  and  OXT_29
+REMARK                            x       y       z     vdW  Elec       q    Type
+REMARK                         _______ _______ _______ _____ _____    ______ ____
+ROOT
+ATOM      1  C   PRO A   2      59.768  56.184   1.146  1.00  0.00    +0.000 C 
+ATOM      2  O   PRO A   2      58.720  55.663   1.520  1.00  0.00    +0.000 OA
+ATOM      3  N   MET A   3      60.926  55.457   0.936  1.00  0.00    +0.000 N 
+ATOM      4  H   MET A   3      61.797  55.977   0.980  1.00  0.00    +0.000 HD
+ENDROOT
+BRANCH   1   8
+ATOM      5  C   MET A   1      57.964  58.154  -0.778  1.00  0.00    +0.000 C 
+ATOM      6  O   MET A   1      56.859  58.672  -0.972  1.00  0.00    +0.000 OA
+ATOM      7  N   PRO A   2      58.614  58.279   0.427  1.00  0.00    +0.000 N 
+ATOM      8  CA  PRO A   2      59.897  57.694   0.827  1.00  0.00    +0.000 C 
+ATOM      9  CB  PRO A   2      60.270  58.490   2.080  1.00  0.00    +0.000 C 
+ATOM     10  CG  PRO A   2      58.912  58.777   2.717  1.00  0.00    +0.000 C 
+ATOM     11  CD  PRO A   2      58.009  59.024   1.518  1.00  0.00    +0.000 C 
+BRANCH   5  12
+ATOM     12  CA  MET A   1      58.671  57.384  -1.919  1.00  0.00    +0.000 C 
+BRANCH  12  13
+ATOM     13  N   MET A   1      58.164  55.996  -1.972  1.00  0.00    +0.000 NA
+ATOM     14  H1  MET A   1      58.908  55.385  -1.624  1.00  0.00    +0.000 HD
+ATOM     15  H2  MET A   1      57.440  55.912  -1.249  1.00  0.00    +0.000 HD
+ENDBRANCH  12  13
+BRANCH  12  16
+ATOM     16  CB  MET A   1      58.494  58.119  -3.260  1.00  0.00    +0.000 C 
+BRANCH  16  17
+ATOM     17  CG  MET A   1      59.293  59.418  -3.374  1.00  0.00    +0.000 C 
+BRANCH  17  18
+ATOM     18  SD  MET A   1      60.996  59.209  -2.740  1.00  0.00    +0.000 S 
+ATOM     19  CE  MET A   1      60.973  60.448  -1.419  1.00  0.00    +0.000 C 
+ENDBRANCH  17  18
+ENDBRANCH  16  17
+ENDBRANCH  12  16
+ENDBRANCH   5  12
+ENDBRANCH   1   8
+BRANCH   3  20
+ATOM     20  CA  MET A   3      61.023  54.085   1.436  1.00  0.00    +0.000 C 
+BRANCH  20  21
+ATOM     21  C   MET A   3      62.483  53.843   1.864  1.00  0.00    +0.000 C 
+ATOM     22  O   MET A   3      63.262  53.176   1.184  1.00  0.00    +0.000 OA
+ATOM     23  N   ALA A   4      62.811  54.381   3.091  1.00  0.00    +0.000 N 
+ATOM     24  H   ALA A   4      62.044  54.677   3.687  1.00  0.00    +0.000 HD
+BRANCH  23  25
+ATOM     25  CA  ALA A   4      64.064  54.030   3.757  1.00  0.00    +0.000 C 
+ATOM     26  CB  ALA A   4      65.128  55.077   3.465  1.00  0.00    +0.000 C 
+BRANCH  25  27
+ATOM     27  C   ALA A   4      63.810  53.947   5.263  1.00  0.00    +0.000 C 
+ATOM     28  O   ALA A   4      64.433  53.270   6.068  1.00  0.00    +0.000 OA
+BRANCH  27  29
+ATOM     29  OXT ALA A   4      62.761  54.696   5.664  1.00  0.00    +0.000 OA
+ATOM     30  HXT ALA A   4      63.167  55.485   6.082  1.00  0.00    +0.000 HD
+ENDBRANCH  27  29
+ENDBRANCH  25  27
+ENDBRANCH  23  25
+ENDBRANCH  20  21
+BRANCH  20  31
+ATOM     31  CB  MET A   3      60.645  53.071   0.344  1.00  0.00    +0.000 C 
+BRANCH  31  32
+ATOM     32  CG  MET A   3      59.398  52.258   0.696  1.00  0.00    +0.000 C 
+BRANCH  32  33
+ATOM     33  SD  MET A   3      59.371  50.621  -0.116  1.00  0.00    +0.000 S 
+ATOM     34  CE  MET A   3      60.749  50.828  -1.273  1.00  0.00    +0.000 C 
+ENDBRANCH  32  33
+ENDBRANCH  31  32
+ENDBRANCH  20  31
+ENDBRANCH   3  20
+TORSDOF 14
+ENDMDL
+MODEL 2
+REMARK VINA RESULT:    -5.134      1.872      2.203
+REMARK INTER + INTRA:         -10.467
+REMARK INTER:                  -8.956
+REMARK INTRA:                  -1.511
+REMARK UNBOUND:                -1.432
+REMARK  Name = 
+REMARK  17 active torsions:
+REMARK  status: ('A' for Active; 'I' for Inactive)
+REMARK    1  A    between atoms: N_1  and  CA_2
+REMARK    2  A    between atoms: CA_2  and  C_3
+REMARK    3  A    between atoms: CA_2  and  CB_5
+REMARK    4  A    between atoms: CB_5  and  CG_6
+REMARK    5  A    between atoms: CG_6  and  SD_7
+REMARK    6  A    between atoms: SD_7  and  CE_8
+REMARK    7  A    between atoms: CA_10  and  C_11
+REMARK    8  A    between atoms: N_16  and  CA_17
+REMARK    9  A    between atoms: CA_17  and  C_18
+REMARK   10  A    between atoms: CA_17  and  CB_20
+REMARK   11  A    between atoms: CB_20  and  CG_21
+REMARK   12  A    between atoms: CG_21  and  SD_22
+REMARK   13  A    between atoms: SD_22  and  CE_23
+REMARK   14  A    between atoms: N_24  and  CA_25
+REMARK   15  A    between atoms: CA_25  and  C_26
+REMARK   16  A    between atoms: CA_25  and  CB_28
+REMARK   17  A    between atoms: C_26  and  OXT_29
+REMARK                            x       y       z     vdW  Elec       q    Type
+REMARK                         _______ _______ _______ _____ _____    ______ ____
+ROOT
+ATOM      1  C   PRO A   2      59.466  56.627   0.325  1.00  0.00    +0.000 C 
+ATOM      2  O   PRO A   2      58.592  56.624   1.189  1.00  0.00    +0.000 OA
+ATOM      3  N   MET A   3      60.169  55.489  -0.027  1.00  0.00    +0.000 N 
+ATOM      4  H   MET A   3      61.075  55.636  -0.460  1.00  0.00    +0.000 HD
+ENDROOT
+BRANCH   1   8
+ATOM      5  C   MET A   1      57.692  59.261  -0.543  1.00  0.00    +0.000 C 
+ATOM      6  O   MET A   1      57.070  60.256  -0.155  1.00  0.00    +0.000 OA
+ATOM      7  N   PRO A   2      58.992  59.031  -0.159  1.00  0.00    +0.000 N 
+ATOM      8  CA  PRO A   2      59.844  57.887  -0.494  1.00  0.00    +0.000 C 
+ATOM      9  CB  PRO A   2      61.248  58.377  -0.129  1.00  0.00    +0.000 C 
+ATOM     10  CG  PRO A   2      60.991  59.280   1.075  1.00  0.00    +0.000 C 
+ATOM     11  CD  PRO A   2      59.674  59.958   0.728  1.00  0.00    +0.000 C 
+BRANCH   5  12
+ATOM     12  CA  MET A   1      57.026  58.264  -1.522  1.00  0.00    +0.000 C 
+BRANCH  12  13
+ATOM     13  N   MET A   1      55.997  57.478  -0.809  1.00  0.00    +0.000 NA
+ATOM     14  H1  MET A   1      56.059  57.720   0.184  1.00  0.00    +0.000 HD
+ATOM     15  H2  MET A   1      55.083  57.860  -1.081  1.00  0.00    +0.000 HD
+ENDBRANCH  12  13
+BRANCH  12  16
+ATOM     16  CB  MET A   1      56.450  59.003  -2.742  1.00  0.00    +0.000 C 
+BRANCH  16  17
+ATOM     17  CG  MET A   1      57.492  59.376  -3.799  1.00  0.00    +0.000 C 
+BRANCH  17  18
+ATOM     18  SD  MET A   1      57.493  58.180  -5.182  1.00  0.00    +0.000 S 
+ATOM     19  CE  MET A   1      58.769  57.042  -4.586  1.00  0.00    +0.000 C 
+ENDBRANCH  17  18
+ENDBRANCH  16  17
+ENDBRANCH  12  16
+ENDBRANCH   5  12
+ENDBRANCH   1   8
+BRANCH   3  20
+ATOM     20  CA  MET A   3      60.101  54.302   0.827  1.00  0.00    +0.000 C 
+BRANCH  20  21
+ATOM     21  C   MET A   3      61.545  53.890   1.174  1.00  0.00    +0.000 C 
+ATOM     22  O   MET A   3      62.119  52.968   0.595  1.00  0.00    +0.000 OA
+ATOM     23  N   ALA A   4      62.101  54.596   2.219  1.00  0.00    +0.000 N 
+ATOM     24  H   ALA A   4      61.469  55.142   2.798  1.00  0.00    +0.000 HD
+BRANCH  23  25
+ATOM     25  CA  ALA A   4      63.353  54.166   2.839  1.00  0.00    +0.000 C 
+ATOM     26  CB  ALA A   4      64.401  55.262   2.729  1.00  0.00    +0.000 C 
+BRANCH  25  27
+ATOM     27  C   ALA A   4      63.084  53.844   4.310  1.00  0.00    +0.000 C 
+ATOM     28  O   ALA A   4      63.207  54.612   5.255  1.00  0.00    +0.000 OA
+BRANCH  27  29
+ATOM     29  OXT ALA A   4      62.709  52.564   4.512  1.00  0.00    +0.000 OA
+ATOM     30  HXT ALA A   4      62.494  52.226   3.617  1.00  0.00    +0.000 HD
+ENDBRANCH  27  29
+ENDBRANCH  25  27
+ENDBRANCH  23  25
+ENDBRANCH  20  21
+BRANCH  20  31
+ATOM     31  CB  MET A   3      59.407  53.138   0.101  1.00  0.00    +0.000 C 
+BRANCH  31  32
+ATOM     32  CG  MET A   3      58.430  53.610  -0.976  1.00  0.00    +0.000 C 
+BRANCH  32  33
+ATOM     33  SD  MET A   3      58.675  52.759  -2.575  1.00  0.00    +0.000 S 
+ATOM     34  CE  MET A   3      60.398  53.213  -2.903  1.00  0.00    +0.000 C 
+ENDBRANCH  32  33
+ENDBRANCH  31  32
+ENDBRANCH  20  31
+ENDBRANCH   3  20
+TORSDOF 14
+ENDMDL
+MODEL 3
+REMARK VINA RESULT:    -5.023      1.503      1.799
+REMARK INTER + INTRA:         -10.273
+REMARK INTER:                  -8.848
+REMARK INTRA:                  -1.424
+REMARK UNBOUND:                -1.432
+REMARK  Name = 
+REMARK  17 active torsions:
+REMARK  status: ('A' for Active; 'I' for Inactive)
+REMARK    1  A    between atoms: N_1  and  CA_2
+REMARK    2  A    between atoms: CA_2  and  C_3
+REMARK    3  A    between atoms: CA_2  and  CB_5
+REMARK    4  A    between atoms: CB_5  and  CG_6
+REMARK    5  A    between atoms: CG_6  and  SD_7
+REMARK    6  A    between atoms: SD_7  and  CE_8
+REMARK    7  A    between atoms: CA_10  and  C_11
+REMARK    8  A    between atoms: N_16  and  CA_17
+REMARK    9  A    between atoms: CA_17  and  C_18
+REMARK   10  A    between atoms: CA_17  and  CB_20
+REMARK   11  A    between atoms: CB_20  and  CG_21
+REMARK   12  A    between atoms: CG_21  and  SD_22
+REMARK   13  A    between atoms: SD_22  and  CE_23
+REMARK   14  A    between atoms: N_24  and  CA_25
+REMARK   15  A    between atoms: CA_25  and  C_26
+REMARK   16  A    between atoms: CA_25  and  CB_28
+REMARK   17  A    between atoms: C_26  and  OXT_29
+REMARK                            x       y       z     vdW  Elec       q    Type
+REMARK                         _______ _______ _______ _____ _____    ______ ____
+ROOT
+ATOM      1  C   PRO A   2      60.052  56.267   1.172  1.00  0.00    +0.000 C 
+ATOM      2  O   PRO A   2      59.084  55.640   1.597  1.00  0.00    +0.000 OA
+ATOM      3  N   MET A   3      61.298  55.689   1.008  1.00  0.00    +0.000 N 
+ATOM      4  H   MET A   3      62.090  56.322   1.003  1.00  0.00    +0.000 HD
+ENDROOT
+BRANCH   1   8
+ATOM      5  C   MET A   1      57.935  57.836  -0.801  1.00  0.00    +0.000 C 
+ATOM      6  O   MET A   1      56.766  58.196  -0.976  1.00  0.00    +0.000 OA
+ATOM      7  N   PRO A   2      58.613  58.138   0.357  1.00  0.00    +0.000 N 
+ATOM      8  CA  PRO A   2      59.975  57.750   0.733  1.00  0.00    +0.000 C 
+ATOM      9  CB  PRO A   2      60.296  58.685   1.902  1.00  0.00    +0.000 C 
+ATOM     10  CG  PRO A   2      58.940  58.854   2.584  1.00  0.00    +0.000 C 
+ATOM     11  CD  PRO A   2      57.965  58.890   1.418  1.00  0.00    +0.000 C 
+BRANCH   5  12
+ATOM     12  CA  MET A   1      58.686  57.068  -1.915  1.00  0.00    +0.000 C 
+BRANCH  12  13
+ATOM     13  N   MET A   1      58.193  55.676  -1.979  1.00  0.00    +0.000 NA
+ATOM     14  H1  MET A   1      58.264  55.282  -1.037  1.00  0.00    +0.000 HD
+ATOM     15  H2  MET A   1      57.179  55.721  -2.134  1.00  0.00    +0.000 HD
+ENDBRANCH  12  13
+BRANCH  12  16
+ATOM     16  CB  MET A   1      58.547  57.796  -3.263  1.00  0.00    +0.000 C 
+BRANCH  16  17
+ATOM     17  CG  MET A   1      59.252  59.153  -3.319  1.00  0.00    +0.000 C 
+BRANCH  17  18
+ATOM     18  SD  MET A   1      58.056  60.514  -3.566  1.00  0.00    +0.000 S 
+ATOM     19  CE  MET A   1      58.232  61.354  -1.971  1.00  0.00    +0.000 C 
+ENDBRANCH  17  18
+ENDBRANCH  16  17
+ENDBRANCH  12  16
+ENDBRANCH   5  12
+ENDBRANCH   1   8
+BRANCH   3  20
+ATOM     20  CA  MET A   3      61.579  54.386   1.615  1.00  0.00    +0.000 C 
+BRANCH  20  21
+ATOM     21  C   MET A   3      62.638  54.599   2.713  1.00  0.00    +0.000 C 
+ATOM     22  O   MET A   3      63.046  55.719   3.021  1.00  0.00    +0.000 OA
+ATOM     23  N   ALA A   4      63.126  53.433   3.265  1.00  0.00    +0.000 N 
+ATOM     24  H   ALA A   4      62.929  52.569   2.769  1.00  0.00    +0.000 HD
+BRANCH  23  25
+ATOM     25  CA  ALA A   4      64.307  53.443   4.127  1.00  0.00    +0.000 C 
+ATOM     26  CB  ALA A   4      63.895  53.593   5.583  1.00  0.00    +0.000 C 
+BRANCH  25  27
+ATOM     27  C   ALA A   4      65.066  52.130   3.930  1.00  0.00    +0.000 C 
+ATOM     28  O   ALA A   4      66.281  51.990   3.912  1.00  0.00    +0.000 OA
+BRANCH  27  29
+ATOM     29  OXT ALA A   4      64.251  51.073   3.730  1.00  0.00    +0.000 OA
+ATOM     30  HXT ALA A   4      64.009  51.124   2.781  1.00  0.00    +0.000 HD
+ENDBRANCH  27  29
+ENDBRANCH  25  27
+ENDBRANCH  23  25
+ENDBRANCH  20  21
+BRANCH  20  31
+ATOM     31  CB  MET A   3      62.128  53.398   0.572  1.00  0.00    +0.000 C 
+BRANCH  31  32
+ATOM     32  CG  MET A   3      61.167  53.174  -0.596  1.00  0.00    +0.000 C 
+BRANCH  32  33
+ATOM     33  SD  MET A   3      60.645  51.430  -0.757  1.00  0.00    +0.000 S 
+ATOM     34  CE  MET A   3      59.138  51.466   0.247  1.00  0.00    +0.000 C 
+ENDBRANCH  32  33
+ENDBRANCH  31  32
+ENDBRANCH  20  31
+ENDBRANCH   3  20
+TORSDOF 14
+ENDMDL
+MODEL 4
+REMARK VINA RESULT:    -4.980      2.525      4.313
+REMARK INTER + INTRA:         -10.196
+REMARK INTER:                  -8.427
+REMARK INTRA:                  -1.768
+REMARK UNBOUND:                -1.432
+REMARK  Name = 
+REMARK  17 active torsions:
+REMARK  status: ('A' for Active; 'I' for Inactive)
+REMARK    1  A    between atoms: N_1  and  CA_2
+REMARK    2  A    between atoms: CA_2  and  C_3
+REMARK    3  A    between atoms: CA_2  and  CB_5
+REMARK    4  A    between atoms: CB_5  and  CG_6
+REMARK    5  A    between atoms: CG_6  and  SD_7
+REMARK    6  A    between atoms: SD_7  and  CE_8
+REMARK    7  A    between atoms: CA_10  and  C_11
+REMARK    8  A    between atoms: N_16  and  CA_17
+REMARK    9  A    between atoms: CA_17  and  C_18
+REMARK   10  A    between atoms: CA_17  and  CB_20
+REMARK   11  A    between atoms: CB_20  and  CG_21
+REMARK   12  A    between atoms: CG_21  and  SD_22
+REMARK   13  A    between atoms: SD_22  and  CE_23
+REMARK   14  A    between atoms: N_24  and  CA_25
+REMARK   15  A    between atoms: CA_25  and  C_26
+REMARK   16  A    between atoms: CA_25  and  CB_28
+REMARK   17  A    between atoms: C_26  and  OXT_29
+REMARK                            x       y       z     vdW  Elec       q    Type
+REMARK                         _______ _______ _______ _____ _____    ______ ____
+ROOT
+ATOM      1  C   PRO A   2      60.553  56.209   0.553  1.00  0.00    +0.000 C 
+ATOM      2  O   PRO A   2      59.654  55.418   0.828  1.00  0.00    +0.000 OA
+ATOM      3  N   MET A   3      61.851  55.801   0.296  1.00  0.00    +0.000 N 
+ATOM      4  H   MET A   3      62.576  56.497   0.431  1.00  0.00    +0.000 HD
+ENDROOT
+BRANCH   1   8
+ATOM      5  C   MET A   1      58.020  57.928  -0.658  1.00  0.00    +0.000 C 
+ATOM      6  O   MET A   1      56.826  58.221  -0.540  1.00  0.00    +0.000 OA
+ATOM      7  N   PRO A   2      58.904  58.076   0.385  1.00  0.00    +0.000 N 
+ATOM      8  CA  PRO A   2      60.328  57.735   0.418  1.00  0.00    +0.000 C 
+ATOM      9  CB  PRO A   2      60.837  58.476   1.658  1.00  0.00    +0.000 C 
+ATOM     10  CG  PRO A   2      59.639  58.418   2.604  1.00  0.00    +0.000 C 
+ATOM     11  CD  PRO A   2      58.449  58.580   1.671  1.00  0.00    +0.000 C 
+BRANCH   5  12
+ATOM     12  CA  MET A   1      58.565  57.426  -2.017  1.00  0.00    +0.000 C 
+BRANCH  12  13
+ATOM     13  N   MET A   1      58.301  55.978  -2.155  1.00  0.00    +0.000 NA
+ATOM     14  H1  MET A   1      57.679  55.705  -1.389  1.00  0.00    +0.000 HD
+ATOM     15  H2  MET A   1      57.709  55.857  -2.985  1.00  0.00    +0.000 HD
+ENDBRANCH  12  13
+BRANCH  12  16
+ATOM     16  CB  MET A   1      57.963  58.239  -3.176  1.00  0.00    +0.000 C 
+BRANCH  16  17
+ATOM     17  CG  MET A   1      58.859  59.373  -3.678  1.00  0.00    +0.000 C 
+BRANCH  17  18
+ATOM     18  SD  MET A   1      60.607  59.094  -3.218  1.00  0.00    +0.000 S 
+ATOM     19  CE  MET A   1      61.177  58.258  -4.720  1.00  0.00    +0.000 C 
+ENDBRANCH  17  18
+ENDBRANCH  16  17
+ENDBRANCH  12  16
+ENDBRANCH   5  12
+ENDBRANCH   1   8
+BRANCH   3  20
+ATOM     20  CA  MET A   3      62.262  54.437   0.634  1.00  0.00    +0.000 C 
+BRANCH  20  21
+ATOM     21  C   MET A   3      61.613  53.485  -0.388  1.00  0.00    +0.000 C 
+ATOM     22  O   MET A   3      61.819  53.584  -1.598  1.00  0.00    +0.000 OA
+ATOM     23  N   ALA A   4      60.743  52.568   0.163  1.00  0.00    +0.000 N 
+ATOM     24  H   ALA A   4      60.439  52.734   1.117  1.00  0.00    +0.000 HD
+BRANCH  23  25
+ATOM     25  CA  ALA A   4      59.857  51.767  -0.681  1.00  0.00    +0.000 C 
+ATOM     26  CB  ALA A   4      59.248  50.630   0.124  1.00  0.00    +0.000 C 
+BRANCH  25  27
+ATOM     27  C   ALA A   4      58.751  52.674  -1.225  1.00  0.00    +0.000 C 
+ATOM     28  O   ALA A   4      58.479  52.859  -2.403  1.00  0.00    +0.000 OA
+BRANCH  27  29
+ATOM     29  OXT ALA A   4      58.075  53.324  -0.255  1.00  0.00    +0.000 OA
+ATOM     30  HXT ALA A   4      57.209  53.542  -0.662  1.00  0.00    +0.000 HD
+ENDBRANCH  27  29
+ENDBRANCH  25  27
+ENDBRANCH  23  25
+ENDBRANCH  20  21
+BRANCH  20  31
+ATOM     31  CB  MET A   3      61.793  54.053   2.047  1.00  0.00    +0.000 C 
+BRANCH  31  32
+ATOM     32  CG  MET A   3      62.734  54.557   3.142  1.00  0.00    +0.000 C 
+BRANCH  32  33
+ATOM     33  SD  MET A   3      63.227  53.242   4.311  1.00  0.00    +0.000 S 
+ATOM     34  CE  MET A   3      63.975  54.254   5.614  1.00  0.00    +0.000 C 
+ENDBRANCH  32  33
+ENDBRANCH  31  32
+ENDBRANCH  20  31
+ENDBRANCH   3  20
+TORSDOF 14
+ENDMDL
+MODEL 5
+REMARK VINA RESULT:    -4.960      2.836      6.697
+REMARK INTER + INTRA:         -10.161
+REMARK INTER:                  -8.638
+REMARK INTRA:                  -1.523
+REMARK UNBOUND:                -1.432
+REMARK  Name = 
+REMARK  17 active torsions:
+REMARK  status: ('A' for Active; 'I' for Inactive)
+REMARK    1  A    between atoms: N_1  and  CA_2
+REMARK    2  A    between atoms: CA_2  and  C_3
+REMARK    3  A    between atoms: CA_2  and  CB_5
+REMARK    4  A    between atoms: CB_5  and  CG_6
+REMARK    5  A    between atoms: CG_6  and  SD_7
+REMARK    6  A    between atoms: SD_7  and  CE_8
+REMARK    7  A    between atoms: CA_10  and  C_11
+REMARK    8  A    between atoms: N_16  and  CA_17
+REMARK    9  A    between atoms: CA_17  and  C_18
+REMARK   10  A    between atoms: CA_17  and  CB_20
+REMARK   11  A    between atoms: CB_20  and  CG_21
+REMARK   12  A    between atoms: CG_21  and  SD_22
+REMARK   13  A    between atoms: SD_22  and  CE_23
+REMARK   14  A    between atoms: N_24  and  CA_25
+REMARK   15  A    between atoms: CA_25  and  C_26
+REMARK   16  A    between atoms: CA_25  and  CB_28
+REMARK   17  A    between atoms: C_26  and  OXT_29
+REMARK                            x       y       z     vdW  Elec       q    Type
+REMARK                         _______ _______ _______ _____ _____    ______ ____
+ROOT
+ATOM      1  C   PRO A   2      58.939  56.869   1.110  1.00  0.00    +0.000 C 
+ATOM      2  O   PRO A   2      57.879  56.315   1.392  1.00  0.00    +0.000 OA
+ATOM      3  N   MET A   3      59.390  56.993  -0.193  1.00  0.00    +0.000 N 
+ATOM      4  H   MET A   3      60.388  57.127  -0.312  1.00  0.00    +0.000 HD
+ENDROOT
+BRANCH   1   8
+ATOM      5  C   MET A   1      62.200  56.714   1.535  1.00  0.00    +0.000 C 
+ATOM      6  O   MET A   1      63.312  56.977   1.065  1.00  0.00    +0.000 OA
+ATOM      7  N   PRO A   2      61.232  57.681   1.674  1.00  0.00    +0.000 N 
+ATOM      8  CA  PRO A   2      59.861  57.523   2.167  1.00  0.00    +0.000 C 
+ATOM      9  CB  PRO A   2      59.426  58.962   2.459  1.00  0.00    +0.000 C 
+ATOM     10  CG  PRO A   2      60.153  59.763   1.381  1.00  0.00    +0.000 C 
+ATOM     11  CD  PRO A   2      61.491  59.050   1.260  1.00  0.00    +0.000 C 
+BRANCH   5  12
+ATOM     12  CA  MET A   1      61.885  55.282   2.028  1.00  0.00    +0.000 C 
+BRANCH  12  13
+ATOM     13  N   MET A   1      61.919  54.343   0.887  1.00  0.00    +0.000 NA
+ATOM     14  H1  MET A   1      61.185  53.647   1.041  1.00  0.00    +0.000 HD
+ATOM     15  H2  MET A   1      61.579  54.856   0.065  1.00  0.00    +0.000 HD
+ENDBRANCH  12  13
+BRANCH  12  16
+ATOM     16  CB  MET A   1      62.855  54.869   3.149  1.00  0.00    +0.000 C 
+BRANCH  16  17
+ATOM     17  CG  MET A   1      63.671  53.612   2.842  1.00  0.00    +0.000 C 
+BRANCH  17  18
+ATOM     18  SD  MET A   1      64.080  52.694   4.370  1.00  0.00    +0.000 S 
+ATOM     19  CE  MET A   1      64.907  51.259   3.639  1.00  0.00    +0.000 C 
+ENDBRANCH  17  18
+ENDBRANCH  16  17
+ENDBRANCH  12  16
+ENDBRANCH   5  12
+ENDBRANCH   1   8
+BRANCH   3  20
+ATOM     20  CA  MET A   3      58.760  56.209  -1.256  1.00  0.00    +0.000 C 
+BRANCH  20  21
+ATOM     21  C   MET A   3      59.509  54.866  -1.355  1.00  0.00    +0.000 C 
+ATOM     22  O   MET A   3      60.537  54.737  -2.018  1.00  0.00    +0.000 OA
+ATOM     23  N   ALA A   4      58.894  53.824  -0.693  1.00  0.00    +0.000 N 
+ATOM     24  H   ALA A   4      57.931  53.963  -0.404  1.00  0.00    +0.000 HD
+BRANCH  23  25
+ATOM     25  CA  ALA A   4      59.328  52.442  -0.894  1.00  0.00    +0.000 C 
+ATOM     26  CB  ALA A   4      59.176  51.649   0.394  1.00  0.00    +0.000 C 
+BRANCH  25  27
+ATOM     27  C   ALA A   4      58.472  51.819  -1.998  1.00  0.00    +0.000 C 
+ATOM     28  O   ALA A   4      58.467  52.135  -3.179  1.00  0.00    +0.000 OA
+BRANCH  27  29
+ATOM     29  OXT ALA A   4      57.643  50.855  -1.543  1.00  0.00    +0.000 OA
+ATOM     30  HXT ALA A   4      58.094  50.497  -0.749  1.00  0.00    +0.000 HD
+ENDBRANCH  27  29
+ENDBRANCH  25  27
+ENDBRANCH  23  25
+ENDBRANCH  20  21
+BRANCH  20  31
+ATOM     31  CB  MET A   3      58.854  56.936  -2.608  1.00  0.00    +0.000 C 
+BRANCH  31  32
+ATOM     32  CG  MET A   3      58.731  58.455  -2.474  1.00  0.00    +0.000 C 
+BRANCH  32  33
+ATOM     33  SD  MET A   3      57.002  59.009  -2.269  1.00  0.00    +0.000 S 
+ATOM     34  CE  MET A   3      57.169  59.983  -0.751  1.00  0.00    +0.000 C 
+ENDBRANCH  32  33
+ENDBRANCH  31  32
+ENDBRANCH  20  31
+ENDBRANCH   3  20
+TORSDOF 14
+ENDMDL
+MODEL 6
+REMARK VINA RESULT:    -4.927      2.918      4.855
+REMARK INTER + INTRA:         -10.103
+REMARK INTER:                  -8.414
+REMARK INTRA:                  -1.689
+REMARK UNBOUND:                -1.432
+REMARK  Name = 
+REMARK  17 active torsions:
+REMARK  status: ('A' for Active; 'I' for Inactive)
+REMARK    1  A    between atoms: N_1  and  CA_2
+REMARK    2  A    between atoms: CA_2  and  C_3
+REMARK    3  A    between atoms: CA_2  and  CB_5
+REMARK    4  A    between atoms: CB_5  and  CG_6
+REMARK    5  A    between atoms: CG_6  and  SD_7
+REMARK    6  A    between atoms: SD_7  and  CE_8
+REMARK    7  A    between atoms: CA_10  and  C_11
+REMARK    8  A    between atoms: N_16  and  CA_17
+REMARK    9  A    between atoms: CA_17  and  C_18
+REMARK   10  A    between atoms: CA_17  and  CB_20
+REMARK   11  A    between atoms: CB_20  and  CG_21
+REMARK   12  A    between atoms: CG_21  and  SD_22
+REMARK   13  A    between atoms: SD_22  and  CE_23
+REMARK   14  A    between atoms: N_24  and  CA_25
+REMARK   15  A    between atoms: CA_25  and  C_26
+REMARK   16  A    between atoms: CA_25  and  CB_28
+REMARK   17  A    between atoms: C_26  and  OXT_29
+REMARK                            x       y       z     vdW  Elec       q    Type
+REMARK                         _______ _______ _______ _____ _____    ______ ____
+ROOT
+ATOM      1  C   PRO A   2      61.016  56.935  -0.136  1.00  0.00    +0.000 C 
+ATOM      2  O   PRO A   2      62.152  56.815  -0.589  1.00  0.00    +0.000 OA
+ATOM      3  N   MET A   3      60.206  55.848   0.141  1.00  0.00    +0.000 N 
+ATOM      4  H   MET A   3      59.208  56.025   0.165  1.00  0.00    +0.000 HD
+ENDROOT
+BRANCH   1   8
+ATOM      5  C   MET A   1      57.953  58.074  -0.529  1.00  0.00    +0.000 C 
+ATOM      6  O   MET A   1      56.763  57.956  -0.216  1.00  0.00    +0.000 OA
+ATOM      7  N   PRO A   2      58.937  58.201   0.422  1.00  0.00    +0.000 N 
+ATOM      8  CA  PRO A   2      60.385  58.305   0.216  1.00  0.00    +0.000 C 
+ATOM      9  CB  PRO A   2      60.895  58.813   1.567  1.00  0.00    +0.000 C 
+ATOM     10  CG  PRO A   2      59.940  58.157   2.561  1.00  0.00    +0.000 C 
+ATOM     11  CD  PRO A   2      58.603  58.193   1.836  1.00  0.00    +0.000 C 
+BRANCH   5  12
+ATOM     12  CA  MET A   1      58.359  58.129  -2.021  1.00  0.00    +0.000 C 
+BRANCH  12  13
+ATOM     13  N   MET A   1      58.224  56.787  -2.625  1.00  0.00    +0.000 NA
+ATOM     14  H1  MET A   1      58.832  56.758  -3.447  1.00  0.00    +0.000 HD
+ATOM     15  H2  MET A   1      58.673  56.122  -1.984  1.00  0.00    +0.000 HD
+ENDBRANCH  12  13
+BRANCH  12  16
+ATOM     16  CB  MET A   1      57.532  59.189  -2.770  1.00  0.00    +0.000 C 
+BRANCH  16  17
+ATOM     17  CG  MET A   1      58.352  60.365  -3.303  1.00  0.00    +0.000 C 
+BRANCH  17  18
+ATOM     18  SD  MET A   1      58.867  61.484  -1.951  1.00  0.00    +0.000 S 
+ATOM     19  CE  MET A   1      57.300  61.597  -1.050  1.00  0.00    +0.000 C 
+ENDBRANCH  17  18
+ENDBRANCH  16  17
+ENDBRANCH  12  16
+ENDBRANCH   5  12
+ENDBRANCH   1   8
+BRANCH   3  20
+ATOM     20  CA  MET A   3      60.566  54.526  -0.374  1.00  0.00    +0.000 C 
+BRANCH  20  21
+ATOM     21  C   MET A   3      59.316  53.928  -1.046  1.00  0.00    +0.000 C 
+ATOM     22  O   MET A   3      58.197  54.420  -0.902  1.00  0.00    +0.000 OA
+ATOM     23  N   ALA A   4      59.553  52.772  -1.760  1.00  0.00    +0.000 N 
+ATOM     24  H   ALA A   4      60.441  52.305  -1.603  1.00  0.00    +0.000 HD
+BRANCH  23  25
+ATOM     25  CA  ALA A   4      58.449  51.943  -2.242  1.00  0.00    +0.000 C 
+ATOM     26  CB  ALA A   4      58.682  51.545  -3.690  1.00  0.00    +0.000 C 
+BRANCH  25  27
+ATOM     27  C   ALA A   4      58.358  50.694  -1.363  1.00  0.00    +0.000 C 
+ATOM     28  O   ALA A   4      59.143  50.366  -0.485  1.00  0.00    +0.000 OA
+BRANCH  27  29
+ATOM     29  OXT ALA A   4      57.301  49.911  -1.666  1.00  0.00    +0.000 OA
+ATOM     30  HXT ALA A   4      56.706  49.990  -0.890  1.00  0.00    +0.000 HD
+ENDBRANCH  27  29
+ENDBRANCH  25  27
+ENDBRANCH  23  25
+ENDBRANCH  20  21
+BRANCH  20  31
+ATOM     31  CB  MET A   3      61.019  53.594   0.763  1.00  0.00    +0.000 C 
+BRANCH  31  32
+ATOM     32  CG  MET A   3      62.540  53.529   0.905  1.00  0.00    +0.000 C 
+BRANCH  32  33
+ATOM     33  SD  MET A   3      63.100  53.782   2.627  1.00  0.00    +0.000 S 
+ATOM     34  CE  MET A   3      62.762  55.553   2.803  1.00  0.00    +0.000 C 
+ENDBRANCH  32  33
+ENDBRANCH  31  32
+ENDBRANCH  20  31
+ENDBRANCH   3  20
+TORSDOF 14
+ENDMDL
+MODEL 7
+REMARK VINA RESULT:    -4.641     16.390     19.652
+REMARK INTER + INTRA:          -9.600
+REMARK INTER:                  -8.007
+REMARK INTRA:                  -1.593
+REMARK UNBOUND:                -1.432
+REMARK  Name = 
+REMARK  17 active torsions:
+REMARK  status: ('A' for Active; 'I' for Inactive)
+REMARK    1  A    between atoms: N_1  and  CA_2
+REMARK    2  A    between atoms: CA_2  and  C_3
+REMARK    3  A    between atoms: CA_2  and  CB_5
+REMARK    4  A    between atoms: CB_5  and  CG_6
+REMARK    5  A    between atoms: CG_6  and  SD_7
+REMARK    6  A    between atoms: SD_7  and  CE_8
+REMARK    7  A    between atoms: CA_10  and  C_11
+REMARK    8  A    between atoms: N_16  and  CA_17
+REMARK    9  A    between atoms: CA_17  and  C_18
+REMARK   10  A    between atoms: CA_17  and  CB_20
+REMARK   11  A    between atoms: CB_20  and  CG_21
+REMARK   12  A    between atoms: CG_21  and  SD_22
+REMARK   13  A    between atoms: SD_22  and  CE_23
+REMARK   14  A    between atoms: N_24  and  CA_25
+REMARK   15  A    between atoms: CA_25  and  C_26
+REMARK   16  A    between atoms: CA_25  and  CB_28
+REMARK   17  A    between atoms: C_26  and  OXT_29
+REMARK                            x       y       z     vdW  Elec       q    Type
+REMARK                         _______ _______ _______ _____ _____    ______ ____
+ROOT
+ATOM      1  C   PRO A   2      52.714  37.815   2.495  1.00  0.00    +0.000 C 
+ATOM      2  O   PRO A   2      53.281  36.792   2.117  1.00  0.00    +0.000 OA
+ATOM      3  N   MET A   3      53.210  39.080   2.236  1.00  0.00    +0.000 N 
+ATOM      4  H   MET A   3      52.902  39.820   2.858  1.00  0.00    +0.000 HD
+ENDROOT
+BRANCH   1   8
+ATOM      5  C   MET A   1      50.657  35.351   3.227  1.00  0.00    +0.000 C 
+ATOM      6  O   MET A   1      50.497  34.294   3.847  1.00  0.00    +0.000 OA
+ATOM      7  N   PRO A   2      51.088  36.495   3.856  1.00  0.00    +0.000 N 
+ATOM      8  CA  PRO A   2      51.367  37.804   3.260  1.00  0.00    +0.000 C 
+ATOM      9  CB  PRO A   2      51.417  38.738   4.472  1.00  0.00    +0.000 C 
+ATOM     10  CG  PRO A   2      52.004  37.847   5.564  1.00  0.00    +0.000 C 
+ATOM     11  CD  PRO A   2      51.379  36.490   5.281  1.00  0.00    +0.000 C 
+BRANCH   5  12
+ATOM     12  CA  MET A   1      50.324  35.423   1.718  1.00  0.00    +0.000 C 
+BRANCH  12  13
+ATOM     13  N   MET A   1      50.900  34.251   1.024  1.00  0.00    +0.000 NA
+ATOM     14  H1  MET A   1      50.429  33.418   1.387  1.00  0.00    +0.000 HD
+ATOM     15  H2  MET A   1      50.580  34.290   0.050  1.00  0.00    +0.000 HD
+ENDBRANCH  12  13
+BRANCH  12  16
+ATOM     16  CB  MET A   1      48.804  35.536   1.502  1.00  0.00    +0.000 C 
+BRANCH  16  17
+ATOM     17  CG  MET A   1      48.302  36.969   1.316  1.00  0.00    +0.000 C 
+BRANCH  17  18
+ATOM     18  SD  MET A   1      48.553  37.544  -0.402  1.00  0.00    +0.000 S 
+ATOM     19  CE  MET A   1      49.956  38.659  -0.137  1.00  0.00    +0.000 C 
+ENDBRANCH  17  18
+ENDBRANCH  16  17
+ENDBRANCH  12  16
+ENDBRANCH   5  12
+ENDBRANCH   1   8
+BRANCH   3  20
+ATOM     20  CA  MET A   3      54.584  39.236   1.755  1.00  0.00    +0.000 C 
+BRANCH  20  21
+ATOM     21  C   MET A   3      55.437  39.750   2.931  1.00  0.00    +0.000 C 
+ATOM     22  O   MET A   3      55.339  39.280   4.064  1.00  0.00    +0.000 OA
+ATOM     23  N   ALA A   4      56.260  40.810   2.614  1.00  0.00    +0.000 N 
+ATOM     24  H   ALA A   4      56.078  41.291   1.739  1.00  0.00    +0.000 HD
+BRANCH  23  25
+ATOM     25  CA  ALA A   4      56.938  41.576   3.659  1.00  0.00    +0.000 C 
+ATOM     26  CB  ALA A   4      58.446  41.441   3.516  1.00  0.00    +0.000 C 
+BRANCH  25  27
+ATOM     27  C   ALA A   4      56.529  43.044   3.530  1.00  0.00    +0.000 C 
+ATOM     28  O   ALA A   4      55.788  43.519   2.681  1.00  0.00    +0.000 OA
+BRANCH  27  29
+ATOM     29  OXT ALA A   4      57.105  43.837   4.458  1.00  0.00    +0.000 OA
+ATOM     30  HXT ALA A   4      57.608  44.499   3.937  1.00  0.00    +0.000 HD
+ENDBRANCH  27  29
+ENDBRANCH  25  27
+ENDBRANCH  23  25
+ENDBRANCH  20  21
+BRANCH  20  31
+ATOM     31  CB  MET A   3      54.654  40.251   0.602  1.00  0.00    +0.000 C 
+BRANCH  31  32
+ATOM     32  CG  MET A   3      53.307  40.453  -0.093  1.00  0.00    +0.000 C 
+BRANCH  32  33
+ATOM     33  SD  MET A   3      53.308  39.860  -1.822  1.00  0.00    +0.000 S 
+ATOM     34  CE  MET A   3      53.397  38.074  -1.533  1.00  0.00    +0.000 C 
+ENDBRANCH  32  33
+ENDBRANCH  31  32
+ENDBRANCH  20  31
+ENDBRANCH   3  20
+TORSDOF 14
+ENDMDL
+MODEL 8
+REMARK VINA RESULT:    -4.639      2.806      7.420
+REMARK INTER + INTRA:          -9.596
+REMARK INTER:                  -7.995
+REMARK INTRA:                  -1.602
+REMARK UNBOUND:                -1.432
+REMARK  Name = 
+REMARK  17 active torsions:
+REMARK  status: ('A' for Active; 'I' for Inactive)
+REMARK    1  A    between atoms: N_1  and  CA_2
+REMARK    2  A    between atoms: CA_2  and  C_3
+REMARK    3  A    between atoms: CA_2  and  CB_5
+REMARK    4  A    between atoms: CB_5  and  CG_6
+REMARK    5  A    between atoms: CG_6  and  SD_7
+REMARK    6  A    between atoms: SD_7  and  CE_8
+REMARK    7  A    between atoms: CA_10  and  C_11
+REMARK    8  A    between atoms: N_16  and  CA_17
+REMARK    9  A    between atoms: CA_17  and  C_18
+REMARK   10  A    between atoms: CA_17  and  CB_20
+REMARK   11  A    between atoms: CB_20  and  CG_21
+REMARK   12  A    between atoms: CG_21  and  SD_22
+REMARK   13  A    between atoms: SD_22  and  CE_23
+REMARK   14  A    between atoms: N_24  and  CA_25
+REMARK   15  A    between atoms: CA_25  and  C_26
+REMARK   16  A    between atoms: CA_25  and  CB_28
+REMARK   17  A    between atoms: C_26  and  OXT_29
+REMARK                            x       y       z     vdW  Elec       q    Type
+REMARK                         _______ _______ _______ _____ _____    ______ ____
+ROOT
+ATOM      1  C   PRO A   2      61.631  54.368   1.364  1.00  0.00    +0.000 C 
+ATOM      2  O   PRO A   2      62.441  53.717   0.708  1.00  0.00    +0.000 OA
+ATOM      3  N   MET A   3      60.264  54.177   1.259  1.00  0.00    +0.000 N 
+ATOM      4  H   MET A   3      59.679  54.955   1.541  1.00  0.00    +0.000 HD
+ENDROOT
+BRANCH   1   8
+ATOM      5  C   MET A   1      64.374  54.696   3.154  1.00  0.00    +0.000 C 
+ATOM      6  O   MET A   1      65.594  54.891   3.140  1.00  0.00    +0.000 OA
+ATOM      7  N   PRO A   2      63.502  55.549   2.520  1.00  0.00    +0.000 N 
+ATOM      8  CA  PRO A   2      62.046  55.434   2.407  1.00  0.00    +0.000 C 
+ATOM      9  CB  PRO A   2      61.617  56.834   1.961  1.00  0.00    +0.000 C 
+ATOM     10  CG  PRO A   2      62.785  57.286   1.087  1.00  0.00    +0.000 C 
+ATOM     11  CD  PRO A   2      63.998  56.713   1.803  1.00  0.00    +0.000 C 
+BRANCH   5  12
+ATOM     12  CA  MET A   1      63.790  53.495   3.936  1.00  0.00    +0.000 C 
+BRANCH  12  13
+ATOM     13  N   MET A   1      63.964  52.256   3.150  1.00  0.00    +0.000 NA
+ATOM     14  H1  MET A   1      64.969  52.123   3.006  1.00  0.00    +0.000 HD
+ATOM     15  H2  MET A   1      63.714  51.471   3.763  1.00  0.00    +0.000 HD
+ENDBRANCH  12  13
+BRANCH  12  16
+ATOM     16  CB  MET A   1      64.431  53.393   5.331  1.00  0.00    +0.000 C 
+BRANCH  16  17
+ATOM     17  CG  MET A   1      65.289  52.144   5.538  1.00  0.00    +0.000 C 
+BRANCH  17  18
+ATOM     18  SD  MET A   1      67.072  52.535   5.424  1.00  0.00    +0.000 S 
+ATOM     19  CE  MET A   1      67.410  52.878   7.170  1.00  0.00    +0.000 C 
+ENDBRANCH  17  18
+ENDBRANCH  16  17
+ENDBRANCH  12  16
+ENDBRANCH   5  12
+ENDBRANCH   1   8
+BRANCH   3  20
+ATOM     20  CA  MET A   3      59.724  53.396   0.144  1.00  0.00    +0.000 C 
+BRANCH  20  21
+ATOM     21  C   MET A   3      58.656  54.257  -0.557  1.00  0.00    +0.000 C 
+ATOM     22  O   MET A   3      58.272  54.019  -1.701  1.00  0.00    +0.000 OA
+ATOM     23  N   ALA A   4      58.225  55.339   0.181  1.00  0.00    +0.000 N 
+ATOM     24  H   ALA A   4      58.783  55.601   0.988  1.00  0.00    +0.000 HD
+BRANCH  23  25
+ATOM     25  CA  ALA A   4      57.414  56.392  -0.428  1.00  0.00    +0.000 C 
+ATOM     26  CB  ALA A   4      55.963  56.259   0.009  1.00  0.00    +0.000 C 
+BRANCH  25  27
+ATOM     27  C   ALA A   4      57.969  57.749   0.007  1.00  0.00    +0.000 C 
+ATOM     28  O   ALA A   4      57.889  58.242   1.123  1.00  0.00    +0.000 OA
+BRANCH  27  29
+ATOM     29  OXT ALA A   4      58.564  58.424  -0.999  1.00  0.00    +0.000 OA
+ATOM     30  HXT ALA A   4      59.525  58.331  -0.825  1.00  0.00    +0.000 HD
+ENDBRANCH  27  29
+ENDBRANCH  25  27
+ENDBRANCH  23  25
+ENDBRANCH  20  21
+BRANCH  20  31
+ATOM     31  CB  MET A   3      59.073  52.096   0.644  1.00  0.00    +0.000 C 
+BRANCH  31  32
+ATOM     32  CG  MET A   3      59.595  50.855  -0.081  1.00  0.00    +0.000 C 
+BRANCH  32  33
+ATOM     33  SD  MET A   3      58.611  50.439  -1.565  1.00  0.00    +0.000 S 
+ATOM     34  CE  MET A   3      59.733  51.038  -2.855  1.00  0.00    +0.000 C 
+ENDBRANCH  32  33
+ENDBRANCH  31  32
+ENDBRANCH  20  31
+ENDBRANCH   3  20
+TORSDOF 14
+ENDMDL
+MODEL 9
+REMARK VINA RESULT:    -4.622      3.278      4.949
+REMARK INTER + INTRA:          -9.566
+REMARK INTER:                  -7.835
+REMARK INTRA:                  -1.731
+REMARK UNBOUND:                -1.432
+REMARK  Name = 
+REMARK  17 active torsions:
+REMARK  status: ('A' for Active; 'I' for Inactive)
+REMARK    1  A    between atoms: N_1  and  CA_2
+REMARK    2  A    between atoms: CA_2  and  C_3
+REMARK    3  A    between atoms: CA_2  and  CB_5
+REMARK    4  A    between atoms: CB_5  and  CG_6
+REMARK    5  A    between atoms: CG_6  and  SD_7
+REMARK    6  A    between atoms: SD_7  and  CE_8
+REMARK    7  A    between atoms: CA_10  and  C_11
+REMARK    8  A    between atoms: N_16  and  CA_17
+REMARK    9  A    between atoms: CA_17  and  C_18
+REMARK   10  A    between atoms: CA_17  and  CB_20
+REMARK   11  A    between atoms: CB_20  and  CG_21
+REMARK   12  A    between atoms: CG_21  and  SD_22
+REMARK   13  A    between atoms: SD_22  and  CE_23
+REMARK   14  A    between atoms: N_24  and  CA_25
+REMARK   15  A    between atoms: CA_25  and  C_26
+REMARK   16  A    between atoms: CA_25  and  CB_28
+REMARK   17  A    between atoms: C_26  and  OXT_29
+REMARK                            x       y       z     vdW  Elec       q    Type
+REMARK                         _______ _______ _______ _____ _____    ______ ____
+ROOT
+ATOM      1  C   PRO A   2      61.145  56.282  -1.138  1.00  0.00    +0.000 C 
+ATOM      2  O   PRO A   2      61.758  56.297  -2.203  1.00  0.00    +0.000 OA
+ATOM      3  N   MET A   3      60.925  55.118  -0.423  1.00  0.00    +0.000 N 
+ATOM      4  H   MET A   3      60.141  55.128   0.221  1.00  0.00    +0.000 HD
+ENDROOT
+BRANCH   1   8
+ATOM      5  C   MET A   1      58.493  56.759   0.754  1.00  0.00    +0.000 C 
+ATOM      6  O   MET A   1      57.932  56.497   1.823  1.00  0.00    +0.000 OA
+ATOM      7  N   PRO A   2      59.779  57.245   0.717  1.00  0.00    +0.000 N 
+ATOM      8  CA  PRO A   2      60.593  57.560  -0.460  1.00  0.00    +0.000 C 
+ATOM      9  CB  PRO A   2      61.729  58.409   0.117  1.00  0.00    +0.000 C 
+ATOM     10  CG  PRO A   2      61.935  57.804   1.504  1.00  0.00    +0.000 C 
+ATOM     11  CD  PRO A   2      60.522  57.459   1.948  1.00  0.00    +0.000 C 
+BRANCH   5  12
+ATOM     12  CA  MET A   1      57.733  56.588  -0.583  1.00  0.00    +0.000 C 
+BRANCH  12  13
+ATOM     13  N   MET A   1      57.155  55.229  -0.658  1.00  0.00    +0.000 NA
+ATOM     14  H1  MET A   1      56.969  55.029  -1.644  1.00  0.00    +0.000 HD
+ATOM     15  H2  MET A   1      57.907  54.569  -0.427  1.00  0.00    +0.000 HD
+ENDBRANCH  12  13
+BRANCH  12  16
+ATOM     16  CB  MET A   1      56.665  57.683  -0.744  1.00  0.00    +0.000 C 
+BRANCH  16  17
+ATOM     17  CG  MET A   1      57.128  58.899  -1.548  1.00  0.00    +0.000 C 
+BRANCH  17  18
+ATOM     18  SD  MET A   1      57.677  60.255  -0.450  1.00  0.00    +0.000 S 
+ATOM     19  CE  MET A   1      57.569  61.638  -1.614  1.00  0.00    +0.000 C 
+ENDBRANCH  17  18
+ENDBRANCH  16  17
+ENDBRANCH  12  16
+ENDBRANCH   5  12
+ENDBRANCH   1   8
+BRANCH   3  20
+ATOM     20  CA  MET A   3      61.160  53.821  -1.059  1.00  0.00    +0.000 C 
+BRANCH  20  21
+ATOM     21  C   MET A   3      59.911  52.951  -0.824  1.00  0.00    +0.000 C 
+ATOM     22  O   MET A   3      59.178  53.107   0.152  1.00  0.00    +0.000 OA
+ATOM     23  N   ALA A   4      59.729  51.954  -1.760  1.00  0.00    +0.000 N 
+ATOM     24  H   ALA A   4      60.516  51.738  -2.364  1.00  0.00    +0.000 HD
+BRANCH  23  25
+ATOM     25  CA  ALA A   4      58.750  50.889  -1.547  1.00  0.00    +0.000 C 
+ATOM     26  CB  ALA A   4      58.226  50.381  -2.881  1.00  0.00    +0.000 C 
+BRANCH  25  27
+ATOM     27  C   ALA A   4      59.426  49.751  -0.781  1.00  0.00    +0.000 C 
+ATOM     28  O   ALA A   4      59.918  48.742  -1.267  1.00  0.00    +0.000 OA
+BRANCH  27  29
+ATOM     29  OXT ALA A   4      59.413  49.931   0.556  1.00  0.00    +0.000 OA
+ATOM     30  HXT ALA A   4      59.841  50.804   0.691  1.00  0.00    +0.000 HD
+ENDBRANCH  27  29
+ENDBRANCH  25  27
+ENDBRANCH  23  25
+ENDBRANCH  20  21
+BRANCH  20  31
+ATOM     31  CB  MET A   3      62.383  53.119  -0.446  1.00  0.00    +0.000 C 
+BRANCH  31  32
+ATOM     32  CG  MET A   3      62.635  53.527   1.006  1.00  0.00    +0.000 C 
+BRANCH  32  33
+ATOM     33  SD  MET A   3      64.375  53.993   1.318  1.00  0.00    +0.000 S 
+ATOM     34  CE  MET A   3      64.536  55.371   0.153  1.00  0.00    +0.000 C 
+ENDBRANCH  32  33
+ENDBRANCH  31  32
+ENDBRANCH  20  31
+ENDBRANCH   3  20
+TORSDOF 14
+ENDMDL

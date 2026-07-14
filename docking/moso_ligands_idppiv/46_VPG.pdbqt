@@ -1,0 +1,54 @@
+REMARK  Name = 
+REMARK  9 active torsions:
+REMARK  status: ('A' for Active; 'I' for Inactive)
+REMARK    1  A    between atoms: N_1  and  CA_2
+REMARK    2  A    between atoms: CA_2  and  C_3
+REMARK    3  A    between atoms: CA_2  and  CB_5
+REMARK    4  A    between atoms: CB_5  and  CG1_6
+REMARK    5  A    between atoms: CB_5  and  CG2_7
+REMARK    6  A    between atoms: CA_9  and  C_10
+REMARK    7  A    between atoms: N_15  and  CA_16
+REMARK    8  A    between atoms: CA_16  and  C_17
+REMARK    9  A    between atoms: C_17  and  OXT_19
+REMARK                            x       y       z     vdW  Elec       q    Type
+REMARK                         _______ _______ _______ _____ _____    ______ ____
+ROOT
+ATOM      1  C   VAL A   1      -0.730   0.261   1.167  1.00  0.00    +0.000 C 
+ATOM      2  O   VAL A   1       0.125   1.022   1.637  1.00  0.00    +0.000 OA
+ATOM      3  N   PRO A   2      -0.461  -1.079   0.993  1.00  0.00    +0.000 N 
+ATOM      4  CA  PRO A   2       0.868  -1.635   1.309  1.00  0.00    +0.000 C 
+ATOM      5  CB  PRO A   2       0.649  -3.154   1.330  1.00  0.00    +0.000 C 
+ATOM      6  CG  PRO A   2      -0.829  -3.301   1.652  1.00  0.00    +0.000 C 
+ATOM      7  CD  PRO A   2      -1.455  -2.139   0.899  1.00  0.00    +0.000 C 
+ENDROOT
+BRANCH   4   8
+ATOM      8  C   PRO A   2       1.925  -1.228   0.255  1.00  0.00    +0.000 C 
+ATOM      9  O   PRO A   2       2.374  -1.996  -0.592  1.00  0.00    +0.000 OA
+ATOM     10  N   GLY A   3       2.330   0.084   0.335  1.00  0.00    +0.000 N 
+ATOM     11  H   GLY A   3       1.784   0.727   0.916  1.00  0.00    +0.000 HD
+BRANCH  10  12
+ATOM     12  CA  GLY A   3       3.205   0.665  -0.667  1.00  0.00    +0.000 C 
+BRANCH  12  13
+ATOM     13  C   GLY A   3       3.550   2.119  -0.390  1.00  0.00    +0.000 C 
+ATOM     14  O   GLY A   3       4.286   2.821  -1.067  1.00  0.00    +0.000 OA
+BRANCH  13  15
+ATOM     15  OXT GLY A   3       2.945   2.631   0.703  1.00  0.00    +0.000 OA
+ATOM     16  HXT GLY A   3       3.255   3.559   0.740  1.00  0.00    +0.000 HD
+ENDBRANCH  13  15
+ENDBRANCH  12  13
+ENDBRANCH  10  12
+ENDBRANCH   4   8
+BRANCH   1  17
+ATOM     17  CA  VAL A   1      -2.104   0.820   0.706  1.00  0.00    +0.000 C 
+BRANCH  17  18
+ATOM     18  N   VAL A   1      -2.492   1.922   1.621  1.00  0.00    +0.000 NA
+ATOM     19  H1  VAL A   1      -1.704   2.576   1.659  1.00  0.00    +0.000 HD
+ATOM     20  H2  VAL A   1      -2.542   1.550   2.570  1.00  0.00    +0.000 HD
+ENDBRANCH  17  18
+BRANCH  17  21
+ATOM     21  CB  VAL A   1      -2.083   1.316  -0.762  1.00  0.00    +0.000 C 
+ATOM     22  CG1 VAL A   1      -1.919   0.163  -1.756  1.00  0.00    +0.000 C 
+ATOM     23  CG2 VAL A   1      -1.026   2.390  -1.048  1.00  0.00    +0.000 C 
+ENDBRANCH  17  21
+ENDBRANCH   1  17
+TORSDOF 7

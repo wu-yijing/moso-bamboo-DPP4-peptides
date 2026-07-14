@@ -1,0 +1,9 @@
+metric	new_idppiv	old_proxy
+n	60	60
+best_dG	-6.807	-6.461
+median_dG	-5.780	-5.682
+mean_dG	-5.813	-5.733
+frac<=-6.5	0.050	0.000
+overlap_n	32	
+overlap_better_new	21	
+overlap_better_old	11	
