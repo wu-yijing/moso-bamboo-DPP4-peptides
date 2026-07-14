@@ -23,3 +23,17 @@ SPTVMFPPQSVL	-	羊乳	羊乳蛋白	羊	676.31	676.31 uM	-	-
 LPLP	-	乳(酪蛋白)	酪蛋白	牛	1909	0.84 mg/mL (MW~440)	Caco-2提取	实验	
 QEPV	-	乳(酪蛋白)	酪蛋白	牛	31500	14.45 mg/mL (MW~458)	-	实验(弱)	
 GPSGLDGAK	-	(未指明食物)	-	-	61.27	61.27 uM	酶解	实验	
+IPQHY	-	谷物(燕麦)	燕麦蛋白	燕麦	<50	<50 uM (混合抑制型, 4条中最强之一)	酶解+UPLC-MS/MS	实验	2022 oat proteins (PMC9141920)
+VPQHY	-	谷物(燕麦)	燕麦蛋白	燕麦	<50	<50 uM (混合抑制型)	酶解+UPLC-MS/MS	实验	2022 oat proteins
+VAVVPF	-	谷物(燕麦)	燕麦蛋白	燕麦	<50	<50 uM (混合抑制型)	酶解+UPLC-MS/MS	实验	2022 oat proteins
+VPLGGF	-	谷物(燕麦)	燕麦蛋白	燕麦	<50	<50 uM (混合抑制型)	酶解+UPLC-MS/MS	实验	2022 oat proteins
+IAIPPGIPYW	-	豆类(鹰嘴豆)	鹰嘴豆蛋白	鹰嘴豆	12.43	12.43 uM (含重复Pro基序); Caco-2细胞有效	酶解+分子对接	实验+对接	2023 J Agric Food Chem doi:10.1021/acs.jafc.3c00603
+WLAFR	-	藜麦	藜麦蛋白	藜麦	78	78 uM (五肽, 竞争性); 疏水作用主导	合成+动力学/光谱/in silico	实验+in silico	2026 Food Chemistry doi:10.1016/j.foodchem.2026.013270
+LLPFR	-	藜麦	藜麦蛋白	藜麦	130	130 uM (五肽, 竞争性)	合成+动力学/光谱/in silico	实验+in silico	2026 Food Chemistry
+LTFPGSAED	Lup1	羽扇豆	白羽扇豆蛋白	羽扇豆	228	228 uM	酶解	实验	食物源DPP4肽综述
+ATHALLA	AA-7	蜂花粉	蜂花粉蛋白	蜂	52.63	52.63 uM (双重: DPP4抑制+葡萄糖转运调节)	酶解+LC-Q-TOF-MS/MS	实验+对接+in silico ADMET	2026 Nat Sci Rep doi:10.1038/s41598-026-39009-1
+EGF	-	毛竹(竹笋)	毛竹笋蛋白	毛竹		IC50=366.44 ug/mL (MW~309, 约数百uM); 三肽; 与ARG125/TYR662等6个H-bond	虚拟酶解+对接(CDOCKER)+体外酶抑制	实验(体外)+对接	2026 世界竹藤通讯 谢鹏等 doi:10.12168/sjzttx.2025.11.25.001
+TENEWK	-	小麦	小麦蛋白	小麦	4960	4.96 mM (竞争性); tau-RaMD停留时间5.05ns	虚拟水解(ConPLex)+合成+细胞	实验(IC50)+细胞	2025 J Agric Food Chem doi:10.1021/acs.jafc.5c03006
+NFVSER	-	小麦	小麦蛋白	小麦	3070	3.07 mM (竞争性); 停留时间最长	虚拟水解(ConPLex)+合成+细胞	实验(IC50)+细胞	2025 J Agric Food Chem
+LDLPSK	-	小麦	小麦蛋白	小麦	2890	2.89 mM (竞争性); 停留时间最短0.28ns	虚拟水解(ConPLex)+合成+细胞	实验(IC50)+细胞	2025 J Agric Food Chem
+QHEQR	-	小麦	小麦蛋白	小麦	4180	4.18 mM (竞争性)	虚拟水解(ConPLex)+合成+细胞	实验(IC50)+细胞	2025 J Agric Food Chem
