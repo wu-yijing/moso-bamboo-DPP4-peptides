@@ -1,0 +1,25 @@
+peptide_seq	name	source_food	source_protein	species	ic50_uM	ic50_note	prep_method	evidence	reference
+IPI	Diprotin A	微生物	-	Streptomyces	5.48	5.48 uM (阳性对照); 文献亦报 ~88 uM (31.5 ug/mL)	分离纯化	实验	经典阳性对照
+VPL	Diprotin B	微生物	-	Streptomyces	40	~40 uM	分离	实验	经典
+IPP	Ile-Pro-Pro	乳	beta/kappa-casein	牛乳	150	数十-数百 uM	酶解	实验	食物源经典
+VPP	Val-Pro-Pro	乳	beta-casein	牛乳	150	数十-数百 uM	酶解	实验	食物源经典
+DYPAY	-	大豆	大豆蛋白	大豆	162.2	162.2 uM	酶解+LC-MS/MS	实验+对接	2026 ebiotrade
+IAVPTGVA	Soy1	大豆	大豆蛋白	大豆	106	106 uM	酶解	实验+in silico	2010s
+YVVNPDNDEN	Soy2	大豆	大豆蛋白	大豆	-	weak	酶解	实验	
+YVVNPDNNEN	Soy3	大豆	大豆蛋白	大豆	-	weak	酶解	实验	
+LTFPGSAED	Lup1	羽扇豆	羽扇豆蛋白	Lupin	228	228 uM	酶解	实验	
+LPVP	-	骆驼乳	骆驼乳蛋白	骆驼	87.0	87.0 uM	酶解(trypsin)	实验	2018 Food Chem
+MPVQA	-	骆驼乳	骆驼乳蛋白	骆驼	93.3	93.3 uM	酶解	实验	2018 Food Chem
+LDKVFR	-	三文鱼皮	胶原	大西洋鲑	128.71	128.71 uM	酶解(trypsin)	实验+对接	2020 Food Res Int
+LPGFF	-	南瓜籽	南瓜籽蛋白	南瓜	449.68	449.68 uM	-	-	
+MAGVDHI	-	红藻	红藻蛋白	红藻	159.37	159.37 uM	-	-	
+GPFPLL	-	山羊乳	山羊乳蛋白	山羊	130.68	130.68 uM	虚拟筛选+MD+实验	计算+实验	2025
+LPYPY	-	山羊乳	山羊乳蛋白	山羊	179.52	179.52 uM	-	-	2025
+GPFPILN	-	山羊乳	山羊乳蛋白	山羊	198.18	198.18 uM	-	-	2025
+RPWR	-	山羊乳	山羊乳蛋白	山羊	474.17	474.17 uM	-	-	2025
+YPVEPF	-	牛乳	牛乳蛋白	牛	196.67	196.67 uM	-	-	
+MHQPPQPL	-	羊乳	羊乳蛋白	羊	350.41	350.41 uM	-	-	
+SPTVMFPPQSVL	-	羊乳	羊乳蛋白	羊	676.31	676.31 uM	-	-	
+LPLP	-	乳(酪蛋白)	酪蛋白	牛	1909	0.84 mg/mL (MW~440)	Caco-2提取	实验	
+QEPV	-	乳(酪蛋白)	酪蛋白	牛	31500	14.45 mg/mL (MW~458)	-	实验(弱)	
+GPSGLDGAK	-	(未指明食物)	-	-	61.27	61.27 uM	酶解	实验	

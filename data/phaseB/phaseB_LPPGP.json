@@ -1,0 +1,128 @@
+{
+  "peptide": "LPPGP",
+  "seq": "LPPGP",
+  "dg_vina": -6.558,
+  "dE_MM": 2.338,
+  "E_complex": -280.14,
+  "E_pocket": -297.12,
+  "E_lig": 14.64,
+  "n_pocket_res": 35,
+  "pocket_residues": [
+    "ALA130",
+    "ARG147",
+    "ARG184",
+    "ASN119",
+    "ASN150",
+    "ASN151",
+    "ASN169",
+    "ASN179",
+    "ASP133",
+    "ASP171",
+    "GLU145",
+    "GLU146",
+    "GLU177",
+    "ILE143",
+    "ILE148",
+    "ILE172",
+    "ILE185",
+    "LEU180",
+    "LYS175",
+    "NAG1201",
+    "PRO149",
+    "PRO178",
+    "PRO181",
+    "SER131",
+    "SER182",
+    "THR144",
+    "THR152",
+    "TRP168",
+    "TYR118",
+    "TYR132",
+    "TYR166",
+    "TYR173",
+    "TYR183",
+    "VAL167",
+    "VAL174"
+  ],
+  "contact_total": 35,
+  "contact_per_position": [
+    [
+      1,
+      "L",
+      4
+    ],
+    [
+      2,
+      "P",
+      11
+    ],
+    [
+      3,
+      "P",
+      5
+    ],
+    [
+      4,
+      "G",
+      14
+    ],
+    [
+      5,
+      "P",
+      1
+    ]
+  ],
+  "contact_top_atoms": [
+    [
+      "O",
+      8
+    ],
+    [
+      "C",
+      3
+    ],
+    [
+      "CD",
+      3
+    ],
+    [
+      "CA",
+      3
+    ],
+    [
+      "CD2",
+      3
+    ],
+    [
+      "N",
+      2
+    ],
+    [
+      "CA",
+      2
+    ],
+    [
+      "CB",
+      2
+    ]
+  ],
+  "fingerprint": {
+    "hbonds": 5,
+    "hydrophobics": 29,
+    "ionic_like": 0,
+    "hbond_lig_atoms": [
+      "O",
+      "N",
+      "O",
+      "N",
+      "CB"
+    ],
+    "hbond_pocket_residues": [
+      "GLU146",
+      "GLU146",
+      "GLU146",
+      "GLU146",
+      "NAG1201"
+    ]
+  }
+}
