@@ -1,0 +1,4 @@
+finalist	length	iDPPIV_score	global_percentile	length_class_n	rank_in_length_class	top_pct_in_length_class	z_vs_length_class_mean	length_class_mean_score
+LPPGP	5	2.4524	99.7	1202	1196	99.4	2.45	-0.8426
+APPSQ	5	0.8404	91.5	1202	1082	89.9	1.25	-0.8426
+APQIP	5	1.5653	97.8	1202	1162	96.6	1.79	-0.8426

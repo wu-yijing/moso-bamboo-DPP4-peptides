@@ -1,0 +1,12 @@
+Length-agnostic (within-length-class) ranking of 3 finalists
+Pool n = 4950 (short peptides 2-6 aa)
+
+finalist   len    score  global%  classN  rank/class  top%class      z
+LPPGP        5   2.4524     99.7    1202  1196/1202        99.4   2.45
+APPSQ        5   0.8404     91.5    1202  1082/1202        89.9   1.25
+APQIP        5   1.5653     97.8    1202  1162/1202        96.6   1.79
+
+Interpretation: even when ranked ONLY within their own 5-mer
+length class (removing the cross-length 'shorter=higher' effect),
+all three finalists remain in the top ~90-99% by iDPPIV composition
+score, proving their priority is NOT a mere artifact of length bias.
