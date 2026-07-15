@@ -1,0 +1,46 @@
+=== 思路② 多靶点抗糖尿病肽优先化 (离线/文献锚定) ===
+
+候选池: 4717 条 (来自 DPP4 阶段 iDPPIV 阳性)
+参考集规模: DPP4=37, ACE=55, alphaG=16 (均为引用文献已知活性肽)
+
+[A] 跨靶点长度偏倚 (核心方法贡献, 与思路①同构)
+  target            N   medLen  %%<=6  min  max  meanLen  corr(score,length)
+  DPP4 (ref=已知活性肽)    37    6.0  0.703    3   12    5.97   +0.155
+  ACE  (ref=已知活性肽)    55    6.0  0.655    3   15    6.53   +0.414
+  alphaG(ref=已知活性肽)   16    7.5  0.375    2   10    5.88   +0.258
+  -> 三个靶点参考集均以短肽为主, 且候选分数与长度正相关 -> 长度偏倚是跨靶点的普遍问题
+
+[B] 优先化结果
+  多靶点(>=2轴前1/10): 218 条
+  单靶点 DPP4: 310 | 单靶点 ACE: 256 | 单靶点 alphaG: 412
+  阈值: dpp4_norm>=0.275, ace_norm>=0.437, ag_norm>=0.336 (各自前10%)
+
+[C] 多靶点候选 Top-20 (按命中靶点数, 再按 dpp4 归一分)
+  LPPQGHIPEK   L=10  dpp4=0.378 ace=0.463 ag=0.342  nTar=3 [MULTI]
+  LATDQPAGPVSMMPK L=15  dpp4=0.326 ace=0.513 ag=0.359  nTar=3 [MULTI]
+  EPPVK        L= 5  dpp4=0.308 ace=0.441 ag=0.346  nTar=3 [MULTI]
+  VVAPPER      L= 7  dpp4=0.303 ace=0.589 ag=0.404  nTar=3 [MULTI]
+  PPIPVGTESSAEDPPDK L=17  dpp4=0.290 ace=0.507 ag=0.354  nTar=3 [MULTI]
+  LVMVDPDAPSPSNPTK L=16  dpp4=0.278 ace=0.586 ag=0.352  nTar=3 [MULTI]
+  LPMAPPPMPMP  L=11  dpp4=0.981 ace=0.498 ag=0.170  nTar=2 [MULTI]
+  LPTDPTAPPQPVEVEPE L=17  dpp4=0.849 ace=0.474 ag=0.246  nTar=2 [MULTI]
+  LPTDPTPPPQPAPPST L=16  dpp4=0.806 ace=0.494 ag=0.195  nTar=2 [MULTI]
+  LVSPPVAPSPSMPPMP L=16  dpp4=0.791 ace=0.500 ag=0.187  nTar=2 [MULTI]
+  VPPNPTPPPPS  L=11  dpp4=0.782 ace=0.545 ag=0.138  nTar=2 [MULTI]
+  LPSIPPPPSPMAAPP L=15  dpp4=0.763 ace=0.531 ag=0.208  nTar=2 [MULTI]
+  LPQAHAPPPPPPAQPQAAK L=19  dpp4=0.710 ace=0.516 ag=0.241  nTar=2 [MULTI]
+  LPPPVTIPP    L= 9  dpp4=0.692 ace=0.597 ag=0.158  nTar=2 [MULTI]
+  PQPPVPQH     L= 8  dpp4=0.678 ace=0.598 ag=0.115  nTar=2 [MULTI]
+  LPPMPAPAPVH  L=11  dpp4=0.664 ace=0.485 ag=0.177  nTar=2 [MULTI]
+  LMMHPSMEQPPAPK L=14  dpp4=0.619 ace=0.484 ag=0.262  nTar=2 [MULTI]
+  PGQPMNNPHPPMAAGPSHH L=19  dpp4=0.618 ace=0.470 ag=0.208  nTar=2 [MULTI]
+  LPPPPHQEPAAVEA L=14  dpp4=0.607 ace=0.494 ag=0.215  nTar=2 [MULTI]
+  PTPPPPPSA    L= 9  dpp4=0.604 ace=0.567 ag=0.140  nTar=2 [MULTI]
+
+[D] 决赛候选在三靶点矩阵中的位置
+  LPPGP    L= 5 dpp4=0.438 ace=0.553 ag=0.193 nTar=2 flag=MULTI
+  APPSQ    L= 5 dpp4=0.242 ace=0.394 ag=0.236 nTar=0 flag=none
+  APQIP    L= 5 dpp4=0.330 ace=0.406 ag=0.151 nTar=1 flag=SINGLE-DPP4
+
+诚实边界: ACE/alphaG 分数为知识型组成+序列相似签名(文献锚定), 非基准验证 ML 预测器;
+          仅表示与已知活性肽的相似度, 不等同预测活性; 需湿实验验证。
