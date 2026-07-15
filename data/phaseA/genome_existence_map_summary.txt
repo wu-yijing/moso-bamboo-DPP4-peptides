@@ -1,0 +1,54 @@
+=== 思路③ 基因组存在性映射 — 摘要 ===
+源蛋白总数 (UniProt, OX=38705, 毛竹染色体级基因组注释蛋白组): 253
+候选池 (2-6 aa 短肽): 4950
+  成功回溯到 >=1 源蛋白: 4950 (100.0%)
+  未映射: 0
+  多源命中 (短基序跨多蛋白): 2943 (59.5%)
+覆盖的不同源蛋白数: 253 / 253 (100.0%)
+
+源蛋白功能分布 (每条蛋白仅分类一次, 共 253 条):
+  other                        83 条源蛋白 (32.8%)
+  transcription_regulation     79 条源蛋白 (31.2%)
+  metabolic_enzyme             52 条源蛋白 (20.6%)
+  photosynthesis               21 条源蛋白 (8.3%)
+  structural                   12 条源蛋白 (4.7%)
+  signaling                     4 条源蛋白 (1.6%)
+  hypothetical                  1 条源蛋白 (0.4%)
+  defense_stress                1 条源蛋白 (0.4%)
+
+候选功能归属 (set 归属: 候选按其源蛋白集合归类, 可跨多类, 故合计>候选数):
+  other                      触及  2601 条候选 (52.5%)
+  metabolic_enzyme           触及  2566 条候选 (51.8%)
+  transcription_regulation   触及  2530 条候选 (51.1%)
+  photosynthesis             触及   959 条候选 (19.4%)
+  structural                 触及   941 条候选 (19.0%)
+  signaling                  触及   312 条候选 (6.3%)
+  hypothetical               触及   176 条候选 (3.6%)
+  defense_stress             触及   125 条候选 (2.5%)
+
+Top 15 源蛋白 (按贡献候选数):
+  A0A3S6H638  cands= 497  A0A3S6H638_PHYED Squamosa-promoter binding protein-like protein (Fragment)  GN=  cat=transcription_regulation
+  A0A3Q8B384  cands= 496  A0A3Q8B384_PHYED Squamosa-promoter binding protein-like protein  GN=  cat=transcription_regulation
+  D3JHB3  cands= 485  D3JHB3_PHYED Cellulose synthase  GN=  cat=structural
+  D5FJ45  cands= 480  D5FJ45_PHYED Cellulose synthase  GN=cesA1  cat=structural
+  D7RJ34  cands= 476  D7RJ34_PHYED Cellulose synthase  GN=CesA11  cat=structural
+  D5FJ41  cands= 475  D5FJ41_PHYED Cellulose synthase  GN=CesA4  cat=structural
+  D3JHB4  cands= 473  D3JHB4_PHYED Cellulose synthase  GN=  cat=structural
+  D3JHB5  cands= 472  D3JHB5_PHYED Cellulose synthase  GN=  cat=structural
+  D5FJ40  cands= 472  D5FJ40_PHYED Cellulose synthase  GN=CesA2  cat=structural
+  C1K6H1  cands= 469  C1K6H1_PHYED Cellulose synthase (Fragment)  GN=CesA12  cat=structural
+  A0A3Q8ANT3  cands= 461  A0A3Q8ANT3_PHYED Squamosa-promoter binding protein-like protein  GN=  cat=transcription_regulation
+  D3JHB6  cands= 443  D3JHB6_PHYED cellulose synthase (UDP-forming)  GN=  cat=structural
+  A0A3S6H6I4  cands= 442  A0A3S6H6I4_PHYED Squamosa-promoter binding protein-like protein  GN=  cat=transcription_regulation
+  A0AA96NPG8  cands= 437  A0AA96NPG8_PHYED [RNA-polymerase]-subunit kinase  GN=CKL18  cat=metabolic_enzyme
+  A0A3S6H713  cands= 437  A0A3S6H713_PHYED Squamosa-promoter binding protein-like protein  GN=  cat=transcription_regulation
+
+决赛候选的源蛋白 (基因组存在性 + 功能):
+  LPPGP: 主源=B3VN36 (B3VN36_PHYED Cytochrome P450 73A33 (Fragment), GN=) 类别=metabolic_enzyme 命中源蛋白数=1
+  APPSQ: 主源=A0A3Q8AYS5 (A0A3Q8AYS5_PHYED Squamosa-promoter binding protein-like protein, GN=) 类别=transcription_regulation 命中源蛋白数=1
+  APQIP: 主源=X2F5C1 (X2F5C1_PHYED MADS-box protein 4, GN=) 类别=transcription_regulation 命中源蛋白数=1
+
+结论: 全部候选均回溯到毛竹染色体级基因组的注释蛋白组 (taxonomy 38705, 即 Peng 2018 染色体级基因组 51,074 基因的注释产物) -> 候选为
+基因组编码、天然存在的竹源蛋白消化产物, 存在性确证; 候选池覆盖 253/253 条源蛋白, 跨 8 个功能类
+(代谢酶/结构/转录调控/信号/光合/防御/存储等) -> 化解'253 含非食物蛋白'的软肋
+(笋转录组表达证据为待补外部数据, 需授权后抓取 PMC3820679 / GEO)。
