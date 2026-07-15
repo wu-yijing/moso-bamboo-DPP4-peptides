@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
-"""验证本地 iDPPIV-SCM 是否复现文献精度
-   文献: CV≈0.819, 独立测试≈0.797 (Charoenkwan 2020)
+"""Validate whether the local iDPPIV-SCM reproduces the literature accuracy
+   Literature: CV~0.819, independent test~0.797 (Charoenkwan 2020)
 """
 import sys, os, random
 sys.path.insert(0, os.path.dirname(__file__))
@@ -10,19 +10,19 @@ random.seed(42)
 
 tr_seqs, tr_lab = load_tsv("idppiv_scm/data/train.tsv")
 te_seqs, te_lab = load_tsv("idppiv_scm/data/test.tsv")
-print(f"训练集: {len(tr_seqs)} 条 (正={sum(tr_lab)}, 负={len(tr_lab)-sum(tr_lab)})")
-print(f"测试集: {len(te_seqs)} 条 (正={sum(te_lab)}, 负={len(te_lab)-sum(te_lab)})")
+print(f"Training set: {len(tr_seqs)} entries (pos={sum(tr_lab)}, neg={len(tr_lab)-sum(tr_lab)})")
+print(f"Test set:     {len(te_seqs)} entries (pos={sum(te_lab)}, neg={len(te_lab)-sum(te_lab)})")
 
 pos = [s for s, y in zip(tr_seqs, tr_lab) if y == 1]
 neg = [s for s, y in zip(tr_seqs, tr_lab) if y == 0]
 P, L = build_scm(pos, neg)
-print(f"SCM 评分卡维度: 位置数 L_max={L}, 每位置 {len(AA:=set('ACDEFGHIKLMNPQRSTVWY'))} 个氨基酸")
+print(f"SCM scoring-card dims: positions L_max={L}, {len(AA:=set('ACDEFGHIKLMNPQRSTVWY'))} amino acids per position")
 
-# ---- 在独立测试集上评估 ----
+# ---- evaluate on the independent test set ----
 acc_te, mcc_te, _ = evaluate(te_seqs, te_lab, P, L)
-print(f"\n[独立测试集] ACC={acc_te:.3f}  MCC={mcc_te:.3f}  (文献≈0.797)")
+print(f"\n[independent test] ACC={acc_te:.3f}  MCC={mcc_te:.3f}  (literature~0.797)")
 
-# ---- 5 折交叉验证 (训练集内) ----
+# ---- 5-fold cross-validation (within training set) ----
 idx = list(range(len(tr_seqs)))
 random.shuffle(idx)
 folds = [idx[i::5] for i in range(5)]
@@ -38,10 +38,10 @@ for k in range(5):
     a, _, _ = evaluate(fold_seqs, fold_lab, Pk, Lk)
     accs.append(a)
 cv = sum(accs) / len(accs)
-print(f"[5折CV] 平均 ACC={cv:.3f}  (各折: {[f'{a:.3f}' for a in accs]})  (文献≈0.819)")
+print(f"[5-fold CV] mean ACC={cv:.3f}  (folds: {[f'{a:.3f}' for a in accs]})  (literature~0.819)")
 
-# ---- 阈值敏感性 (在训练集上用全量模型走一遍, 仅供参考) ----
+# ---- threshold sensitivity (full model swept on training set, reference only) ----
 acc_tr, mcc_tr, _ = evaluate(tr_seqs, tr_lab, P, L)
-print(f"[训练集全量] ACC={acc_tr:.3f}  MCC={mcc_tr:.3f}")
+print(f"[full training set] ACC={acc_tr:.3f}  MCC={mcc_tr:.3f}")
 
-print("\n=> 若 独立测试 ACC 落在 0.75-0.82、CV 落在 0.78-0.85, 即视为忠实复现。")
+print("\n=> If independent-test ACC falls in 0.75-0.82 and CV in 0.78-0.85, treat it as a faithful reproduction.")

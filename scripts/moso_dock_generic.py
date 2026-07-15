@@ -1,20 +1,21 @@
 # -*- coding: utf-8 -*-
 """
-通用 Vina 对接(同一 RDKit 制备管线) —— 可用于任意队列, 断点续跑 + 即时落盘.
-用法: python moso_dock_generic.py <QUEUE> <RESULTS_TSV> <LIGDIR>
+Generic Vina docking (same RDKit prep pipeline) -- usable for any queue,
+with resume-from-checkpoint + immediate disk flush.
+Usage: python moso_dock_generic.py <QUEUE> <RESULTS_TSV> <LIGDIR>
 """
 import os, sys, subprocess
 from rdkit import Chem
 from rdkit.Chem import AllChem
 from openbabel import pybel
 
-REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))  # scripts/ -> 仓库根
+REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))  # scripts/ -> repo root
 DATA = os.path.join(REPO, "data")
 DOCK = os.path.join(REPO, "docking")
 
 def _resolve_in(name, *dirs):
-    """按给定目录顺序解析已存在的输入文件; 绝对路径/已存在则原样返回;
-    都找不到时默认落在第一个目录(用于输出)。"""
+    """Resolve an existing input file following the given directory order; return as-is
+    if absolute path / already exists; if none found, default to the first dir (for output)."""
     if os.path.isabs(name) or os.path.exists(name):
         return name
     for d in dirs:
@@ -23,13 +24,13 @@ def _resolve_in(name, *dirs):
             return cand
     return os.path.join(dirs[0], name)
 
-QUEUE  = _resolve_in(sys.argv[1], DATA, DOCK)                         # 队列多在 data/
-RESULTS= sys.argv[2] if os.path.isabs(sys.argv[2]) else os.path.join(DOCK, sys.argv[2])
-LIGDIR = sys.argv[3] if os.path.isabs(sys.argv[3]) else os.path.join(DOCK, sys.argv[3])
-REC    = os.path.join(DOCK, "1WCY_receptor.pdbqt")
-BOX    = os.path.join(DOCK, "moso_box.txt")
-# AutoDock Vina 第三方二进制(不纳入版本库): 默认走 PATH; 可用 VINA_EXE 覆盖。
-VINA   = os.environ.get("VINA_EXE", "vina")
+QUEUE   = _resolve_in(sys.argv[1], DATA, DOCK)                         # queue often in data/
+RESULTS = sys.argv[2] if os.path.isabs(sys.argv[2]) else os.path.join(DOCK, sys.argv[2])
+LIGDIR  = sys.argv[3] if os.path.isabs(sys.argv[3]) else os.path.join(DOCK, sys.argv[3])
+REC     = os.path.join(DOCK, "1WCY_receptor.pdbqt")
+BOX     = os.path.join(DOCK, "moso_box.txt")
+# AutoDock Vina third-party binary (not under version control): defaults to PATH; override via VINA_EXE.
+VINA    = os.environ.get("VINA_EXE", "vina")
 os.makedirs(LIGDIR, exist_ok=True)
 
 def _autolocate_babel_datadir():
@@ -83,7 +84,7 @@ if os.path.exists(RESULTS):
             done.add(ln.split("\t")[0])
 
 rows = [l.rstrip("\n").split("\t") for l in open(QUEUE, encoding="utf-8") if l.strip()]
-print(f"队列 {sys.argv[1]}: {len(rows)} 条, 已完成 {len(done)} 条", flush=True)
+print(f"Queue {sys.argv[1]}: {len(rows)} entries, {len(done)} already done", flush=True)
 if not os.path.exists(RESULTS):
     with open(RESULTS, "w", encoding="utf-8") as f:
         f.write("peptide\tiDPPIV_score\tdG_kcal_mol\n")
@@ -103,6 +104,6 @@ for i, parts in enumerate(rows):
         with open(RESULTS, "a", encoding="utf-8") as f:
             f.write(f"{seq}\t{float(sc):.3f}\tERR\n")
         done.add(seq)
-        print(f"  {seq:7s} 异常: {e}", flush=True)
+        print(f"  {seq:7s} exception: {e}", flush=True)
 
-print(f"\n本轮新增 {count} 条; 累计 {len(done)}/{len(rows)} -> {RESULTS}", flush=True)
+print(f"\nThis run added {count} entries; cumulative {len(done)}/{len(rows)} -> {RESULTS}", flush=True)

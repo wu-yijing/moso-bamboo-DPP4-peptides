@@ -1,12 +1,12 @@
 # -*- coding: utf-8 -*-
-"""新 iDPPIV 队列内部分析: 去重 + iDPPIV 分 vs 实测 dG 相关性 (无制备方法混杂)"""
+"""Internal analysis of the new iDPPIV queue: de-dup + iDPPIV score vs measured dG correlation (free of preparation-method confound)"""
 import collections, statistics, json, os
 
-REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))  # scripts/ -> 仓库根
+REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))  # scripts/ -> repo root
 DOCK = os.path.join(REPO, "docking")
 
 RAW = os.path.join(DOCK, "moso_dock_results_idppiv.tsv")
-# 按肽聚合所有对接值(多次重跑)
+# aggregate all docking values per peptide (multiple re-runs)
 agg = collections.defaultdict(list)
 for l in open(RAW, encoding="utf-8"):
     l = l.rstrip("\n")
@@ -17,7 +17,7 @@ for l in open(RAW, encoding="utf-8"):
         continue
     agg[seq].append((float(sc), float(dg)))
 
-# 干净 60 肽表: 取每个肽最优(最负) dG
+# clean 60-peptide table: take each peptide's best (most negative) dG
 clean = []
 for seq, vals in agg.items():
     sc = vals[0][0]
@@ -26,14 +26,14 @@ for seq, vals in agg.items():
     spread = max(dgs) - min(dgs)
     clean.append((seq, sc, best, spread, len(vals)))
 
-clean.sort(key=lambda x: x[2])   # 按 dG 升序(最负在前)
-print(f"唯一肽数: {len(clean)}  重跑次数>1 的肽: {sum(1 for c in clean if c[4]>1)}")
-print("\n=== 新 iDPPIV 队列 Top-15 (按 dG 最优) ===")
+clean.sort(key=lambda x: x[2])   # ascending by dG (most negative first)
+print(f"unique peptides: {len(clean)}  peptides with >1 re-run: {sum(1 for c in clean if c[4]>1)}")
+print("\n=== new iDPPIV queue Top-15 (best dG) ===")
 print(f"{'rank':<5}{'peptide':<8}{'iDPPIV':>8}{'dG_best':>9}{'spread':>8}{'n_dock':>7}")
 for i, (seq, sc, best, spread, n) in enumerate(clean[:15], 1):
     print(f"{i:<5}{seq:<8}{sc:>8.3f}{best:>9.3f}{spread:>8.3f}{n:>7}")
 
-# iDPPIV 排序分 vs dG 的 Spearman 相关
+# Spearman correlation between iDPPIV ranking score and dG
 def spearman(xs, ys):
     n = len(xs)
     rx = sorted(range(n), key=lambda i: xs[i])
@@ -47,18 +47,18 @@ def spearman(xs, ys):
 scs = [c[1] for c in clean]
 dgs = [c[2] for c in clean]
 rho = spearman(scs, dgs)
-print(f"\n=== 相关性 (n={len(clean)}) ===")
+print(f"\n=== correlation (n={len(clean)}) ===")
 print(f"iDPPIV_score vs dG  Spearman rho = {rho:.3f}")
-# 分箱: iDPPIV 高/低两组的 dG 中位
+# bin: dG median of iDPPIV high/low groups
 hi = [d for s, d in zip(scs, dgs) if s >= statistics.median(scs)]
 lo = [d for s, d in zip(scs, dgs) if s < statistics.median(scs)]
-print(f"iDPPIV 高分组 dG 中位: {statistics.median(hi):.3f}  (n={len(hi)})")
-print(f"iDPPIV 低分组 dG 中位: {statistics.median(lo):.3f}  (n={len(lo)})")
+print(f"iDPPIV high-group dG median: {statistics.median(hi):.3f}  (n={len(hi)})")
+print(f"iDPPIV low-group  dG median: {statistics.median(lo):.3f}  (n={len(lo)})")
 
-# 保存干净表
+# save clean table
 _clean_out = os.path.join(DOCK, "moso_dock_results_idppiv_clean.tsv")
 with open(_clean_out, "w", encoding="utf-8") as f:
     f.write("peptide\tiDPPIV_score\tdG_best\tdG_spread\tn_dock\n")
     for seq, sc, best, spread, n in clean:
         f.write(f"{seq}\t{sc:.3f}\t{best:.3f}\t{spread:.3f}\t{n}\n")
-print(f"\n干净表已写 -> {_clean_out}")
+print(f"\nclean table written -> {_clean_out}")

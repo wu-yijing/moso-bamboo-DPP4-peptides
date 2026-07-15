@@ -1,15 +1,16 @@
 # -*- coding: utf-8 -*-
 """
-公平跨队列对比: 新 iDPPIV 队列 vs 旧代理队列 (两者均用同一 RDKit 管线对接 1WCY)
+Fair cross-queue comparison: new iDPPIV queue vs old proxy queue
+(both docked against 1WCY with the same RDKit pipeline)
 ------------------------------------------------------------------------
-读取:
-  moso_dock_results_idppiv_clean.tsv  (新队列 60, 已去重取最优)
-  moso_dock_results_old_rdkit.tsv    (旧队列 60, 同法重对接, 去重取最优)
-输出: 控制台对比 + moso_dock_compare.tsv
+Read:
+  moso_dock_results_idppiv_clean.tsv  (new queue 60, de-dup best kept)
+  moso_dock_results_old_rdkit.tsv    (old queue 60, re-docked same way, de-dup best kept)
+Output: console comparison + moso_dock_compare.tsv
 """
 import collections, statistics, os
 
-REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))  # scripts/ -> 仓库根
+REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))  # scripts/ -> repo root
 DOCK = os.path.join(REPO, "docking")
 
 def load_best(path, has_score=True):
@@ -32,7 +33,7 @@ def load_best(path, has_score=True):
 new = load_best(os.path.join(DOCK, "moso_dock_results_idppiv_clean.tsv"))
 old = load_best(os.path.join(DOCK, "moso_dock_results_old_rdkit.tsv"))
 
-print(f"新队列唯一肽: {len(new)}   旧队列唯一肽: {len(old)}")
+print(f"new queue unique peptides: {len(new)}   old queue unique peptides: {len(old)}")
 
 new_dg = [v[1] for v in new.values()]
 old_dg = [v[1] for v in old.values()]
@@ -40,34 +41,34 @@ old_dg = [v[1] for v in old.values()]
 def stats(name, xs):
     xs_sorted = sorted(xs)
     print(f"\n[{name}] n={len(xs)}")
-    print(f"  最佳 dG (最负): {min(xs):.3f}")
-    print(f"  中位 dG:        {statistics.median(xs):.3f}")
-    print(f"  均值 dG:        {statistics.mean(xs):.3f}")
-    print(f"  dG <= -6.5 占比: {sum(1 for x in xs if x<=-6.5)/len(xs)*100:.1f}%")
-    print(f"  dG <= -6.0 占比: {sum(1 for x in xs if x<=-6.0)/len(xs)*100:.1f}%")
+    print(f"  best dG (most negative): {min(xs):.3f}")
+    print(f"  median dG:        {statistics.median(xs):.3f}")
+    print(f"  mean dG:        {statistics.mean(xs):.3f}")
+    print(f"  frac dG <= -6.5: {sum(1 for x in xs if x<=-6.5)/len(xs)*100:.1f}%")
+    print(f"  frac dG <= -6.0: {sum(1 for x in xs if x<=-6.0)/len(xs)*100:.1f}%")
 
-stats("新 iDPPIV 队列 (RDKit 同法)", new_dg)
-stats("旧 代理队列 (RDKit 同法)", old_dg)
+stats("new iDPPIV queue (same RDKit method)", new_dg)
+stats("old proxy queue (same RDKit method)", old_dg)
 
-# 重叠肽(两队列共有)直接配对比较
+# directly pair-compare overlapping peptides (shared by both queues)
 overlap = set(new) & set(old)
-print(f"\n=== 重叠肽配对比较 (n={len(overlap)}) ===")
-better_new = sum(1 for p in overlap if new[p][1] < old[p][1])   # 更负=更好
+print(f"\n=== paired comparison of overlapping peptides (n={len(overlap)}) ===")
+better_new = sum(1 for p in overlap if new[p][1] < old[p][1])   # more negative = better
 better_old = sum(1 for p in overlap if old[p][1] < new[p][1])
-print(f"  新队列 dG 更优(更负)的肽: {better_new}")
-print(f"  旧队列 dG 更优(更负)的肽: {better_old}")
+print(f"  peptides with better (more negative) dG in new queue: {better_new}")
+print(f"  peptides with better (more negative) dG in old queue: {better_old}")
 
 new_best = min(new_dg); old_best = min(old_dg)
-print(f"\n=== 结论性对比 ===")
-print(f"  新队列最佳结合肽 dG = {new_best:.3f} ({min(new, key=lambda p: new[p][1])})")
-print(f"  旧队列最佳结合肽 dG = {old_best:.3f} ({min(old, key=lambda p: old[p][1])})")
+print(f"\n=== conclusive comparison ===")
+print(f"  new-queue best-binding peptide dG = {new_best:.3f} ({min(new, key=lambda p: new[p][1])})")
+print(f"  old-queue best-binding peptide dG = {old_best:.3f} ({min(old, key=lambda p: old[p][1])})")
 if new_best < old_best:
-    print(f"  >>> 同法制备下, 新 iDPPIV 优先化给出更优结合肽 (Δ={new_best-old_best:+.3f} kcal/mol)")
+    print(f"  >>> under the same preparation, the new iDPPIV prioritization yields a better-binding peptide (Δ={new_best-old_best:+.3f} kcal/mol)")
 else:
-    print(f"  >>> 同法制备下, 新队列最佳未超越旧队列 (Δ={new_best-old_best:+.3f} kcal/mol)")
-    print(f"      即 iDPPIV 优先化在本受体/盒子上未带来结合更强肽; 其价值在活性筛选维度(见分析)。")
+    print(f"  >>> under the same preparation, the new queue's best does not surpass the old queue (Δ={new_best-old_best:+.3f} kcal/mol)")
+    print(f"      i.e. iDPPIV prioritization brought no stronger-binding peptide on this receptor/box; its value lies in the activity-screening dimension (see analysis).")
 
-# 保存
+# save
 with open(os.path.join(DOCK, "moso_dock_compare.tsv"), "w", encoding="utf-8") as f:
     f.write("metric\tnew_idppiv\told_proxy\n")
     f.write(f"n\t{len(new)}\t{len(old)}\n")
@@ -78,4 +79,4 @@ with open(os.path.join(DOCK, "moso_dock_compare.tsv"), "w", encoding="utf-8") as
     f.write(f"overlap_n\t{len(overlap)}\t\n")
     f.write(f"overlap_better_new\t{better_new}\t\n")
     f.write(f"overlap_better_old\t{better_old}\t\n")
-print(f"\n对比已写 -> {os.path.join(DOCK, 'moso_dock_compare.tsv')}")
+print(f"\ncomparison written -> {os.path.join(DOCK, 'moso_dock_compare.tsv')}")

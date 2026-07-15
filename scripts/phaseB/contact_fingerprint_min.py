@@ -1,12 +1,14 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-LPPGP / APPSQ 接触指纹 (受体残基层面) —— 与 §3.6/§3.7 完全一致的 *最小化复合体* 几何
+LPPGP / APPSQ contact fingerprint (receptor-residue interface) -- geometry of the
+*minimized complex* fully consistent with Section 3.6 / 3.7
 ==================================================================================
-复用 scripts/phaseB/phaseB_validation.py 的 compute_mm_bind (MMFF94s 松弛:
-受体骨架固定, 配体+口袋侧链优化; 口袋=9A cutoff), 由最小化后的复合物计算逐受体残基
-接触数 (total / hydrophobic / polar-Hbond) -> 接触指纹。
-输出:
+Reuses scripts/phaseB/phaseB_validation.py's compute_mm_bind (MMFF94s relaxation:
+receptor backbone fixed, ligand + pocket side chains optimized; pocket = 9A cutoff);
+from the minimized complex, compute per-receptor-residue contact counts
+(total / hydrophobic / polar-HBond) -> contact fingerprint.
+Output:
   data/phaseB/contact_fingerprint_LPPGP_APPSQ.tsv
   data/phaseB/contact_fingerprint_LPPGP_APPSQ.json
 """
@@ -38,12 +40,12 @@ def role_of(rn, ri):
     return "pocket"
 
 def receptor_contact_map(res):
-    """由最小化复合物 (res['_combo']) 计算逐受体残基接触。"""
+    """Compute per-receptor-residue contacts from the minimized complex (res['_combo'])."""
     combo = res["_combo"]
     conf  = combo.GetConformer()
-    pkt_idx  = res["_pkt_idx"]     # 口袋重原子在 combo 中的索引
-    lig_idx  = res["_lig_idx"]     # 配体重原子在 combo 中的索引
-    pkt_atoms = res["_pkt_atoms"]  # 元数据 [(resname,resid,name,chain,...)]
+    pkt_idx  = res["_pkt_idx"]     # pocket heavy-atom indices within the combo
+    lig_idx  = res["_lig_idx"]     # ligand heavy-atom indices within the combo
+    pkt_atoms = res["_pkt_atoms"]  # metadata [(resname,resid,name,chain,...)]
 
     def sym(i): return combo.GetAtomWithIdx(i).GetSymbol()
     def is_donor(i):
@@ -73,15 +75,15 @@ def receptor_contact_map(res):
 def main():
     per_pep = {}
     for pep in PEPS:
-        print(f"=== {pep['name']} : MMFF 最小化 + 指纹 ===", flush=True)
+        print(f"=== {pep['name']} : MMFF minimization + fingerprint ===", flush=True)
         res = pb.compute_mm_bind(pep)
         rec_cnt, rec_hb = receptor_contact_map(res)
         per_pep[pep["name"]] = {
             "rec": rec_cnt, "hb": rec_hb,
             "n_total": sum(c["total"] for c in rec_cnt.values()),
         }
-        print(f"  [{pep['name']}] 总接触={per_pep[pep['name']]['n_total']} "
-              f"H-bond残基={sorted(rec_hb)}", flush=True)
+        print(f"  [{pep['name']}] total_contacts={per_pep[pep['name']]['n_total']} "
+              f"H-bond_residues={sorted(rec_hb)}", flush=True)
 
     all_keys = set()
     for d in per_pep.values():

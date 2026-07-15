@@ -1,15 +1,16 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
-Phase A - Step 1: 提取毛竹虚拟消化产生的 2-6aa 短肽，作为官方服务器
-(PeptideRanker / AllerTOP v2 / ToxinPred3) 的输入。
+Phase A - Step 1: extract the 2-6 aa short peptides produced by the moso-bamboo
+in silico digestion, to serve as input for the official web servers
+(PeptideRanker / AllerTOP v2 / ToxinPred3).
 
-输入: data/moso_253_peptides_strict.txt  (每行一条肽)
-过滤: 长度 2-6, 仅标准 20 氨基酸, 去重
-输出: data/phaseA_inputs/
-  - moso_short_2to6.fasta      (主输入, 全部 2-6aa, 带 ID)
-  - moso_short_2to6.txt        (简单列表, 每行一条, 供部分服务器)
-  - <server>/batch_XX.fasta     (每批 500, 三服务器各一份)
+Input : data/moso_253_peptides_strict.txt  (one peptide per line)
+Filter: length 2-6, standard 20 amino acids only, deduplicated
+Output: data/phaseA_inputs/
+  - moso_short_2to6.fasta      (main input, all 2-6 aa, with IDs)
+  - moso_short_2to6.txt        (plain list, one per line, for some servers)
+  - <server>/batch_XX.fasta     (500 per batch, one copy per server)
 """
 import os
 import math

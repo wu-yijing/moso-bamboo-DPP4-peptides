@@ -1,39 +1,39 @@
 peptide_seq	name	source_food	source_protein	species	ic50_uM	ic50_note	prep_method	evidence	reference
-IPI	Diprotin A	微生物	-	Streptomyces	5.48	5.48 uM (阳性对照); 文献亦报 ~88 uM (31.5 ug/mL)	分离纯化	实验	经典阳性对照
-VPL	Diprotin B	微生物	-	Streptomyces	40	~40 uM	分离	实验	经典
-IPP	Ile-Pro-Pro	乳	beta/kappa-casein	牛乳	150	数十-数百 uM	酶解	实验	食物源经典
-VPP	Val-Pro-Pro	乳	beta-casein	牛乳	150	数十-数百 uM	酶解	实验	食物源经典
-DYPAY	-	大豆	大豆蛋白	大豆	162.2	162.2 uM	酶解+LC-MS/MS	实验+对接	2026 ebiotrade
-IAVPTGVA	Soy1	大豆	大豆蛋白	大豆	106	106 uM	酶解	实验+in silico	2010s
-YVVNPDNDEN	Soy2	大豆	大豆蛋白	大豆	-	weak	酶解	实验	
-YVVNPDNNEN	Soy3	大豆	大豆蛋白	大豆	-	weak	酶解	实验	
-LTFPGSAED	Lup1	羽扇豆	羽扇豆蛋白	Lupin	228	228 uM	酶解	实验	
-LPVP	-	骆驼乳	骆驼乳蛋白	骆驼	87.0	87.0 uM	酶解(trypsin)	实验	2018 Food Chem
-MPVQA	-	骆驼乳	骆驼乳蛋白	骆驼	93.3	93.3 uM	酶解	实验	2018 Food Chem
-LDKVFR	-	三文鱼皮	胶原	大西洋鲑	128.71	128.71 uM	酶解(trypsin)	实验+对接	2020 Food Res Int
-LPGFF	-	南瓜籽	南瓜籽蛋白	南瓜	449.68	449.68 uM	-	-	
-MAGVDHI	-	红藻	红藻蛋白	红藻	159.37	159.37 uM	-	-	
-GPFPLL	-	山羊乳	山羊乳蛋白	山羊	130.68	130.68 uM	虚拟筛选+MD+实验	计算+实验	2025
-LPYPY	-	山羊乳	山羊乳蛋白	山羊	179.52	179.52 uM	-	-	2025
-GPFPILN	-	山羊乳	山羊乳蛋白	山羊	198.18	198.18 uM	-	-	2025
-RPWR	-	山羊乳	山羊乳蛋白	山羊	474.17	474.17 uM	-	-	2025
-YPVEPF	-	牛乳	牛乳蛋白	牛	196.67	196.67 uM	-	-	
-MHQPPQPL	-	羊乳	羊乳蛋白	羊	350.41	350.41 uM	-	-	
-SPTVMFPPQSVL	-	羊乳	羊乳蛋白	羊	676.31	676.31 uM	-	-	
-LPLP	-	乳(酪蛋白)	酪蛋白	牛	1909	0.84 mg/mL (MW~440)	Caco-2提取	实验	
-QEPV	-	乳(酪蛋白)	酪蛋白	牛	31500	14.45 mg/mL (MW~458)	-	实验(弱)	
-GPSGLDGAK	-	(未指明食物)	-	-	61.27	61.27 uM	酶解	实验	
-IPQHY	-	谷物(燕麦)	燕麦蛋白	燕麦	<50	<50 uM (混合抑制型, 4条中最强之一)	酶解+UPLC-MS/MS	实验	2022 oat proteins (PMC9141920)
-VPQHY	-	谷物(燕麦)	燕麦蛋白	燕麦	<50	<50 uM (混合抑制型)	酶解+UPLC-MS/MS	实验	2022 oat proteins
-VAVVPF	-	谷物(燕麦)	燕麦蛋白	燕麦	<50	<50 uM (混合抑制型)	酶解+UPLC-MS/MS	实验	2022 oat proteins
-VPLGGF	-	谷物(燕麦)	燕麦蛋白	燕麦	<50	<50 uM (混合抑制型)	酶解+UPLC-MS/MS	实验	2022 oat proteins
-IAIPPGIPYW	-	豆类(鹰嘴豆)	鹰嘴豆蛋白	鹰嘴豆	12.43	12.43 uM (含重复Pro基序); Caco-2细胞有效	酶解+分子对接	实验+对接	2023 J Agric Food Chem doi:10.1021/acs.jafc.3c00603
-WLAFR	-	藜麦	藜麦蛋白	藜麦	78	78 uM (五肽, 竞争性); 疏水作用主导	合成+动力学/光谱/in silico	实验+in silico	2026 Food Chemistry doi:10.1016/j.foodchem.2026.013270
-LLPFR	-	藜麦	藜麦蛋白	藜麦	130	130 uM (五肽, 竞争性)	合成+动力学/光谱/in silico	实验+in silico	2026 Food Chemistry
-LTFPGSAED	Lup1	羽扇豆	白羽扇豆蛋白	羽扇豆	228	228 uM	酶解	实验	食物源DPP4肽综述
-ATHALLA	AA-7	蜂花粉	蜂花粉蛋白	蜂	52.63	52.63 uM (双重: DPP4抑制+葡萄糖转运调节)	酶解+LC-Q-TOF-MS/MS	实验+对接+in silico ADMET	2026 Nat Sci Rep doi:10.1038/s41598-026-39009-1
-EGF	-	毛竹(竹笋)	毛竹笋蛋白	毛竹		IC50=366.44 ug/mL (MW~309, 约数百uM); 三肽; 与ARG125/TYR662等6个H-bond	虚拟酶解+对接(CDOCKER)+体外酶抑制	实验(体外)+对接	2026 世界竹藤通讯 谢鹏等 doi:10.12168/sjzttx.2025.11.25.001
-TENEWK	-	小麦	小麦蛋白	小麦	4960	4.96 mM (竞争性); tau-RaMD停留时间5.05ns	虚拟水解(ConPLex)+合成+细胞	实验(IC50)+细胞	2025 J Agric Food Chem doi:10.1021/acs.jafc.5c03006
-NFVSER	-	小麦	小麦蛋白	小麦	3070	3.07 mM (竞争性); 停留时间最长	虚拟水解(ConPLex)+合成+细胞	实验(IC50)+细胞	2025 J Agric Food Chem
-LDLPSK	-	小麦	小麦蛋白	小麦	2890	2.89 mM (竞争性); 停留时间最短0.28ns	虚拟水解(ConPLex)+合成+细胞	实验(IC50)+细胞	2025 J Agric Food Chem
-QHEQR	-	小麦	小麦蛋白	小麦	4180	4.18 mM (竞争性)	虚拟水解(ConPLex)+合成+细胞	实验(IC50)+细胞	2025 J Agric Food Chem
+IPI	Diprotin A	microbial	-	Streptomyces	5.48	5.48 uM (positive control); literature also reports ~88 uM (31.5 ug/mL)	isolation/purification	experimental	classic positive control
+VPL	Diprotin B	microbial	-	Streptomyces	40	~40 uM	isolation	experimental	classic
+IPP	Ile-Pro-Pro	milk	beta/kappa-casein	bovine milk	150	tens to hundreds of uM	enzymatic hydrolysis	experimental	classic food-derived
+VPP	Val-Pro-Pro	milk	beta-casein	bovine milk	150	tens to hundreds of uM	enzymatic hydrolysis	experimental	classic food-derived
+DYPAY	-	soy	soy protein	soy	162.2	162.2 uM	enzymatic hydrolysis + LC-MS/MS	experimental + docking	2026 ebiotrade
+IAVPTGVA	Soy1	soy	soy protein	soy	106	106 uM	enzymatic hydrolysis	experimental + in silico	2010s
+YVVNPDNDEN	Soy2	soy	soy protein	soy	-	weak	enzymatic hydrolysis	experimental	
+YVVNPDNNEN	Soy3	soy	soy protein	soy	-	weak	enzymatic hydrolysis	experimental	
+LTFPGSAED	Lup1	lupin	lupin protein	Lupin	228	228 uM	enzymatic hydrolysis	experimental	
+LPVP	-	camel milk	camel milk protein	camel	87.0	87.0 uM	enzymatic hydrolysis (trypsin)	experimental	2018 Food Chem
+MPVQA	-	camel milk	camel milk protein	camel	93.3	93.3 uM	enzymatic hydrolysis	experimental	2018 Food Chem
+LDKVFR	-	salmon skin	collagen	Atlantic salmon	128.71	128.71 uM	enzymatic hydrolysis (trypsin)	experimental + docking	2020 Food Res Int
+LPGFF	-	pumpkin seed	pumpkin seed protein	pumpkin	449.68	449.68 uM	-	-	
+MAGVDHI	-	red algae	red-algae protein	red algae	159.37	159.37 uM	-	-	
+GPFPLL	-	goat milk	goat milk protein	goat	130.68	130.68 uM	virtual screening + MD + experimental	computational + experimental	2025
+LPYPY	-	goat milk	goat milk protein	goat	179.52	179.52 uM	-	-	2025
+GPFPILN	-	goat milk	goat milk protein	goat	198.18	198.18 uM	-	-	2025
+RPWR	-	goat milk	goat milk protein	goat	474.17	474.17 uM	-	-	2025
+YPVEPF	-	bovine milk	bovine milk protein	bovine	196.67	196.67 uM	-	-	
+MHQPPQPL	-	ovine milk	sheep milk protein	sheep	350.41	350.41 uM	-	-	
+SPTVMFPPQSVL	-	ovine milk	sheep milk protein	sheep	676.31	676.31 uM	-	-	
+LPLP	-	milk (casein)	casein	bovine	1909	0.84 mg/mL (MW~440)	Caco-2 extraction	experimental	
+QEPV	-	milk (casein)	casein	bovine	31500	14.45 mg/mL (MW~458)	-	experimental (weak)	
+GPSGLDGAK	-	(unspecified food)	-	-	61.27	61.27 uM	enzymatic hydrolysis	experimental	
+IPQHY	-	cereal (oat)	oat protein	oat	<50	<50 uM (mixed-inhibition type; one of the strongest among 4)	enzymatic hydrolysis + UPLC-MS/MS	experimental	2022 oat proteins (PMC9141920)
+VPQHY	-	cereal (oat)	oat protein	oat	<50	<50 uM (mixed-inhibition type)	enzymatic hydrolysis + UPLC-MS/MS	experimental	2022 oat proteins
+VAVVPF	-	cereal (oat)	oat protein	oat	<50	<50 uM (mixed-inhibition type)	enzymatic hydrolysis + UPLC-MS/MS	experimental	2022 oat proteins
+VPLGGF	-	cereal (oat)	oat protein	oat	<50	<50 uM (mixed-inhibition type)	enzymatic hydrolysis + UPLC-MS/MS	experimental	2022 oat proteins
+IAIPPGIPYW	-	legume (chickpea)	chickpea protein	chickpea	12.43	12.43 uM (contains repeated Pro motif); effective in Caco-2 cells	enzymatic hydrolysis + molecular docking	experimental + docking	2023 J Agric Food Chem doi:10.1021/acs.jafc.3c00603
+WLAFR	-	quinoa	quinoa protein	quinoa	78	78 uM (pentapeptide, competitive); hydrophobic-interaction-dominated	synthesis + kinetics/spectroscopy / in silico	experimental + in silico	2026 Food Chemistry doi:10.1016/j.foodchem.2026.013270
+LLPFR	-	quinoa	quinoa protein	quinoa	130	130 uM (pentapeptide, competitive)	synthesis + kinetics/spectroscopy / in silico	experimental + in silico	2026 Food Chemistry
+LTFPGSAED	Lup1	lupin	white lupin protein	Lupin	228	228 uM	enzymatic hydrolysis	experimental	food-derived DPP4 peptide review
+ATHALLA	AA-7	bee pollen	bee pollen protein	bee	52.63	52.63 uM (dual: DPP4 inhibition + glucose-transport modulation)	enzymatic hydrolysis + LC-Q-TOF-MS/MS	experimental + docking + in silico ADMET	2026 Nat Sci Rep doi:10.1038/s41598-026-39009-1
+EGF	-	moso bamboo (bamboo shoot)	moso bamboo shoot protein	moso bamboo		IC50=366.44 ug/mL (MW~309, roughly hundreds of uM); tripeptide; 6 H-bonds with e.g. ARG125/TYR662	virtual hydrolysis + docking (CDOCKER) + in vitro enzyme inhibition	experimental (in vitro) + docking	2026 World Bamboo Rattan Commun. Xie et al. doi:10.12168/sjzttx.2025.11.25.001
+TENEWK	-	wheat	wheat protein	wheat	4960	4.96 mM (competitive); tau-RaMD residence time 5.05 ns	virtual hydrolysis (ConPLex) + synthesis + cellular	experimental (IC50) + cellular	2025 J Agric Food Chem doi:10.1021/acs.jafc.5c03006
+NFVSER	-	wheat	wheat protein	wheat	3070	3.07 mM (competitive); longest residence time	virtual hydrolysis (ConPLex) + synthesis + cellular	experimental (IC50) + cellular	2025 J Agric Food Chem
+LDLPSK	-	wheat	wheat protein	wheat	2890	2.89 mM (competitive); shortest residence time 0.28 ns	virtual hydrolysis (ConPLex) + synthesis + cellular	experimental (IC50) + cellular	2025 J Agric Food Chem
+QHEQR	-	wheat	wheat protein	wheat	4180	4.18 mM (competitive)	virtual hydrolysis (ConPLex) + synthesis + cellular	experimental (IC50) + cellular	2025 J Agric Food Chem

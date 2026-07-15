@@ -1,14 +1,14 @@
 # -*- coding: utf-8 -*-
 """
-[受体准备] 1WCY.pdb -> 1WCY_receptor.pdbqt
-步骤: 去水/去原配体(sitagliptin A1201) -> ADT prepare_receptor4.py 转 pdbqt
-依赖: AutoDockTools (pythonsh + MGLTools) 或 openbabel(obabel -xr)
-本机无 ADT, 此处生成干净受体 pdb 供用户本机转换。
+[Receptor prep] 1WCY.pdb -> 1WCY_receptor.pdbqt
+Steps: strip water / native ligand (sitagliptin A1201) -> ADT prepare_receptor4.py to pdbqt
+Deps: AutoDockTools (pythonsh + MGLTools) or openbabel (obabel -xr)
+This machine has no ADT; here we emit a clean receptor pdb for the user to convert locally.
 """
 import re, os
-REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))  # scripts/ -> 仓库根
+REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))  # scripts/ -> repo root
 DOCK = os.path.join(REPO, "docking")
-# 1WCY.pdb 需从 RCSB PDB 单独下载后置于 docking/ (不纳入版本库)
+# 1WCY.pdb must be downloaded separately from RCSB PDB and placed in docking/ (not under version control)
 SRC=os.path.join(DOCK, "1WCY.pdb")
 OUT=os.path.join(DOCK, "1WCY_clean.pdb")
 keep=[]
@@ -17,7 +17,7 @@ for line in open(SRC):
     if rec in ("TER   ","END   ","ENDMDL"):
         keep.append(line); continue
     if rec=="HETATM":
-        # 去除配体 A1201(sitagliptin) 与结晶水(HOH); 保留离子/甘油等可酌情
+        # remove ligand A1201 (sitagliptin) and crystal water (HOH); ions/glycerol etc. may be kept at discretion
         name=line[17:20].strip()
         if name=="A1201" or name=="HOH":
             continue
@@ -25,10 +25,10 @@ for line in open(SRC):
         keep.append(line); continue
     keep.append(line)
 open(OUT,"w").writelines(keep)
-print(f"已写干净受体(去配体/水): {OUT}  ({len(keep)} 行)")
+print(f"Wrote clean receptor (ligand/water stripped): {OUT}  ({len(keep)} lines)")
 
-print("\n--- 用户本机执行(装好 ADT/MGLTools 后) ---")
+print("\n--- run on user's machine (after installing ADT/MGLTools) ---")
 print("  pythonsh $MGLTOOLS/prepare_receptor4.py -r 1WCY_clean.pdb -o 1WCY_receptor.pdbqt -A checkhydrogens")
-print("  或: obabel 1WCY_clean.pdb -O 1WCY_receptor.pdbqt -xr")
-print(f"\n口袋(grid)中心(实测 sitagliptin A1201): center_x=62.8 center_y=47.7 center_z=4.8  size=30 30 30")
-print("模板论文给 (54,62,37) 为同口袋近似, 以实测为准更稳。")
+print("  or: obabel 1WCY_clean.pdb -O 1WCY_receptor.pdbqt -xr")
+print(f"\nPocket (grid) center (measured from sitagliptin A1201): center_x=62.8 center_y=47.7 center_z=4.8  size=30 30 30")
+print("The template paper gives (54,62,37) as an approximate same-pocket value; the measured values are more reliable.")

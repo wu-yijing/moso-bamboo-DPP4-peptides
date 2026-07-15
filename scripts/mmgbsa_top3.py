@@ -1,22 +1,28 @@
 # -*- coding: utf-8 -*-
-"""MM-GBSA 单结构结合自由能重算 (OpenMM implicit GBn2) —— **pocket 限制版**。
-对 Top3 候选 (APQIP/LPPGP/APPSQ) 的对接 pose:
+"""Single-structure MM-GBSA binding free-energy recomputation (OpenMM implicit GBn2)
+— **pocket-restricted** version.
+For the Top3 docking poses of the candidate peptides (APQIP/LPPGP/APPSQ):
     dG_bind = E_cplx - E_rec - E_lig   (implicit GBSA, single-structure)
 
-为何 pocket 限制 (2026-07-14 修正):
-- 全蛋白 (1WCY 链 A, ~23k 原子含 H) 的 GBSA Born 半径计算为 O(N^2),
-  在 CPU 上需数十分钟, 超出本环境单次运行上限且后台任务会被回收, 故不可行。
-- 改用 **口袋限制受体**: 取受体中距已知活性口袋中心 (62.8,47.7,4.8 Å) 15 Å 内的
-  整残基 (保留残基完整性, 不切断残基), 约 40–60 残基 / <1k 原子, GBSA 可 <2 min 完成。
-- 受体 E_rec 用**同一固定口袋**计算一次, 三条候选共享 -> 仅配体/复合物不同,
-  使 dG 差异纯粹来自配体-口袋相互作用, 排序最干净。
-- 氢原子补加由 OpenMM `PDBFixer` 完成, 但**跳过 findMissingResidues**
-  (避免其回填口袋缺口导致体系重新膨胀); 仅 addMissingAtoms + addMissingHydrogens,
-  末端残基按 N/C 末端补 H/oxT, amber14 模板可接受 (口袋末端封端的常用近似)。
-- 配体直接由 RDKit 读取 pose MODEL 1 (标准氨基酸残基名) -> 交 PDBFixer 补氢。
+Why pocket-restricted (corrected 2026-07-14):
+- Full-protein GBSA (1WCY chain A, ~23k atoms incl. H) Born-radius evaluation is O(N^2),
+  taking tens of minutes on CPU — exceeding this environment's per-run limit and getting
+  reclaimed as a background task, hence infeasible.
+- Switched to a **pocket-restricted receptor**: take whole residues within 15 A of the known
+  active-site pocket center (62.8,47.7,4.8 A), ~40-60 residues / <1k atoms, GBSA <2 min.
+- E_rec is computed once for the **same fixed pocket** and shared by all three candidates ->
+  only ligand/complex differ, so dG differences arise purely from ligand-pocket interactions,
+  giving the cleanest ranking.
+- Hydrogens added by OpenMM `PDBFixer`, but **skip findMissingResidues** (to avoid it
+  back-filling pocket gaps and re-inflating the system); only addMissingAtoms + addMissingHydrogens,
+  terminal residues capped with N/C-terminal H/oxT, acceptable under the amber14 template
+  (common approximation for pocket-terminated systems).
+- Ligand read directly from RDKit on the pose MODEL 1 (standard AA residue names) -> PDBFixer H addition.
 
-方法学诚实披露: pocket 限制 MM-GBSA 忽略口袋外受体-受体长程相互作用与受体构象应变,
-用于**三候选相对排序**而非绝对亲和力断言; 单结构近似、忽略 -TΔS。"""
+Methodological honest disclosure: pocket-restricted MM-GBSA ignores long-range receptor-receptor
+interactions outside the pocket and receptor conformational strain; it is used for **relative
+ranking of the three candidates**, not for absolute affinity claims; single-structure approximation,
+ignores -TΔS."""
 import os
 from openmm import app, openmm
 from openmm.app import ForceField, PDBFile
@@ -29,7 +35,7 @@ DOCK = os.path.join(REPO, "docking")
 REC  = os.path.join(DOCK, "1WCY_receptor.pdbqt")
 LIGDIR_IDPP = os.path.join(DOCK, "moso_ligands_idppiv")
 DG = {"APQIP": -6.807, "LPPGP": -6.558, "APPSQ": -6.513}
-# 正确 iDPPIV 队列对接 pose (dock_<idx>.pdbqt), idx 对应 moso_dock_queue_idppiv.txt
+# Correct iDPPIV-queue docking poses (dock_<idx>.pdbqt), idx matches moso_dock_queue_idppiv.txt
 #   APQIP -> dock_19, LPPGP -> dock_00, APPSQ -> dock_54
 TOP3 = [
     ("APQIP", os.path.join(LIGDIR_IDPP, "dock_19.pdbqt")),
@@ -38,14 +44,15 @@ TOP3 = [
 ]
 STD_AA = {'ALA','ARG','ASN','ASP','CYS','GLN','GLU','GLY','HIS','ILE',
            'LEU','LYS','MET','PHE','PRO','SER','THR','TRP','TYR','VAL'}
-POCKET_CENTER = (62.8, 47.7, 4.8)   # 1WCY DPP4 活性口袋中心 (box 中心)
-POCKET_RADIUS = 9.0                  # Å (收紧以适配本环境 <2min 前台上限)
+POCKET_CENTER = (62.8, 47.7, 4.8)   # 1WCY DPP4 active-site pocket center (box center)
+POCKET_RADIUS = 9.0                  # A (tightened to fit <2 min foreground limit)
 
 
 def write_rec_pocket(src, dst, center, radius):
-    """受体 pdbqt -> 距 center 半径内整残基的口袋 PDB (链 A, 标准 AA, 去 HETATM)。"""
+    """Receptor pdbqt -> pocket PDB of whole residues within radius of center
+    (chain A, standard AA, no HETATM)."""
     cx, cy, cz = center
-    # 按残基聚合原子行
+    # aggregate atoms by residue
     res_atoms = {}
     order = []
     with open(src) as fh:
@@ -78,8 +85,10 @@ def write_rec_pocket(src, dst, center, radius):
 
 
 def write_lig_raw(pose_path, dst):
-    """取 pose MODEL 1 的标准氨基酸 ATOM 行, **按 resid 排序** (pose 的 ATOM 行常乱序,
-    须整理为残基连续, 否则 PDBFixer 残基错配) 后写 PDB (截到 76 列), 交 PDBFixer 补氢。"""
+    """Take the ATOM lines of pose MODEL 1 (standard AA), **sorted by resid**
+    (pose ATOM lines are often out of order and must be made residue-contiguous,
+    otherwise PDBFixer mis-assigns residues), then write PDB (truncated to col 76)
+    for PDBFixer H addition."""
     atoms = []
     inm = False
     with open(pose_path) as fh:
@@ -92,19 +101,20 @@ def write_lig_raw(pose_path, dst):
             if inm and ln[:6] in ("ATOM  ", "HETATM"):
                 resid = int(ln[22:26])
                 atoms.append((resid, ln))
-    atoms.sort(key=lambda x: x[0])   # 残基连续
+    atoms.sort(key=lambda x: x[0])   # residue-contiguous
     with open(dst, "w") as f:
         for _, ln in atoms:
             f.write(ln[:76] + "  \n")
 
 
 def fix_pocket(src_pdb, dst_pdb):
-    """PDBFixer 补缺失原子 + 补氢。对口袋 (非连续残基):
-    先 findMissingResidues 建立属性, 再清空其缺口字典 -> addMissingAtoms 仅补
-    现有残基缺失原子 (OXT/末端 H), 不回填口袋缺口, 体系保持小。"""
+    """PDBFixer: add missing atoms + hydrogens. For the pocket (non-contiguous residues):
+    first call findMissingResidues to establish the attribute, then clear its gap dict ->
+    addMissingAtoms only fills existing residues' missing atoms (OXT/terminal H), does not
+    back-fill pocket gaps, keeping the system small."""
     fixer = PDBFixer(filename=src_pdb)
-    fixer.findMissingResidues()      # 建立 missingResidues 属性 (否则 addMissingAtoms 报 AttributeError)
-    fixer.missingResidues = {}       # 清空缺口 -> 不膨胀口袋
+    fixer.findMissingResidues()      # establish missingResidues attr (else addMissingAtoms raises AttributeError)
+    fixer.missingResidues = {}       # clear gaps -> do not inflate pocket
     fixer.findMissingAtoms()
     fixer.addMissingAtoms()
     fixer.addMissingHydrogens(7.0)
@@ -112,7 +122,7 @@ def fix_pocket(src_pdb, dst_pdb):
 
 
 def parse_pdbqt_model1_atoms(path):
-    """解析 pdbqt MODEL 1 的 ATOM/HETATM 行 -> 字典列表。无 MODEL 则取全部。"""
+    """Parse ATOM/HETATM lines of pdbqt MODEL 1 -> list of dicts. Use all if no MODEL."""
     atoms, inm = [], False
     with open(path) as fh:
         for ln in fh:
@@ -144,17 +154,18 @@ def _atom(ln):
 
 
 def ligand_from_pose(seq, pqt):
-    """从序列构建规范五肽拓扑 (键/Pro 环正确), 再将 pose 重原子坐标按
-    (残基号 1-based, 原子名) 映射覆盖。返回**重原子** mol (含坐标), 不含 H ——
-    H 由 ligand_pdb_with_h 经 PDBFixer 补加 (amber 模板 H 名/残基信息最干净)。"""
+    """Build a canonical pentapeptide topology from sequence (correct bonds/Pro ring),
+    then overlay pose heavy-atom coordinates by (1-based residue number, atom name).
+    Returns the **heavy-atom** mol (with coords), no H -- H is added by ligand_pdb_with_h
+    via PDBFixer (cleanest amber-template H names/residue info)."""
     atoms = parse_pdbqt_model1_atoms(pqt)
     if not atoms:
         return None
-    m = Chem.MolFromSequence(seq)          # 规范肽拓扑 (正确键/Pro 环)
+    m = Chem.MolFromSequence(seq)          # canonical peptide topology (correct bonds/Pro ring)
     if m is None:
         return None
     m = Chem.RemoveHs(m)
-    if m.GetNumConformers() == 0:        # 保证有 conformer 以放置坐标
+    if m.GetNumConformers() == 0:        # ensure a conformer exists to place coords
         m.AddConformer(Chem.Conformer(m.GetNumAtoms()), assignId=True)
     pose = {(a["resid"], a["name"]): (a["x"], a["y"], a["z"]) for a in atoms}
     conf = m.GetConformer()
@@ -173,29 +184,29 @@ def ligand_from_pose(seq, pqt):
 
 
 def ligand_pdb_with_h(mol, dst):
-    """重原子 mol (含坐标) -> 手写重原子 PDB -> PDBFixer 补缺失原子+氢,
-    写出带**正确 H 名与残基信息**的 PDB (amber14 模板可直接匹配)。
-    关键教训: RDKit AddHs 的 H 原子 GetMonomerInfo 返回 None,
-    手写 PDB 若标 UNK 或 H 名非模板 (H1/H2...) 均会被 amber14 判为
-    'missing hydrogens'。PDBFixer 按模板产出标准 H 名, 一劳永逸。"""
+    """Heavy-atom mol (with coords) -> hand-written heavy-atom PDB -> PDBFixer add
+    missing atoms + H, writing a PDB with **correct H names and residue info** (amber14
+    template matches directly). Lesson: RDKit AddHs H atoms return None from GetMonomerInfo;
+    a hand-written PDB marked UNK or with non-template H names (H1/H2...) is judged
+    'missing hydrogens' by amber14. PDBFixer emits standard H names by template, once and for all."""
     heavy = os.path.join(DOCK, "_mgbsa_heavy_tmp.pdb")
     open(heavy, "w").write(_mol_to_pdb(Chem.RemoveHs(mol)))
     fixer = PDBFixer(filename=heavy)
-    fixer.findMissingResidues(); fixer.missingResidues = {}   # 不回填缺失残基
+    fixer.findMissingResidues(); fixer.missingResidues = {}   # do not back-fill missing residues
     fixer.findMissingAtoms(); fixer.addMissingAtoms(); fixer.addMissingHydrogens(7.0)
     PDBFile.writeFile(fixer.topology, fixer.positions, dst)
 
 
 def _mol_to_pdb(m):
-    """手动将 RDKit mol (含 H) 写为 PDB 文本, 逐原子输出 (含 H),
-    规避 Chem.MolToPDBBlock 在某些情况下丢弃 H 原子的问题。
-    关键: RDKit 自行 AddHs 产生的 H 原子 GetMonomerInfo() 返回 None,
-    若写成 UNK 会导致 amber14 "No template / missing hydrogens"。
-    修复: H 原子继承其成键重原子的残基信息 (resname/resnum/chain),
-    并按 (resnum,chain) 计数赋唯一 H 名 (H1/H2/...)。amber14 按元素+成键
-    重原子匹配 H, 名不敏感。"""
+    """Manually write an RDKit mol (with H) to PDB text, atom-by-atom (incl. H),
+    avoiding Chem.MolToPDBBlock dropping H atoms in some cases.
+    Key: H atoms produced by RDKit's own AddHs return None from GetMonomerInfo();
+    writing them as UNK causes amber14 'No template / missing hydrogens'.
+    Fix: H atoms inherit the residue info (resname/resnum/chain) of their bonded heavy atom,
+    and are assigned unique H names (H1/H2/...) by (resnum,chain) count. amber14 matches
+    H by element + bonded heavy atom, name-insensitive."""
     conf = m.GetConformer()
-    # 先收集重原子残基信息 (按原子 idx)
+    # first collect heavy-atom residue info (by atom idx)
     heavy_info = {}
     for atom in m.GetAtoms():
         if atom.GetSymbol() == "H":
@@ -207,7 +218,7 @@ def _mol_to_pdb(m):
                 info.GetResidueNumber(),
                 info.GetChainId() or "A",
             )
-    hcount = {}          # (resnum, chain) -> 已写 H 数
+    hcount = {}          # (resnum, chain) -> count of H written
     out = ["REMARK manual pdb (heavy+H)", "COMPND    LIG"]
     for i, atom in enumerate(m.GetAtoms(), 1):
         p = conf.GetAtomPosition(atom.GetIdx())
@@ -219,7 +230,7 @@ def _mol_to_pdb(m):
             chain = info.GetChainId() or "A"
             name = (info.GetName() or el).strip()[:4]
         else:
-            # H: 取其成键重原子的残基信息
+            # H: take residue info of its bonded heavy atom
             heavy_res = None
             for nbr in atom.GetNeighbors():
                 if nbr.GetSymbol() != "H":
@@ -250,7 +261,7 @@ def renumber_chain_B(lines):
 
 
 def minimize_state(system, topology, positions, maxIter=200):
-    """最小化并返回 (energy_kcal, minimized_positions)。"""
+    """Minimize and return (energy_kcal, minimized_positions)."""
     integ = openmm.LangevinMiddleIntegrator(300*openmm.unit.kelvin,
                                            1/openmm.unit.picosecond,
                                            0.001*openmm.unit.picosecond)
@@ -263,7 +274,8 @@ def minimize_state(system, topology, positions, maxIter=200):
 
 
 def eval_energy(system, topology, positions):
-    """仅计算能量 (不最小化), 用于从复合物极小化坐标中分解受体/配体能量。"""
+    """Compute energy only (no minimization), used to decompose receptor/ligand
+    energy from the minimized complex coordinates."""
     integ = openmm.LangevinMiddleIntegrator(300*openmm.unit.kelvin,
                                            1/openmm.unit.picosecond,
                                            0.001*openmm.unit.picosecond)
@@ -274,8 +286,9 @@ def eval_energy(system, topology, positions):
 
 
 def subset_topology(topology, keep_idxs):
-    """抽取 keep_idxs (原 atom.index 集合) 构建新 Topology (保留残基/链/键结构)。
-    返回 (new_topology, pos_index_list), pos_index_list[i] = 第 i 个新原子对应的原坐标 index。"""
+    """Extract keep_idxs (original atom.index set) into a new Topology (preserving
+    residue/chain/bond structure). Returns (new_topology, pos_index_list), where
+    pos_index_list[i] = original coordinate index of the i-th new atom."""
     keep = set(keep_idxs)
     new = app.Topology()
     atom_map = {}
@@ -310,7 +323,7 @@ def main():
               nonbondedCutoff=2.0*openmm.unit.nanometer,
               constraints=app.HBonds)
 
-    # 受体口袋 (固定, 三候选共享) -> PDBFixer 补氢
+    # Receptor pocket (fixed, shared by all three candidates) -> PDBFixer H addition
     rec_pocket = os.path.join(DOCK, "_mgbsa_rec_pocket.pdb")
     n_res = write_rec_pocket(REC, rec_pocket, POCKET_CENTER, POCKET_RADIUS)
     rec_h = os.path.join(DOCK, "_mgbsa_rec_h.pdb")
@@ -322,8 +335,9 @@ def main():
     for seq, pqt in TOP3:
         lig_mol = ligand_from_pose(seq, pqt)
         if lig_mol is None:
-            raise RuntimeError(f"配体读取失败: {pqt}")
-        # 配体: 规范序列肽 + pose 重原子坐标; H 由 PDBFixer 补 (名/残基信息正确)
+            raise RuntimeError(f"ligand read failed: {pqt}")
+        # Ligand: canonical sequence peptide + pose heavy-atom coords; H added by PDBFixer
+        # (correct names/residue info)
         lig_h = os.path.join(DOCK, f"_mgbsa_lig_h_{seq}.pdb")
         ligand_pdb_with_h(lig_mol, lig_h)
 
@@ -341,9 +355,11 @@ def main():
 
         cp = PDBFile(cplx)
         top = cp.topology
-        # (a) 仅最小化**复合物**一次; (b) 从同一极小化坐标分解 E_rec / E_lig
-        #     —— 单轨迹 MM-GBSA, 杜绝"配体独立弛豫"伪影 (否则自由配体能量被
-        #        不实压低, 致 dG 偏高甚至为正如 APQIP 初版 +8.2)。
+        # (a) minimize the **complex** once only; (b) decompose E_rec / E_lig from the
+        #     same minimized coordinates -- single-trajectory MM-GBSA, eliminating the
+        #     "ligand independent relaxation" artifact (otherwise free-ligand energy is
+        #     spuriously lowered, making dG too high or even positive, e.g. the +8.2
+        #     initial APQIP result).
         E_cplx, minpos = minimize_state(ff.createSystem(top, **kw), top, cp.positions)
         rec_idxs = [a.index for a in top.atoms() if a.residue.chain.id == 'A']
         lig_idxs = [a.index for a in top.atoms() if a.residue.chain.id == 'B']

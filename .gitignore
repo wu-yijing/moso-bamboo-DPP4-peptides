@@ -1,30 +1,39 @@
-# 第三方二进制（请从官方发布页单独下载，不纳入版本库）
+# Third-party binaries (download separately from official releases; not version-controlled)
 vina.exe
 vina
 vina_*
 
-# 临时文件
+# Temporary files
 *_tmp_*.sdf
 *.tmp
 __pycache__/
 *.pyc
 
-# Phase B 中间产物（脚本运行即重新生成，无需版本控制）
+# Phase B intermediates (regenerated on script run; not version controlled)
 scripts/phaseB/phaseB_lig_*.mol2
 
-# 系统/IDE
+# System / IDE
 .DS_Store
 Thumbs.db
 *.swp
 
-# 工作区元数据
+# Workspace metadata
 .workbuddy/
 
-# 运行日志与临时 PDB（单次运行产物，不入库）
+# Run logs and temporary PDBs (single-run artifacts; not versioned)
 *.log
 docking/_*.pdb
 _*.pdb
 docking/_mgbsa_*
 
-# 手稿正文（本地撰写中，暂不推送远程；需要时 git add -f 强制纳入）
+# Manuscript body (local draft, not pushed to remote; use `git add -f` to force-include if needed)
 docs/manuscript_draft.md
+
+# Local-only Chinese working docs (kept locally per user request; English versions are tracked)
+docs/发表差异化新思路.md
+docs/思路①_长度偏倚量化_章节草稿.md
+docs/思路②_多靶点优先化_章节草稿.md
+docs/思路③_基因组存在性映射_章节草稿.md
+docs/思路③_转录组表达层_章节草稿.md
+docs/文献支撑与改进方案.md
+docs/方法学替换报告.md

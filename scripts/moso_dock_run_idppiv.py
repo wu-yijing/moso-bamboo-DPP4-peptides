@@ -1,41 +1,45 @@
 # -*- coding: utf-8 -*-
 """
-[配体准备 + 批量对接] 毛竹 iDPPIV-SCM 优先化 Top-60 队列 -> Vina 对接 DPP4 (1WCY)
+[Ligand prep + batch docking] moso-bamboo iDPPIV-SCM-prioritized Top-60 queue -> Vina docking vs DPP4 (1WCY)
 --------------------------------------------------------------------------
-制备方法(关键修复):
-  旧 openbabel make3D 在本环境因 MMFF94/ring-fragments 数据文件缺失(且 wheel 内
-  文件名拼写错误 rigid-*) 而损坏, 生成的 PDBQT 扭转树畸形导致 Vina 静默崩溃。
-  现改用: RDKit MolFromSequence(自带 MMFF94, 无需外部数据) 生成合规 3D
-        -> 写 SDF -> openbabel 仅做 SDF->PDBQT 格式转换(不调 make3D)。
-  产出 PDBQT 电荷为 0.00、原子类型为 C/OA/N/NA/HD 等退化型,
-  与既有 moso_dock_ranking.txt(旧代理队列) 的制备惯例一致, 可比。
+Preparation fix (key):
+  the old openbabel make3D was broken in this environment (missing MMFF94/ring-fragments
+  data files, plus a filename typo rigid-* inside the wheel), producing malformed PDBQTs
+  whose torsion trees crashed Vina silently.
+  Now we use: RDKit MolFromSequence (ships its own MMFF94, no external data) to make a
+        valid 3D -> write SDF -> openbabel only does SDF->PDBQT format conversion (no make3D).
+  Produced PDBQTs have charge 0.00 and degenerate atom types C/OA/N/NA/HD,
+  consistent with the existing moso_dock_ranking.txt (old proxy queue) preparation
+  convention, hence comparable.
 
-鲁棒性改进(本次重跑):
-  - 断点续跑: 已完成肽写入结果与时跳过, 中途被杀可重跑补齐。
-  - 即时落盘: 每肽对接完立即 append 到结果 TSV, 不依赖最终一次性写盘。
-  - vina 超时保护: 单肽子进程超时 300s, 超时记 NA 不阻塞整批。
+Robustness improvements (this re-run):
+  - resume from checkpoint: finished peptides are written to results and skipped, so an interrupted run can resume.
+  - immediate flush: each peptide is appended to the result TSV right after docking, not relying on a final one-shot write.
+  - Vina timeout guard: per-peptide subprocess timeout 300s; on timeout record NA without blocking the batch.
 """
 import os, subprocess, sys
 from rdkit import Chem
 from rdkit.Chem import AllChem
 from openbabel import pybel
 
-REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))  # scripts/ -> 仓库根
+REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))  # scripts/ -> repo root
 DATA = os.path.join(REPO, "data")
 DOCK = os.path.join(REPO, "docking")
 QUEUE   = os.path.join(DATA, "moso_dock_queue_idppiv.txt")
 REC     = os.path.join(DOCK, "1WCY_receptor.pdbqt")
 BOX     = os.path.join(DOCK, "moso_box.txt")
-# AutoDock Vina 为第三方二进制(不纳入版本库): 默认走 PATH 中的 `vina`,
-# 也可用环境变量 VINA_EXE 指定绝对路径(如 Windows 下的 vina.exe)。
+# AutoDock Vina is a third-party binary (not under version control): defaults to `vina` on PATH,
+# or set the absolute path via env var VINA_EXE (e.g. vina.exe under Windows).
 VINA    = os.environ.get("VINA_EXE", "vina")
 LIGDIR  = os.path.join(DOCK, "moso_ligands_idppiv")
 RESULTS = os.path.join(DOCK, "moso_dock_results_idppiv.tsv")
 os.makedirs(LIGDIR, exist_ok=True)
 
 def _autolocate_babel_datadir():
-    """从已安装的 openbabel 包位置自动推导 BABEL_DATADIR(可移植, 免机器特定绝对路径)。
-    本管线仅用 openbabel 做 SDF->PDBQT 格式转换, 不依赖 MMFF94; 设置它只为抑制噪声。"""
+    """Auto-derive BABEL_DATADIR from the installed openbabel package location
+    (portable, avoids machine-specific absolute paths).
+    This pipeline only uses openbabel for SDF->PDBQT format conversion, not MMFF94;
+    it is set only to silence noise."""
     if os.environ.get("BABEL_DATADIR"):
         return
     try:
@@ -51,7 +55,7 @@ def _autolocate_babel_datadir():
 _autolocate_babel_datadir()
 
 def prep_pdbqt(seq, idx):
-    """RDKit 生成 3D(SDF) -> openbabel 转 PDBQT(不调 make3D)"""
+    """RDKit makes 3D (SDF) -> openbabel converts to PDBQT (no make3D)"""
     m = Chem.MolFromSequence(seq)
     if m is None:
         return None
@@ -60,7 +64,7 @@ def prep_pdbqt(seq, idx):
     params.randomSeed = 42
     if not AllChem.EmbedMultipleConfs(m, numConfs=1, params=params):
         return None
-    AllChem.MMFFOptimizeMoleculeConfs(m)   # RDKit 自带 MMFF94
+    AllChem.MMFFOptimizeMoleculeConfs(m)   # RDKit ships MMFF94
     sdf = os.path.join(LIGDIR, f"{idx:02d}_{seq}.sdf")
     w = Chem.SDWriter(sdf); w.write(m); w.close()
     mb = pybel.readfile("sdf", sdf).__next__()
@@ -84,7 +88,7 @@ def dock(pqt, idx):
                 pass
     return None
 
-# ---- 断点续跑: 加载已完成 ----
+# ---- resume from checkpoint: load finished ----
 done = set()
 if os.path.exists(RESULTS):
     with open(RESULTS, encoding="utf-8") as f:
@@ -94,9 +98,9 @@ if os.path.exists(RESULTS):
                 done.add(ln.split("\t")[0])
 
 rows = [l.rstrip("\n").split("\t") for l in open(QUEUE, encoding="utf-8") if l.strip()]
-print(f"iDPPIV 队列: {len(rows)} 条, 已完成 {len(done)} 条", flush=True)
+print(f"iDPPIV queue: {len(rows)} entries, {len(done)} already done", flush=True)
 
-# 若是首次, 写表头
+# if first run, write header
 if not os.path.exists(RESULTS):
     with open(RESULTS, "w", encoding="utf-8") as f:
         f.write("peptide\tiDPPIV_score\tdG_kcal_mol\n")
@@ -110,7 +114,7 @@ for i, (seq, sc, _tier) in enumerate(rows):
         aff = None
         if pqt is not None:
             aff = dock(pqt, i)
-        # 即时落盘
+        # immediate flush
         with open(RESULTS, "a", encoding="utf-8") as f:
             f.write(f"{seq}\t{float(sc):.3f}\t{aff if aff is not None else 'NA'}\n")
         done.add(seq)
@@ -120,6 +124,6 @@ for i, (seq, sc, _tier) in enumerate(rows):
         with open(RESULTS, "a", encoding="utf-8") as f:
             f.write(f"{seq}\t{float(sc):.3f}\tERR\n")
         done.add(seq)
-        print(f"  {seq:7s} 异常: {e}", flush=True)
+        print(f"  {seq:7s} exception: {e}", flush=True)
 
-print(f"\n本轮新增 {count} 条; 累计 {len(done)}/{len(rows)} 条 -> {RESULTS}", flush=True)
+print(f"\nthis run added {count} entries; cumulative {len(done)}/{len(rows)} -> {RESULTS}", flush=True)

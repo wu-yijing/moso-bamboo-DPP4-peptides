@@ -1,10 +1,9 @@
 # -*- coding: utf-8 -*-
-"""iDPPIV-SCM 配方探测: 测试多种 SCM 变体, 找能复现~0.80的配方"""
+"""iDPPIV-SCM recipe probe: test multiple SCM variants, find the recipe that reproduces ~0.80"""
 import sys, os, math
 from collections import defaultdict
 sys.path.insert(0, os.path.dirname(__file__))
 from scm import load_tsv
-
 AA = "ACDEFGHIKLMNPQRSTVWY"
 AAS = set(AA)
 
@@ -42,7 +41,7 @@ def build_mono(pos, neg, Lmax):
     return P, Lmax
 
 def build_mono_global(pos, neg):
-    """全局组成型: P(a) 不依赖位置"""
+    """Global composition type: P(a) does not depend on position"""
     Np=defaultdict(int); Nn=defaultdict(int)
     Tp=sum(len(s) for s in pos); Tn=sum(len(s) for s in neg)
     for s in pos:
@@ -57,7 +56,7 @@ def build_mono_global(pos, neg):
     return P
 
 def build_di(pos, neg, Lmax):
-    """二肽位置特异性"""
+    """Dipeptide position-specific"""
     Np=defaultdict(lambda:defaultdict(int)); Nn=defaultdict(lambda:defaultdict(int))
     Npi=defaultdict(int); Nni=defaultdict(int)
     for s in pos:
@@ -70,7 +69,7 @@ def build_di(pos, neg, Lmax):
     for i in range(Lmax):
         P[i]={}
         denom=Npi[i]+Nni[i]
-        # 遍历出现过的二肽
+        # iterate over observed dipeptides
         keys=set(Np[i]) | set(Nn[i])
         for d in keys:
             obs=Np[i][d]/Npi[i] if Npi[i] else 0
@@ -89,7 +88,7 @@ def score_di(seq, P, Lmax):
     return sum(P[i].get(seq[i:i+2],0.0) for i in range(len(seq)-1) if i<Lmax)
 
 def best_thresh(seqs, labs, scores):
-    """在训练集上扫描阈值, 取 MCC 最大"""
+    """Scan threshold on training set, take the one maximizing MCC"""
     cand=sorted(set(scores))
     best=(-1,0,None)
     for t in [min(scores)-1e-9]+[(cand[i]+cand[i+1])/2 for i in range(len(cand)-1)]+[max(scores)+1e-9]:
@@ -109,27 +108,27 @@ def acc_at(seqs,labs,scores,th):
     ok=sum(1 for sc,y in zip(scores,labs) if (1 if sc>th else 0)==y)
     return ok/len(labs)
 
-# ---- 变体1: 位置特异性单残基 ----
+# ---- variant 1: position-specific single residue ----
 Pm,Lm=build_mono(pos,neg,Lmax)
 sm=[score_mono(s,Pm,Lm) for s in trS]; se=[score_mono(s,Pm,Lm) for s in teS]
-tm=best_thresh(trS,trL,sm); print(f"[单残基-位置] 最优阈值={tm:.3f}  trainACC={acc_at(trS,trL,sm,tm):.3f}  testACC={acc_at(teS,teL,se,tm):.3f}")
+tm=best_thresh(trS,trL,sm); print(f"[single-residue-position] best threshold={tm:.3f}  trainACC={acc_at(trS,trL,sm,tm):.3f}  testACC={acc_at(teS,teL,se,tm):.3f}")
 
-# ---- 变体2: 全局组成单残基 ----
+# ---- variant 2: global composition single residue ----
 Pmg=build_mono_global(pos,neg)
 smg=[score_mono(s,None,Lmax,Pmg) for s in trS]; seg=[score_mono(s,None,Lmax,Pmg) for s in teS]
-tmg=best_thresh(trS,trL,smg); print(f"[单残基-全局] 最优阈值={tmg:.3f}  trainACC={acc_at(trS,trL,smg,tmg):.3f}  testACC={acc_at(teS,teL,seg,tmg):.3f}")
+tmg=best_thresh(trS,trL,smg); print(f"[single-residue-global] best threshold={tmg:.3f}  trainACC={acc_at(trS,trL,smg,tmg):.3f}  testACC={acc_at(teS,teL,seg,tmg):.3f}")
 
-# ---- 变体3: 二肽位置特异性 ----
+# ---- variant 3: dipeptide position-specific ----
 Pd,Ld=build_di(pos,neg,Lmax)
 sd=[score_di(s,Pd,Ld) for s in trS]; de=[score_di(s,Pd,Ld) for s in teS]
-td=best_thresh(trS,trL,sd); print(f"[二肽-位置]   最优阈值={td:.3f}  trainACC={acc_at(trS,trL,sd,td):.3f}  testACC={acc_at(teS,teL,de,td):.3f}")
+td=best_thresh(trS,trL,sd); print(f"[dipeptide-position]    best threshold={td:.3f}  trainACC={acc_at(trS,trL,sd,td):.3f}  testACC={acc_at(teS,teL,de,td):.3f}")
 
-# ---- 变体4: 混合 (单残基位置 + 二肽位置) ----
+# ---- variant 4: mix (single-residue position + dipeptide position) ----
 sh=[sm[i]+sd[i] for i in range(len(sm))]
 dh=[se[i]+de[i] for i in range(len(se))]
-th=best_thresh(trS,trL,sh); print(f"[混合 单+二]  最优阈值={th:.3f}  trainACC={acc_at(trS,trL,sh,th):.3f}  testACC={acc_at(teS,teL,dh,th):.3f}")
+th=best_thresh(trS,trL,sh); print(f"[mix single+di]   best threshold={th:.3f}  trainACC={acc_at(trS,trL,sh,th):.3f}  testACC={acc_at(teS,teL,dh,th):.3f}")
 
-# ---- 变体5: 混合 (全局单残基 + 二肽位置) ----
+# ---- variant 5: mix (global single-residue + dipeptide position) ----
 sh2=[smg[i]+sd[i] for i in range(len(smg))]
 dh2=[seg[i]+de[i] for i in range(len(seg))]
-th2=best_thresh(trS,trL,sh2); print(f"[混合 全局单+二] 最优阈值={th2:.3f}  trainACC={acc_at(trS,trL,sh2,th2):.3f}  testACC={acc_at(teS,teL,dh2,th2):.3f}")
+th2=best_thresh(trS,trL,sh2); print(f"[mix global-single+di]  best threshold={th2:.3f}  trainACC={acc_at(trS,trL,sh2,th2):.3f}  testACC={acc_at(teS,teL,dh2,th2):.3f}")

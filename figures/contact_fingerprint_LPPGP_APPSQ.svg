@@ -1,7 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="560" height="388" font-family="DejaVu Sans, Arial, sans-serif" font-size="11">
 <rect width="560" height="388" fill="#ffffff"/>
-<text x="70" y="26" font-size="15" font-weight="bold">LPPGP / APPSQ 残基层接触指纹 (最小化复合体, ≤4.5 Å)</text>
-<text x="70" y="44" font-size="11" fill="#555">细胞填充=接触数 (浅→深); ★=极性/H-bond; 边框色=残基角色</text>
+<text x="70" y="26" font-size="15" font-weight="bold">LPPGP / APPSQ residue-level contact fingerprint (minimized complex, ≤4.5 Å)</text>
+<text x="70" y="44" font-size="11" fill="#555">cell fill = contact count (pale→deep); ★ = polar/H-bond; border color = residue role</text>
 <rect x="64" y="60" width="372" height="56" fill="#fafafa" stroke="#ddd"/>
 <text x="58" y="92.0" text-anchor="end" font-weight="bold">LPPGP</text>
 <rect x="64" y="142" width="372" height="56" fill="#fafafa" stroke="#ddd"/>
@@ -47,16 +47,16 @@
 <text x="415.0" y="70.0" text-anchor="middle" font-size="12" fill="#c0392b" font-weight="bold">★</text>
 <text x="415.0" y="212" text-anchor="middle" font-size="9" fill="#7f8c8d">NAG1201</text>
 <line x1="70" y1="198" x2="70" y2="202" stroke="#999"/>
-<text x="70" y="238" font-weight="bold">残基角色:</text>
+<text x="70" y="238" font-weight="bold">Residue role:</text>
 <rect x="70" y="248" width="12" height="12" fill="#fff" stroke="#c0392b" stroke-width="2"/>
-<text x="86" y="258" font-size="10">催化核心 (Glu146/Arg147)</text>
+<text x="86" y="258" font-size="10">catalytic core (Glu146/Arg147)</text>
 <rect x="320" y="248" width="12" height="12" fill="#fff" stroke="#e67e22" stroke-width="2"/>
-<text x="336" y="258" font-size="10">S1/S2 口袋</text>
+<text x="336" y="258" font-size="10">S1/S2 pocket</text>
 <rect x="70" y="268" width="12" height="12" fill="#fff" stroke="#7f8c8d" stroke-width="2"/>
-<text x="86" y="278" font-size="10">糖基化偏倚 (NAG/FUC)</text>
+<text x="86" y="278" font-size="10">glycan bias (NAG/FUC)</text>
 <rect x="320" y="268" width="12" height="12" fill="#fff" stroke="#2980b9" stroke-width="2"/>
-<text x="336" y="278" font-size="10">界面/口袋壁</text>
+<text x="336" y="278" font-size="10">interface / pocket wall</text>
 <rect x="70" y="288" width="12" height="12" fill="#fff" stroke="#16a085" stroke-width="2"/>
-<text x="86" y="298" font-size="10">口袋残基</text>
-<text x="70" y="326" font-size="10" fill="#777">★ 极性/H-bond 接触; 圆面积按接触原子对数着色 (浅→深)。</text>
+<text x="86" y="298" font-size="10">pocket residue</text>
+<text x="70" y="326" font-size="10" fill="#777">★ polar/H-bond contact; circle area encodes number of contacting atom pairs (pale→deep).</text>
 </svg>

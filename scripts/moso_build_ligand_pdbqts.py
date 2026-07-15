@@ -1,13 +1,13 @@
 # -*- coding: utf-8 -*-
 """
-毛竹候选肽 → 批量生成 3D PDBQT 文件（用 openbabel）
-输出: moso_ligands/ 目录下所有 <序号>_<肽名>.pdbqt
-同时生成 batch_dock.cmd (Windows 一键 Vina 对接)
+Moso-bamboo candidate peptides -> batch-generate 3D PDBQT files (using openbabel)
+Output: all <index>_<peptide>.pdbqt files under moso_ligands/
+Also generate batch_dock.cmd (one-click Windows Vina docking)
 """
 import os, subprocess, glob
 from openbabel import pybel
 
-# 氨基酸三字母 SMILES 片段（简化版：N→C 端直接拼接）
+# amino-acid three-letter SMILES fragments (simplified: direct N->C concatenation)
 AA = {'A':'C[C@@H](N)C(=O)O','C':'SC[C@@H](N)C(=O)O','D':'OC(=O)C[C@@H](N)C(=O)O',
       'E':'OC(=O)CC[C@@H](N)C(=O)O','F':'C1=CC=CC=C1C[C@@H](N)C(=O)O',
       'G':'NCC(=O)O','H':'C1=C[N+]=CN1C[C@@H](N)C(=O)O',
@@ -21,25 +21,25 @@ AA = {'A':'C[C@@H](N)C(=O)O','C':'SC[C@@H](N)C(=O)O','D':'OC(=O)C[C@@H](N)C(=O)O
 
 def seq_to_smiles(seq):
     """Build proper peptide SMILES with peptide bonds"""
-    if len(seq)==0 or any(a not in AA for a in seq): return None
+    if len(seq) == 0 or any(a not in AA for a in seq): return None
     parts = [AA[a] for a in seq]
     # N-term: keep NH2; C-term: keep COOH
     # Between: replace COOH of i with CONH of i+1
-    # S M I L E S: concatenate with proper NC(=O) linkage
+    # SMILES: concatenate with proper NC(=O) linkage
     result = parts[0]  # N-term
     for p in parts[1:]:
         # Remove OH from previous C-term, add NC(=O) then attach next amino (remove NH2)
         result = result[:-1] + 'NC(=O)' + p[1:]
     return result
 
-# 读队列
+# read queue
 queue = [l.strip().split('\t') for l in open("moso_dock_queue.txt") if l.strip()]
-print(f"对接队列: {len(queue[:60])} 条")
+print(f"Docking queue: {len(queue[:60])} entries")
 
 outdir = "moso_ligands"
 os.makedirs(outdir, exist_ok=True)
 
-batch = ["@echo off", "REM 批量 Vina 对接 - 用 Docker 或本地 Vina"]
+batch = ["@echo off", "REM batch Vina docking - using Docker or local Vina"]
 batch.append(f"set REC=1WCY_receptor.pdbqt")
 batch.append(f"set BOX=moso_box.txt")
 
@@ -64,9 +64,9 @@ for i, row in enumerate(queue[:60]):
             f"vina --receptor %REC% --ligand {outdir}\\{fname} "
             f"--config %BOX% --out {outdir}\\dock_{i:02d}_{seq}.pdbqt --cpu 4"
         )
-        print(f"  ✅ {i:02d} {seq:6s} -> {fname} ({size} B)")
+        print(f"  [OK] {i:02d} {seq:6s} -> {fname} ({size} B)")
     except Exception as e:
-        print(f"  ❌ {i:02d} {seq:6s} error: {e}")
+        print(f"  [ERR] {i:02d} {seq:6s} error: {e}")
 
 # Write batch script
 with open("batch_dock.cmd", "w") as f:
@@ -87,7 +87,7 @@ with open("batch_dock.sh", "w") as f:
     f.write("\n".join(batch_sh) + "\n")
 
 n_ok = len([f for f in os.listdir(outdir) if f.endswith('.pdbqt')])
-print(f"\n成功生成 {n_ok}/{len(queue[:60])} 个配体 PDBQT")
+print(f"\nSuccessfully generated {n_ok}/{len(queue[:60])} ligand PDBQT files")
 print(f"Windows:   batch_dock.cmd")
 print(f"Linux/WSL: bash batch_dock.sh")
-print(f"出文件目录: {outdir}/")
+print(f"Output directory: {outdir}/")

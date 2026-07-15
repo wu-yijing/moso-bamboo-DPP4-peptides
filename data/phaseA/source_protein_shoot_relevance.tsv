@@ -1,254 +1,254 @@
 accession	gene_name	category	shoot_tier	rationale	description
-A0A8F6LBU3		metabolic_enzyme	medium-high	代谢酶(含P450/激酶/糖基转移酶), 笋幼嫩组织次生代谢活跃	A0A8F6LBU3_PHYED Phosphotransferase
-A0A8F6LBU9		metabolic_enzyme	medium-high	代谢酶(含P450/激酶/糖基转移酶), 笋幼嫩组织次生代谢活跃	A0A8F6LBU9_PHYED Phosphotransferase
-A0A8F6LBV0		metabolic_enzyme	medium-high	代谢酶(含P450/激酶/糖基转移酶), 笋幼嫩组织次生代谢活跃	A0A8F6LBV0_PHYED Phosphotransferase
-A0AA96NL62	CDKA1-2	other	high	命中笋高表达家族关键词(转录因子/细胞周期/细胞壁/激素信号)	A0AA96NL62_PHYED CDKA1-2 protein
-A0AA96NLG9	CDKA2-2	other	high	命中笋高表达家族关键词(转录因子/细胞周期/细胞壁/激素信号)	A0AA96NLG9_PHYED CDKA2-2 protein
-A0AA96NNE8	CDKA1-1	other	high	命中笋高表达家族关键词(转录因子/细胞周期/细胞壁/激素信号)	A0AA96NNE8_PHYED CDKA1-1 protein
-A0AA96NNG2	CDKA2-1	other	high	命中笋高表达家族关键词(转录因子/细胞周期/细胞壁/激素信号)	A0AA96NNG2_PHYED CDKA2-1 protein
-A0AA96SJB1	CDKD1-1	metabolic_enzyme	high	命中笋高表达家族关键词(转录因子/细胞周期/细胞壁/激素信号)	A0AA96SJB1_PHYED Cyclin-dependent kinase D-1
-A0AA96SLQ4	CDKD1-2	metabolic_enzyme	high	命中笋高表达家族关键词(转录因子/细胞周期/细胞壁/激素信号)	A0AA96SLQ4_PHYED Cyclin-dependent kinase D-1
-A0S5Z8	psbC	photosynthesis	low-medium	光合类, 嫩笋光合弱于成熟叶, 但幼组织仍有一定表达	A0S5Z8_PHYED Photosystem II CP43 reaction center protein
-C1K6H1	CesA12	structural	high	命中笋高表达家族关键词(转录因子/细胞周期/细胞壁/激素信号)	C1K6H1_PHYED Cellulose synthase (Fragment)
-D3JHB3		structural	high	命中笋高表达家族关键词(转录因子/细胞周期/细胞壁/激素信号)	D3JHB3_PHYED Cellulose synthase
-D3JHB4		structural	high	命中笋高表达家族关键词(转录因子/细胞周期/细胞壁/激素信号)	D3JHB4_PHYED Cellulose synthase
-D3JHB5		structural	high	命中笋高表达家族关键词(转录因子/细胞周期/细胞壁/激素信号)	D3JHB5_PHYED Cellulose synthase
-D3JHB6		structural	high	命中笋高表达家族关键词(转录因子/细胞周期/细胞壁/激素信号)	D3JHB6_PHYED cellulose synthase (UDP-forming)
-D3K1B8		metabolic_enzyme	medium	一般代谢酶, 部分属组成型表达	D3K1B8_PHYED Glyceraldehyde-3-phosphate dehydrogenase
-D5FJ40	CesA2	structural	high	命中笋高表达家族关键词(转录因子/细胞周期/细胞壁/激素信号)	D5FJ40_PHYED Cellulose synthase
-D5FJ41	CesA4	structural	high	命中笋高表达家族关键词(转录因子/细胞周期/细胞壁/激素信号)	D5FJ41_PHYED Cellulose synthase
-D5FJ45	cesA1	structural	high	命中笋高表达家族关键词(转录因子/细胞周期/细胞壁/激素信号)	D5FJ45_PHYED Cellulose synthase
-D7RJ34	CesA11	structural	high	命中笋高表达家族关键词(转录因子/细胞周期/细胞壁/激素信号)	D7RJ34_PHYED Cellulose synthase
-A0A0C5KH39	TPS2	metabolic_enzyme	medium	一般代谢酶, 部分属组成型表达	A0A0C5KH39_PHYED (E, E)-farnesol synthase
-A0A0K1L5Y4		other	medium	未归类(other), 需逐条功能注释判定, 保守计为中等	A0A0K1L5Y4_PHYED magnesium-protoporphyrin IX monomethyl ester (oxidative) cyclase
-A0A0M4L961		other	medium	未归类(other), 需逐条功能注释判定, 保守计为中等	A0A0M4L961_PHYED DREB2A
-A0A1D8F0G9	AUX1	signaling	high	命中笋高表达家族关键词(转录因子/细胞周期/细胞壁/激素信号)	A0A1D8F0G9_PHYED Auxin-responsive protein
-A0A1D8F0H0	AUX3	signaling	medium	信号/激素类, 笋发育激素信号活跃	A0A1D8F0H0_PHYED Auxin-responsive protein
-A0A1D8F0H5	ARF2	transcription_regulation	high	命中笋高表达家族关键词(转录因子/细胞周期/细胞壁/激素信号)	A0A1D8F0H5_PHYED Auxin response factor
-A0A1D8F0H7	AUX2	signaling	medium	信号/激素类, 笋发育激素信号活跃	A0A1D8F0H7_PHYED Auxin-responsive protein
-A0A1D8F0I0	AUX4	signaling	medium	信号/激素类, 笋发育激素信号活跃	A0A1D8F0I0_PHYED Auxin-responsive protein
-A0A1D8F0I2	WRKY74-1	transcription_regulation	high	命中笋高表达家族关键词(转录因子/细胞周期/细胞壁/激素信号)	A0A1D8F0I2_PHYED WRKY74-1 protein
-A0A1D8F0I5	Dof12-2	other	high	命中笋高表达家族关键词(转录因子/细胞周期/细胞壁/激素信号)	A0A1D8F0I5_PHYED Dof protein
-A0A1D8F0J0	Dof1	other	high	命中笋高表达家族关键词(转录因子/细胞周期/细胞壁/激素信号)	A0A1D8F0J0_PHYED Dof zinc finger protein
-A0A1D8F0J4	MYB2R-42	transcription_regulation	high	命中笋高表达家族关键词(转录因子/细胞周期/细胞壁/激素信号)	A0A1D8F0J4_PHYED Transcription factor GAMYB
-A0A1D8F0J5	MYB2R-100	transcription_regulation	high	命中笋高表达家族关键词(转录因子/细胞周期/细胞壁/激素信号)	A0A1D8F0J5_PHYED Transcription factor MYBS1
-A0A1D8F0J8	MYB2R-104	transcription_regulation	high	命中笋高表达家族关键词(转录因子/细胞周期/细胞壁/激素信号)	A0A1D8F0J8_PHYED Transcription factor MYBS1
-A0A1D8F0K5	WRKY76	transcription_regulation	high	命中笋高表达家族关键词(转录因子/细胞周期/细胞壁/激素信号)	A0A1D8F0K5_PHYED WRKY76 protein
-A0A1D8F0K6	ARF1	transcription_regulation	high	命中笋高表达家族关键词(转录因子/细胞周期/细胞壁/激素信号)	A0A1D8F0K6_PHYED Auxin response factor
-A0A1L1Y221		metabolic_enzyme	medium	一般代谢酶, 部分属组成型表达	A0A1L1Y221_PHYED Zeaxanthin epoxidase, chloroplastic
-A0A3S6K9G7		transcription_regulation	high	命中笋高表达家族关键词(转录因子/细胞周期/细胞壁/激素信号)	A0A3S6K9G7_PHYED MADS18-2
-A0A3S6KA60		transcription_regulation	high	命中笋高表达家族关键词(转录因子/细胞周期/细胞壁/激素信号)	A0A3S6KA60_PHYED MADS56
-A0A5C2IFI3	F3'H	other	medium	未归类(other), 需逐条功能注释判定, 保守计为中等	A0A5C2IFI3_PHYED flavonoid 3'-monooxygenase
-A0A5J6DQ91	CGT3	metabolic_enzyme	medium-high	代谢酶(含P450/激酶/糖基转移酶), 笋幼嫩组织次生代谢活跃	A0A5J6DQ91_PHYED Glycosyltransferase
-A0A5J6DQ94	CGT1	metabolic_enzyme	medium-high	代谢酶(含P450/激酶/糖基转移酶), 笋幼嫩组织次生代谢活跃	A0A5J6DQ94_PHYED Glycosyltransferase
-A0A5J6DQA0	CGT4	metabolic_enzyme	medium-high	代谢酶(含P450/激酶/糖基转移酶), 笋幼嫩组织次生代谢活跃	A0A5J6DQA0_PHYED Glycosyltransferase
-A0A5J6DQK3	CGT2	metabolic_enzyme	medium-high	代谢酶(含P450/激酶/糖基转移酶), 笋幼嫩组织次生代谢活跃	A0A5J6DQK3_PHYED UDP-glycosyltransferase CGT
-A0A5J6DQM1	F2H	other	medium	未归类(other), 需逐条功能注释判定, 保守计为中等	A0A5J6DQM1_PHYED Flavanone 2-hydroxylase
-A0A6G8IU41	NAP-1	other	medium	未归类(other), 需逐条功能注释判定, 保守计为中等	A0A6G8IU41_PHYED NAC domain-containing protein 1
-A0A8K1UFY0		other	medium	未归类(other), 需逐条功能注释判定, 保守计为中等	A0A8K1UFY0_PHYED Dirigent protein
-A0AA96NG41	CDKB2-2	other	high	命中笋高表达家族关键词(转录因子/细胞周期/细胞壁/激素信号)	A0AA96NG41_PHYED CDKB2-2 protein
-A0AA96NG47	CDKC2	other	high	命中笋高表达家族关键词(转录因子/细胞周期/细胞壁/激素信号)	A0AA96NG47_PHYED CDKC2 protein
-A0AA96NG54	CKL4	metabolic_enzyme	medium-high	代谢酶(含P450/激酶/糖基转移酶), 笋幼嫩组织次生代谢活跃	A0AA96NG54_PHYED [RNA-polymerase]-subunit kinase
-A0AA96NG55	CKL2	metabolic_enzyme	medium-high	代谢酶(含P450/激酶/糖基转移酶), 笋幼嫩组织次生代谢活跃	A0AA96NG55_PHYED [RNA-polymerase]-subunit kinase
-A0AA96NG61	CKL19	metabolic_enzyme	medium-high	代谢酶(含P450/激酶/糖基转移酶), 笋幼嫩组织次生代谢活跃	A0AA96NG61_PHYED [RNA-polymerase]-subunit kinase
-A0AA96NG63	CKL17	metabolic_enzyme	medium-high	代谢酶(含P450/激酶/糖基转移酶), 笋幼嫩组织次生代谢活跃	A0AA96NG63_PHYED [RNA-polymerase]-subunit kinase
-A0AA96NKZ1	CDKB1-1	other	high	命中笋高表达家族关键词(转录因子/细胞周期/细胞壁/激素信号)	A0AA96NKZ1_PHYED CDKB1-1 protein
-A0AA96NKZ5	CDKG2-1	other	high	命中笋高表达家族关键词(转录因子/细胞周期/细胞壁/激素信号)	A0AA96NKZ5_PHYED CDKG2-1 protein
-A0AA96NL09	CKL14	metabolic_enzyme	medium-high	代谢酶(含P450/激酶/糖基转移酶), 笋幼嫩组织次生代谢活跃	A0AA96NL09_PHYED [RNA-polymerase]-subunit kinase
-A0AA96NL71	CDKF1-3	other	high	命中笋高表达家族关键词(转录因子/细胞周期/细胞壁/激素信号)	A0AA96NL71_PHYED CDK1-3 protein
-A0AA96NL80	CKL11	metabolic_enzyme	medium-high	代谢酶(含P450/激酶/糖基转移酶), 笋幼嫩组织次生代谢活跃	A0AA96NL80_PHYED [RNA-polymerase]-subunit kinase
-A0AA96NLH6	CDKG1-2	other	high	命中笋高表达家族关键词(转录因子/细胞周期/细胞壁/激素信号)	A0AA96NLH6_PHYED CDKG1-2 protein
-A0AA96NLI5	CKL13	metabolic_enzyme	medium-high	代谢酶(含P450/激酶/糖基转移酶), 笋幼嫩组织次生代谢活跃	A0AA96NLI5_PHYED [RNA-polymerase]-subunit kinase
-A0AA96NNF8	CDKF1-2	metabolic_enzyme	high	命中笋高表达家族关键词(转录因子/细胞周期/细胞壁/激素信号)	A0AA96NNF8_PHYED Cyclin-dependent kinase F-1
-A0AA96NNG7	CDKG1-1	other	high	命中笋高表达家族关键词(转录因子/细胞周期/细胞壁/激素信号)	A0AA96NNG7_PHYED CDKG1-1 protein
-A0AA96NNH1	CKL10	metabolic_enzyme	medium-high	代谢酶(含P450/激酶/糖基转移酶), 笋幼嫩组织次生代谢活跃	A0AA96NNH1_PHYED [RNA-polymerase]-subunit kinase
-A0AA96NNH2	CKL12	metabolic_enzyme	medium-high	代谢酶(含P450/激酶/糖基转移酶), 笋幼嫩组织次生代谢活跃	A0AA96NNH2_PHYED [RNA-polymerase]-subunit kinase
-A0AA96NNV0	CDKB2-1	other	high	命中笋高表达家族关键词(转录因子/细胞周期/细胞壁/激素信号)	A0AA96NNV0_PHYED CDKB2-1 protein
-A0AA96NNV9	CKL1	metabolic_enzyme	medium-high	代谢酶(含P450/激酶/糖基转移酶), 笋幼嫩组织次生代谢活跃	A0AA96NNV9_PHYED [RNA-polymerase]-subunit kinase
-A0AA96NNW5	CKL16	metabolic_enzyme	medium-high	代谢酶(含P450/激酶/糖基转移酶), 笋幼嫩组织次生代谢活跃	A0AA96NNW5_PHYED [RNA-polymerase]-subunit kinase
-A0AA96NPF7	CDKC1	other	high	命中笋高表达家族关键词(转录因子/细胞周期/细胞壁/激素信号)	A0AA96NPF7_PHYED CDKC1 protein
-A0AA96NPG0	CKL3	metabolic_enzyme	medium-high	代谢酶(含P450/激酶/糖基转移酶), 笋幼嫩组织次生代谢活跃	A0AA96NPG0_PHYED [RNA-polymerase]-subunit kinase
-A0AA96NPG8	CKL18	metabolic_enzyme	medium-high	代谢酶(含P450/激酶/糖基转移酶), 笋幼嫩组织次生代谢活跃	A0AA96NPG8_PHYED [RNA-polymerase]-subunit kinase
-A0AA96NPY4	CDKB1-2	other	high	命中笋高表达家族关键词(转录因子/细胞周期/细胞壁/激素信号)	A0AA96NPY4_PHYED CDKB1-2 protein
-A0AA96NPY7	CDKG2-2	other	high	命中笋高表达家族关键词(转录因子/细胞周期/细胞壁/激素信号)	A0AA96NPY7_PHYED CDKG2-2 protein
-A0AA96NPZ6	CKL15	metabolic_enzyme	medium-high	代谢酶(含P450/激酶/糖基转移酶), 笋幼嫩组织次生代谢活跃	A0AA96NPZ6_PHYED [RNA-polymerase]-subunit kinase (Fragment)
-A0AA96SGG4	CDKE1	metabolic_enzyme	high	命中笋高表达家族关键词(转录因子/细胞周期/细胞壁/激素信号)	A0AA96SGG4_PHYED Cyclin-dependent kinase E-1
-A0AA96SGG7	CKL8	metabolic_enzyme	medium-high	代谢酶(含P450/激酶/糖基转移酶), 笋幼嫩组织次生代谢活跃	A0AA96SGG7_PHYED [RNA-polymerase]-subunit kinase
-A0AA96SIB7	CDKC3	metabolic_enzyme	high	命中笋高表达家族关键词(转录因子/细胞周期/细胞壁/激素信号)	A0AA96SIB7_PHYED [RNA-polymerase]-subunit kinase
-A0AA96SIB9	CKL5	metabolic_enzyme	medium-high	代谢酶(含P450/激酶/糖基转移酶), 笋幼嫩组织次生代谢活跃	A0AA96SIB9_PHYED [RNA-polymerase]-subunit kinase
-A0AA96SIC1	CKL20	metabolic_enzyme	medium-high	代谢酶(含P450/激酶/糖基转移酶), 笋幼嫩组织次生代谢活跃	A0AA96SIC1_PHYED [RNA-polymerase]-subunit kinase
-A0AA96SJB3	CKL6	metabolic_enzyme	medium-high	代谢酶(含P450/激酶/糖基转移酶), 笋幼嫩组织次生代谢活跃	A0AA96SJB3_PHYED [RNA-polymerase]-subunit kinase
-A0AA96SJC6	CDKF1-1	metabolic_enzyme	high	命中笋高表达家族关键词(转录因子/细胞周期/细胞壁/激素信号)	A0AA96SJC6_PHYED Cyclin-dependent kinase F-1
-A0AA96SJC9	CKL9	metabolic_enzyme	medium-high	代谢酶(含P450/激酶/糖基转移酶), 笋幼嫩组织次生代谢活跃	A0AA96SJC9_PHYED [RNA-polymerase]-subunit kinase
-A0AA96SLQ8	CKL7	metabolic_enzyme	medium-high	代谢酶(含P450/激酶/糖基转移酶), 笋幼嫩组织次生代谢活跃	A0AA96SLQ8_PHYED [RNA-polymerase]-subunit kinase
-A0S601		photosynthesis	low-medium	光合类, 嫩笋光合弱于成熟叶, 但幼组织仍有一定表达	A0S601_PHYED Photosystem II 10 kDa polypeptide, chloroplastic
-A9YUA2	DREB2	transcription_regulation	high	转录调控类(TF)为笋转录组最富集的功能类之一	A9YUA2_PHYED DRE-binding protein DREB2
-B0L0Y1	cab-PhE1	photosynthesis	low-medium	光合类, 嫩笋光合弱于成熟叶, 但幼组织仍有一定表达	B0L0Y1_PHYED Chlorophyll a-b binding protein, chloroplastic
-B0L0Y2	cab-PhE2	photosynthesis	low-medium	光合类, 嫩笋光合弱于成熟叶, 但幼组织仍有一定表达	B0L0Y2_PHYED Chlorophyll a-b binding protein, chloroplastic
-B0L805		photosynthesis	low-medium	光合类, 嫩笋光合弱于成熟叶, 但幼组织仍有一定表达	B0L805_PHYED Chlorophyll a-b binding protein, chloroplastic
-B0L806		photosynthesis	low-medium	光合类, 嫩笋光合弱于成熟叶, 但幼组织仍有一定表达	B0L806_PHYED Chlorophyll a-b binding protein, chloroplastic
-B3SRP7		photosynthesis	low-medium	光合类, 嫩笋光合弱于成熟叶, 但幼组织仍有一定表达	B3SRP7_PHYED 23 kDa subunit of oxygen evolving system of photosystem II (Fragment)
-B3VEX3	cox2	metabolic_enzyme	medium-high	代谢酶(含P450/激酶/糖基转移酶), 笋幼嫩组织次生代谢活跃	B3VEX3_PHYED Cytochrome c oxidase subunit 2
-B3VEX5	cox3	metabolic_enzyme	medium-high	代谢酶(含P450/激酶/糖基转移酶), 笋幼嫩组织次生代谢活跃	B3VEX5_PHYED Cytochrome c oxidase subunit 3
-B3VEX7	atp8	other	medium	未归类(other), 需逐条功能注释判定, 保守计为中等	B3VEX7_PHYED H(+)-transporting two-sector ATPase
-B3VN36		metabolic_enzyme	medium-high	代谢酶(含P450/激酶/糖基转移酶), 笋幼嫩组织次生代谢活跃	B3VN36_PHYED Cytochrome P450 73A33 (Fragment)
-B3VN37		photosynthesis	low-medium	光合类, 嫩笋光合弱于成熟叶, 但幼组织仍有一定表达	B3VN37_PHYED Chlorophyll a-b binding protein, chloroplastic (Fragment)
-B4XAP3	nad1	metabolic_enzyme	medium	一般代谢酶, 部分属组成型表达	B4XAP3_PHYED NADH-ubiquinone oxidoreductase chain 1 (Fragment)
-B4XGT7	Lhca1	photosynthesis	low-medium	光合类, 嫩笋光合弱于成熟叶, 但幼组织仍有一定表达	B4XGT7_PHYED Chlorophyll a-b binding protein, chloroplastic
-B5AMY7	DREB1	transcription_regulation	high	转录调控类(TF)为笋转录组最富集的功能类之一	B5AMY7_PHYED DRE-binding protein DREB1
-B7SAW1		photosynthesis	low-medium	光合类, 嫩笋光合弱于成熟叶, 但幼组织仍有一定表达	B7SAW1_PHYED Chlorophyll a-b binding protein, chloroplastic
-B7SAW2		photosynthesis	low-medium	光合类, 嫩笋光合弱于成熟叶, 但幼组织仍有一定表达	B7SAW2_PHYED Chlorophyll a-b binding protein, chloroplastic
-B7SB29		photosynthesis	low-medium	光合类, 嫩笋光合弱于成熟叶, 但幼组织仍有一定表达	B7SB29_PHYED Chlorophyll a-b binding protein, chloroplastic
-B8PYF9		photosynthesis	low-medium	光合类, 嫩笋光合弱于成熟叶, 但幼组织仍有一定表达	B8PYF9_PHYED Chlorophyll a-b binding protein, chloroplastic
-B9VR53	PAL1	metabolic_enzyme	medium	一般代谢酶, 部分属组成型表达	B9VR53_PHYED Phenylalanine ammonia-lyase
-C5G6D4		photosynthesis	low-medium	光合类, 嫩笋光合弱于成熟叶, 但幼组织仍有一定表达	C5G6D4_PHYED Chlorophyll a-b binding protein, chloroplastic
-C5G6D5		photosynthesis	low-medium	光合类, 嫩笋光合弱于成熟叶, 但幼组织仍有一定表达	C5G6D5_PHYED Chlorophyll a-b binding protein, chloroplastic
-C6ERZ0	matK	other	medium	未归类(other), 需逐条功能注释判定, 保守计为中等	C6ERZ0_PHYED Maturase K
-C9W8B2		metabolic_enzyme	medium	一般代谢酶, 部分属组成型表达	C9W8B2_PHYED Phenylalanine ammonia-lyase
-D1MY57	aldc-1	other	medium	未归类(other), 需逐条功能注释判定, 保守计为中等	D1MY57_PHYED Fructose-bisphosphate aldolase
-D1MY58	aldc-2	other	medium	未归类(other), 需逐条功能注释判定, 保守计为中等	D1MY58_PHYED Fructose-bisphosphate aldolase
-D2Y391	NHX1	other	medium	未归类(other), 需逐条功能注释判定, 保守计为中等	D2Y391_PHYED Sodium/hydrogen exchanger
-D3IWC5		metabolic_enzyme	medium-high	代谢酶(含P450/激酶/糖基转移酶), 笋幼嫩组织次生代谢活跃	D3IWC5_PHYED Protein kinase domain-containing protein (Fragment)
-D3JHB7		other	medium	未归类(other), 需逐条功能注释判定, 保守计为中等	D3JHB7_PHYED Endoglucanase
-E5G3F9		other	medium	未归类(other), 需逐条功能注释判定, 保守计为中等	E5G3F9_PHYED V-type proton ATPase proteolipid subunit
-E6Y428	lhca4	photosynthesis	low-medium	光合类, 嫩笋光合弱于成熟叶, 但幼组织仍有一定表达	E6Y428_PHYED Chlorophyll a-b binding protein, chloroplastic
-E6Y429	lhca3	photosynthesis	low-medium	光合类, 嫩笋光合弱于成熟叶, 但幼组织仍有一定表达	E6Y429_PHYED Chlorophyll a-b binding protein, chloroplastic
-J7F2G6	PAL	metabolic_enzyme	medium	一般代谢酶, 部分属组成型表达	J7F2G6_PHYED Phenylalanine ammonia-lyase
-K9J8W8	lhca2	photosynthesis	low-medium	光合类, 嫩笋光合弱于成熟叶, 但幼组织仍有一定表达	K9J8W8_PHYED Chlorophyll a-b binding protein, chloroplastic
-L7NKG3	LHCB2-1	photosynthesis	low-medium	光合类, 嫩笋光合弱于成熟叶, 但幼组织仍有一定表达	L7NKG3_PHYED Chlorophyll a-b binding protein, chloroplastic
-L7NKG4	LHCB6	photosynthesis	low-medium	光合类, 嫩笋光合弱于成熟叶, 但幼组织仍有一定表达	L7NKG4_PHYED Chlorophyll a-b binding protein, chloroplastic
-Q6F4B1	pBA-GS	metabolic_enzyme	medium	一般代谢酶, 部分属组成型表达	Q6F4B1_PHYED Glutamine synthetase (Fragment)
-Q852S6	BA-ACS	metabolic_enzyme	medium	一般代谢酶, 部分属组成型表达	Q852S6_PHYED 1-aminocyclopropane-1-carboxylate synthase
-Q9AYS8	BA-ACO	metabolic_enzyme	medium	一般代谢酶, 部分属组成型表达	Q9AYS8_PHYED 1-aminocyclopropane-1-carboxylate oxidase 1
-S4U6D1		transcription_regulation	high	命中笋高表达家族关键词(转录因子/细胞周期/细胞壁/激素信号)	S4U6D1_PHYED Transcription factor AP2
-X2F431		transcription_regulation	high	命中笋高表达家族关键词(转录因子/细胞周期/细胞壁/激素信号)	X2F431_PHYED MADS-box protein 3
-X2F5C4		transcription_regulation	high	命中笋高表达家族关键词(转录因子/细胞周期/细胞壁/激素信号)	X2F5C4_PHYED MADS-box protein 13
-X2F5C7		transcription_regulation	high	命中笋高表达家族关键词(转录因子/细胞周期/细胞壁/激素信号)	X2F5C7_PHYED MADS-box protein 21
-X2F965		transcription_regulation	high	命中笋高表达家族关键词(转录因子/细胞周期/细胞壁/激素信号)	X2F965_PHYED MADS-box protein 2
-X2FB12		transcription_regulation	high	命中笋高表达家族关键词(转录因子/细胞周期/细胞壁/激素信号)	X2FB12_PHYED MADS-box protein 15
-X2FB16		transcription_regulation	high	命中笋高表达家族关键词(转录因子/细胞周期/细胞壁/激素信号)	X2FB16_PHYED MADS-box protein 58
-X2FD64		transcription_regulation	high	命中笋高表达家族关键词(转录因子/细胞周期/细胞壁/激素信号)	X2FD64_PHYED MADS-box protein 5
-A0A023HHE3	SCL6	other	medium	未归类(other), 需逐条功能注释判定, 保守计为中等	A0A023HHE3_PHYED Scarecrow-like 6 protein
-A0A0C5KR55	TPS5	metabolic_enzyme	medium	一般代谢酶, 部分属组成型表达	A0A0C5KR55_PHYED (E, E)-farnesol/(E)-nerolidol synthase
-A0A0C5L205	TPS6	metabolic_enzyme	medium	一般代谢酶, 部分属组成型表达	A0A0C5L205_PHYED (E)-nerolidol synthase
-A0A0M5KTY4		other	medium	未归类(other), 需逐条功能注释判定, 保守计为中等	A0A0M5KTY4_PHYED DREB1A
-A0A0U1VT70	FT	other	medium	未归类(other), 需逐条功能注释判定, 保守计为中等	A0A0U1VT70_PHYED Flowering locus T
-A0A140F584	WRKY11-2	transcription_regulation	high	命中笋高表达家族关键词(转录因子/细胞周期/细胞壁/激素信号)	A0A140F584_PHYED WAKY 11-2 protein
-A0A140F585	WRKY1	transcription_regulation	high	命中笋高表达家族关键词(转录因子/细胞周期/细胞壁/激素信号)	A0A140F585_PHYED WAKY 1 protein
-A0A1D8F0I1	Dof12-1	other	high	命中笋高表达家族关键词(转录因子/细胞周期/细胞壁/激素信号)	A0A1D8F0I1_PHYED Dof protein
-A0A1D8F0I7	Dof26	other	high	命中笋高表达家族关键词(转录因子/细胞周期/细胞壁/激素信号)	A0A1D8F0I7_PHYED Dof protein
-A0A1D8F0I8	MADS14	transcription_regulation	high	命中笋高表达家族关键词(转录因子/细胞周期/细胞壁/激素信号)	A0A1D8F0I8_PHYED MADs14 protein
-A0A1D8F0I9	MADS15	transcription_regulation	high	命中笋高表达家族关键词(转录因子/细胞周期/细胞壁/激素信号)	A0A1D8F0I9_PHYED MADs15 protein
-A0A1D8F0J2	WRKY9	transcription_regulation	high	命中笋高表达家族关键词(转录因子/细胞周期/细胞壁/激素信号)	A0A1D8F0J2_PHYED WRKY9 protein
-A0A1D8F0J3	MYBR0-1	transcription_regulation	high	命中笋高表达家族关键词(转录因子/细胞周期/细胞壁/激素信号)	A0A1D8F0J3_PHYED MYB protein
-A0A1D8F0J7	LAX1	other	medium	未归类(other), 需逐条功能注释判定, 保守计为中等	A0A1D8F0J7_PHYED LAX protein
-A0A1D8F0J9	MYB16	transcription_regulation	high	命中笋高表达家族关键词(转录因子/细胞周期/细胞壁/激素信号)	A0A1D8F0J9_PHYED MYB protein
-A0A1D8F0K0	SAUR29	other	high	命中笋高表达家族关键词(转录因子/细胞周期/细胞壁/激素信号)	A0A1D8F0K0_PHYED SAUR protein
-A0A1D8F0K2	SAUR14	other	high	命中笋高表达家族关键词(转录因子/细胞周期/细胞壁/激素信号)	A0A1D8F0K2_PHYED SAUR protein
-A0A1D8F0K3	SAUR4	other	high	命中笋高表达家族关键词(转录因子/细胞周期/细胞壁/激素信号)	A0A1D8F0K3_PHYED SAUR protein
-A0A1D8F0K4	MYB4-1	transcription_regulation	high	命中笋高表达家族关键词(转录因子/细胞周期/细胞壁/激素信号)	A0A1D8F0K4_PHYED MYB protein
-A0A1D8F0K7	SAUR34	other	high	命中笋高表达家族关键词(转录因子/细胞周期/细胞壁/激素信号)	A0A1D8F0K7_PHYED SAUR protein
-A0A1D8F0L0	SAUR41	other	high	命中笋高表达家族关键词(转录因子/细胞周期/细胞壁/激素信号)	A0A1D8F0L0_PHYED SAUR protein
-A0A1D8F0L6	SAUR28	other	high	命中笋高表达家族关键词(转录因子/细胞周期/细胞壁/激素信号)	A0A1D8F0L6_PHYED SAUR protein
-A0A2I4KVC7	UDPGE	other	medium	未归类(other), 需逐条功能注释判定, 保守计为中等	A0A2I4KVC7_PHYED UDP-galactose-4-epimerase
-A0A386JUC7	GES	metabolic_enzyme	medium	一般代谢酶, 部分属组成型表达	A0A386JUC7_PHYED Geraniol synthetase
-A0A3Q8AHP8		other	medium	未归类(other), 需逐条功能注释判定, 保守计为中等	A0A3Q8AHP8_PHYED Constans-like protein
-A0A3Q8AHQ2		other	medium	未归类(other), 需逐条功能注释判定, 保守计为中等	A0A3Q8AHQ2_PHYED Constans-like protein
-A0A3Q8AHQ5		transcription_regulation	high	命中笋高表达家族关键词(转录因子/细胞周期/细胞壁/激素信号)	A0A3Q8AHQ5_PHYED Squamosa-promoter binding protein-like protein
-A0A3Q8AHQ6		transcription_regulation	high	命中笋高表达家族关键词(转录因子/细胞周期/细胞壁/激素信号)	A0A3Q8AHQ6_PHYED Squamosa-promoter binding protein-like protein
-A0A3Q8AHR5		other	medium	未归类(other), 需逐条功能注释判定, 保守计为中等	A0A3Q8AHR5_PHYED Constans-like protein
-A0A3Q8AHR9		transcription_regulation	high	命中笋高表达家族关键词(转录因子/细胞周期/细胞壁/激素信号)	A0A3Q8AHR9_PHYED Squamosa-promoter binding protein-like protein
-A0A3Q8AHS1		transcription_regulation	high	命中笋高表达家族关键词(转录因子/细胞周期/细胞壁/激素信号)	A0A3Q8AHS1_PHYED Squamosa-promoter binding protein-like protein
-A0A3Q8AKY8		transcription_regulation	high	命中笋高表达家族关键词(转录因子/细胞周期/细胞壁/激素信号)	A0A3Q8AKY8_PHYED Squamosa-promoter binding protein-like protein
-A0A3Q8AKZ9		other	medium	未归类(other), 需逐条功能注释判定, 保守计为中等	A0A3Q8AKZ9_PHYED Constans-like protein
-A0A3Q8AL04		transcription_regulation	high	命中笋高表达家族关键词(转录因子/细胞周期/细胞壁/激素信号)	A0A3Q8AL04_PHYED Squamosa-promoter binding protein-like protein
-A0A3Q8ANR2		transcription_regulation	high	命中笋高表达家族关键词(转录因子/细胞周期/细胞壁/激素信号)	A0A3Q8ANR2_PHYED Squamosa-promoter binding protein-like protein
-A0A3Q8ANS6		other	medium	未归类(other), 需逐条功能注释判定, 保守计为中等	A0A3Q8ANS6_PHYED Constans-like protein
-A0A3Q8ANT3		transcription_regulation	high	命中笋高表达家族关键词(转录因子/细胞周期/细胞壁/激素信号)	A0A3Q8ANT3_PHYED Squamosa-promoter binding protein-like protein
-A0A3Q8AS14		transcription_regulation	high	命中笋高表达家族关键词(转录因子/细胞周期/细胞壁/激素信号)	A0A3Q8AS14_PHYED Squamosa-promoter binding protein-like protein
-A0A3Q8AS29		other	medium	未归类(other), 需逐条功能注释判定, 保守计为中等	A0A3Q8AS29_PHYED Constans-like protein
-A0A3Q8AS37		transcription_regulation	high	命中笋高表达家族关键词(转录因子/细胞周期/细胞壁/激素信号)	A0A3Q8AS37_PHYED Squamosa-promoter binding protein-like protein
-A0A3Q8AVR5		other	medium	未归类(other), 需逐条功能注释判定, 保守计为中等	A0A3Q8AVR5_PHYED Constans-like protein
-A0A3Q8AVT1		other	medium	未归类(other), 需逐条功能注释判定, 保守计为中等	A0A3Q8AVT1_PHYED Constans-like protein
-A0A3Q8AVT8		transcription_regulation	high	命中笋高表达家族关键词(转录因子/细胞周期/细胞壁/激素信号)	A0A3Q8AVT8_PHYED Squamosa-promoter binding protein-like protein
-A0A3Q8AYQ3		transcription_regulation	high	命中笋高表达家族关键词(转录因子/细胞周期/细胞壁/激素信号)	A0A3Q8AYQ3_PHYED Squamosa-promoter binding protein-like protein
-A0A3Q8AYR8		other	medium	未归类(other), 需逐条功能注释判定, 保守计为中等	A0A3Q8AYR8_PHYED Constans-like protein
-A0A3Q8AYS5		transcription_regulation	high	命中笋高表达家族关键词(转录因子/细胞周期/细胞壁/激素信号)	A0A3Q8AYS5_PHYED Squamosa-promoter binding protein-like protein
-A0A3Q8B365		transcription_regulation	high	命中笋高表达家族关键词(转录因子/细胞周期/细胞壁/激素信号)	A0A3Q8B365_PHYED Squamosa-promoter binding protein-like protein
-A0A3Q8B384		transcription_regulation	high	命中笋高表达家族关键词(转录因子/细胞周期/细胞壁/激素信号)	A0A3Q8B384_PHYED Squamosa-promoter binding protein-like protein
-A0A3Q8B7R3		transcription_regulation	high	命中笋高表达家族关键词(转录因子/细胞周期/细胞壁/激素信号)	A0A3Q8B7R3_PHYED Squamosa-promoter binding protein-like protein
-A0A3Q8B7T7		other	medium	未归类(other), 需逐条功能注释判定, 保守计为中等	A0A3Q8B7T7_PHYED Constans-like protein
-A0A3Q8B7U9		transcription_regulation	high	命中笋高表达家族关键词(转录因子/细胞周期/细胞壁/激素信号)	A0A3Q8B7U9_PHYED Squamosa-promoter binding protein-like protein
-A0A3Q8B9H0		transcription_regulation	high	命中笋高表达家族关键词(转录因子/细胞周期/细胞壁/激素信号)	A0A3Q8B9H0_PHYED MADS26
-A0A3Q8BAT2		transcription_regulation	high	命中笋高表达家族关键词(转录因子/细胞周期/细胞壁/激素信号)	A0A3Q8BAT2_PHYED Squamosa-promoter binding protein-like protein
-A0A3Q8BAV1		transcription_regulation	high	命中笋高表达家族关键词(转录因子/细胞周期/细胞壁/激素信号)	A0A3Q8BAV1_PHYED Squamosa-promoter binding protein-like protein
-A0A3Q8BBY6		transcription_regulation	high	命中笋高表达家族关键词(转录因子/细胞周期/细胞壁/激素信号)	A0A3Q8BBY6_PHYED MADS37-1
-A0A3Q8BG47		other	medium	未归类(other), 需逐条功能注释判定, 保守计为中等	A0A3Q8BG47_PHYED COLN
-A0A3Q8BI97		transcription_regulation	high	命中笋高表达家族关键词(转录因子/细胞周期/细胞壁/激素信号)	A0A3Q8BI97_PHYED MADS55
-A0A3Q8BIC1		other	medium	未归类(other), 需逐条功能注释判定, 保守计为中等	A0A3Q8BIC1_PHYED COLP
-A0A3Q8BMZ5		transcription_regulation	high	命中笋高表达家族关键词(转录因子/细胞周期/细胞壁/激素信号)	A0A3Q8BMZ5_PHYED MADS32
-A0A3Q8BS12		transcription_regulation	high	命中笋高表达家族关键词(转录因子/细胞周期/细胞壁/激素信号)	A0A3Q8BS12_PHYED MADS64
-A0A3Q8BS39		other	medium	未归类(other), 需逐条功能注释判定, 保守计为中等	A0A3Q8BS39_PHYED COLO-1
-A0A3Q8BXM9		other	medium	未归类(other), 需逐条功能注释判定, 保守计为中等	A0A3Q8BXM9_PHYED COLB
-A0A3Q8C2Q7		transcription_regulation	high	命中笋高表达家族关键词(转录因子/细胞周期/细胞壁/激素信号)	A0A3Q8C2Q7_PHYED MADS37-2
-A0A3Q8C2T5		other	medium	未归类(other), 需逐条功能注释判定, 保守计为中等	A0A3Q8C2T5_PHYED FTL1
-A0A3Q8C5I4		other	medium	未归类(other), 需逐条功能注释判定, 保守计为中等	A0A3Q8C5I4_PHYED COLM
-A0A3S6H5H0		transcription_regulation	high	命中笋高表达家族关键词(转录因子/细胞周期/细胞壁/激素信号)	A0A3S6H5H0_PHYED Squamosa-promoter binding protein-like protein
-A0A3S6H5H7		transcription_regulation	high	命中笋高表达家族关键词(转录因子/细胞周期/细胞壁/激素信号)	A0A3S6H5H7_PHYED Squamosa-promoter binding protein-like protein
-A0A3S6H5I4		transcription_regulation	high	命中笋高表达家族关键词(转录因子/细胞周期/细胞壁/激素信号)	A0A3S6H5I4_PHYED Squamosa-promoter binding protein-like protein
-A0A3S6H5L3		transcription_regulation	high	命中笋高表达家族关键词(转录因子/细胞周期/细胞壁/激素信号)	A0A3S6H5L3_PHYED Squamosa-promoter binding protein-like protein
-A0A3S6H5L5		transcription_regulation	high	命中笋高表达家族关键词(转录因子/细胞周期/细胞壁/激素信号)	A0A3S6H5L5_PHYED Squamosa-promoter binding protein-like protein
-A0A3S6H5M6		other	medium	未归类(other), 需逐条功能注释判定, 保守计为中等	A0A3S6H5M6_PHYED Constans-like protein
-A0A3S6H5M9		transcription_regulation	high	命中笋高表达家族关键词(转录因子/细胞周期/细胞壁/激素信号)	A0A3S6H5M9_PHYED Squamosa-promoter binding protein-like protein (Fragment)
-A0A3S6H5X4		transcription_regulation	high	命中笋高表达家族关键词(转录因子/细胞周期/细胞壁/激素信号)	A0A3S6H5X4_PHYED Squamosa-promoter binding protein-like protein
-A0A3S6H5Y3		transcription_regulation	high	命中笋高表达家族关键词(转录因子/细胞周期/细胞壁/激素信号)	A0A3S6H5Y3_PHYED Squamosa-promoter binding protein-like protein
-A0A3S6H638		transcription_regulation	high	命中笋高表达家族关键词(转录因子/细胞周期/细胞壁/激素信号)	A0A3S6H638_PHYED Squamosa-promoter binding protein-like protein (Fragment)
-A0A3S6H646		other	medium	未归类(other), 需逐条功能注释判定, 保守计为中等	A0A3S6H646_PHYED Constans-like protein
-A0A3S6H653		transcription_regulation	high	命中笋高表达家族关键词(转录因子/细胞周期/细胞壁/激素信号)	A0A3S6H653_PHYED Squamosa-promoter binding protein-like protein
-A0A3S6H659		transcription_regulation	high	命中笋高表达家族关键词(转录因子/细胞周期/细胞壁/激素信号)	A0A3S6H659_PHYED Squamosa-promoter binding protein-like protein
-A0A3S6H666		transcription_regulation	high	命中笋高表达家族关键词(转录因子/细胞周期/细胞壁/激素信号)	A0A3S6H666_PHYED Squamosa-promoter binding protein-like protein
-A0A3S6H6I4		transcription_regulation	high	命中笋高表达家族关键词(转录因子/细胞周期/细胞壁/激素信号)	A0A3S6H6I4_PHYED Squamosa-promoter binding protein-like protein
-A0A3S6H6Q4		other	medium	未归类(other), 需逐条功能注释判定, 保守计为中等	A0A3S6H6Q4_PHYED Flowering locus t-like protein
-A0A3S6H6S2		transcription_regulation	high	命中笋高表达家族关键词(转录因子/细胞周期/细胞壁/激素信号)	A0A3S6H6S2_PHYED Squamosa-promoter binding protein-like protein
-A0A3S6H713		transcription_regulation	high	命中笋高表达家族关键词(转录因子/细胞周期/细胞壁/激素信号)	A0A3S6H713_PHYED Squamosa-promoter binding protein-like protein
-A0A3S6H725		transcription_regulation	high	命中笋高表达家族关键词(转录因子/细胞周期/细胞壁/激素信号)	A0A3S6H725_PHYED Squamosa-promoter binding protein-like protein
-A0A3S6K2Y7		other	medium	未归类(other), 需逐条功能注释判定, 保守计为中等	A0A3S6K2Y7_PHYED FTL11
-A0A3S6K7P2		other	medium	未归类(other), 需逐条功能注释判定, 保守计为中等	A0A3S6K7P2_PHYED FTL12
-A0A3S6K9J1		other	medium	未归类(other), 需逐条功能注释判定, 保守计为中等	A0A3S6K9J1_PHYED COLH
-A0A3S6KA32		other	medium	未归类(other), 需逐条功能注释判定, 保守计为中等	A0A3S6KA32_PHYED COLD
-A0A3S6KA81		other	medium	未归类(other), 需逐条功能注释判定, 保守计为中等	A0A3S6KA81_PHYED COLE
-A0A3S6KAH5		other	medium	未归类(other), 需逐条功能注释判定, 保守计为中等	A0A3S6KAH5_PHYED COLK
-A0A6G8IU77	NAC10-2	other	medium	未归类(other), 需逐条功能注释判定, 保守计为中等	A0A6G8IU77_PHYED NAC domain-containing protein 10-2
-A0A6G8IUE7	NAC10-1	other	medium	未归类(other), 需逐条功能注释判定, 保守计为中等	A0A6G8IUE7_PHYED NAC domain-containing protein 10-1
-A0A6G8IUU5	NAC10-4	other	medium	未归类(other), 需逐条功能注释判定, 保守计为中等	A0A6G8IUU5_PHYED NAC domain-containing protein 10-4
-A0A8K1UFJ8		other	medium	未归类(other), 需逐条功能注释判定, 保守计为中等	A0A8K1UFJ8_PHYED PH02Gene39026.t1
-A0A8K1UFX3		other	medium	未归类(other), 需逐条功能注释判定, 保守计为中等	A0A8K1UFX3_PHYED Dirigent protein
-A0S5Z9		photosynthesis	low-medium	光合类, 嫩笋光合弱于成熟叶, 但幼组织仍有一定表达	A0S5Z9_PHYED Chlorophyll synthase
-A6XMM8	TB1	other	medium	未归类(other), 需逐条功能注释判定, 保守计为中等	A6XMM8_PHYED TB1 protein (Fragment)
-B2M1Y2		other	medium	未归类(other), 需逐条功能注释判定, 保守计为中等	B2M1Y2_PHYED Zinc finger protein
-B3SRP8		other	medium	未归类(other), 需逐条功能注释判定, 保守计为中等	B3SRP8_PHYED Chloroplast PsbO (Fragment)
-B8PYG0		transcription_regulation	high	命中笋高表达家族关键词(转录因子/细胞周期/细胞壁/激素信号)	B8PYG0_PHYED MADS-box protein
-B8Y3Y8		other	medium	未归类(other), 需逐条功能注释判定, 保守计为中等	B8Y3Y8_PHYED Zinc finger protein
-D2DN35		structural	high	结构/细胞壁合成类(CesA等), 笋快速生长与可食质地核心	D2DN35_PHYED Actin (Fragment)
-D3IWC6		hypothetical	low	hypothetical 类, 与笋特异性高表达关联弱	D3IWC6_PHYED Uncharacterized protein (Fragment)
-D3IWC7		other	medium	未归类(other), 需逐条功能注释判定, 保守计为中等	D3IWC7_PHYED Putative uvrB/uvrC motif family protein (Fragment)
-E0WBG6		other	medium	未归类(other), 需逐条功能注释判定, 保守计为中等	E0WBG6_PHYED PsbS protein
-E5G3F8		transcription_regulation	high	命中笋高表达家族关键词(转录因子/细胞周期/细胞壁/激素信号)	E5G3F8_PHYED MYB protein
-E9K174		structural	high	结构/细胞壁合成类(CesA等), 笋快速生长与可食质地核心	E9K174_PHYED Actin
-F4YCW4	WRKY10	defense_stress	high	命中笋高表达家族关键词(转录因子/细胞周期/细胞壁/激素信号)	F4YCW4_PHYED Putative pathogenesis protein
-K9K4T1	EMF	other	medium	未归类(other), 需逐条功能注释判定, 保守计为中等	K9K4T1_PHYED EMF protein
-Q0EDP0	PpFT	other	medium	未归类(other), 需逐条功能注释判定, 保守计为中等	Q0EDP0_PHYED RFT-like protein (Fragment)
-Q0MX07		other	medium	未归类(other), 需逐条功能注释判定, 保守计为中等	Q0MX07_PHYED CCHC-type domain-containing protein
-Q0PPV6		other	medium	未归类(other), 需逐条功能注释判定, 保守计为中等	Q0PPV6_PHYED Retrotransposon gag domain-containing protein
-Q6F4B2	pBA-PAL	metabolic_enzyme	medium	一般代谢酶, 部分属组成型表达	Q6F4B2_PHYED Phenylalanine ammonia-lyase (Fragment)
-Q766D6	BA-AC	structural	high	结构/细胞壁合成类(CesA等), 笋快速生长与可食质地核心	Q766D6_PHYED Actin (Fragment)
-R9QL67	VDE	metabolic_enzyme	medium	一般代谢酶, 部分属组成型表达	R9QL67_PHYED Violaxanthin deepoxidase
-X2F434		transcription_regulation	high	命中笋高表达家族关键词(转录因子/细胞周期/细胞壁/激素信号)	X2F434_PHYED MADS-box protein 8
-X2F437		transcription_regulation	high	命中笋高表达家族关键词(转录因子/细胞周期/细胞壁/激素信号)	X2F437_PHYED MADS-box protein 18
-X2F5C1		transcription_regulation	high	命中笋高表达家族关键词(转录因子/细胞周期/细胞壁/激素信号)	X2F5C1_PHYED MADS-box protein 4
-X2F967		transcription_regulation	high	命中笋高表达家族关键词(转录因子/细胞周期/细胞壁/激素信号)	X2F967_PHYED MADS-box protein 7
-X2F972		transcription_regulation	high	命中笋高表达家族关键词(转录因子/细胞周期/细胞壁/激素信号)	X2F972_PHYED MADS-box protein 16
-X2FB04		transcription_regulation	high	命中笋高表达家族关键词(转录因子/细胞周期/细胞壁/激素信号)	X2FB04_PHYED MADS-box protein 1
-X2FB07		transcription_regulation	high	命中笋高表达家族关键词(转录因子/细胞周期/细胞壁/激素信号)	X2FB07_PHYED MADS-box protein 6
-X2FD68		transcription_regulation	high	命中笋高表达家族关键词(转录因子/细胞周期/细胞壁/激素信号)	X2FD68_PHYED MADS-box protein 14
-X2FD71		transcription_regulation	high	命中笋高表达家族关键词(转录因子/细胞周期/细胞壁/激素信号)	X2FD71_PHYED MADS-box protein 34
+A0A8F6LBU3		metabolic_enzyme	medium-high	metabolic enzyme (incl. P450/kinase/glycosyltransferase), active secondary metabolism in young shoots	A0A8F6LBU3_PHYED Phosphotransferase
+A0A8F6LBU9		metabolic_enzyme	medium-high	metabolic enzyme (incl. P450/kinase/glycosyltransferase), active secondary metabolism in young shoots	A0A8F6LBU9_PHYED Phosphotransferase
+A0A8F6LBV0		metabolic_enzyme	medium-high	metabolic enzyme (incl. P450/kinase/glycosyltransferase), active secondary metabolism in young shoots	A0A8F6LBV0_PHYED Phosphotransferase
+A0AA96NL62	CDKA1-2	other	high	hits shoot high-expression family keyword (TF/cell-cycle/cell-wall/hormone-signaling)	A0AA96NL62_PHYED CDKA1-2 protein
+A0AA96NLG9	CDKA2-2	other	high	hits shoot high-expression family keyword (TF/cell-cycle/cell-wall/hormone-signaling)	A0AA96NLG9_PHYED CDKA2-2 protein
+A0AA96NNE8	CDKA1-1	other	high	hits shoot high-expression family keyword (TF/cell-cycle/cell-wall/hormone-signaling)	A0AA96NNE8_PHYED CDKA1-1 protein
+A0AA96NNG2	CDKA2-1	other	high	hits shoot high-expression family keyword (TF/cell-cycle/cell-wall/hormone-signaling)	A0AA96NNG2_PHYED CDKA2-1 protein
+A0AA96SJB1	CDKD1-1	metabolic_enzyme	high	hits shoot high-expression family keyword (TF/cell-cycle/cell-wall/hormone-signaling)	A0AA96SJB1_PHYED Cyclin-dependent kinase D-1
+A0AA96SLQ4	CDKD1-2	metabolic_enzyme	high	hits shoot high-expression family keyword (TF/cell-cycle/cell-wall/hormone-signaling)	A0AA96SLQ4_PHYED Cyclin-dependent kinase D-1
+A0S5Z8	psbC	photosynthesis	low-medium	photosynthesis, young shoots photosynthesize less than mature leaves but still express	A0S5Z8_PHYED Photosystem II CP43 reaction center protein
+C1K6H1	CesA12	structural	high	hits shoot high-expression family keyword (TF/cell-cycle/cell-wall/hormone-signaling)	C1K6H1_PHYED Cellulose synthase (Fragment)
+D3JHB3		structural	high	hits shoot high-expression family keyword (TF/cell-cycle/cell-wall/hormone-signaling)	D3JHB3_PHYED Cellulose synthase
+D3JHB4		structural	high	hits shoot high-expression family keyword (TF/cell-cycle/cell-wall/hormone-signaling)	D3JHB4_PHYED Cellulose synthase
+D3JHB5		structural	high	hits shoot high-expression family keyword (TF/cell-cycle/cell-wall/hormone-signaling)	D3JHB5_PHYED Cellulose synthase
+D3JHB6		structural	high	hits shoot high-expression family keyword (TF/cell-cycle/cell-wall/hormone-signaling)	D3JHB6_PHYED cellulose synthase (UDP-forming)
+D3K1B8		metabolic_enzyme	medium	general metabolic enzyme, partly constitutive expression	D3K1B8_PHYED Glyceraldehyde-3-phosphate dehydrogenase
+D5FJ40	CesA2	structural	high	hits shoot high-expression family keyword (TF/cell-cycle/cell-wall/hormone-signaling)	D5FJ40_PHYED Cellulose synthase
+D5FJ41	CesA4	structural	high	hits shoot high-expression family keyword (TF/cell-cycle/cell-wall/hormone-signaling)	D5FJ41_PHYED Cellulose synthase
+D5FJ45	cesA1	structural	high	hits shoot high-expression family keyword (TF/cell-cycle/cell-wall/hormone-signaling)	D5FJ45_PHYED Cellulose synthase
+D7RJ34	CesA11	structural	high	hits shoot high-expression family keyword (TF/cell-cycle/cell-wall/hormone-signaling)	D7RJ34_PHYED Cellulose synthase
+A0A0C5KH39	TPS2	metabolic_enzyme	medium	general metabolic enzyme, partly constitutive expression	A0A0C5KH39_PHYED (E, E)-farnesol synthase
+A0A0K1L5Y4		other	medium	unclassified (other), needs per-gene annotation; conservatively medium	A0A0K1L5Y4_PHYED magnesium-protoporphyrin IX monomethyl ester (oxidative) cyclase
+A0A0M4L961		other	medium	unclassified (other), needs per-gene annotation; conservatively medium	A0A0M4L961_PHYED DREB2A
+A0A1D8F0G9	AUX1	signaling	high	hits shoot high-expression family keyword (TF/cell-cycle/cell-wall/hormone-signaling)	A0A1D8F0G9_PHYED Auxin-responsive protein
+A0A1D8F0H0	AUX3	signaling	medium	signaling/hormone, active hormone signaling in shoot development	A0A1D8F0H0_PHYED Auxin-responsive protein
+A0A1D8F0H5	ARF2	transcription_regulation	high	hits shoot high-expression family keyword (TF/cell-cycle/cell-wall/hormone-signaling)	A0A1D8F0H5_PHYED Auxin response factor
+A0A1D8F0H7	AUX2	signaling	medium	signaling/hormone, active hormone signaling in shoot development	A0A1D8F0H7_PHYED Auxin-responsive protein
+A0A1D8F0I0	AUX4	signaling	medium	signaling/hormone, active hormone signaling in shoot development	A0A1D8F0I0_PHYED Auxin-responsive protein
+A0A1D8F0I2	WRKY74-1	transcription_regulation	high	hits shoot high-expression family keyword (TF/cell-cycle/cell-wall/hormone-signaling)	A0A1D8F0I2_PHYED WRKY74-1 protein
+A0A1D8F0I5	Dof12-2	other	high	hits shoot high-expression family keyword (TF/cell-cycle/cell-wall/hormone-signaling)	A0A1D8F0I5_PHYED Dof protein
+A0A1D8F0J0	Dof1	other	high	hits shoot high-expression family keyword (TF/cell-cycle/cell-wall/hormone-signaling)	A0A1D8F0J0_PHYED Dof zinc finger protein
+A0A1D8F0J4	MYB2R-42	transcription_regulation	high	hits shoot high-expression family keyword (TF/cell-cycle/cell-wall/hormone-signaling)	A0A1D8F0J4_PHYED Transcription factor GAMYB
+A0A1D8F0J5	MYB2R-100	transcription_regulation	high	hits shoot high-expression family keyword (TF/cell-cycle/cell-wall/hormone-signaling)	A0A1D8F0J5_PHYED Transcription factor MYBS1
+A0A1D8F0J8	MYB2R-104	transcription_regulation	high	hits shoot high-expression family keyword (TF/cell-cycle/cell-wall/hormone-signaling)	A0A1D8F0J8_PHYED Transcription factor MYBS1
+A0A1D8F0K5	WRKY76	transcription_regulation	high	hits shoot high-expression family keyword (TF/cell-cycle/cell-wall/hormone-signaling)	A0A1D8F0K5_PHYED WRKY76 protein
+A0A1D8F0K6	ARF1	transcription_regulation	high	hits shoot high-expression family keyword (TF/cell-cycle/cell-wall/hormone-signaling)	A0A1D8F0K6_PHYED Auxin response factor
+A0A1L1Y221		metabolic_enzyme	medium	general metabolic enzyme, partly constitutive expression	A0A1L1Y221_PHYED Zeaxanthin epoxidase, chloroplastic
+A0A3S6K9G7		transcription_regulation	high	hits shoot high-expression family keyword (TF/cell-cycle/cell-wall/hormone-signaling)	A0A3S6K9G7_PHYED MADS18-2
+A0A3S6KA60		transcription_regulation	high	hits shoot high-expression family keyword (TF/cell-cycle/cell-wall/hormone-signaling)	A0A3S6KA60_PHYED MADS56
+A0A5C2IFI3	F3'H	other	medium	unclassified (other), needs per-gene annotation; conservatively medium	A0A5C2IFI3_PHYED flavonoid 3'-monooxygenase
+A0A5J6DQ91	CGT3	metabolic_enzyme	medium-high	metabolic enzyme (incl. P450/kinase/glycosyltransferase), active secondary metabolism in young shoots	A0A5J6DQ91_PHYED Glycosyltransferase
+A0A5J6DQ94	CGT1	metabolic_enzyme	medium-high	metabolic enzyme (incl. P450/kinase/glycosyltransferase), active secondary metabolism in young shoots	A0A5J6DQ94_PHYED Glycosyltransferase
+A0A5J6DQA0	CGT4	metabolic_enzyme	medium-high	metabolic enzyme (incl. P450/kinase/glycosyltransferase), active secondary metabolism in young shoots	A0A5J6DQA0_PHYED Glycosyltransferase
+A0A5J6DQK3	CGT2	metabolic_enzyme	medium-high	metabolic enzyme (incl. P450/kinase/glycosyltransferase), active secondary metabolism in young shoots	A0A5J6DQK3_PHYED UDP-glycosyltransferase CGT
+A0A5J6DQM1	F2H	other	medium	unclassified (other), needs per-gene annotation; conservatively medium	A0A5J6DQM1_PHYED Flavanone 2-hydroxylase
+A0A6G8IU41	NAP-1	other	medium	unclassified (other), needs per-gene annotation; conservatively medium	A0A6G8IU41_PHYED NAC domain-containing protein 1
+A0A8K1UFY0		other	medium	unclassified (other), needs per-gene annotation; conservatively medium	A0A8K1UFY0_PHYED Dirigent protein
+A0AA96NG41	CDKB2-2	other	high	hits shoot high-expression family keyword (TF/cell-cycle/cell-wall/hormone-signaling)	A0AA96NG41_PHYED CDKB2-2 protein
+A0AA96NG47	CDKC2	other	high	hits shoot high-expression family keyword (TF/cell-cycle/cell-wall/hormone-signaling)	A0AA96NG47_PHYED CDKC2 protein
+A0AA96NG54	CKL4	metabolic_enzyme	medium-high	metabolic enzyme (incl. P450/kinase/glycosyltransferase), active secondary metabolism in young shoots	A0AA96NG54_PHYED [RNA-polymerase]-subunit kinase
+A0AA96NG55	CKL2	metabolic_enzyme	medium-high	metabolic enzyme (incl. P450/kinase/glycosyltransferase), active secondary metabolism in young shoots	A0AA96NG55_PHYED [RNA-polymerase]-subunit kinase
+A0AA96NG61	CKL19	metabolic_enzyme	medium-high	metabolic enzyme (incl. P450/kinase/glycosyltransferase), active secondary metabolism in young shoots	A0AA96NG61_PHYED [RNA-polymerase]-subunit kinase
+A0AA96NG63	CKL17	metabolic_enzyme	medium-high	metabolic enzyme (incl. P450/kinase/glycosyltransferase), active secondary metabolism in young shoots	A0AA96NG63_PHYED [RNA-polymerase]-subunit kinase
+A0AA96NKZ1	CDKB1-1	other	high	hits shoot high-expression family keyword (TF/cell-cycle/cell-wall/hormone-signaling)	A0AA96NKZ1_PHYED CDKB1-1 protein
+A0AA96NKZ5	CDKG2-1	other	high	hits shoot high-expression family keyword (TF/cell-cycle/cell-wall/hormone-signaling)	A0AA96NKZ5_PHYED CDKG2-1 protein
+A0AA96NL09	CKL14	metabolic_enzyme	medium-high	metabolic enzyme (incl. P450/kinase/glycosyltransferase), active secondary metabolism in young shoots	A0AA96NL09_PHYED [RNA-polymerase]-subunit kinase
+A0AA96NL71	CDKF1-3	other	high	hits shoot high-expression family keyword (TF/cell-cycle/cell-wall/hormone-signaling)	A0AA96NL71_PHYED CDK1-3 protein
+A0AA96NL80	CKL11	metabolic_enzyme	medium-high	metabolic enzyme (incl. P450/kinase/glycosyltransferase), active secondary metabolism in young shoots	A0AA96NL80_PHYED [RNA-polymerase]-subunit kinase
+A0AA96NLH6	CDKG1-2	other	high	hits shoot high-expression family keyword (TF/cell-cycle/cell-wall/hormone-signaling)	A0AA96NLH6_PHYED CDKG1-2 protein
+A0AA96NLI5	CKL13	metabolic_enzyme	medium-high	metabolic enzyme (incl. P450/kinase/glycosyltransferase), active secondary metabolism in young shoots	A0AA96NLI5_PHYED [RNA-polymerase]-subunit kinase
+A0AA96NNF8	CDKF1-2	metabolic_enzyme	high	hits shoot high-expression family keyword (TF/cell-cycle/cell-wall/hormone-signaling)	A0AA96NNF8_PHYED Cyclin-dependent kinase F-1
+A0AA96NNG7	CDKG1-1	other	high	hits shoot high-expression family keyword (TF/cell-cycle/cell-wall/hormone-signaling)	A0AA96NNG7_PHYED CDKG1-1 protein
+A0AA96NNH1	CKL10	metabolic_enzyme	medium-high	metabolic enzyme (incl. P450/kinase/glycosyltransferase), active secondary metabolism in young shoots	A0AA96NNH1_PHYED [RNA-polymerase]-subunit kinase
+A0AA96NNH2	CKL12	metabolic_enzyme	medium-high	metabolic enzyme (incl. P450/kinase/glycosyltransferase), active secondary metabolism in young shoots	A0AA96NNH2_PHYED [RNA-polymerase]-subunit kinase
+A0AA96NNV0	CDKB2-1	other	high	hits shoot high-expression family keyword (TF/cell-cycle/cell-wall/hormone-signaling)	A0AA96NNV0_PHYED CDKB2-1 protein
+A0AA96NNV9	CKL1	metabolic_enzyme	medium-high	metabolic enzyme (incl. P450/kinase/glycosyltransferase), active secondary metabolism in young shoots	A0AA96NNV9_PHYED [RNA-polymerase]-subunit kinase
+A0AA96NNW5	CKL16	metabolic_enzyme	medium-high	metabolic enzyme (incl. P450/kinase/glycosyltransferase), active secondary metabolism in young shoots	A0AA96NNW5_PHYED [RNA-polymerase]-subunit kinase
+A0AA96NPF7	CDKC1	other	high	hits shoot high-expression family keyword (TF/cell-cycle/cell-wall/hormone-signaling)	A0AA96NPF7_PHYED CDKC1 protein
+A0AA96NPG0	CKL3	metabolic_enzyme	medium-high	metabolic enzyme (incl. P450/kinase/glycosyltransferase), active secondary metabolism in young shoots	A0AA96NPG0_PHYED [RNA-polymerase]-subunit kinase
+A0AA96NPG8	CKL18	metabolic_enzyme	medium-high	metabolic enzyme (incl. P450/kinase/glycosyltransferase), active secondary metabolism in young shoots	A0AA96NPG8_PHYED [RNA-polymerase]-subunit kinase
+A0AA96NPY4	CDKB1-2	other	high	hits shoot high-expression family keyword (TF/cell-cycle/cell-wall/hormone-signaling)	A0AA96NPY4_PHYED CDKB1-2 protein
+A0AA96NPY7	CDKG2-2	other	high	hits shoot high-expression family keyword (TF/cell-cycle/cell-wall/hormone-signaling)	A0AA96NPY7_PHYED CDKG2-2 protein
+A0AA96NPZ6	CKL15	metabolic_enzyme	medium-high	metabolic enzyme (incl. P450/kinase/glycosyltransferase), active secondary metabolism in young shoots	A0AA96NPZ6_PHYED [RNA-polymerase]-subunit kinase (Fragment)
+A0AA96SGG4	CDKE1	metabolic_enzyme	high	hits shoot high-expression family keyword (TF/cell-cycle/cell-wall/hormone-signaling)	A0AA96SGG4_PHYED Cyclin-dependent kinase E-1
+A0AA96SGG7	CKL8	metabolic_enzyme	medium-high	metabolic enzyme (incl. P450/kinase/glycosyltransferase), active secondary metabolism in young shoots	A0AA96SGG7_PHYED [RNA-polymerase]-subunit kinase
+A0AA96SIB7	CDKC3	metabolic_enzyme	high	hits shoot high-expression family keyword (TF/cell-cycle/cell-wall/hormone-signaling)	A0AA96SIB7_PHYED [RNA-polymerase]-subunit kinase
+A0AA96SIB9	CKL5	metabolic_enzyme	medium-high	metabolic enzyme (incl. P450/kinase/glycosyltransferase), active secondary metabolism in young shoots	A0AA96SIB9_PHYED [RNA-polymerase]-subunit kinase
+A0AA96SIC1	CKL20	metabolic_enzyme	medium-high	metabolic enzyme (incl. P450/kinase/glycosyltransferase), active secondary metabolism in young shoots	A0AA96SIC1_PHYED [RNA-polymerase]-subunit kinase
+A0AA96SJB3	CKL6	metabolic_enzyme	medium-high	metabolic enzyme (incl. P450/kinase/glycosyltransferase), active secondary metabolism in young shoots	A0AA96SJB3_PHYED [RNA-polymerase]-subunit kinase
+A0AA96SJC6	CDKF1-1	metabolic_enzyme	high	hits shoot high-expression family keyword (TF/cell-cycle/cell-wall/hormone-signaling)	A0AA96SJC6_PHYED Cyclin-dependent kinase F-1
+A0AA96SJC9	CKL9	metabolic_enzyme	medium-high	metabolic enzyme (incl. P450/kinase/glycosyltransferase), active secondary metabolism in young shoots	A0AA96SJC9_PHYED [RNA-polymerase]-subunit kinase
+A0AA96SLQ8	CKL7	metabolic_enzyme	medium-high	metabolic enzyme (incl. P450/kinase/glycosyltransferase), active secondary metabolism in young shoots	A0AA96SLQ8_PHYED [RNA-polymerase]-subunit kinase
+A0S601		photosynthesis	low-medium	photosynthesis, young shoots photosynthesize less than mature leaves but still express	A0S601_PHYED Photosystem II 10 kDa polypeptide, chloroplastic
+A9YUA2	DREB2	transcription_regulation	high	transcription regulation (TF) is among the most enriched classes in the shoot transcriptome	A9YUA2_PHYED DRE-binding protein DREB2
+B0L0Y1	cab-PhE1	photosynthesis	low-medium	photosynthesis, young shoots photosynthesize less than mature leaves but still express	B0L0Y1_PHYED Chlorophyll a-b binding protein, chloroplastic
+B0L0Y2	cab-PhE2	photosynthesis	low-medium	photosynthesis, young shoots photosynthesize less than mature leaves but still express	B0L0Y2_PHYED Chlorophyll a-b binding protein, chloroplastic
+B0L805		photosynthesis	low-medium	photosynthesis, young shoots photosynthesize less than mature leaves but still express	B0L805_PHYED Chlorophyll a-b binding protein, chloroplastic
+B0L806		photosynthesis	low-medium	photosynthesis, young shoots photosynthesize less than mature leaves but still express	B0L806_PHYED Chlorophyll a-b binding protein, chloroplastic
+B3SRP7		photosynthesis	low-medium	photosynthesis, young shoots photosynthesize less than mature leaves but still express	B3SRP7_PHYED 23 kDa subunit of oxygen evolving system of photosystem II (Fragment)
+B3VEX3	cox2	metabolic_enzyme	medium-high	metabolic enzyme (incl. P450/kinase/glycosyltransferase), active secondary metabolism in young shoots	B3VEX3_PHYED Cytochrome c oxidase subunit 2
+B3VEX5	cox3	metabolic_enzyme	medium-high	metabolic enzyme (incl. P450/kinase/glycosyltransferase), active secondary metabolism in young shoots	B3VEX5_PHYED Cytochrome c oxidase subunit 3
+B3VEX7	atp8	other	medium	unclassified (other), needs per-gene annotation; conservatively medium	B3VEX7_PHYED H(+)-transporting two-sector ATPase
+B3VN36		metabolic_enzyme	medium-high	metabolic enzyme (incl. P450/kinase/glycosyltransferase), active secondary metabolism in young shoots	B3VN36_PHYED Cytochrome P450 73A33 (Fragment)
+B3VN37		photosynthesis	low-medium	photosynthesis, young shoots photosynthesize less than mature leaves but still express	B3VN37_PHYED Chlorophyll a-b binding protein, chloroplastic (Fragment)
+B4XAP3	nad1	metabolic_enzyme	medium	general metabolic enzyme, partly constitutive expression	B4XAP3_PHYED NADH-ubiquinone oxidoreductase chain 1 (Fragment)
+B4XGT7	Lhca1	photosynthesis	low-medium	photosynthesis, young shoots photosynthesize less than mature leaves but still express	B4XGT7_PHYED Chlorophyll a-b binding protein, chloroplastic
+B5AMY7	DREB1	transcription_regulation	high	transcription regulation (TF) is among the most enriched classes in the shoot transcriptome	B5AMY7_PHYED DRE-binding protein DREB1
+B7SAW1		photosynthesis	low-medium	photosynthesis, young shoots photosynthesize less than mature leaves but still express	B7SAW1_PHYED Chlorophyll a-b binding protein, chloroplastic
+B7SAW2		photosynthesis	low-medium	photosynthesis, young shoots photosynthesize less than mature leaves but still express	B7SAW2_PHYED Chlorophyll a-b binding protein, chloroplastic
+B7SB29		photosynthesis	low-medium	photosynthesis, young shoots photosynthesize less than mature leaves but still express	B7SB29_PHYED Chlorophyll a-b binding protein, chloroplastic
+B8PYF9		photosynthesis	low-medium	photosynthesis, young shoots photosynthesize less than mature leaves but still express	B8PYF9_PHYED Chlorophyll a-b binding protein, chloroplastic
+B9VR53	PAL1	metabolic_enzyme	medium	general metabolic enzyme, partly constitutive expression	B9VR53_PHYED Phenylalanine ammonia-lyase
+C5G6D4		photosynthesis	low-medium	photosynthesis, young shoots photosynthesize less than mature leaves but still express	C5G6D4_PHYED Chlorophyll a-b binding protein, chloroplastic
+C5G6D5		photosynthesis	low-medium	photosynthesis, young shoots photosynthesize less than mature leaves but still express	C5G6D5_PHYED Chlorophyll a-b binding protein, chloroplastic
+C6ERZ0	matK	other	medium	unclassified (other), needs per-gene annotation; conservatively medium	C6ERZ0_PHYED Maturase K
+C9W8B2		metabolic_enzyme	medium	general metabolic enzyme, partly constitutive expression	C9W8B2_PHYED Phenylalanine ammonia-lyase
+D1MY57	aldc-1	other	medium	unclassified (other), needs per-gene annotation; conservatively medium	D1MY57_PHYED Fructose-bisphosphate aldolase
+D1MY58	aldc-2	other	medium	unclassified (other), needs per-gene annotation; conservatively medium	D1MY58_PHYED Fructose-bisphosphate aldolase
+D2Y391	NHX1	other	medium	unclassified (other), needs per-gene annotation; conservatively medium	D2Y391_PHYED Sodium/hydrogen exchanger
+D3IWC5		metabolic_enzyme	medium-high	metabolic enzyme (incl. P450/kinase/glycosyltransferase), active secondary metabolism in young shoots	D3IWC5_PHYED Protein kinase domain-containing protein (Fragment)
+D3JHB7		other	medium	unclassified (other), needs per-gene annotation; conservatively medium	D3JHB7_PHYED Endoglucanase
+E5G3F9		other	medium	unclassified (other), needs per-gene annotation; conservatively medium	E5G3F9_PHYED V-type proton ATPase proteolipid subunit
+E6Y428	lhca4	photosynthesis	low-medium	photosynthesis, young shoots photosynthesize less than mature leaves but still express	E6Y428_PHYED Chlorophyll a-b binding protein, chloroplastic
+E6Y429	lhca3	photosynthesis	low-medium	photosynthesis, young shoots photosynthesize less than mature leaves but still express	E6Y429_PHYED Chlorophyll a-b binding protein, chloroplastic
+J7F2G6	PAL	metabolic_enzyme	medium	general metabolic enzyme, partly constitutive expression	J7F2G6_PHYED Phenylalanine ammonia-lyase
+K9J8W8	lhca2	photosynthesis	low-medium	photosynthesis, young shoots photosynthesize less than mature leaves but still express	K9J8W8_PHYED Chlorophyll a-b binding protein, chloroplastic
+L7NKG3	LHCB2-1	photosynthesis	low-medium	photosynthesis, young shoots photosynthesize less than mature leaves but still express	L7NKG3_PHYED Chlorophyll a-b binding protein, chloroplastic
+L7NKG4	LHCB6	photosynthesis	low-medium	photosynthesis, young shoots photosynthesize less than mature leaves but still express	L7NKG4_PHYED Chlorophyll a-b binding protein, chloroplastic
+Q6F4B1	pBA-GS	metabolic_enzyme	medium	general metabolic enzyme, partly constitutive expression	Q6F4B1_PHYED Glutamine synthetase (Fragment)
+Q852S6	BA-ACS	metabolic_enzyme	medium	general metabolic enzyme, partly constitutive expression	Q852S6_PHYED 1-aminocyclopropane-1-carboxylate synthase
+Q9AYS8	BA-ACO	metabolic_enzyme	medium	general metabolic enzyme, partly constitutive expression	Q9AYS8_PHYED 1-aminocyclopropane-1-carboxylate oxidase 1
+S4U6D1		transcription_regulation	high	hits shoot high-expression family keyword (TF/cell-cycle/cell-wall/hormone-signaling)	S4U6D1_PHYED Transcription factor AP2
+X2F431		transcription_regulation	high	hits shoot high-expression family keyword (TF/cell-cycle/cell-wall/hormone-signaling)	X2F431_PHYED MADS-box protein 3
+X2F5C4		transcription_regulation	high	hits shoot high-expression family keyword (TF/cell-cycle/cell-wall/hormone-signaling)	X2F5C4_PHYED MADS-box protein 13
+X2F5C7		transcription_regulation	high	hits shoot high-expression family keyword (TF/cell-cycle/cell-wall/hormone-signaling)	X2F5C7_PHYED MADS-box protein 21
+X2F965		transcription_regulation	high	hits shoot high-expression family keyword (TF/cell-cycle/cell-wall/hormone-signaling)	X2F965_PHYED MADS-box protein 2
+X2FB12		transcription_regulation	high	hits shoot high-expression family keyword (TF/cell-cycle/cell-wall/hormone-signaling)	X2FB12_PHYED MADS-box protein 15
+X2FB16		transcription_regulation	high	hits shoot high-expression family keyword (TF/cell-cycle/cell-wall/hormone-signaling)	X2FB16_PHYED MADS-box protein 58
+X2FD64		transcription_regulation	high	hits shoot high-expression family keyword (TF/cell-cycle/cell-wall/hormone-signaling)	X2FD64_PHYED MADS-box protein 5
+A0A023HHE3	SCL6	other	medium	unclassified (other), needs per-gene annotation; conservatively medium	A0A023HHE3_PHYED Scarecrow-like 6 protein
+A0A0C5KR55	TPS5	metabolic_enzyme	medium	general metabolic enzyme, partly constitutive expression	A0A0C5KR55_PHYED (E, E)-farnesol/(E)-nerolidol synthase
+A0A0C5L205	TPS6	metabolic_enzyme	medium	general metabolic enzyme, partly constitutive expression	A0A0C5L205_PHYED (E)-nerolidol synthase
+A0A0M5KTY4		other	medium	unclassified (other), needs per-gene annotation; conservatively medium	A0A0M5KTY4_PHYED DREB1A
+A0A0U1VT70	FT	other	medium	unclassified (other), needs per-gene annotation; conservatively medium	A0A0U1VT70_PHYED Flowering locus T
+A0A140F584	WRKY11-2	transcription_regulation	high	hits shoot high-expression family keyword (TF/cell-cycle/cell-wall/hormone-signaling)	A0A140F584_PHYED WAKY 11-2 protein
+A0A140F585	WRKY1	transcription_regulation	high	hits shoot high-expression family keyword (TF/cell-cycle/cell-wall/hormone-signaling)	A0A140F585_PHYED WAKY 1 protein
+A0A1D8F0I1	Dof12-1	other	high	hits shoot high-expression family keyword (TF/cell-cycle/cell-wall/hormone-signaling)	A0A1D8F0I1_PHYED Dof protein
+A0A1D8F0I7	Dof26	other	high	hits shoot high-expression family keyword (TF/cell-cycle/cell-wall/hormone-signaling)	A0A1D8F0I7_PHYED Dof protein
+A0A1D8F0I8	MADS14	transcription_regulation	high	hits shoot high-expression family keyword (TF/cell-cycle/cell-wall/hormone-signaling)	A0A1D8F0I8_PHYED MADs14 protein
+A0A1D8F0I9	MADS15	transcription_regulation	high	hits shoot high-expression family keyword (TF/cell-cycle/cell-wall/hormone-signaling)	A0A1D8F0I9_PHYED MADs15 protein
+A0A1D8F0J2	WRKY9	transcription_regulation	high	hits shoot high-expression family keyword (TF/cell-cycle/cell-wall/hormone-signaling)	A0A1D8F0J2_PHYED WRKY9 protein
+A0A1D8F0J3	MYBR0-1	transcription_regulation	high	hits shoot high-expression family keyword (TF/cell-cycle/cell-wall/hormone-signaling)	A0A1D8F0J3_PHYED MYB protein
+A0A1D8F0J7	LAX1	other	medium	unclassified (other), needs per-gene annotation; conservatively medium	A0A1D8F0J7_PHYED LAX protein
+A0A1D8F0J9	MYB16	transcription_regulation	high	hits shoot high-expression family keyword (TF/cell-cycle/cell-wall/hormone-signaling)	A0A1D8F0J9_PHYED MYB protein
+A0A1D8F0K0	SAUR29	other	high	hits shoot high-expression family keyword (TF/cell-cycle/cell-wall/hormone-signaling)	A0A1D8F0K0_PHYED SAUR protein
+A0A1D8F0K2	SAUR14	other	high	hits shoot high-expression family keyword (TF/cell-cycle/cell-wall/hormone-signaling)	A0A1D8F0K2_PHYED SAUR protein
+A0A1D8F0K3	SAUR4	other	high	hits shoot high-expression family keyword (TF/cell-cycle/cell-wall/hormone-signaling)	A0A1D8F0K3_PHYED SAUR protein
+A0A1D8F0K4	MYB4-1	transcription_regulation	high	hits shoot high-expression family keyword (TF/cell-cycle/cell-wall/hormone-signaling)	A0A1D8F0K4_PHYED MYB protein
+A0A1D8F0K7	SAUR34	other	high	hits shoot high-expression family keyword (TF/cell-cycle/cell-wall/hormone-signaling)	A0A1D8F0K7_PHYED SAUR protein
+A0A1D8F0L0	SAUR41	other	high	hits shoot high-expression family keyword (TF/cell-cycle/cell-wall/hormone-signaling)	A0A1D8F0L0_PHYED SAUR protein
+A0A1D8F0L6	SAUR28	other	high	hits shoot high-expression family keyword (TF/cell-cycle/cell-wall/hormone-signaling)	A0A1D8F0L6_PHYED SAUR protein
+A0A2I4KVC7	UDPGE	other	medium	unclassified (other), needs per-gene annotation; conservatively medium	A0A2I4KVC7_PHYED UDP-galactose-4-epimerase
+A0A386JUC7	GES	metabolic_enzyme	medium	general metabolic enzyme, partly constitutive expression	A0A386JUC7_PHYED Geraniol synthetase
+A0A3Q8AHP8		other	medium	unclassified (other), needs per-gene annotation; conservatively medium	A0A3Q8AHP8_PHYED Constans-like protein
+A0A3Q8AHQ2		other	medium	unclassified (other), needs per-gene annotation; conservatively medium	A0A3Q8AHQ2_PHYED Constans-like protein
+A0A3Q8AHQ5		transcription_regulation	high	hits shoot high-expression family keyword (TF/cell-cycle/cell-wall/hormone-signaling)	A0A3Q8AHQ5_PHYED Squamosa-promoter binding protein-like protein
+A0A3Q8AHQ6		transcription_regulation	high	hits shoot high-expression family keyword (TF/cell-cycle/cell-wall/hormone-signaling)	A0A3Q8AHQ6_PHYED Squamosa-promoter binding protein-like protein
+A0A3Q8AHR5		other	medium	unclassified (other), needs per-gene annotation; conservatively medium	A0A3Q8AHR5_PHYED Constans-like protein
+A0A3Q8AHR9		transcription_regulation	high	hits shoot high-expression family keyword (TF/cell-cycle/cell-wall/hormone-signaling)	A0A3Q8AHR9_PHYED Squamosa-promoter binding protein-like protein
+A0A3Q8AHS1		transcription_regulation	high	hits shoot high-expression family keyword (TF/cell-cycle/cell-wall/hormone-signaling)	A0A3Q8AHS1_PHYED Squamosa-promoter binding protein-like protein
+A0A3Q8AKY8		transcription_regulation	high	hits shoot high-expression family keyword (TF/cell-cycle/cell-wall/hormone-signaling)	A0A3Q8AKY8_PHYED Squamosa-promoter binding protein-like protein
+A0A3Q8AKZ9		other	medium	unclassified (other), needs per-gene annotation; conservatively medium	A0A3Q8AKZ9_PHYED Constans-like protein
+A0A3Q8AL04		transcription_regulation	high	hits shoot high-expression family keyword (TF/cell-cycle/cell-wall/hormone-signaling)	A0A3Q8AL04_PHYED Squamosa-promoter binding protein-like protein
+A0A3Q8ANR2		transcription_regulation	high	hits shoot high-expression family keyword (TF/cell-cycle/cell-wall/hormone-signaling)	A0A3Q8ANR2_PHYED Squamosa-promoter binding protein-like protein
+A0A3Q8ANS6		other	medium	unclassified (other), needs per-gene annotation; conservatively medium	A0A3Q8ANS6_PHYED Constans-like protein
+A0A3Q8ANT3		transcription_regulation	high	hits shoot high-expression family keyword (TF/cell-cycle/cell-wall/hormone-signaling)	A0A3Q8ANT3_PHYED Squamosa-promoter binding protein-like protein
+A0A3Q8AS14		transcription_regulation	high	hits shoot high-expression family keyword (TF/cell-cycle/cell-wall/hormone-signaling)	A0A3Q8AS14_PHYED Squamosa-promoter binding protein-like protein
+A0A3Q8AS29		other	medium	unclassified (other), needs per-gene annotation; conservatively medium	A0A3Q8AS29_PHYED Constans-like protein
+A0A3Q8AS37		transcription_regulation	high	hits shoot high-expression family keyword (TF/cell-cycle/cell-wall/hormone-signaling)	A0A3Q8AS37_PHYED Squamosa-promoter binding protein-like protein
+A0A3Q8AVR5		other	medium	unclassified (other), needs per-gene annotation; conservatively medium	A0A3Q8AVR5_PHYED Constans-like protein
+A0A3Q8AVT1		other	medium	unclassified (other), needs per-gene annotation; conservatively medium	A0A3Q8AVT1_PHYED Constans-like protein
+A0A3Q8AVT8		transcription_regulation	high	hits shoot high-expression family keyword (TF/cell-cycle/cell-wall/hormone-signaling)	A0A3Q8AVT8_PHYED Squamosa-promoter binding protein-like protein
+A0A3Q8AYQ3		transcription_regulation	high	hits shoot high-expression family keyword (TF/cell-cycle/cell-wall/hormone-signaling)	A0A3Q8AYQ3_PHYED Squamosa-promoter binding protein-like protein
+A0A3Q8AYR8		other	medium	unclassified (other), needs per-gene annotation; conservatively medium	A0A3Q8AYR8_PHYED Constans-like protein
+A0A3Q8AYS5		transcription_regulation	high	hits shoot high-expression family keyword (TF/cell-cycle/cell-wall/hormone-signaling)	A0A3Q8AYS5_PHYED Squamosa-promoter binding protein-like protein
+A0A3Q8B365		transcription_regulation	high	hits shoot high-expression family keyword (TF/cell-cycle/cell-wall/hormone-signaling)	A0A3Q8B365_PHYED Squamosa-promoter binding protein-like protein
+A0A3Q8B384		transcription_regulation	high	hits shoot high-expression family keyword (TF/cell-cycle/cell-wall/hormone-signaling)	A0A3Q8B384_PHYED Squamosa-promoter binding protein-like protein
+A0A3Q8B7R3		transcription_regulation	high	hits shoot high-expression family keyword (TF/cell-cycle/cell-wall/hormone-signaling)	A0A3Q8B7R3_PHYED Squamosa-promoter binding protein-like protein
+A0A3Q8B7T7		other	medium	unclassified (other), needs per-gene annotation; conservatively medium	A0A3Q8B7T7_PHYED Constans-like protein
+A0A3Q8B7U9		transcription_regulation	high	hits shoot high-expression family keyword (TF/cell-cycle/cell-wall/hormone-signaling)	A0A3Q8B7U9_PHYED Squamosa-promoter binding protein-like protein
+A0A3Q8B9H0		transcription_regulation	high	hits shoot high-expression family keyword (TF/cell-cycle/cell-wall/hormone-signaling)	A0A3Q8B9H0_PHYED MADS26
+A0A3Q8BAT2		transcription_regulation	high	hits shoot high-expression family keyword (TF/cell-cycle/cell-wall/hormone-signaling)	A0A3Q8BAT2_PHYED Squamosa-promoter binding protein-like protein
+A0A3Q8BAV1		transcription_regulation	high	hits shoot high-expression family keyword (TF/cell-cycle/cell-wall/hormone-signaling)	A0A3Q8BAV1_PHYED Squamosa-promoter binding protein-like protein
+A0A3Q8BBY6		transcription_regulation	high	hits shoot high-expression family keyword (TF/cell-cycle/cell-wall/hormone-signaling)	A0A3Q8BBY6_PHYED MADS37-1
+A0A3Q8BG47		other	medium	unclassified (other), needs per-gene annotation; conservatively medium	A0A3Q8BG47_PHYED COLN
+A0A3Q8BI97		transcription_regulation	high	hits shoot high-expression family keyword (TF/cell-cycle/cell-wall/hormone-signaling)	A0A3Q8BI97_PHYED MADS55
+A0A3Q8BIC1		other	medium	unclassified (other), needs per-gene annotation; conservatively medium	A0A3Q8BIC1_PHYED COLP
+A0A3Q8BMZ5		transcription_regulation	high	hits shoot high-expression family keyword (TF/cell-cycle/cell-wall/hormone-signaling)	A0A3Q8BMZ5_PHYED MADS32
+A0A3Q8BS12		transcription_regulation	high	hits shoot high-expression family keyword (TF/cell-cycle/cell-wall/hormone-signaling)	A0A3Q8BS12_PHYED MADS64
+A0A3Q8BS39		other	medium	unclassified (other), needs per-gene annotation; conservatively medium	A0A3Q8BS39_PHYED COLO-1
+A0A3Q8BXM9		other	medium	unclassified (other), needs per-gene annotation; conservatively medium	A0A3Q8BXM9_PHYED COLB
+A0A3Q8C2Q7		transcription_regulation	high	hits shoot high-expression family keyword (TF/cell-cycle/cell-wall/hormone-signaling)	A0A3Q8C2Q7_PHYED MADS37-2
+A0A3Q8C2T5		other	medium	unclassified (other), needs per-gene annotation; conservatively medium	A0A3Q8C2T5_PHYED FTL1
+A0A3Q8C5I4		other	medium	unclassified (other), needs per-gene annotation; conservatively medium	A0A3Q8C5I4_PHYED COLM
+A0A3S6H5H0		transcription_regulation	high	hits shoot high-expression family keyword (TF/cell-cycle/cell-wall/hormone-signaling)	A0A3S6H5H0_PHYED Squamosa-promoter binding protein-like protein
+A0A3S6H5H7		transcription_regulation	high	hits shoot high-expression family keyword (TF/cell-cycle/cell-wall/hormone-signaling)	A0A3S6H5H7_PHYED Squamosa-promoter binding protein-like protein
+A0A3S6H5I4		transcription_regulation	high	hits shoot high-expression family keyword (TF/cell-cycle/cell-wall/hormone-signaling)	A0A3S6H5I4_PHYED Squamosa-promoter binding protein-like protein
+A0A3S6H5L3		transcription_regulation	high	hits shoot high-expression family keyword (TF/cell-cycle/cell-wall/hormone-signaling)	A0A3S6H5L3_PHYED Squamosa-promoter binding protein-like protein
+A0A3S6H5L5		transcription_regulation	high	hits shoot high-expression family keyword (TF/cell-cycle/cell-wall/hormone-signaling)	A0A3S6H5L5_PHYED Squamosa-promoter binding protein-like protein
+A0A3S6H5M6		other	medium	unclassified (other), needs per-gene annotation; conservatively medium	A0A3S6H5M6_PHYED Constans-like protein
+A0A3S6H5M9		transcription_regulation	high	hits shoot high-expression family keyword (TF/cell-cycle/cell-wall/hormone-signaling)	A0A3S6H5M9_PHYED Squamosa-promoter binding protein-like protein (Fragment)
+A0A3S6H5X4		transcription_regulation	high	hits shoot high-expression family keyword (TF/cell-cycle/cell-wall/hormone-signaling)	A0A3S6H5X4_PHYED Squamosa-promoter binding protein-like protein
+A0A3S6H5Y3		transcription_regulation	high	hits shoot high-expression family keyword (TF/cell-cycle/cell-wall/hormone-signaling)	A0A3S6H5Y3_PHYED Squamosa-promoter binding protein-like protein
+A0A3S6H638		transcription_regulation	high	hits shoot high-expression family keyword (TF/cell-cycle/cell-wall/hormone-signaling)	A0A3S6H638_PHYED Squamosa-promoter binding protein-like protein (Fragment)
+A0A3S6H646		other	medium	unclassified (other), needs per-gene annotation; conservatively medium	A0A3S6H646_PHYED Constans-like protein
+A0A3S6H653		transcription_regulation	high	hits shoot high-expression family keyword (TF/cell-cycle/cell-wall/hormone-signaling)	A0A3S6H653_PHYED Squamosa-promoter binding protein-like protein
+A0A3S6H659		transcription_regulation	high	hits shoot high-expression family keyword (TF/cell-cycle/cell-wall/hormone-signaling)	A0A3S6H659_PHYED Squamosa-promoter binding protein-like protein
+A0A3S6H666		transcription_regulation	high	hits shoot high-expression family keyword (TF/cell-cycle/cell-wall/hormone-signaling)	A0A3S6H666_PHYED Squamosa-promoter binding protein-like protein
+A0A3S6H6I4		transcription_regulation	high	hits shoot high-expression family keyword (TF/cell-cycle/cell-wall/hormone-signaling)	A0A3S6H6I4_PHYED Squamosa-promoter binding protein-like protein
+A0A3S6H6Q4		other	medium	unclassified (other), needs per-gene annotation; conservatively medium	A0A3S6H6Q4_PHYED Flowering locus t-like protein
+A0A3S6H6S2		transcription_regulation	high	hits shoot high-expression family keyword (TF/cell-cycle/cell-wall/hormone-signaling)	A0A3S6H6S2_PHYED Squamosa-promoter binding protein-like protein
+A0A3S6H713		transcription_regulation	high	hits shoot high-expression family keyword (TF/cell-cycle/cell-wall/hormone-signaling)	A0A3S6H713_PHYED Squamosa-promoter binding protein-like protein
+A0A3S6H725		transcription_regulation	high	hits shoot high-expression family keyword (TF/cell-cycle/cell-wall/hormone-signaling)	A0A3S6H725_PHYED Squamosa-promoter binding protein-like protein
+A0A3S6K2Y7		other	medium	unclassified (other), needs per-gene annotation; conservatively medium	A0A3S6K2Y7_PHYED FTL11
+A0A3S6K7P2		other	medium	unclassified (other), needs per-gene annotation; conservatively medium	A0A3S6K7P2_PHYED FTL12
+A0A3S6K9J1		other	medium	unclassified (other), needs per-gene annotation; conservatively medium	A0A3S6K9J1_PHYED COLH
+A0A3S6KA32		other	medium	unclassified (other), needs per-gene annotation; conservatively medium	A0A3S6KA32_PHYED COLD
+A0A3S6KA81		other	medium	unclassified (other), needs per-gene annotation; conservatively medium	A0A3S6KA81_PHYED COLE
+A0A3S6KAH5		other	medium	unclassified (other), needs per-gene annotation; conservatively medium	A0A3S6KAH5_PHYED COLK
+A0A6G8IU77	NAC10-2	other	medium	unclassified (other), needs per-gene annotation; conservatively medium	A0A6G8IU77_PHYED NAC domain-containing protein 10-2
+A0A6G8IUE7	NAC10-1	other	medium	unclassified (other), needs per-gene annotation; conservatively medium	A0A6G8IUE7_PHYED NAC domain-containing protein 10-1
+A0A6G8IUU5	NAC10-4	other	medium	unclassified (other), needs per-gene annotation; conservatively medium	A0A6G8IUU5_PHYED NAC domain-containing protein 10-4
+A0A8K1UFJ8		other	medium	unclassified (other), needs per-gene annotation; conservatively medium	A0A8K1UFJ8_PHYED PH02Gene39026.t1
+A0A8K1UFX3		other	medium	unclassified (other), needs per-gene annotation; conservatively medium	A0A8K1UFX3_PHYED Dirigent protein
+A0S5Z9		photosynthesis	low-medium	photosynthesis, young shoots photosynthesize less than mature leaves but still express	A0S5Z9_PHYED Chlorophyll synthase
+A6XMM8	TB1	other	medium	unclassified (other), needs per-gene annotation; conservatively medium	A6XMM8_PHYED TB1 protein (Fragment)
+B2M1Y2		other	medium	unclassified (other), needs per-gene annotation; conservatively medium	B2M1Y2_PHYED Zinc finger protein
+B3SRP8		other	medium	unclassified (other), needs per-gene annotation; conservatively medium	B3SRP8_PHYED Chloroplast PsbO (Fragment)
+B8PYG0		transcription_regulation	high	hits shoot high-expression family keyword (TF/cell-cycle/cell-wall/hormone-signaling)	B8PYG0_PHYED MADS-box protein
+B8Y3Y8		other	medium	unclassified (other), needs per-gene annotation; conservatively medium	B8Y3Y8_PHYED Zinc finger protein
+D2DN35		structural	high	structural/cell-wall synthesis (CesA etc.), core to rapid shoot growth and edible texture	D2DN35_PHYED Actin (Fragment)
+D3IWC6		hypothetical	low	hypothetical class, weakly associated with shoot-specific high expression	D3IWC6_PHYED Uncharacterized protein (Fragment)
+D3IWC7		other	medium	unclassified (other), needs per-gene annotation; conservatively medium	D3IWC7_PHYED Putative uvrB/uvrC motif family protein (Fragment)
+E0WBG6		other	medium	unclassified (other), needs per-gene annotation; conservatively medium	E0WBG6_PHYED PsbS protein
+E5G3F8		transcription_regulation	high	hits shoot high-expression family keyword (TF/cell-cycle/cell-wall/hormone-signaling)	E5G3F8_PHYED MYB protein
+E9K174		structural	high	structural/cell-wall synthesis (CesA etc.), core to rapid shoot growth and edible texture	E9K174_PHYED Actin
+F4YCW4	WRKY10	defense_stress	high	hits shoot high-expression family keyword (TF/cell-cycle/cell-wall/hormone-signaling)	F4YCW4_PHYED Putative pathogenesis protein
+K9K4T1	EMF	other	medium	unclassified (other), needs per-gene annotation; conservatively medium	K9K4T1_PHYED EMF protein
+Q0EDP0	PpFT	other	medium	unclassified (other), needs per-gene annotation; conservatively medium	Q0EDP0_PHYED RFT-like protein (Fragment)
+Q0MX07		other	medium	unclassified (other), needs per-gene annotation; conservatively medium	Q0MX07_PHYED CCHC-type domain-containing protein
+Q0PPV6		other	medium	unclassified (other), needs per-gene annotation; conservatively medium	Q0PPV6_PHYED Retrotransposon gag domain-containing protein
+Q6F4B2	pBA-PAL	metabolic_enzyme	medium	general metabolic enzyme, partly constitutive expression	Q6F4B2_PHYED Phenylalanine ammonia-lyase (Fragment)
+Q766D6	BA-AC	structural	high	structural/cell-wall synthesis (CesA etc.), core to rapid shoot growth and edible texture	Q766D6_PHYED Actin (Fragment)
+R9QL67	VDE	metabolic_enzyme	medium	general metabolic enzyme, partly constitutive expression	R9QL67_PHYED Violaxanthin deepoxidase
+X2F434		transcription_regulation	high	hits shoot high-expression family keyword (TF/cell-cycle/cell-wall/hormone-signaling)	X2F434_PHYED MADS-box protein 8
+X2F437		transcription_regulation	high	hits shoot high-expression family keyword (TF/cell-cycle/cell-wall/hormone-signaling)	X2F437_PHYED MADS-box protein 18
+X2F5C1		transcription_regulation	high	hits shoot high-expression family keyword (TF/cell-cycle/cell-wall/hormone-signaling)	X2F5C1_PHYED MADS-box protein 4
+X2F967		transcription_regulation	high	hits shoot high-expression family keyword (TF/cell-cycle/cell-wall/hormone-signaling)	X2F967_PHYED MADS-box protein 7
+X2F972		transcription_regulation	high	hits shoot high-expression family keyword (TF/cell-cycle/cell-wall/hormone-signaling)	X2F972_PHYED MADS-box protein 16
+X2FB04		transcription_regulation	high	hits shoot high-expression family keyword (TF/cell-cycle/cell-wall/hormone-signaling)	X2FB04_PHYED MADS-box protein 1
+X2FB07		transcription_regulation	high	hits shoot high-expression family keyword (TF/cell-cycle/cell-wall/hormone-signaling)	X2FB07_PHYED MADS-box protein 6
+X2FD68		transcription_regulation	high	hits shoot high-expression family keyword (TF/cell-cycle/cell-wall/hormone-signaling)	X2FD68_PHYED MADS-box protein 14
+X2FD71		transcription_regulation	high	hits shoot high-expression family keyword (TF/cell-cycle/cell-wall/hormone-signaling)	X2FD71_PHYED MADS-box protein 34

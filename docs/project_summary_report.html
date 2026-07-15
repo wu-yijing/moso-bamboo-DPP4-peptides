@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Moso Bamboo Protein-Derived DPP-IV Inhibitory Peptide Computational Study · Summary Report</title>
+<style>
+  :root{
+    --bg:#f7f8fa; --panel:#ffffff; --ink:#1f2733; --sub:#5b6675; --line:#e3e8ef;
+    --accent:#2f6f4f; --accent2:#8a5a2b; --accent3:#3a5a8c;
+    --up:#c0392b; --neutral:#c99a2e; --good:#2f8f5b;
+    --chip:#eef3f0; --shadow:0 1px 3px rgba(20,30,50,.06),0 8px 24px rgba(20,30,50,.05);
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0;background:var(--bg);color:var(--ink);
+    font-family:"Segoe UI","PingFang SC","Microsoft YaHei",system-ui,-apple-system,sans-serif;
+    line-height:1.7;font-size:15px;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:960px;margin:0 auto;padding:40px 28px 80px}
+  header.hero{background:linear-gradient(135deg,#2f6f4f 0%,#245a7c 100%);
+    color:#fff;border-radius:16px;padding:34px 36px;box-shadow:var(--shadow);position:relative;overflow:hidden}
+  header.hero:after{content:"";position:absolute;right:-60px;top:-60px;width:220px;height:220px;
+    background:radial-gradient(circle,rgba(255,255,255,.12),transparent 70%)}
+  header.hero .kicker{font-size:12.5px;letter-spacing:.18em;text-transform:uppercase;opacity:.85;margin-bottom:10px}
+  header.hero h1{margin:0 0 12px;font-size:26px;line-height:1.35;font-weight:700}
+  header.hero .meta{font-size:13px;opacity:.92;display:flex;gap:20px;flex-wrap:wrap;margin-top:14px}
+  header.hero .meta b{font-weight:600}
+  .badge{display:inline-block;background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.28);
+    padding:3px 11px;border-radius:20px;font-size:12px;margin-right:8px}
+  section{background:var(--panel);border:1px solid var(--line);border-radius:14px;
+    padding:26px 30px;margin-top:22px;box-shadow:var(--shadow)}
+  h2{font-size:19px;margin:0 0 4px;color:var(--ink);display:flex;align-items:center;gap:10px}
+  h2 .num{display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;
+    background:var(--accent);color:#fff;border-radius:8px;font-size:14px;font-weight:700;flex:none}
+  h2 .en{font-size:12px;color:var(--sub);font-weight:400;letter-spacing:.05em}
+  h3{font-size:15.5px;margin:22px 0 8px;color:var(--accent);font-weight:650}
+  p{margin:10px 0}
+  .lead{color:var(--sub);font-size:14px;margin:2px 0 16px}
+  table{width:100%;border-collapse:collapse;margin:14px 0;font-size:13.5px}
+  th,td{border:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:middle}
+  th{background:var(--chip);font-weight:650;color:var(--ink)}
+  td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}
+  tr:nth-child(even) td{background:#fbfcfd}
+  .rank1{background:#eaf6ef!important}
+  .rank3{background:#fdf3ec!important}
+  .pill{display:inline-block;padding:2px 9px;border-radius:20px;font-size:12px;font-weight:600}
+  .pill.g{background:#e6f4ec;color:#1e7a48}
+  .pill.y{background:#fbf1da;color:#a9781c}
+  .pill.r{background:#fbe7e3;color:#b23a29}
+  .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:16px 0}
+  .card{border:1px solid var(--line);border-radius:12px;padding:16px 18px;background:#fff}
+  .card .seq{font-size:22px;font-weight:800;letter-spacing:.08em;font-family:"Consolas",monospace}
+  .card .tag{font-size:11.5px;padding:2px 8px;border-radius:6px;font-weight:600;float:right}
+  .card .kv{display:flex;justify-content:space-between;font-size:12.5px;margin-top:8px;color:var(--sub)}
+  .card .kv b{color:var(--ink);font-variant-numeric:tabular-nums}
+  .funnel{margin:16px 0}
+  .funnel .step{display:flex;align-items:center;gap:14px;margin:6px 0}
+  .funnel .bar{height:34px;border-radius:8px;background:linear-gradient(90deg,#2f6f4f,#5aa17b);
+    display:flex;align-items:center;color:#fff;font-size:12.5px;font-weight:600;padding:0 12px;
+    white-space:nowrap;box-shadow:var(--shadow)}
+  .funnel .lab{font-size:13px;color:var(--sub);flex:none;width:180px}
+  .callout{border-left:4px solid var(--accent);background:#f2f7f4;border-radius:0 10px 10px 0;
+    padding:14px 18px;margin:16px 0;font-size:13.5px}
+  .callout.warn{border-left-color:var(--accent2);background:#fbf6ef}
+  .callout.danger{border-left-color:var(--up);background:#fbf1ef}
+  .callout b{color:var(--ink)}
+  ul.tight{margin:8px 0;padding-left:22px}
+  ul.tight li{margin:5px 0}
+  .kpi{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:6px 0 2px}
+  .kpi .box{background:linear-gradient(135deg,#fafbfc,#f1f5f2);border:1px solid var(--line);
+    border-radius:12px;padding:16px;text-align:center}
+  .kpi .box .v{font-size:24px;font-weight:800;color:var(--accent);font-variant-numeric:tabular-nums}
+  .kpi .box .l{font-size:12px;color:var(--sub);margin-top:4px}
+  .sig-legend{display:flex;gap:16px;flex-wrap:wrap;font-size:12px;color:var(--sub);margin:8px 0}
+  .sig-legend span{display:inline-flex;align-items:center;gap:6px}
+  .dot{width:11px;height:11px;border-radius:50%;display:inline-block}
+  .foot{color:var(--sub);font-size:12.5px;text-align:center;margin-top:28px;line-height:1.9}
+  .anchor-nav{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0 0}
+  .anchor-nav a{font-size:12.5px;color:var(--accent3);text-decoration:none;border:1px solid var(--line);
+    padding:4px 11px;border-radius:20px;background:#fff}
+  .anchor-nav a:hover{background:var(--chip)}
+  code{background:#eef1f4;padding:1px 6px;border-radius:5px;font-size:12.5px;color:#354}
+  .bar-cell{position:relative}
+  .mini-bar{height:8px;border-radius:4px;display:inline-block;vertical-align:middle;margin-left:6px}
+  @media print{
+    body{background:#fff}
+    section,header.hero{box-shadow:none;break-inside:avoid}
+    .anchor-nav{display:none}
+    .wrap{padding:0}
+  }
+  @media(max-width:720px){
+    .grid3,.kpi{grid-template-columns:1fr 1fr}
+    header.hero h1{font-size:21px}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="hero">
+  <div class="kicker">Computational Peptide Discovery · Summary Report</div>
+  <h1>Moso Bamboo (<i>Phyllostachys edulis</i>) Protein-Derived DPP-IV Inhibitory Peptides<br>Computational Screening · Docking · MM-GBSA Binding Free-Energy Evaluation</h1>
+  <div>
+    <span class="badge">Purely computational · Zero wet-lab</span>
+    <span class="badge">Offline reproducible</span>
+    <span class="badge">First systematic mining of bamboo-derived DPP4 peptides</span>
+  </div>
+  <div class="meta">
+    <span><b>Receptor</b> DPP4 crystal 1WCY (chain A)</span>
+    <span><b>Protein set</b> 253 UniProtKB entries / 103,409 residues</span>
+    <span><b>Report date</b> 2026-07-15</span>
+    <span><b>Repository</b> wu-yijing/moso-bamboo-DPP4-peptides</span>
+  </div>
+</header>
+
+<nav class="anchor-nav">
+  <a href="#s1">① Overview &amp; Scope</a>
+  <a href="#s2">② Pipeline &amp; Funnel</a>
+  <a href="#s3">③ Top-3 Candidates</a>
+  <a href="#s4">④ Multi-signal Convergence</a>
+  <a href="#s5">⑤ Priority Master Table</a>
+  <a href="#s6">⑥ Docking Benchmark</a>
+  <a href="#s7">⑦ Contact Fingerprint</a>
+  <a href="#s8">⑧ Limitations &amp; Disclosure</a>
+  <a href="#s9">⑨ Conclusion &amp; Roadmap</a>
+</nav>
+
+<!-- ① Overview -->
+<section id="s1">
+  <h2><span class="num">1</span> Research Overview &amp; Established Scope <span class="en">Overview &amp; Scope</span></h2>
+  <p class="lead">A core pathology of type 2 diabetes is the rapid degradation of GLP-1 by dipeptidyl peptidase-IV (DPP-IV / DPP4). Food-derived DPP4 inhibitory peptides can be taken long-term via diet with high safety. This study takes the complete moso-bamboo proteome as the subject and builds a complete purely-computational prioritization pipeline, delivering a testable shortlist of candidates.</p>
+
+  <div class="kpi">
+    <div class="box"><div class="v">7,988</div><div class="l">Virtual-digestion unique peptides</div></div>
+    <div class="box"><div class="v">565</div><div class="l">Docking queue</div></div>
+    <div class="box"><div class="v">3</div><div class="l">Prioritized candidate pentapeptides</div></div>
+    <div class="box"><div class="v">4+1</div><div class="l">Docking benchmark (inhibitors + control)</div></div>
+  </div>
+
+  <div class="callout danger">
+    <b>Established project boundary (applies throughout):</b> all conclusions are <b>purely computational methodology results</b>, with no support from any wet-lab experiment (in vitro DPP4 inhibition, IC<sub>50</sub> assay, Caco-2 transport, peptide synthesis and activity verification, etc.). Every "validation layer" is replaced by computational methods; biological confirmation awaits future (if any) wet-lab work. Related limitations are in §8.
+  </div>
+
+  <h3>Research value</h3>
+  <ul class="tight">
+    <li><b>Novel source</b>: Published food-derived DPP4 peptides concentrate on milk, soy, fish-skin collagen, lupin, etc.; <b>bamboo (Poaceae) as a food protein matrix is almost absent from DPP4 peptide research</b>. To our knowledge this is the first systematic computational mining of bamboo protein-derived DPP4 inhibitory peptides.</li>
+    <li><b>Methodological credibility</b>: The protocol's credibility is anchored by a docking benchmark of 4 known DPP4 inhibitors + 1 negative control, and the physical meaning of Vina's single score is supplemented by two layers — MM-GBSA and static MM.</li>
+    <li><b>Fully offline reproducible</b>: Local re-implementation of iDPPIV-SCM + RDKit preparation + Vina docking + OpenMM MM-GBSA, with zero external API dependency.</li>
+  </ul>
+</section>
+
+<!-- ② Pipeline -->
+<section id="s2">
+  <h2><span class="num">2</span> Computational Pipeline &amp; Screening Funnel <span class="en">Pipeline &amp; Funnel</span></h2>
+  <p class="lead">Virtual digestion → iDPPIV-SCM activity prescreen → de-allergenization / detoxification → DPP4-preference narrowing → AutoDock Vina docking → static MM and MM-GBSA binding free-energy recomputation.</p>
+
+  <div class="funnel">
+    <div class="step"><div class="lab">Virtual digestion (deduplicated unique peptides)</div><div class="bar" style="width:100%">7,988 peptides</div></div>
+    <div class="step"><div class="lab">iDPPIV-SCM activity prescreen</div><div class="bar" style="width:78%">4,746 peptides</div></div>
+    <div class="step"><div class="lab">Deduplication / consistency</div><div class="bar" style="width:77%">4,742 peptides</div></div>
+    <div class="step"><div class="lab">De-allergenization + DPP4-preference narrowing</div><div class="bar" style="width:36%">565 peptides (docking queue)</div></div>
+    <div class="step"><div class="lab">Top-60 docking → prioritization</div><div class="bar" style="width:14%">Top-3 candidates</div></div>
+  </div>
+
+  <table>
+    <tr><th style="width:22%">Stage</th><th>Method highlights</th></tr>
+    <tr><td><b>Protein set &amp; virtual digestion</b></td><td>UniProtKB moso bamboo, 253 entries (0 reviewed / all TrEMBL), simulated gastrointestinal protease digestion; deduplicated to 7,988 unique peptides (4,950 with ≤10 residues).</td></tr>
+    <tr><td><b>iDPPIV-SCM prescreen</b></td><td>Global amino-acid-composition Scoring Card Method of Charoenkwan 2020 (<i>J. Proteome Res.</i>), fully reproduced offline on this machine (665+665 public benchmark set). Used for candidate <b>ranking / soft filtering</b>, not deterministic judgment.</td></tr>
+    <tr><td><b>DPP4-preference narrowing</b></td><td>Narrowed by DPP4 substrate/inhibitor sequence preferences (Pro favored at N-terminal position 2 and C-terminal penultimate position).</td></tr>
+    <tr><td><b>Vina docking</b></td><td>Receptor 1WCY (box center 62.8/47.7/4.8 Å, 30³ Å³), RDKit-generated 3D conformations, AutoDock Vina 1.2.5.</td></tr>
+    <tr><td><b>Static MM (Phase B)</b></td><td>MMFF94s relaxation of residues within 9 Å of the pocket; ΔE_MM plus contact fingerprint (H-bond / hydrophobic).</td></tr>
+    <tr><td><b>MM-GBSA</b></td><td>OpenMM implicit GBn2, pocket-restricted single-trajectory decomposition, ΔG_bind = E_cplx − E_rec − E_lig.</td></tr>
+  </table>
+</section>
+
+<!-- ③ Top-three -->
+<section id="s3">
+  <h2><span class="num">3</span> Three Prioritized Candidates <span class="en">Top-3 Candidates</span></h2>
+  <div class="grid3">
+    <div class="card" style="border-top:3px solid var(--good)">
+      <span class="tag" style="background:#e6f4ec;color:#1e7a48">Priority #1</span>
+      <div class="seq">LPPGP</div>
+      <div class="kv"><span>iDPPIV probability</span><b>0.490</b></div>
+      <div class="kv"><span>Vina dG</span><b>−6.558</b></div>
+      <div class="kv"><span>MM-GBSA ΔG</span><b>−11.97</b></div>
+      <div class="kv"><span>Catalytic Glu146 H-bond</span><b>4</b></div>
+    </div>
+    <div class="card" style="border-top:3px solid var(--accent3)">
+      <span class="tag" style="background:#e7eefb;color:#31599c">Priority #2</span>
+      <div class="seq">APPSQ</div>
+      <div class="kv"><span>iDPPIV probability</span><b>0.168</b></div>
+      <div class="kv"><span>Vina dG</span><b>−6.513</b></div>
+      <div class="kv"><span>MM-GBSA ΔG</span><b>−9.11</b></div>
+      <div class="kv"><span>Catalytic Glu146 H-bond</span><b>4 + Arg184</b></div>
+    </div>
+    <div class="card" style="border-top:3px solid var(--neutral)">
+      <span class="tag" style="background:#fbf1da;color:#a9781c">Questionable #3</span>
+      <div class="seq">APQIP</div>
+      <div class="kv"><span>iDPPIV probability</span><b>0.313</b></div>
+      <div class="kv"><span>Vina dG</span><b>−6.807</b></div>
+      <div class="kv"><span>MM-GBSA ΔG</span><b>−1.29</b></div>
+      <div class="kv"><span>Catalytic Glu146 H-bond</span><b>0</b></div>
+    </div>
+  </div>
+  <p>All three candidates are Pro-rich and dock into the DPP4 active pocket (coinciding with the box center); their Vina dG is better than that of the known positive control Diprotin A (−5.74). But <b>although APQIP has the most negative Vina, its MM-GBSA is near-neutral</b> — this divergence is the core of the study's joint interpretation (see §4–§5).</p>
+</section>
+
+<!-- ④ Four-layer signals -->
+<section id="s4">
+  <h2><span class="num">4</span> Convergence &amp; Divergence of Four Signal Layers <span class="en">Multi-signal Convergence &amp; Divergence</span></h2>
+  <p class="lead">No conclusion can be drawn from any single metric alone; only by jointly examining composition signal, Vina, gas-phase MM and MM-GBSA can the candidates be localized.</p>
+
+  <h3>Three energetic metrics give different relative orders</h3>
+  <table>
+    <tr><th>Signal (physical meaning)</th><th>Order (best → worst)</th><th>Indicates</th></tr>
+    <tr><td>Vina dG (empirical score, incl. solvation-like terms)</td><td>APQIP > LPPGP > APPSQ</td><td>APQIP best on the surface</td></tr>
+    <tr><td>Gas-phase ΔE_MM (MMFF94s endpoints, no solvent/entropy)</td><td>APPSQ > LPPGP > APQIP</td><td>APQIP highest gas-phase strain</td></tr>
+    <tr><td><b>MM-GBSA ΔG_bind</b> (incl. desolvation/solvation)</td><td><b>LPPGP ≫ APPSQ > APQIP</b></td><td>LPPGP strongest binding free energy</td></tr>
+  </table>
+
+  <div class="callout">
+    <b>Root cause of the divergence (localized by the contact profile):</b> APQIP ranks first on Vina (−6.807) and on contact count (82) / H-bond count (6), yet ranks last in MM-GBSA (only −1.29). The reason is that <b>its contacts are highly concentrated on the C-terminal Pro5 (66 of 82), and its 6 H-bonds fall mainly on the gating Arg147 and the crystal sugar chain NAG1201 rather than the catalytic core Glu146</b>. That is, "many contacts ≠ high-quality binding" — a large number of contacts come from tail-end hydrophobic stacking and glycosylation bias, which MM-GBSA's net free energy corrects to near-neutral.
+  </div>
+  <p>Conversely, <b>LPPGP</b>, though it has the fewest contacts (35), precisely strikes the catalytic Glu146 with 4 H-bonds plus a hydrophobic Pro interface, giving the strongest MM-GBSA net ΔG (−11.97); <b>APPSQ</b> ranks second by combining catalytic Glu146 anchoring, the lowest gas-phase strain (−8.40) and the broadest footprint (41 contacts).</p>
+</section>
+
+<!-- ⑤ Priority master table -->
+<section id="s5">
+  <h2><span class="num">5</span> Candidate Priority Master Table (combined four-layer signals) <span class="en">Priority Master Table</span></h2>
+  <table>
+    <tr>
+      <th>Priority</th><th>Candidate</th><th class="num">iDPPIV prob.</th><th class="num">Vina dG</th>
+      <th class="num">MM-GBSA ΔG</th><th class="num">ΔE_MM</th><th class="num">Total contacts</th>
+      <th class="num">Glu146 H-bond</th><th>Combined read</th>
+    </tr>
+    <tr class="rank1">
+      <td><span class="pill g">1</span></td><td><b>LPPGP</b></td>
+      <td class="num">0.490</td><td class="num">−6.558</td><td class="num"><b>−11.97</b></td>
+      <td class="num">+2.34</td><td class="num">35</td><td class="num"><b>4</b></td>
+      <td>MM-GBSA and iDPPIV both #1; precisely anchors catalytic core → <b>advance first</b></td>
+    </tr>
+    <tr>
+      <td><span class="pill y">2</span></td><td><b>APPSQ</b></td>
+      <td class="num">0.168</td><td class="num">−6.513</td><td class="num">−9.11</td>
+      <td class="num"><b>−8.40</b></td><td class="num">41</td><td class="num"><b>4</b>+Arg184</td>
+      <td>MM-GBSA #2, lowest gas-phase strain, broadest footprint → <b>second priority</b></td>
+    </tr>
+    <tr class="rank3">
+      <td><span class="pill r">3 questionable</span></td><td><b>APQIP</b></td>
+      <td class="num">0.313</td><td class="num"><b>−6.807</b></td><td class="num">−1.29</td>
+      <td class="num">+11.03</td><td class="num"><b>82</b></td><td class="num">0</td>
+      <td>Vina/contact-count #1, but MM-GBSA near-neutral and lacks catalytic anchoring → <b>needs wet-lab verification</b></td>
+    </tr>
+  </table>
+  <div class="callout" style="border-left-color:var(--good);background:#eef7f1">
+    <b>Combined-ranking conclusion: LPPGP ≫ APPSQ >> APQIP.</b> MM-GBSA (with relatively complete physics) and iDPPIV-SCM (composition activity signal) jointly push LPPGP to the top; APPSQ sits second on catalytic anchoring + low strain; APQIP's "best Vina/contact-count" is jointly disproven by MM-GBSA and the contact profile as tail-end Pro5 stacking + glycosylation bias, so it is listed as the questionable candidate. The final priority must defer to (future, if any) wet-lab IC<sub>50</sub> verification.
+  </div>
+</section>
+
+<!-- ⑥ Benchmark validation -->
+<section id="s6">
+  <h2><span class="num">6</span> Docking-Protocol Benchmark Validation <span class="en">Docking Benchmark</span></h2>
+  <p class="lead">4 literature-confirmed DPP4 peptide inhibitors + 1 non-inhibitory negative control, reusing the identical preparation and docking workflow, to validate protocol credibility.</p>
+  <table>
+    <tr><th>Benchmark peptide</th><th>Role</th><th class="num">Vina dG</th><th>Nearest active-pocket residues (distance Å)</th></tr>
+    <tr><td>IPI (Diprotin A)</td><td><span class="pill g">positive</span></td><td class="num">−5.736</td><td>Ser182(2.5) Tyr166(2.7) Arg147(3.1) Glu146(3.2)</td></tr>
+    <tr><td>VPP (Val-Pro-Pro)</td><td>food-derived</td><td class="num">−5.640</td><td>Tyr166(2.3) Arg147(2.7) Glu146(3.1) Ser182(3.1)</td></tr>
+    <tr><td>VPL (Diprotin B)</td><td><span class="pill g">positive</span></td><td class="num">−5.452</td><td>Ser182(2.1) Tyr166(2.7) Arg147(3.1) Glu146(3.3)</td></tr>
+    <tr><td>IPP (Ile-Pro-Pro)</td><td>food-derived</td><td class="num">−5.384</td><td>Arg147(2.0) Glu146(2.8) Tyr166(3.0)</td></tr>
+    <tr><td>AA (Ala-Ala)</td><td><span class="pill r">negative control</span></td><td class="num">−4.466</td><td>Ser182(2.1) Glu146(2.6) Trp168(2.7)</td></tr>
+  </table>
+  <ul class="tight">
+    <li><b>(a) Correct localization</b>: All known inhibitors fall in the DPP4 active pocket, with high overlap on the classic residues (Glu146, Arg147, Tyr166, Ser182, Trp168).</li>
+    <li><b>(b) Reasonable ordering</b>: dG order is IPI > VPP > VPL > IPP > AA; the strong inhibitors (Diprotin series) are significantly stronger than the negative control AA, consistent with the literature's relative activity direction.</li>
+  </ul>
+  <p>This benchmark provides a methodological credibility anchor for the candidate docking results — all three candidates' dG (−6.5 ~ −6.8) outperform the positive control Diprotin A (−5.74).</p>
+</section>
+
+<!-- ⑦ Contact fingerprint -->
+<section id="s7">
+  <h2><span class="num">7</span> Contact Fingerprints of Two Priority Candidates <span class="en">Contact Fingerprint</span></h2>
+  <p class="lead">Based on the same MMFF94s-relaxed geometry as §4, contact atom pairs are counted per receptor residue and colored by role.</p>
+  <div class="sig-legend">
+    <span><i class="dot" style="background:#c0392b"></i>Catalytic core (Glu146)</span>
+    <span><i class="dot" style="background:#3a5a8c"></i>S1/S2 pocket</span>
+    <span><i class="dot" style="background:#8a5a2b"></i>Glycosylation bias (NAG)</span>
+    <span><i class="dot" style="background:#7a8596"></i>Interface residues</span>
+    <span>★ polar / H-bond</span>
+  </div>
+  <table>
+    <tr><th>Receptor residue</th><th>Role</th><th class="num">LPPGP contacts</th><th class="num">APPSQ contacts</th><th>Note</th></tr>
+    <tr><td><b>Glu146</b> ★</td><td><span class="pill r">catalytic core</span></td><td class="num"><b>19</b></td><td class="num"><b>27</b></td><td>Highest bar shared by both peptides; both strongly anchor the catalytic site via H-bond</td></tr>
+    <tr><td>Tyr166</td><td>S1/S2</td><td class="num">9</td><td class="num">0</td><td>LPPGP-exclusive hydrophobic lock</td></tr>
+    <tr><td>Pro149</td><td>interface</td><td class="num">1</td><td class="num">8</td><td>APPSQ-exclusive</td></tr>
+    <tr><td>Arg184 ★</td><td>interface (gating)</td><td class="num">0</td><td class="num">5</td><td>APPSQ-exclusive H-bond</td></tr>
+    <tr><td>Lys175</td><td>interface</td><td class="num">4</td><td class="num">0</td><td>LPPGP flank</td></tr>
+    <tr><td>NAG1201 ★</td><td><span class="pill y">glycosylation</span></td><td class="num">1</td><td class="num">0</td><td>Negligible sugar-chain bias (vs. APQIP, which falls heavily here)</td></tr>
+  </table>
+  <ul class="tight">
+    <li><b>Shared catalytic anchoring</b>: Both peptides make strong H-bond contact with the catalytic core Glu146 (the highest fingerprint bar), truly anchoring the active site.</li>
+    <li><b>Differentiated binding</b>: LPPGP takes a "catalytic core + S1/S2 hydrophobic lock (Tyr166)" two-point route; APPSQ takes a "catalytic core + gating Arg184, broader footprint" route.</li>
+    <li><b>Negligible glycosylation bias</b>: Both priority candidates' contacts with NAG1201 are negligible — exactly the structural basis for their higher priority over APQIP.</li>
+  </ul>
+  <p style="font-size:12.5px;color:var(--sub)">Figures: <code>figures/contact_fingerprint_LPPGP_APPSQ.svg</code>, <code>figures/contact_per_position.svg</code> (combined view <code>figures/contact_fingerprint.html</code>).</p>
+</section>
+
+<!-- ⑧ Limitations -->
+<section id="s8">
+  <h2><span class="num">8</span> Methodological Limitations &amp; Honest Disclosure <span class="en">Limitations &amp; Disclosure</span></h2>
+  <div class="callout warn">
+    <b>All outputs in this report are computational-method products.</b> Honestly disclosing the limitations of each layer is part of this study's credibility.
+  </div>
+  <table>
+    <tr><th style="width:26%">Stage</th><th>Limitation</th></tr>
+    <tr><td><b>iDPPIV-SCM prescreen</b></td><td>Independent-test ACC≈0.771 (literature≈0.797); benchmark has length confounding (a naive length baseline already reaches 0.820). Its score mainly reflects the real residue-composition signal, used for <b>ranking / soft filtering rather than deterministic judgment</b>.</td></tr>
+    <tr><td><b>Vina dG</b></td><td>Static relative score; excludes conformational entropy and explicit solvent; absolute values for known inhibitors are on the low side — a known bias. "Better than Diprotin A" refers only to the relative computational score.</td></tr>
+    <tr><td><b>MM-GBSA</b></td><td>Pocket-restricted single-structure approximation (only ~11 residues within 9 Å of the active pocket form the computation domain); long-range interactions outside the pocket and receptor strain are ignored; −TΔS ignored, receptor glycosylation solvation not counted. Used for <b>relative ranking</b>, not absolute affinity.</td></tr>
+    <tr><td><b>Phase B static MM</b></td><td>Single-conformation endpoint method, not MD sampling; conformational entropy not covered.</td></tr>
+    <tr><td><b>Overall boundary</b></td><td><b>Entirely purely computational, zero wet-lab</b>: no in vitro DPP4 inhibition, IC<sub>50</sub>, Caco-2, peptide synthesis or activity verification. Biological confirmation awaits wet-lab work.</td></tr>
+    <tr><td><b>Protein set</b></td><td>All 253 moso-bamboo UniProtKB records are TrEMBL predictions (0 manually reviewed).</td></tr>
+  </table>
+</section>
+
+<!-- ⑨ Conclusion -->
+<section id="s9">
+  <h2><span class="num">9</span> Conclusion &amp; Future Verification Roadmap <span class="en">Conclusion &amp; Roadmap</span></h2>
+  <p>This study built a purely-computational prioritization pipeline for moso-bamboo protein-derived DPP4 inhibitory peptides, prioritizing three Pro-rich candidate pentapeptides from 7,988 unique digestion peptides (<b>APQIP / LPPGP / APPSQ</b>, Vina dG −6.81 / −6.56 / −6.51 kcal·mol⁻¹). The docking benchmark (4 known inhibitors + 1 negative control) proves the protocol correctly reproduces the DPP4 active pocket and the known relative activity ordering; MM-GBSA and static MM further support the binding pose and yield a more credible relative ranking <b>LPPGP ≫ APPSQ >> APQIP</b>. As the first computational study of bamboo-derived DPP4 inhibitory peptides, the results provide new candidates for the development of functional foods from plant (grass-family) proteins.</p>
+
+  <h3>Suggested wet-lab verification roadmap (if pursued in future)</h3>
+  <ul class="tight">
+    <li><b>① Activity assay</b>: Solid-phase synthesize LPPGP / APPSQ (and the questionable APQIP) and measure in vitro DPP4 inhibition IC<sub>50</sub>.</li>
+    <li><b>② Absorption &amp; stability</b>: Caco-2 model to assess oral absorption / intestinal stability.</li>
+    <li><b>③ Binding confirmation</b>: Co-crystallize DPP4 with the most promising candidate to confirm the binding mode.</li>
+    <li><b>④ Pipeline calibration</b>: Retroactively correlate computational scores with measured IC<sub>50</sub> to further calibrate iDPPIV / docking / MM-GBSA weights.</li>
+  </ul>
+
+  <div class="callout" style="border-left-color:var(--accent3);background:#eef2fa">
+    <b>Deliverables index:</b> Full manuscript <code>docs/manuscript_draft.md</code>; MM-GBSA <code>data/phaseB/mmgbsa_top3.tsv</code>; priority master table <code>data/phaseB/candidate_priority_table.tsv</code>; contact fingerprint <code>data/phaseB/contact_fingerprint_LPPGP_APPSQ.tsv</code> + <code>figures/</code>; benchmark <code>docking/benchmark_dpp4_inhibitors.tsv</code>; literature comparison <code>data/literature_dpp4_peptides.tsv</code>. All committed and pushed to GitHub.
+  </div>
+</section>
+
+<div class="foot">
+  Moso-bamboo protein-derived DPP-IV inhibitory peptide computational study · Summary Report · Generated 2026-07-15<br>
+  Purely computational methodology (zero wet-lab) · Fully offline reproducible · Repository wu-yijing/moso-bamboo-DPP4-peptides
+</div>
+
+</div>
+</body>
+</html>

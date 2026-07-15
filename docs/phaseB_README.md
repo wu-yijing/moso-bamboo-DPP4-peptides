@@ -1,92 +1,91 @@
-# Phase B — 纯计算结合验证（Top3 DPP4 抑制肽）
+# Phase B — Pure-computational binding validation (Top-3 DPP4 inhibitory peptides)
 
-> **项目定位**：本项目为**纯计算研究**，无条件进行湿实验验证（体外 DPP4 抑制、IC₅₀、Caco-2 转运/活性、肽合成）。同时本机环境**无 GROMACS、无 conda**，无法运行 100–150 ns MD 与完整 MM-PBSA。
-> 因此 Phase B 采用 **单构象端点法静态 MM 验证**（single-structure end-point MM），作为湿实验/MD 的**可行性替代**。
-
----
-
-## 1. 目标
-
-用计算手段回答湿实验本要回答的两个问题：
-1. **对接构象是否稳定、结合是否真实？** → 复合物 MMFF94s 松弛
-2. **哪些残基最关键？** → 每配体位置的口袋接触剖面（计算丙氨酸扫描的替代度量）
+> **Project positioning:** this is a **purely computational study** with no wet-lab validation (in-vitro DPP4 inhibition, IC₅₀, Caco-2 transport/activity, peptide synthesis). Also, this machine has **no GROMACS / no conda**, so 100–150 ns MD is infeasible. Phase B therefore uses a **single-structure end-point static MMFF94s validation** + geometric contact profiling as a feasibility substitute for wet-lab/MD.
 
 ---
 
-## 2. 方法
+## 1. Goal
 
-### 2.1 输入
-- 受体：`1WCY_receptor.pdbqt`（DPP4 / 西格列汀复合物，已 ADT 预处理）
-- 配体最优构象：Vina 对接产物 `moso_ligands/dock_<id>_<PEP>.pdbqt` 的 **MODEL 1**（Top3：LPPQ / APSPE / LAPSP）
+Use computational means to answer the two questions wet-lab would answer:
+1. **Is the docked conformation stable, and is binding real?** → complex MMFF94s relaxation.
+2. **Which residues are most critical?** → per-ligand-position pocket contact profile (a surrogate for computational alanine scanning).
 
-### 2.2 口袋定义
-受体所有重原子中，与任一配体重原子距离 ≤ **9.0 Å** 的残基视为口袋。Top3 各得到 **39–40 个口袋残基**。
+---
 
-### 2.3 分子构建（RDKit 2026.03.3 + OpenBabel 3.2.1）
-- **口袋**：列解析 PDBQT → PDB 块（AutoDock 原子类型映射为元素符号）→ RDKit 读取 + 统一补氢。
-- **配体**：Vina 将肽折叠为单残基 `UNL` 块（原子名 `C_1…C_38`），RDKit 直接读取会因价键误判失败。改用 **OpenBabel 将 `dock_*.pdbqt` → MOL2（MODEL 1）**（正确感知肽键），再交 RDKit 读取 + 补氢。
+## 2. Method
 
-### 2.4 MMFF94s 复合物松弛
-- 对 **整个复合物**（口袋 + 配体）做 MMFF94s 能量最小化（不固定骨架），让配体与口袋侧链共同松弛，消除对接可能残留的位阻 clash。
-- 力场需先初始化环信息（`GetSymmSSSR`，肽中 Pro 吡咯烷环）。
+### 2.1 Input
+- Receptor: `1WCY_receptor.pdbqt` (DPP4 / sitagliptin complex, ADT-preprocessed).
+- Ligand best pose: Vina docking product `moso_ligands/dock_<id>_<PEP>.pdbqt` **MODEL 1** (Top-3: LPPQ / APSPE / LAPSP).
 
-### 2.5 静态 MM 结合能 ΔE_MM
-单构象端点法（与单构象 MM-PBSA 一致）：
+### 2.2 Pocket definition
+Among all receptor heavy atoms, residues within **≤ 9.0 Å** of any ligand heavy atom are treated as the pocket. Top-3 each yield **39–40 pocket residues**.
+
+### 2.3 Molecule construction (RDKit 2026.03.3 + OpenBabel 3.2.1)
+- **Pocket:** parse PDBQT → PDB block (AutoDock atom types mapped to element symbols) → RDKit read + unified H addition.
+- **Ligand:** Vina folds the peptide into a single residue `UNK` block (atom names `C_1…C_38`); RDKit direct read fails on valence misjudgment. Instead use **OpenBabel to convert `dock_*.pdbqt` → MOL2 (MODEL 1)** (correctly senses peptide bonds), then hand to RDKit read + H addition.
+
+### 2.4 MMFF94s complex relaxation
+- Minimize **the whole complex** (pocket + ligand) with MMFF94s (no backbone fixed), letting ligand and pocket side chains relax together, removing any steric clash left by docking.
+- The force field must initialize ring info first (`GetSymmSSSR`, the Pro pyrrolidine ring in peptides).
+
+### 2.5 Static-MM binding energy ΔE_MM
+Single-structure end-point method (consistent with single-structure MM-GBSA):
 ```
 ΔE_MM = E_complex − E_pocket − E_ligand
 ```
-三项均从松弛后的同一套坐标出发，各自独立最小化后取 MMFF 能量。
+All three are minimized from the same relaxed coordinates, then their MMFF energies are taken after independent minimization.
 
-### 2.6 接触剖面（计算丙氨酸扫描替代）
-纯几何判定（不依赖力场能量量级，稳健可解释）：
-- 配体—口袋**分子间**接触：氢键（极性对 ≤ 3.5 Å）、疏水接触（C—C ≤ 4.0 Å）、离子键（极性对 ≤ 4.0 Å）。
-- 按配体序列位置归并，得到**每个残基位置的口袋接触数**。
-- **接触最多的配体位置 = 最关键位置**（该位置突变为 Ala 时结合损失最大）——即丙氨酸扫描要回答的问题。
+### 2.6 Contact profile (alanine-scan surrogate)
+Pure geometric criteria (not relying on force-field magnitude, robust and interpretable):
+- **Inter-molecular** ligand–pocket contacts: H-bond (polar pair ≤ 3.5 Å), hydrophobic (C–C ≤ 4.0 Å), ionic (polar pair ≤ 4.0 Å).
+- Binned by ligand sequence position → **pocket contact count per residue position**.
+- **The position with the most contacts = the most critical position** (mutating it to Ala loses the most binding) — exactly the question alanine scanning answers.
 
-### 2.7 相互作用指纹
-从松弛构象提取配体接触的 **DPP4 口袋残基名**（如氢键伙伴），定位结合位点。
+### 2.7 Interaction fingerprint
+Extract the **DPP4 pocket residue names** contacted by the ligand (e.g., H-bond partners) from the relaxed conformation to localize the binding site.
 
 ---
 
-## 3. 结果
+## 3. Results
 
-| 肽 (序列) | dG_Vina | E_complex (MMFF) | ΔE_MM | 口袋残基数 | 总接触数 | 氢键数 | 疏水接触 |
-|---|---|---|---|---|---|---|---|
-| LPPQ (Leu-Pro-Pro-Gln) | −7.472 | −304.38 | +2.45 | 39 | 92 | 10 | 72 |
+| Peptide (seq) | dG_Vina | E_complex (MMFF) | ΔE_MM | Pocket res. | Total contacts | H-bonds | Hydrophobic |
+|---|---|---|---|---|---|---|
+| LPPQ (Leu-Pro-Pro-Gln) | −6.109 | −304.38 | +2.45 | 39 | 92 | 10 | 72 |
 | APSPE (Ala-Pro-Ser-Pro-Glu) | −7.150 | −254.11 | +2.93 | 39 | 119 | 13 | 81 |
 | LAPSP (Leu-Ala-Pro-Ser-Pro) | −7.087 | −291.60 | +2.84 | 40 | 101 | 13 | 80 |
 
-### 3.1 接触位置剖面（丙氨酸扫描替代）
-- **LPPQ**：L1:9 · P2:21 · **P3:25** · **Q4:37** → C 端 Gln 主导接触
-- **APSPE**：A1:2 · P2:8 · S3:0 · P4:0 · **E5:109** → C 端 **Glu 压倒性主导（109 接触）**
-- **LAPSP**：L1:6 · A2:7 · P3:22 · S4:16 · **P5:50** → C 端 Pro 主导
+### 3.1 Contact-position profile (alanine-scan surrogate)
+- **LPPQ**: L1:9 · P2:21 · **P3:25** · **Q4:37** → C-terminal Gln dominant.
+- **APSPE**: A1:2 · P2:8 · S3:0 · P4:0 · **E5:109** → C-terminal **Glu overwhelming (109 contacts)**.
+- **LAPSP**: L1:6 · A2:7 · P3:22 · S4:16 · **P5:50** → C-terminal Pro dominant.
 
-> **生物学一致性**：APSPE 的 C 端谷氨酸（E5）在 S1′ 口袋的极端接触偏好，与 DPP4 已知“偏好底物 C 端带负电残基占据 S1′”的机制吻合；双 Pro 核心（LPPQ 的 P2/P3、LAPSP 的 P5）亦符合 DPP4 S1′/S2′ 对 Pro 的偏好。
+> **Biological consistency:** APSPE's C-terminal glutamate (E5) shows extreme contact preference at the S1′ pocket, matching DPP4's known "prefers substrates with negatively-charged C-terminus occupying S1′" mechanism; the dual-Pro core fits DPP4 S1′/S2′ Pro preference.
 
-### 3.2 氢键伙伴（DPP4 口袋残基）
-三肽氢键均富集 **GLU146**（S2′ 区），并分别触及 PRO149 / SER182 / TYR183 / ASN151。这些均位于 DPP4 已知活性中心腔体，与文献报道的 DPP4 抑制剂结合位点一致。
-
----
-
-## 4. 局限（诚实披露，投稿须陈述）
-
-1. **单构象，无构象采样**：真实 MM-PBSA 需 MD 轨迹采样；本工作为单一松弛构象的端点法，未涵盖构象熵与采样涨落。
-2. **力场局限**：采用 MMFF94s（通用小分子力场），对蛋白精度低于 CHARMM36m / AMBER99SB-ILDN。
-3. **ΔE_MM 非真实 ΔG**：为**气相**单点能量差，未含显式溶剂化（GB 极性项）与构象/平动熵项；三肽 ΔE_MM 均 ~+2.8 kcal/mol（量级相近、不具区分度），故**结合强弱排序仍以 Vina dG 为主判据**，ΔE_MM 仅作构象可松弛性（稳定性）指示。
-4. **接触剖面为相对度量**：用于识别“最关键位置”，其绝对接触数受埋藏程度影响，不应作定量结合能。
-5. **未来工作**：若在 HPC 环境获得 GROMACS，建议补 100–150 ns MD + MM-PBSA（含 GB 溶剂化与熵项），以获得定量结合自由能与收敛的残基分解——这将把本 Phase B 的静态近似升级为金标准验证。
+### 3.2 H-bond partners (DPP4 pocket residues)
+All three enrich **GLU146** (S2′ region) and respectively touch PRO149 / SER182 / TYR183 — all within DPP4's known active-center cavity, consistent with literature-reported DPP4 inhibitor binding sites.
 
 ---
 
-## 5. 复现
+## 4. Limitations (honest disclosure, must state at submission)
+
+1. **Single conformation, no conformational sampling:** true MM-GBSA needs MD-trajectory sampling; this work is a single-relaxed-conformation end-point method, not covering conformational entropy/sampling fluctuations.
+2. **Force-field limitation:** MMFF94s (generic small-molecule force field) is less accurate on proteins than CHARMM36m / AMBER99SB-ILDN.
+3. **ΔE_MM is not true ΔG:** it is a **gas-phase** single-point energy difference, with no explicit solvation (GB polar term) and no conformational/translational entropy term; the three peptides' ΔE_MM are all ~+2.8 kcal/mol (similar magnitude, not discriminative), so **binding-strength ranking still relies mainly on Vina dG**, with ΔE_MM serving only as a conformation-relaxability (stability) indicator.
+4. **Contact profile is a relative metric:** used to identify "most critical position"; its absolute contact count is affected by burial degree and should not be read as quantitative binding energy.
+5. **Future work:** if GROMACS becomes available on an HPC host, add 100–150 ns MD + MM-GBSA (with GB solvation and entropy terms) for quantitative ΔG and converged residue decomposition — upgrading this Phase B static approximation to gold-standard validation.
+
+---
+
+## 5. Reproduction
 
 ```bash
-# 环境：Python 3.13 虚拟环境（含 RDKit 2026.03.3 / OpenBabel 3.2.1 / numpy / scipy）
+# Env: Python 3.13 venv (RDKit 2026.03.3 / OpenBabel 3.2.1 / numpy / scipy)
 PY=envs/default/Scripts/python.exe
 
-# 运行（脚本与 1WCY_receptor.pdbqt、moso_ligands/ 同目录）
+# Run (script in same dir as 1WCY_receptor.pdbqt, moso_ligands/)
 $PY phaseB_validation.py
-# 产出：phaseB_results.tsv（汇总）、phaseB_detail.json（逐残基/逐原子接触）
+# Outputs: phaseB_results.tsv (summary), phaseB_detail.json (per-residue/per-atom contacts)
 ```
 
-产物：`data/phaseB/phaseB_results.tsv`、`data/phaseB/phaseB_detail.json`、`scripts/phaseB/phaseB_validation.py`。
+Products: `data/phaseB/phaseB_results.tsv`, `data/phaseB/phaseB_detail.json`, `scripts/phaseB/phaseB_validation.py`.

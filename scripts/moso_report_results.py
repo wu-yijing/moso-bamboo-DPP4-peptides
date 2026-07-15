@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
-"""解析 Vina 对接结果，输出排名报告"""
+"""Parse Vina docking results and emit a ranking report"""
 import os, re
 
-# 读结果
+# read results
 if not os.path.exists("moso_dock_results.tsv"):
-    print("结果文件不存在，检查后台任务是否完成。")
-    print("查看进度: wc -l moso_dock_results.tsv && ls moso_ligands/dock_*.pdbqt | wc -l")
+    print("Result file not found; check whether the background task finished.")
+    print("Check progress: wc -l moso_dock_results.tsv && ls moso_ligands/dock_*.pdbqt | wc -l")
     exit()
 
 rows = []
@@ -26,50 +26,50 @@ with open("moso_dock_results.tsv") as f:
         except:
             skipped += 1
 
-print(f"\n====== 毛竹 DPP4 对接排名 ======")
-print(f"成功对接: {len(rows)}/{len(rows)+skipped}" + (f" (跳过的: {skipped})" if skipped else ""))
-print(f"{'排名':>4} {'肽':>8} {'结合能(dG)':>12} {'分类':>10}")
+print(f"\n====== Moso-bamboo DPP4 docking ranking ======")
+print(f"successful docking: {len(rows)}/{len(rows)+skipped}" + (f" (skipped: {skipped})" if skipped else ""))
+print(f"{'rank':>4} {'peptide':>8} {'bind energy(dG)':>12} {'class':>10}")
 print("-"*40)
 
-# 按 dG 排序（最负=最好）
+# sort by dG (most negative = best)
 ranked = sorted(rows, key=lambda x: x[1])
 
-# 结合标签
+# binding label
 def label(dg):
-    if dg <= -8.0: return "强结合"
-    elif dg <= -6.5: return "中-强"
-    elif dg <= -5.5: return "中等"
-    elif dg <= -4.5: return "弱-中"
-    else: return "弱结合"
+    if dg <= -8.0: return "strong"
+    elif dg <= -6.5: return "med-strong"
+    elif dg <= -5.5: return "medium"
+    elif dg <= -4.5: return "weak-med"
+    else: return "weak"
 
 for i, (pep, dg) in enumerate(ranked):
     tag = label(dg)
     print(f"{i+1:>4} {pep:>8} {dg:>10.3f}  {tag}")
 
-# Top 候选
-print(f"\n===== Top 10 候选肽 (推荐优先验证) =====")
+# Top candidates
+print(f"\n===== Top 10 candidate peptides (recommended for priority validation) =====")
 top10 = ranked[:10]
-print(f"{'序':>3} {'肽':>8} {'结合能':>10} {'特性':>15}")
+print(f"{'no.':>3} {'peptide':>8} {'bind energy':>10} {'property':>15}")
 for i, (pep, dg) in enumerate(top10):
     print(f"{i+1:>3} {pep:>8} {dg:>8.3f}  {label(dg)}")
 
-# 聚类分析
-cats = {"强结合":0,"中-强":0,"中等":0,"弱-中":0,"弱结合":0}
+# clustering
+cats = {"strong":0,"med-strong":0,"medium":0,"weak-med":0,"weak":0}
 for _, dg in rows:
     cats[label(dg)] += 1
-print(f"\n===== 结合能力分布 =====")
+print(f"\n===== binding-ability distribution =====")
 for k,v in sorted(cats.items()):
     bar = "#" * (v//2)
     print(f"  {k}: {v:>3}  {bar}")
 
-# 保存报告
+# save report
 with open("moso_dock_ranking.txt", "w") as f:
     f.write("peptide\tdG_kcal_mol\tcategory\trmsd_best\n")
     for i, (pep, dg) in enumerate(ranked):
-        # Try to get RMSD from output file
+        # try to get RMSD from output file
         rmsd = ""
         fpath = f"moso_ligands/dock_{i:02d}_{pep}.pdbqt"
-        # Find correct file
+        # find correct file
         import glob
         matches = glob.glob(f"moso_ligands/dock_*_{pep}.pdbqt")
         if matches:
@@ -80,10 +80,10 @@ with open("moso_dock_ranking.txt", "w") as f:
                         break
         f.write(f"{pep}\t{dg:.3f}\t{label(dg)}\t{rmsd}\n")
 
-print(f"\n详细排名 -> moso_dock_ranking.txt")
-print(f"对接输出 -> moso_ligands/dock_*.pdbqt")
-print(f"\n下一步建议:")
-print(f"  • dG < -7.0 kcal/mol 的候选 → Gly-Pro-pNA 体外 DPP4 抑制验证")
-print(f"  • 最佳结合肽 → MD 模拟 + MM/PBSA (GROMACS, 50-150ns)")
-print(f"  • 网络药理学 SwissTargetPrediction + STRING + DAVID")
-print(f"  • 细胞活性 Caco-2 原位 DPP4 抑制 (复刻模板论文)")
+print(f"\ndetailed ranking -> moso_dock_ranking.txt")
+print(f"docking output -> moso_ligands/dock_*.pdbqt")
+print(f"\nNext-step suggestions:")
+print(f"  - candidates with dG < -7.0 kcal/mol -> in-vitro DPP4 inhibition assay with Gly-Pro-pNA")
+print(f"  - best-binding peptide -> MD simulation + MM/PBSA (GROMACS, 50-150ns)")
+print(f"  - network pharmacology: SwissTargetPrediction + STRING + DAVID")
+print(f"  - cellular activity: Caco-2 in-situ DPP4 inhibition (reproduce template paper)")

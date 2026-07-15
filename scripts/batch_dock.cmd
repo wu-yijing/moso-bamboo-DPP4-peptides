@@ -1,5 +1,5 @@
 @echo off
-REM 批量 Vina 对接 - 用 Docker 或本地 Vina
+REM Batch Vina docking - using Docker or a local Vina
 set REC=1WCY_receptor.pdbqt
 set BOX=moso_box.txt
 echo --- Docking CPR ---

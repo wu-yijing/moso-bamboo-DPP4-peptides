@@ -1,25 +1,30 @@
 # -*- coding: utf-8 -*-
 """
-iDPPIV-SCM 本地复现模型 (全局氨基酸组成型 Scoring Card Method)
+iDPPIV-SCM local reproduction model (global amino-acid composition Scoring Card Method)
 =================================================================
-完全离线 / 零外部依赖。复现 Charoenkwan et al. 2020
-(J. Proteome Res. 19:4125-4136, DOI:10.1021/acs.jproteome.0c00590)。
+Fully offline / zero external dependencies. Reproduces Charoenkwan et al. 2020
+(J. Proteome Res. 19:4125-4136, DOI:10.1021/acs.jproteome.0c00590).
 
-方法: 在 DPP-IV 抑制肽(正)与非抑制肽(负)训练集上, 计算每种氨基酸 a 的
-全局倾向性得分
+Method: on the DPP-IV inhibitory-peptide (positive) vs non-inhibitory-peptide (negative)
+training set, compute for each amino acid a a global propensity score
         P(a) = log2( Obs(a) / Exp(a) )
-        Obs(a) = 正集中 a 的出现频率
-        Exp(a) = (正+负)集中 a 的总体频率
-肽序列 S 的 iDPPIV-SCM 总分 = Σ_{a∈S} P(a)   (标准 SCM 对位置/残基倾向性求和)
-另提供长度归一化版本 score_mean (ΣP / |S|), 用于跨长度公平排名。
+        Obs(a) = occurrence frequency of a in the positive set
+        Exp(a) = overall frequency of a in the (positive+negative) set
+Total iDPPIV-SCM score of peptide sequence S = Sigma_{a in S} P(a)
+  (standard SCM sum over position/residue propensities)
+Also provides a length-normalized variant score_mean (Sigma P / |S|) for fair
+cross-length ranking.
 
-说明(诚实披露):
-  - 该基准集正样本以短肽为主、负样本以长肽/蛋白为主, 存在长度混杂;
-    文献报道的 ~0.82 精度部分源于此。iDPPIV-SCM 作者亦自陈
-    "not yet accurate enough for real-world applications"。
-  - 在本项目(全部候选为 2-6 aa 短肽)中, 长度信号对所有候选一致,
-    故 SCM 分主要反映【残基组成】这一与 DPP-IV 抑制相关的真实信号,
-    用作候选优先级排序(ranking)与软过滤, 而非确定性判定。
+Note (honest disclosure):
+  - This benchmark set is length-confounded: positives are mostly short peptides,
+    negatives are mostly long peptides/proteins; the literature's ~0.82 accuracy
+    is partly attributable to this. The iDPPIV-SCM authors themselves state
+    "not yet accurate enough for real-world applications".
+  - In this project (all candidates are 2-6 aa short peptides), the length signal is
+    identical across all candidates, so the SCM score mainly reflects the genuine
+    signal of [residue composition] that is associated with DPP-IV inhibition,
+    and is used for candidate prioritization (ranking) and soft filtering rather
+    than as a deterministic classifier.
 """
 import os, math
 from collections import defaultdict
@@ -31,10 +36,10 @@ DEFAULT_TRAIN = os.path.join(_HERE, "data", "train.tsv")
 
 
 def build_propensity(train_tsv=DEFAULT_TRAIN):
-    """返回 (P: {aa: log2倾向性}, stats: (Tpos, Tneg))"""
+    """Return (P: {aa: log2 propensity}, stats: (Tpos, Tneg))"""
     pos, neg = [], []
     with open(train_tsv, encoding="utf-8") as f:
-        next(f)  # 表头
+        next(f)  # header
         for line in f:
             p = line.rstrip("\n").split("\t")
             if len(p) < 3:
@@ -62,21 +67,21 @@ def build_propensity(train_tsv=DEFAULT_TRAIN):
 
 
 def score(seq, P):
-    """SCM 总分 (Σ 残基倾向性, 标准 SCM 求和)"""
+    """SCM total score (Sigma residue propensity, standard SCM sum)"""
     if not seq:
         return 0.0
     return sum(P.get(a, 0.0) for a in seq)
 
 
 def score_mean(seq, P):
-    """长度归一化 SCM 分 (每残基平均倾向性), 用于跨长度公平排名"""
+    """Length-normalized SCM score (mean propensity per residue), for fair cross-length ranking"""
     if not seq:
         return 0.0
     return score(seq, P) / len(seq)
 
 
-# ---- 训练集上优化的判定阈值 (嵌套5折 CV 下 MCC 最大) ----
-# 在本数据集上: 阈值 ≈ -1.148 (score > 阈值 => 预测为 DPP-IV 抑制肽)
+# ---- decision threshold optimized on the training set (max MCC under nested 5-fold CV) ----
+# on this dataset: threshold ~= -1.148 (score > threshold => predicted DPP-IV inhibitory peptide)
 DEFAULT_THRESHOLD = -1.148
 
 
@@ -87,8 +92,8 @@ def predict(seq, P, threshold=DEFAULT_THRESHOLD):
 if __name__ == "__main__":
     P, stats = build_propensity()
     Tp, Tn, npos, nneg = stats
-    print(f"训练集: 正={npos} 负={nneg}  正残基总数={Tp} 负残基总数={Tn}")
-    print("氨基酸倾向性 P(a) (正=更倾向出现在 DPP-IV 抑制肽中):")
+    print(f"train: pos={npos} neg={nneg}  total positive residues={Tp} total negative residues={Tn}")
+    print("amino-acid propensity P(a) (positive = more likely to appear in DPP-IV inhibitory peptides):")
     for a in sorted(AA, key=lambda x: -P[x]):
         bar = "#" * int(round(P[a] * 4))
         print(f"  {a}  {P[a]:+.3f}  {bar}")

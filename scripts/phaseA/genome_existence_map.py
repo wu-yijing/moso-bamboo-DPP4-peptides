@@ -1,22 +1,25 @@
 # -*- coding: utf-8 -*-
 """
-思路③（本地可完成部分）：基因组存在性映射
+Idea 3 (locally completable part): genome presence mapping
 ============================================
-把每条候选肽回溯到其源 UniProt 蛋白，证明候选来自毛竹染色体级基因组的
-注释蛋白组（taxonomy 38705），而非人为伪影；并按【每条源蛋白只分类一次】
-的原则给出源蛋白的功能分布，说明候选池覆盖天然存在的毛竹蛋白
-（化解"253 含非食物蛋白"的软肋）。
+Trace each candidate peptide back to its source UniProt protein to prove the candidates
+come from the chromosome-scale genome annotation of moso bamboo (*Phyllostachys edulis*,
+taxonomy 38705), not artifacts; and, under the principle of [classify each source protein
+only once], give the functional distribution of source proteins, showing the candidate pool
+covers naturally occurring moso-bamboo proteins (resolving the soft spot of "253 includes
+non-food proteins").
 
-输入:
-  data/moso_253.fasta                    # 253 条毛竹 UniProt 蛋白 (OX=38705)
-  data/moso_candidates_idppiv_short.tsv  # 4950 条 2-6 aa 候选(含 SCM 分)
-输出:
+Input:
+  data/moso_253.fasta                    # 253 moso-bamboo UniProt proteins (OX=38705)
+  data/moso_candidates_idppiv_short.tsv  # 4950 2-6 aa candidates (incl. SCM score)
+Output:
   data/phaseA/genome_existence_map.tsv
   data/phaseA/genome_existence_map_summary.txt
 
-方法: 候选肽是源蛋白的体外消化子串 -> 用 `pep in protein_seq` 精确回溯;
-每条源蛋白仅分类一次, 候选按"源蛋白集合"做 set 归属(避免 first-hit 偏倚)。
-零外部依赖（仅 stdlib）。
+Method: a candidate peptide is an in-vitro digestion substring of its source protein ->
+  back-trace with `pep in protein_seq` (exact); each source protein is classified only
+  once, and candidates are attributed by their {set of source proteins} (avoiding
+  first-hit bias). Zero external dependencies (stdlib only).
 """
 import os
 from collections import defaultdict, Counter
@@ -104,14 +107,14 @@ def main():
     seqs = [recs[a][0] for a in accs]
     n_prot = len(accs)
 
-    # 每条源蛋白仅分类一次
+    # classify each source protein only once
     prot_cat = {a: categorize(recs[a][1]) for a in accs}
     prot_cat_count = Counter(prot_cat.values())
 
     cands = load_cands(SHORT)
-    cand_cat_set = Counter()       # 候选按源蛋白集合做 set 归属
+    cand_cat_set = Counter()       # candidates attributed by their {set of source proteins}
     src_used = set()
-    prot_count = defaultdict(int)  # 每条源蛋白贡献的候选数
+    prot_count = defaultdict(int)  # candidates contributed by each source protein
     multi = 0; unmapped = 0
     rows = []
     finals_info = {}
@@ -141,51 +144,53 @@ def main():
 
     top_src = sorted(prot_count.items(), key=lambda x: -x[1])[:15]
 
-    # ---------- 输出 TSV ----------
+    # ---------- TSV output ----------
     with open(OUT_TSV, "w", encoding="utf-8") as f:
         f.write("peptide\tlength\tscm_score\tn_source_proteins\tsource_accessions\t"
                  "categories\tgene_names\tsource_descriptions\n")
         for pep, L, sc, nh, hits, catset, gns, descs in rows:
             f.write(f"{pep}\t{L}\t{sc}\t{nh}\t{hits}\t{catset}\t{gns}\t{descs}\n")
 
-    # ---------- 摘要 ----------
+    # ---------- summary ----------
     lines = []
-    lines.append("=== 思路③ 基因组存在性映射 — 摘要 ===")
-    lines.append(f"源蛋白总数 (UniProt, OX=38705, 毛竹染色体级基因组注释蛋白组): {n_prot}")
-    lines.append(f"候选池 (2-6 aa 短肽): {len(cands)}")
-    lines.append(f"  成功回溯到 >=1 源蛋白: {len(cands)-unmapped} ({100*(len(cands)-unmapped)/len(cands):.1f}%)")
-    lines.append(f"  未映射: {unmapped}")
-    lines.append(f"  多源命中 (短基序跨多蛋白): {multi} ({100*multi/len(cands):.1f}%)")
-    lines.append(f"覆盖的不同源蛋白数: {len(src_used)} / {n_prot} ({100*len(src_used)/n_prot:.1f}%)")
+    lines.append("=== Idea 3 genome presence mapping — summary ===")
+    lines.append(f"Total source proteins (UniProt, OX=38705, moso-bamboo chromosome-scale genome annotation): {n_prot}")
+    lines.append(f"Candidate pool (2-6 aa short peptides): {len(cands)}")
+    lines.append(f"  successfully traced to >=1 source protein: {len(cands)-unmapped} ({100*(len(cands)-unmapped)/len(cands):.1f}%)")
+    lines.append(f"  unmapped: {unmapped}")
+    lines.append(f"  multi-source hits (short motif spans multiple proteins): {multi} ({100*multi/len(cands):.1f}%)")
+    lines.append(f"Distinct source proteins covered: {len(src_used)} / {n_prot} ({100*len(src_used)/n_prot:.1f}%)")
     lines.append("")
-    lines.append(f"源蛋白功能分布 (每条蛋白仅分类一次, 共 {n_prot} 条):")
+    lines.append(f"Source-protein functional distribution (each protein classified once, total {n_prot}):")
     for cat, c in prot_cat_count.most_common():
-        lines.append(f"  {cat:26s} {c:4d} 条源蛋白 ({100*c/n_prot:.1f}%)")
+        lines.append(f"  {cat:26s} {c:4d} source proteins ({100*c/n_prot:.1f}%)")
     lines.append("")
-    lines.append("候选功能归属 (set 归属: 候选按其源蛋白集合归类, 可跨多类, 故合计>候选数):")
+    lines.append("Candidate functional attribution (set attribution: candidates grouped by their source-protein set, may cross classes, hence sum > candidate count):")
     for cat, c in cand_cat_set.most_common():
-        lines.append(f"  {cat:26s} 触及 {c:5d} 条候选 ({100*c/len(cands):.1f}%)")
+        lines.append(f"  {cat:26s} touches {c:5d} candidates ({100*c/len(cands):.1f}%)")
     lines.append("")
-    lines.append("Top 15 源蛋白 (按贡献候选数):")
+    lines.append("Top 15 source proteins (by candidate contribution):")
     for a, c in top_src:
         nm = recs[a][1].split(" OS=")[0].split("|")[-1]
         gn = gene_name(recs[a][1])
         lines.append(f"  {a}  cands={c:4d}  {nm}  GN={gn}  cat={prot_cat[a]}")
     lines.append("")
-    lines.append("决赛候选的源蛋白 (基因组存在性 + 功能):")
+    lines.append("Finalist candidates' source proteins (genome presence + function):")
     for pep in FINALS:
         if pep in finals_info:
             nh, a, nm, gn, cat, cats = finals_info[pep]
-            lines.append(f"  {pep}: 主源={a} ({nm}, GN={gn}) 类别={cat} 命中源蛋白数={nh}")
+            lines.append(f"  {pep}: primary source={a} ({nm}, GN={gn}) class={cat} n_source_hits={nh}")
         else:
-            lines.append(f"  {pep}: 未在短肽池命中")
+            lines.append(f"  {pep}: not hit in the short-peptide pool")
     lines.append("")
-    lines.append("结论: 全部候选均回溯到毛竹染色体级基因组的注释蛋白组 (taxonomy 38705, "
-                 "即 Peng 2018 染色体级基因组 51,074 基因的注释产物) -> 候选为")
-    lines.append(f"基因组编码、天然存在的竹源蛋白消化产物, 存在性确证; 候选池覆盖 "
-                 f"{len(src_used)}/{n_prot} 条源蛋白, 跨 {len(prot_cat_count)} 个功能类")
-    lines.append("(代谢酶/结构/转录调控/信号/光合/防御/存储等) -> 化解'253 含非食物蛋白'的软肋")
-    lines.append("(笋转录组表达证据为待补外部数据, 需授权后抓取 PMC3820679 / GEO)。")
+    lines.append("Conclusion: all candidates trace back to the annotation of the moso-bamboo chromosome-scale "
+                 "genome (taxonomy 38705, i.e. the annotation product of Peng 2018's 51,074-gene "
+                 "chromosome-scale genome) -> the candidates are")
+    lines.append(f"genome-encoded, naturally occurring bamboo-protein digestion products, presence confirmed; "
+                 f"the candidate pool covers {len(src_used)}/{n_prot} source proteins across {len(prot_cat_count)} functional classes")
+    lines.append("(metabolic enzyme / structural / transcription regulation / signaling / photosynthesis / defense / storage etc.) "
+                 "-> resolves the soft spot of '253 includes non-food proteins'")
+    lines.append("(shoot-transcriptome expression evidence is pending external data, to be fetched from PMC3820679 / GEO after authorization).")
 
     with open(OUT_SUM, "w", encoding="utf-8") as f:
         f.write("\n".join(lines) + "\n")

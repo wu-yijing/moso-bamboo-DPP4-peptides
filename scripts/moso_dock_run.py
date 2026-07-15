@@ -1,27 +1,27 @@
 # -*- coding: utf-8 -*-
 """
-[配体准备 + 批量对接] 毛竹候选肽 -> Vina 对接 DPP4 (1WCY)
-依赖(用户本机): rdkit, openbabel, autodock-vina
-读取 moso_dock_queue.txt -> 为每个肽:
-  1) RDKit 生成 3D 构象 -> SDF
+[Ligand prep + batch docking] moso-bamboo candidate peptides -> Vina docking vs DPP4 (1WCY)
+Dependencies (user's local machine): rdkit, openbabel, autodock-vina
+Read moso_dock_queue.txt -> for each peptide:
+  1) RDKit generate 3D conformation -> SDF
   2) obabel SDF -> PDBQT
   3) vina --receptor 1WCY_receptor.pdbqt --ligand X.pdbqt --config box.txt
-  4) 解析最佳 binding affinity (kcal/mol)
-输出: moso_dock_results.tsv (肽, PR评分, 亲和力, 等级)
+  4) parse best binding affinity (kcal/mol)
+Output: moso_dock_results.tsv (peptide, PR score, affinity, rank)
 """
 import os, subprocess, sys
 
-REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))  # scripts/ -> 仓库根
+REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))  # scripts/ -> repo root
 DATA = os.path.join(REPO, "data")
 DOCK = os.path.join(REPO, "docking")
 QUEUE = os.path.join(DATA, "moso_dock_queue.txt")
 REC   = os.path.join(DOCK, "1WCY_receptor.pdbqt")
 BOX   = os.path.join(DOCK, "moso_box.txt")
 OUTDIR= os.path.join(DOCK, "dock_out")
-N_CONF = 20          # 每个肽生成构象数
-TOP_N  = 50          # 实际跑前 N 条(默认60队列全部)
+N_CONF = 20          # number of conformations generated per peptide
+TOP_N  = 50          # actually run the first N (default: all 60 in queue)
 
-# ---- 1) 口袋盒子 ----
+# ---- 1) pocket box ----
 open(BOX,"w").write(
     "center_x = 62.8\ncenter_y = 47.7\ncenter_z = 4.8\n"
     "size_x = 30\nsize_y = 30\nsize_z = 30\n"
@@ -62,11 +62,11 @@ for i,(seq,score,_tier) in enumerate(rows[:TOP_N]):
         results.append((seq, float(score), aff))
         print(f"  {seq:6s} PR={score}  dG={aff}")
     except Exception as e:
-        print(f"  {seq:6s} 失败: {e}")
+        print(f"  {seq:6s} failed: {e}")
 
 _results = os.path.join(DOCK, "moso_dock_results.tsv")
 with open(_results,"w") as f:
     f.write("peptide\tPR_score\tdG_kcal_mol\n")
     for s,sc,a in sorted(results, key=lambda x:(x[2] if x[2] is not None else 9e9)):
         f.write(f"{s}\t{sc:.3f}\t{a if a is not None else 'NA'}\n")
-print(f"\n对接完成 -> {_results} ({len(results)} 条)")
+print(f"\nDocking done -> {_results} ({len(results)} entries)")

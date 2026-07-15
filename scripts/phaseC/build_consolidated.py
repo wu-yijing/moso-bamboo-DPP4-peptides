@@ -1,16 +1,17 @@
 # -*- coding: utf-8 -*-
 """
-生成 Top 候选 consolidated 表 (data/phaseC/top_candidates_consolidated.tsv)
+Generate a Top-candidate consolidated table (data/phaseC/top_candidates_consolidated.tsv)
 
-合并两个来源，按肽序列 (peptide) 连接：
+Merge two sources and join by peptide sequence (peptide):
   1) docking/moso_dock_results_idppiv_clean.tsv
-       -> iDPPIV_score (Phase A 离线活性预筛) + dG_best/dG_spread/n_dock (Vina 对接)
+       -> iDPPIV_score (Phase A offline activity pre-screen) + dG_best/dG_spread/n_dock (Vina docking)
   2) data/phaseC/phaseC_peptides.tsv
-       -> ADMET (MW/pI/charge/GRAVY/Boman/TPSA/HBD/HBA/QED) + GI 稳定性 + DPP4 底物基序
-
-排序：dG_best 升序（结合最强优先，与稿件对接小节一致）；取 Top 20。
-iDPPIV 已作为构建对接队列的预筛门槛，故此处以对接 dG 为主序。
-纯计算研究，无任何湿实验验证。
+       -> ADMET (MW/pI/charge/GRAVY/Boman/TPSA/HBD/HBA/QED) + GI stability + DPP4 substrate motif
+Order by dG_best ascending (strongest binding first, consistent with the docking
+subsection of the manuscript); take Top 20.
+iDPPIV already serves as the pre-screen threshold when building the docking queue,
+so here docking dG is the primary sort key.
+Pure computational study; no wet-lab validation of any kind.
 """
 import os, csv
 
@@ -54,11 +55,11 @@ def main():
             "GI_stability": p["GI_stability_class"],
             "DPP4_substrate_motif": p["DPP4_substrate_motif"],
             "is_Top3": p["is_Top3"],
-            # 排序键
+            # sort key
             "_dg": float(d["dG_best"]),
         })
 
-    merged.sort(key=lambda x: x["_dg"])  # 升序 = 最负 = 结合最强
+    merged.sort(key=lambda x: x["_dg"])  # ascending = most negative = strongest binding
     top = merged[:TOPN]
 
     cols = ["peptide", "length", "iDPPIV_score", "dG_Vina", "dG_spread", "n_dock",
@@ -69,8 +70,8 @@ def main():
         w.writeheader()
         for r in top:
             w.writerow(r)
-    print(f"[OK] 写出 {len(top)} 条 -> {OUT}")
-    # 控制台摘要
+    print(f"[OK] wrote {len(top)} entries -> {OUT}")
+    # console summary
     print(f"{'pep':7s} {'iDPPIV':>7s} {'dG':>8s} {'MW':>7s} {'pI':>5s} {'Boman':>6s} {'QED':>6s}  GI")
     for r in top:
         print(f"{r['peptide']:7s} {float(r['iDPPIV_score']):7.3f} {float(r['dG_Vina']):8.3f} "

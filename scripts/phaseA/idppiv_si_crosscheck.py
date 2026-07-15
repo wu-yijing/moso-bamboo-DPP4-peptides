@@ -1,22 +1,25 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
-方案①: iDPPIV-SI 风格的第二独立预测器交叉验证
+Plan (1): iDPPIV-SI-style second independent predictor cross-validation
 ================================================
-目的: 用与 iDPPIV-SCM 不同的、独立训练的序列分类器, 对我们的候选池重打分,
-      报告两模型一致性 (连续分 Spearman 相关 + Top-K 重叠率), 以弥补 SCM
-      基准集长度混杂/精度有限的弱点。
+Purpose: use a sequence classifier trained independently and differently from iDPPIV-SCM
+      to re-score our candidate pool, and report the two-model agreement
+      (Spearman correlation of continuous scores + Top-K overlap rate) to compensate
+      for SCM's benchmark length-confound / limited-accuracy weakness.
 
-方法论 (忠实复现 iDPPIV-SI 的 "特征选择 + SVM" 范式, 离线零外部依赖):
-  - 特征: 氨基酸组成(20) + 二肽组成(400) + 一阶/二阶自相关(40)
-          = 460 维 (iDPPIV-SI 用 50 种物化性质 + 1/2 阶相关 + DWT;
-          此处以组成型特征作为等价可复现的物化性质载体, 见稿件诚实披露)
-  - 特征选择: LASSO (LassoCV, 5-fold)
-  - 分类器: RBF-SVM (class_weight=balanced, 小网格选 C)
-  - 训练/评估: 同源公开 665+665 基准 (train/test.tsv), 报告测试集 ACC/Sens/Spec/MCC
+Methodology (faithfully reproduce iDPPIV-SI's "feature selection + SVM" paradigm,
+offline zero-external-dependency):
+  - features: amino-acid composition (20) + dipeptide composition (400) + 1st/2nd-order autocorrelation (40)
+          = 460 dims (iDPPIV-SI uses 50 physicochemical properties + 1/2-order correlation + DWT;
+          here composition-type features serve as the equivalent reproducible physicochemical-property carrier, see manuscript honest disclosure)
+  - feature selection: LASSO (LassoCV, 5-fold)
+  - classifier: RBF-SVM (class_weight=balanced, small grid for C)
+  - train/eval: homologous public 665+665 benchmark (train/test.tsv), report test-set ACC/Sens/Spec/MCC
 
-诚实声明: Zou H (2024) 原模型权重存于 figshare 的 MATLAB .mat, 本环境无 MATLAB,
-故此处为方法论一致的 Python 离线复现 (iDPPIV-SI-style), 非字节级精确复刻。
+Honest statement: Zou H (2024)'s original model weights are stored as figshare MATLAB .mat;
+this environment has no MATLAB, so this is a methodology-consistent Python offline
+reproduction (iDPPIV-SI-style), not a byte-exact re-implementation.
 """
 import csv, sys, itertools
 import numpy as np
@@ -52,9 +55,9 @@ def dipep_comp(seq):
     return v / (len(seq) - 1)
 
 def autocorr(seq, lag):
-    # 对每个氨基酸类型 a, 计算指示型属性的 Moreau-Broto 归一化自相关:
-    #   AC_a(lag) = sum_i [res_i==a 且 res_{i+lag}==a] / (L - lag)
-    # 返回 20 维 (iDPPIV-SI 的 "1-order / 2-order correlation" 等价载体)
+    # for each amino-acid type a, compute the indicator-property Moreau-Broto normalized autocorrelation:
+    #   AC_a(lag) = sum_i [res_i==a and res_{i+lag}==a] / (L - lag)
+    # returns 20 dims (equivalent carrier of iDPPIV-SI's '1-order / 2-order correlation')
     L = len(seq)
     v = np.zeros(20)
     if L <= lag:
@@ -73,7 +76,7 @@ def aa_comp_single(c):
     return v
 
 def pc_props(seq):
-    # 可精确计算的物化性质 (iDPPIV-SI 的 "50 种 PC 性质" 之等价可复现子集)
+    # precisely computable physicochemical properties (equivalent reproducible subset of iDPPIV-SI's '50 PC properties')
     L = len(seq) or 1
     net = sum(1 for c in seq if c in "KRH") - sum(1 for c in seq if c in "DE")
     hyd = sum(1 for c in seq if c in "AVLIMFWY") / L
@@ -127,7 +130,7 @@ def main():
     Xtr_s = scaler.transform(Xtr)
     Xte_s = scaler.transform(Xte)
 
-    # LASSO 特征选择
+    # LASSO feature selection
     lasso = LassoCV(cv=5, max_iter=5000).fit(Xtr_s, tr_lab)
     mask = lasso.coef_ != 0
     if mask.sum() == 0:
@@ -136,7 +139,7 @@ def main():
     Xtr_l = Xtr_s[:, mask]
     Xte_l = Xte_s[:, mask]
 
-    # RBF-SVM 小网格选 C
+    # RBF-SVM small grid for C
     svc = GridSearchCV(SVC(kernel="rbf", class_weight="balanced", probability=True),
                        {"C": [0.1, 1.0, 10.0]}, cv=StratifiedKFold(3, shuffle=True, random_state=0))
     svc.fit(Xtr_l, tr_lab)
@@ -151,7 +154,7 @@ def main():
     mcc = matthews_corrcoef(te_lab, te_pred)
     print(f"[eval] test ACC={acc:.3f} Sens={sens:.3f} Spec={spec:.3f} MCC={mcc:.3f}", flush=True)
 
-    # 对候选池重打分
+    # re-score the candidate pool
     header, cands = load_candidates("data/moso_candidates_idppiv.txt")
     c_seq = [r[0] for r in cands]
     scm_score = np.array([float(r[1]) for r in cands])
@@ -163,11 +166,11 @@ def main():
     si_pred = (si_prob >= 0.5).astype(int)
     print(f"[score] candidates={len(c_seq)}  si_prob>0.5: {si_pred.sum()}", flush=True)
 
-    # 一致性: 连续分 Spearman
+    # agreement: continuous-score Spearman
     rho, prho = spearmanr(scm_score, si_score)
     print(f"[agree] Spearman(scm_score, si_score) rho={rho:.3f} (p={prho:.1e})", flush=True)
 
-    # Top-K 重叠
+    # Top-K overlap
     def topk(idx, k):
         return set(np.argsort(idx)[::-1][:k])
     for k in (50, 100, 200):
@@ -175,7 +178,7 @@ def main():
         ov = len(a & b)
         print(f"[agree] Top-{k} overlap: {ov}/{k} ({ov/k:.0%})", flush=True)
 
-    # 三决赛肽的两模型定位
+    # locate the three finalist peptides in both models
     si_rank = {c_seq[idx]: r + 1 for r, idx in enumerate(np.argsort(si_score)[::-1])}
     scm_rank = {c_seq[idx]: r + 1 for r, idx in enumerate(np.argsort(scm_score)[::-1])}
     finals = {"LPPGP": None, "APPSQ": None, "APQIP": None}
@@ -189,7 +192,7 @@ def main():
             sc, ss, sp, rk_si, rk_scm = finals[name]
             print(f"  {name}: scm={sc:.3f}  si_score={ss:+.3f}  si_prob={sp:.3f}  rankSI={rk_si}/{len(c_seq)}  rankSCM={rk_scm}/{len(c_seq)}", flush=True)
 
-    # 写出 TSV
+    # write TSV
     out = "data/phaseA/idppiv_si_crosscheck.tsv"
     with open(out, "w", newline="") as f:
         w = csv.writer(f, delimiter="\t")
@@ -199,7 +202,7 @@ def main():
         for i in order:
             w.writerow([c_seq[i], f"{scm_score[i]:.4f}", f"{scm_mean[i]:.4f}",
                         scm_pred[i], f"{si_score[i]:.4f}", f"{si_prob[i]:.4f}", si_pred[i]])
-    # 汇总行 (供稿件引用)
+    # summary line (for manuscript citation)
     with open("data/phaseA/idppiv_si_crosscheck_summary.txt", "w") as f:
         f.write(f"test_ACC\t{acc:.3f}\n")
         f.write(f"test_Sens\t{sens:.3f}\n")

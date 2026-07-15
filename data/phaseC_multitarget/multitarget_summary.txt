@@ -1,21 +1,22 @@
-=== 思路② 多靶点抗糖尿病肽优先化 (离线/文献锚定) ===
+=== Idea 2 multi-target antidiabetic-peptide prioritization (offline / literature-anchored) ===
 
-候选池: 4717 条 (来自 DPP4 阶段 iDPPIV 阳性)
-参考集规模: DPP4=37, ACE=55, alphaG=16 (均为引用文献已知活性肽)
+Candidate pool: 4717 entries (from DPP4-stage iDPPIV positives)
+Reference-set sizes: DPP4=37, ACE=55, alphaG=16 (all cited literature known actives)
 
-[A] 跨靶点长度偏倚 (核心方法贡献, 与思路①同构)
+[A] cross-target length bias (core methodological contribution, isomorphic to Idea 1)
   target            N   medLen  %%<=6  min  max  meanLen  corr(score,length)
-  DPP4 (ref=已知活性肽)    37    6.0  0.703    3   12    5.97   +0.430
-  ACE  (ref=已知活性肽)    55    6.0  0.655    3   15    6.53   +0.414
-  alphaG(ref=已知活性肽)   16    7.5  0.375    2   10    5.88   +0.258
-  -> 三个靶点参考集均以短肽为主, 且候选分数与长度正相关 -> 长度偏倚是跨靶点的普遍问题
+  DPP4 (ref=known active)   37    6.0  0.703    3   12    5.97   +0.430
+  ACE  (ref=known active)   55    6.0  0.655    3   15    6.53   +0.414
+  alphaG(ref=known active)   16    7.5  0.375    2   10    5.88   +0.258
+  -> all three target reference sets are dominated by short peptides, and candidate scores correlate
+     positively with length -> length bias is a cross-target general problem
 
-[B] 优先化结果
-  多靶点(>=2轴前1/10): 294 条
-  单靶点 DPP4: 207 | 单靶点 ACE: 202 | 单靶点 alphaG: 390
-  阈值: dpp4_norm>=0.396, ace_norm>=0.437, ag_norm>=0.336 (各自前10%)
+[B] prioritization results
+  multi-target (>=2 axes top 1/10): 294 entries
+  single-target DPP4: 207 | single-target ACE: 202 | single-target alphaG: 390
+  thresholds: dpp4_norm>=0.396, ace_norm>=0.437, ag_norm>=0.336 (each top 10%)
 
-[C] 多靶点候选 Top-20 (按命中靶点数, 再按 dpp4 归一分)
+[C] multi-target candidates Top-20 (by #targets hit, then by dpp4 norm)
   LPGDVPR      L= 7  dpp4=0.548 ace=0.444 ag=0.355  nTar=3 [MULTI]
   AIVPPGK      L= 7  dpp4=0.538 ace=0.673 ag=0.377  nTar=3 [MULTI]
   LPSVPAIPDK   L=10  dpp4=0.526 ace=0.490 ag=0.390  nTar=3 [MULTI]
@@ -37,10 +38,11 @@
   LATDQPAGPVSMTPK L=15  dpp4=0.436 ace=0.522 ag=0.362  nTar=3 [MULTI]
   LATDQPAGPVSMMPK L=15  dpp4=0.435 ace=0.513 ag=0.359  nTar=3 [MULTI]
 
-[D] 决赛候选在三靶点矩阵中的位置
+[D] finalist candidates in the three-target matrix
   LPPGP    L= 5 dpp4=0.505 ace=0.553 ag=0.193 nTar=2 flag=MULTI
   APPSQ    L= 5 dpp4=0.380 ace=0.394 ag=0.236 nTar=0 flag=none
   APQIP    L= 5 dpp4=0.405 ace=0.406 ag=0.151 nTar=1 flag=SINGLE-DPP4
 
-诚实边界: 三轴(DPP4/ACE/alphaG)分数均为知识型组成+序列相似签名(文献锚定), 非基准验证 ML 预测器;
-          仅表示与已知活性肽的相似度, 不等同预测活性; 需湿实验验证。
+Honest boundary: the three axes (DPP4/ACE/alphaG) are knowledge-based composition+sequence-similarity
+          signatures (literature-anchored), NOT benchmark-validated ML predictors;
+          they only express similarity to known active peptides, not predicted activity; needs wet-lab validation.

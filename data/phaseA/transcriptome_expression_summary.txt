@@ -1,32 +1,32 @@
-=== 思路③ 转录组表达层（定性 + 可复现连接协议）— 摘要 ===
-源蛋白总数: 253
+=== Idea 3 transcriptome expression layer (qualitative + reproducible-join protocol) — summary ===
+Total source proteins: 253
 
-源蛋白【笋相关性分级】分布 (基于与已发表笋高表达家族的重叠, 文献锚定):
-  high            124 条源蛋白 (49.0%)
-  medium           76 条源蛋白 (30.0%)
-  medium-high      31 条源蛋白 (12.3%)
-  low-medium       21 条源蛋白 (8.3%)
-  low               1 条源蛋白 (0.4%)
+Source-protein [shoot-relevance tier] distribution (based on overlap with published shoot high-expression families, literature-anchored):
+  high            124 source proteins (49.0%)
+  medium           76 source proteins (30.0%)
+  medium-high      31 source proteins (12.3%)
+  low-medium       21 source proteins (8.3%)
+  low               1 source proteins (0.4%)
 
-候选池 (4950) 按源蛋白集合做【笋分级 set 归属】(可跨多级, 合计>候选数):
-  high           触及  3222 条候选 (65.1%)
-  medium         触及  2643 条候选 (53.4%)
-  medium-high    触及  1919 条候选 (38.8%)
-  low-medium     触及   959 条候选 (19.4%)
-  low            触及   176 条候选 (3.6%)
+Candidate pool (4950) [shoot-tier set attribution] by source-protein set (crosses tiers, sum > candidate count):
+  high           touches  3222 candidates (65.1%)
+  medium         touches  2643 candidates (53.4%)
+  medium-high    touches  1919 candidates (38.8%)
+  low-medium     touches   959 candidates (19.4%)
+  low            touches   176 candidates (3.6%)
 
-以'最有利源蛋白'判定: 3837/4950 条候选 (77.5%) 其最优源蛋白属 high/medium-high 笋相关性 -> 候选主要来自笋高/中高表达的功能家族
+By 'most-favorable source protein': 3838/4950 candidates (77.5%) have their best source protein in high/medium-high shoot relevance -> candidates mainly come from high/medium-high shoot-expression functional families
 
-决赛候选的源蛋白 (笋相关性):
-  LPPGP: 主源=B3VN36 (B3VN36_PHYED Cytochrome P450 73A33 (Fragment), GN=) 类别=metabolic_enzyme 笋分级=medium-high 命中源蛋白数=1
-  APPSQ: 主源=A0A3Q8AYS5 (A0A3Q8AYS5_PHYED Squamosa-promoter binding protein-like protein, GN=) 类别=transcription_regulation 笋分级=high 命中源蛋白数=1
-  APQIP: 主源=X2F5C1 (X2F5C1_PHYED MADS-box protein 4, GN=) 类别=transcription_regulation 笋分级=high 命中源蛋白数=1
+Finalist candidates' source proteins (shoot relevance):
+  LPPGP: primary source=B3VN36 (B3VN36_PHYED Cytochrome P450 73A33 (Fragment), GN=) class=metabolic_enzyme shoot_tier=medium-high n_source_hits=1
+  APPSQ: primary source=A0A3Q8AYS5 (A0A3Q8AYS5_PHYED Squamosa-promoter binding protein-like protein, GN=) class=transcription_regulation shoot_tier=high n_source_hits=1
+  APQIP: primary source=X2F5C1 (X2F5C1_PHYED MADS-box protein 4, GN=) class=transcription_regulation shoot_tier=high n_source_hits=1
 
-资源审计 (见 transcriptome_expression_audit.tsv): 5 个公开毛竹转录组资源; 仅 Peng2013 与 MDPI2020 为【笋特异性】, 但二者均不以 UniProt accession 为键。
+Resource audit (see transcriptome_expression_audit.tsv): 5 public moso-bamboo transcriptome resources; only Peng2013 and MDPI2020 are [shoot-specific], but neither is keyed by UniProt accession.
 
-量化连接缺口 (诚实边界):
-  (1) UniProt TrEMBL (tax 38705) 条目不含 PH0100... 基因模型交叉引用 -> 直接映射断链;
-  (2) 无公开【以 UniProt 为键】的笋 TPM 矩阵; 沙箱无 BLAST / 大文件下载能力;
-  -> 逐候选 TPM 定量连接需: 在有 BLAST 主机上运行 scripts/phaseA/transcriptome_join_protocol.py
-     (对 de novo 笋转录组 vs 本 253 蛋白做序列比对, 或对接 MDPI2020 基因组基因模型表达矩阵)。
-  本层当前交付 = 资源审计 + 源蛋白定性笋分级(文献锚定) + 定量连接协议(可一键补齐)。
+Quantitative-join gap (honest boundary):
+  (1) UniProt TrEMBL (tax 38705) entries do NOT carry PH0100... gene-model cross-references -> direct map broken;
+  (2) no public [UniProt-keyed] shoot TPM matrix; sandbox has no BLAST / large-file download capability;
+  -> per-candidate TPM quantitative join needs: run scripts/phaseA/transcriptome_join_protocol.py on a BLAST host
+     (sequence-align the de novo shoot transcriptome vs our 253 proteins, or join the MDPI2020 genome-gene-model expression matrix).
+  This layer currently delivers = resource audit + source-protein qualitative shoot tiering (literature-anchored) + quantitative-join protocol (one-click completable).

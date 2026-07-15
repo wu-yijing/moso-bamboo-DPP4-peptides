@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
 """
-基准验证: 已知 DPP4 抑制剂(肽) -> 复用本管线流程对接 1WCY。
-验证两点:
-  (a) 已知抑制剂能否 dock 入 DPP4 活性口袋 (与文献报道结合位点重叠);
-  (b) Vina dG 排序是否与文献相对抑制活性一致 (强抑制剂 dG 更负)。
-完全复用 moso_dock_run_idppiv.py 的 prep_pdbqt + dock 逻辑, 保证方法一致性。
-Vina 二进制: 由环境变量 VINA_EXE 指定 (与现管线约定一致); 未设则走 PATH 的 vina。
+Benchmark validation: known DPP4 inhibitors (peptides) -> reuse this pipeline to dock 1WCY.
+Validates two points:
+  (a) whether known inhibitors dock into the DPP4 active pocket (overlapping the literature binding site);
+  (b) whether Vina dG ranking agrees with literature relative inhibitory activity (stronger inhibitors -> more negative dG).
+Fully reuses moso_dock_run_idppiv.py's prep_pdbqt + dock logic to guarantee method consistency.
+Vina binary: specified via env var VINA_EXE (consistent with current pipeline convention); if unset, uses vina on PATH.
 """
 import os, subprocess, math
 from collections import defaultdict
@@ -22,13 +22,13 @@ LIGDIR = os.path.join(DOCK, "benchmark_ligands")
 os.makedirs(LIGDIR, exist_ok=True)
 
 # (seq, name, ic50_note, role)
-# role: positive=经典人DPP4抑制剂; food=食物源对照; negative=非抑制负对照
+# role: positive=classic human DPP4 inhibitor; food=food-source control; negative=non-inhibitory negative control
 KNOWN = [
-    ("IPI", "Diprotin A",          "经典人 DPP4 竞争性抑制剂 (Streptomyces), IC50 ~ 20-50 uM", "positive"),
-    ("VPL", "Diprotin B",          "经典人 DPP4 抑制剂, IC50 ~ 30-60 uM",                       "positive"),
-    ("IPP", "Ile-Pro-Pro (乳源)",  "乳蛋白源 DPP4 抑制肽, IC50 ~ 数十-数百 uM",                 "food"),
-    ("VPP", "Val-Pro-Pro (乳源)",  "乳蛋白源 DPP4 抑制肽, IC50 ~ 数十-数百 uM",                 "food"),
-    ("AA",  "Ala-Ala (负对照)",    "非 DPP4 抑制剂, 预期弱/无活性",                             "negative"),
+    ("IPI", "Diprotin A",          "classic competitive human DPP4 inhibitor (Streptomyces), IC50 ~ 20-50 uM", "positive"),
+    ("VPL", "Diprotin B",          "classic human DPP4 inhibitor, IC50 ~ 30-60 uM",                       "positive"),
+    ("IPP", "Ile-Pro-Pro (milk-derived)", "milk-protein-source DPP4 inhibitory peptide, IC50 ~ tens-to-hundreds uM", "food"),
+    ("VPP", "Val-Pro-Pro (milk-derived)", "milk-protein-source DPP4 inhibitory peptide, IC50 ~ tens-to-hundreds uM", "food"),
+    ("AA",  "Ala-Ala (negative control)", "non DPP4 inhibitor, expected weak/no activity",                   "negative"),
 ]
 
 def prep_pdbqt(seq, idx):
@@ -67,7 +67,7 @@ def dock(pqt, idx):
     return best, (out if os.path.exists(out) else None)
 
 def parse_atoms(path, model=0):
-    """解析 pdbqt: model=0 全收(受体无 MODEL 头); model=N 只收第 N 个 MODEL(配体 pose)。"""
+    """Parse pdbqt: model=0 collects all (receptor has no MODEL header); model=N collects only the N-th MODEL (ligand pose)."""
     atoms = []; cur = 0
     with open(path) as fh:
         for ln in fh:
@@ -108,7 +108,7 @@ def analyze(out_pqt, receptor_pdbqt):
     for res, ats in res_atoms.items():
         res_min[res] = min(dist(la, ra) for la in lig for ra in ats)
     near = sorted(res_min.items(), key=lambda kv: kv[1])[:12]
-    # 安全标签: 避免对短/空 resName 做 [1] 索引
+    # safe label: avoid [1] indexing on short/empty resName
     near_disp = []
     for res, d in near:
         chain, rn, resSeq = (list(res) + [None, None, None])[:3]
@@ -136,7 +136,7 @@ def main():
             cstr = ",".join(f"{v:.1f}" for v in center) if center else ""
             nstr = "; ".join(f"{lab}({d:.1f}A)" for lab, d in (near or [])[:10])
             f.write(f"{seq}\t{name}\t{role}\t{note}\t{dg if dg is not None else 'NA'}\t{cstr}\t{nstr}\n")
-    print(f"\n-> 基准结果: {out_tsv}")
+    print(f"\n-> benchmark result: {out_tsv}")
 
 if __name__ == "__main__":
     main()

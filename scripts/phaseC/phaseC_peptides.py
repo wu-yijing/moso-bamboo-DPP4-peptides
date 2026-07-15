@@ -55,11 +55,11 @@ DOCK = os.path.join(REPO, "docking")
 DATA = os.path.join(REPO, "data")
 
 # Docking result file (peptide column = single-letter sequence, plus dG)
-# 方案 α: 用 RDKit 制备的 iDPPIV 队列干净结果（含真实 iDPPIV 分 + 校正后 dG）
+# Plan alpha: cleaned iDPPIV-queue results prepared with RDKit (true iDPPIV scores + corrected dG)
 DOCK_TSV = os.path.join(DOCK, "moso_dock_results_idppiv_clean.tsv")
 OUT_TSV = os.path.join(DATA, "phaseC", "phaseC_peptides.tsv")
 
-# Top3 (方案 α): 新 iDPPIV 队列 RDKit 制备下的最优结合肽
+# Top3 (Plan alpha): best-binding peptides under the new iDPPIV-queue RDKit preparation
 TOP3 = {"APQIP": -6.807, "LPPGP": -6.558, "APPSQ": -6.513}
 
 
