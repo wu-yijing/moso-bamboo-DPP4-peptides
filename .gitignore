@@ -26,8 +26,10 @@ docking/_*.pdb
 _*.pdb
 docking/_mgbsa_*
 
-# Manuscript body (local draft, not pushed to remote; use `git add -f` to force-include if needed)
+# Manuscript body (local only, not pushed to remote; use `git add -f` to force-include if needed)
 docs/manuscript_draft.md
+docs/manuscript_csbj_en.md
+docs/manuscript_csbj_zh.md
 
 # Local-only Chinese working docs (kept locally per user request; English versions are tracked)
 docs/发表差异化新思路.md
