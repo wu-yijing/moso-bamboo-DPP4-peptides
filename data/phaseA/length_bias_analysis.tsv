@@ -1,0 +1,42 @@
+metric	value	note
+benchmark_train_n	1063	基准训练集规模
+benchmark_train_pos	531	正样本数
+benchmark_train_neg	532	负样本数
+benchmark_test_n	266	基准独立测试集规模
+benchmark_test_pos	133	测试正样本
+benchmark_test_neg	133	测试负样本
+scm_global_test_ACC	0.771	全局组成 SCM(候选池所用,model.py,thr=-1.148) 独立 ACC
+scm_global_test_MCC	0.555	全局组成 SCM 独立 MCC
+scm_posspec_test_ACC	0.620	位置特异 SCM(scm.py) 独立 ACC, 参考
+scm_posspec_test_MCC	0.243	位置特异 SCM 独立 MCC, 参考
+lenbaseline_T6_ACC	0.748	纯长度基线 len<=6->阳性 ACC
+lenbaseline_T8_ACC	0.774	纯长度基线 len<=8->阳性 ACC
+lenbaseline_T10_ACC	0.820	纯长度基线 len<=10->阳性 ACC
+lenbaseline_T12_ACC	0.820	纯长度基线 len<=12->阳性 ACC
+lenbaseline_T6_MCC	0.504	纯长度基线 len<=6->阳性 MCC
+lenbaseline_T8_MCC	0.549	纯长度基线 len<=8->阳性 MCC
+lenbaseline_T10_MCC	0.648	纯长度基线 len<=10->阳性 MCC
+lenbaseline_T12_MCC	0.670	纯长度基线 len<=12->阳性 MCC
+benchmark_test_pos_len	n=133 median=4 mean=5.31 sd=3.72 min=2 max=18	测试正样本长度分布
+benchmark_test_neg_len	n=133 median=15 mean=15.53 sd=9.09 min=5 max=75	测试负样本长度分布
+stratum_short(<=6)_n	110	
+stratum_short(<=6)_pos_prevalence	0.800	阳性率
+stratum_short(<=6)_scm_ACC	0.518	该层 SCM ACC
+stratum_short(<=6)_lenbase_ACC	0.800	该层长度基线 ACC
+stratum_long(>6)_n	156	
+stratum_long(>6)_pos_prevalence	0.288	阳性率
+stratum_long(>6)_scm_ACC	0.692	该层 SCM ACC
+stratum_long(>6)_lenbase_ACC	0.833	该层长度基线 ACC
+candidate_n	4950	候选短肽池 (2-6 aa)
+candidate_len_dist	2:222,3:1126,4:1455,5:1202,6:945	长度->计数
+corr_scmScore_len_spearman	-0.188	SCM 全局分 ~ 长度 (候选池)
+corr_scmMean_len_spearman	-0.056	SCM 长度归一分 ~ 长度 (候选池)
+corr_siProb_len_spearman	-0.212	SI 概率 ~ 长度 (候选池, n=3398)
+lenreg_slope	-0.1875	score = slope*len + inter 的 slope
+top20_overlap_score_vs_resid	17	原始 Top20 与长度稳健 Top20 重叠数 (越低=偏倚越重塑排序)
+final_LPPGP_rank_score	16	原始 SCM 排名
+final_LPPGP_rank_resid	16	长度稳健残差排名
+final_APPSQ_rank_score	420	原始 SCM 排名
+final_APPSQ_rank_resid	420	长度稳健残差排名
+final_APQIP_rank_score	107	原始 SCM 排名
+final_APQIP_rank_resid	107	长度稳健残差排名
