@@ -4,7 +4,9 @@
 完全离线 / 零第三方依赖。
 
 方法 (与思路①同构, 但扩展到多靶点):
-  - DPP4 轴: 复用现有 iDPPIV-SCM 组成评分 (data/moso_candidates_idppiv.txt)
+  - 三轴统一: 均为 "参考集签名法" (候选 vs 已知活性肽的 组成cosine + 3-mer Jaccard)
+       DPP4 轴用本项目 37 条已知活性肽参考集 (data/literature_dpp4_peptides.tsv);
+       经独立验证的 iDPPIV-SCM 预测器得分在 §3.9/§3.13 单独报告, 不入本多靶点矩阵。
   - ACE / alphaG 轴: 文献锚定 "已知活性肽参考集" 派生
         (a) 组成签名 cosine 相似度 (候选 vs 参考集 20 维氨基酸组成)
         (b) 序列相似度: 候选与参考集逐肽的 3-mer Jaccard 最大值 (基序/短模体重叠)
@@ -13,7 +15,7 @@
   - 识别多靶点候选 (>=2 靶点同时进入前 1/10)
 
 诚实边界 (章节草稿与摘要均显式声明):
-  ACE / alphaG 分数为 "知识型组成+序列相似签名", 源于 *引用文献* 的已知活性肽,
+  ACE / alphaG / DPP4 三轴分数均为 "知识型组成+序列相似签名", 源于 *引用文献* 的已知活性肽,
   非基准验证的 ML 预测器; 仅表示 "与已知活性肽的相似度", 不等同预测活性。
   参考集规模小且偏短肽 -> 与思路①相同的长度偏倚警示适用。
 """
@@ -109,54 +111,49 @@ def pearson(xs, ys):
     dy = math.sqrt(sum((y-my)**2 for y in ys))
     return num/(dx*dy) if dx and dy else 0.0
 
-# ---------- 载入候选 (DPP4 轴 = iDPPIV_score) ----------
+# ---------- 载入候选 (三轴统一 = 参考集签名法) ----------
 cands = []
 with open(CAND, encoding="utf-8") as f:
     r = csv.DictReader(f, delimiter="\t")
     for row in r:
         pep = row["peptide"].strip()
-        try:
-            dscore = float(row["iDPPIV_score"])
-        except:
-            continue
         if all(c in AMI for c in pep) and 2 <= len(pep) <= 20:
-            cands.append([pep, len(pep), dscore])
+            cands.append([pep, len(pep)])
 print("candidates loaded:", len(cands))
 
-# ---------- 参考集组成签名 ----------
-ACE_PROF = ref_profile(ACE_REF)
-AG_PROF  = ref_profile(AG_REF)
+# ---------- 三靶点参考集组成签名 (同源, 保证可比) ----------
+DPP4_PROF = ref_profile(DPP4_REF)
+ACE_PROF  = ref_profile(ACE_REF)
+AG_PROF   = ref_profile(AG_REF)
 
-# 逐候选打分
+# 逐候选打分: 每轴 = 0.5*组成cosine + 0.5*3-mer Jaccard 最大值
 rows = []
-for pep, L, dscore in cands:
+for pep, L in cands:
     cv = comp_vec(pep)
-    ace_comp = cosine(cv, ACE_PROF)
-    ace_km   = max_kmer_jaccard(pep, ACE_REF)
-    ag_comp  = cosine(cv, AG_PROF)
-    ag_km    = max_kmer_jaccard(pep, AG_REF)
-    rows.append([pep, L, dscore, ace_comp, ace_km, ag_comp, ag_km])
+    dpp4_comp = cosine(cv, DPP4_PROF); dpp4_km = max_kmer_jaccard(pep, DPP4_REF)
+    ace_comp  = cosine(cv, ACE_PROF);  ace_km  = max_kmer_jaccard(pep, ACE_REF)
+    ag_comp   = cosine(cv, AG_PROF);   ag_km   = max_kmer_jaccard(pep, AG_REF)
+    rows.append([pep, L, dpp4_comp, dpp4_km, ace_comp, ace_km, ag_comp, ag_km])
 
 # ---------- min-max 归一化 ----------
-def col(idxs):
-    return [r[idxs] for r in rows]
+def col(idx):
+    return [r[idx] for r in rows]
 def minmax(vals):
     lo, hi = min(vals), max(vals)
     rng = hi-lo or 1.0
     return [(v-lo)/rng for v in vals]
 
-d_n   = minmax(col(2))
-ac_c_n = minmax(col(3))
-ac_k_n = minmax(col(4))
-ag_c_n = minmax(col(5))
-ag_k_n = minmax(col(6))
+d_c_n  = minmax(col(2)); d_k_n  = minmax(col(3))
+ac_c_n = minmax(col(4)); ac_k_n = minmax(col(5))
+ag_c_n = minmax(col(6)); ag_k_n = minmax(col(7))
 
 OUT = []
 for i, r in enumerate(rows):
-    pep, L, dscore, ace_comp, ace_km, ag_comp, ag_km = r
-    ace_score = 0.5*ac_c_n[i] + 0.5*ac_k_n[i]
-    ag_score  = 0.5*ag_c_n[i] + 0.5*ag_k_n[i]
-    OUT.append([pep, L, dscore, d_n[i],
+    pep, L, dpp4_comp, dpp4_km, ace_comp, ace_km, ag_comp, ag_km = r
+    dpp4_score = 0.5*d_c_n[i] + 0.5*d_k_n[i]
+    ace_score  = 0.5*ac_c_n[i] + 0.5*ac_k_n[i]
+    ag_score   = 0.5*ag_c_n[i] + 0.5*ag_k_n[i]
+    OUT.append([pep, L, dpp4_score, dpp4_comp, dpp4_km,
                 ace_comp, ace_km, ace_score,
                 ag_comp, ag_km, ag_score])
 
@@ -165,9 +162,9 @@ def top_mask(vals, frac=0.1):
     thr = sorted(vals)[int(len(vals)*(1-frac))-1]
     return [v >= thr for v in vals], thr
 
-d_top, d_thr       = top_mask([o[3] for o in OUT])
-ace_top, ace_thr   = top_mask([o[6] for o in OUT])
-ag_top, ag_thr     = top_mask([o[9] for o in OUT])
+d_top, d_thr       = top_mask([o[2] for o in OUT])
+ace_top, ace_thr   = top_mask([o[7] for o in OUT])
+ag_top, ag_thr     = top_mask([o[10] for o in OUT])
 
 for i, o in enumerate(OUT):
     ntar = sum([d_top[i], ace_top[i], ag_top[i]])
@@ -179,31 +176,31 @@ def bias_block(name, ref, score_col_idx):
     med, pshort, lo, hi, mean = length_stats(ref)
     Ls = [o[1] for o in OUT]
     scores = [o[score_col_idx] for o in OUT]
-    r = pearson(Ls, scores)
-    return (name, len(ref), med, round(pshort,3), lo, hi, round(mean,2), round(r,3))
+    rr = pearson(Ls, scores)
+    return (name, len(ref), med, round(pshort,3), lo, hi, round(mean,2), round(rr,3))
 
 bias = [
-    bias_block("DPP4 (ref=已知活性肽)", DPP4_REF, 3),
-    bias_block("ACE  (ref=已知活性肽)", ACE_REF, 6),
-    bias_block("alphaG(ref=已知活性肽)", AG_REF, 9),
+    bias_block("DPP4 (ref=已知活性肽)", DPP4_REF, 2),
+    bias_block("ACE  (ref=已知活性肽)", ACE_REF, 7),
+    bias_block("alphaG(ref=已知活性肽)", AG_REF, 10),
 ]
 
 # ---------- 输出 ----------
 tsv = os.path.join(OUTDIR, "multitarget_priority_matrix.tsv")
 with open(tsv, "w", encoding="utf-8", newline="") as f:
     w = csv.writer(f, delimiter="\t")
-    w.writerow(["peptide","length","dpp4_scm_score","dpp4_norm",
+    w.writerow(["peptide","length","dpp4_norm","dpp4_comp_cos","dpp4_kmer_jac",
                 "ace_comp_cos","ace_kmer_jac","ace_norm",
                 "ag_comp_cos","ag_kmer_jac","ag_norm",
                 "n_targets","flag"])
-    for o in sorted(OUT, key=lambda x: (-x[10], -x[3], -x[6], -x[9])):
+    for o in sorted(OUT, key=lambda x: (-x[11], -x[2], -x[7], -x[10])):
         w.writerow(o)
 
 summary = os.path.join(OUTDIR, "multitarget_summary.txt")
-multi = [o for o in OUT if o[10] >= 2]
-single_d = [o for o in OUT if o[11] == "SINGLE-DPP4"]
-single_a = [o for o in OUT if o[11] == "SINGLE-ACE"]
-single_g = [o for o in OUT if o[11] == "SINGLE-AG"]
+multi = [o for o in OUT if o[11] >= 2]
+single_d = [o for o in OUT if o[12] == "SINGLE-DPP4"]
+single_a = [o for o in OUT if o[12] == "SINGLE-ACE"]
+single_g = [o for o in OUT if o[12] == "SINGLE-AG"]
 with open(summary, "w", encoding="utf-8") as f:
     f.write("=== 思路② 多靶点抗糖尿病肽优先化 (离线/文献锚定) ===\n\n")
     f.write("候选池: %d 条 (来自 DPP4 阶段 iDPPIV 阳性)\n" % len(OUT))
@@ -218,17 +215,17 @@ with open(summary, "w", encoding="utf-8") as f:
     f.write("  单靶点 DPP4: %d | 单靶点 ACE: %d | 单靶点 alphaG: %d\n" % (len(single_d), len(single_a), len(single_g)))
     f.write("  阈值: dpp4_norm>=%.3f, ace_norm>=%.3f, ag_norm>=%.3f (各自前10%%)\n" % (d_thr, ace_thr, ag_thr))
     f.write("\n[C] 多靶点候选 Top-20 (按命中靶点数, 再按 dpp4 归一分)\n")
-    for o in sorted(multi, key=lambda x:(-x[10], -x[3]))[:20]:
+    for o in sorted(multi, key=lambda x:(-x[11], -x[2]))[:20]:
         f.write("  %-12s L=%2d  dpp4=%.3f ace=%.3f ag=%.3f  nTar=%d [%s]\n" %
-                (o[0], o[1], o[3], o[6], o[9], o[10], o[11]))
+                (o[0], o[1], o[2], o[7], o[10], o[11], o[12]))
     f.write("\n[D] 决赛候选在三靶点矩阵中的位置\n")
     for target in ["LPPGP","APPSQ","APQIP"]:
         m = [o for o in OUT if o[0]==target]
         if m:
             o = m[0]
             f.write("  %-8s L=%2d dpp4=%.3f ace=%.3f ag=%.3f nTar=%d flag=%s\n" %
-                    (o[0], o[1], o[3], o[6], o[9], o[10], o[11]))
-    f.write("\n诚实边界: ACE/alphaG 分数为知识型组成+序列相似签名(文献锚定), 非基准验证 ML 预测器;\n")
+                    (o[0], o[1], o[2], o[7], o[10], o[11], o[12]))
+    f.write("\n诚实边界: 三轴(DPP4/ACE/alphaG)分数均为知识型组成+序列相似签名(文献锚定), 非基准验证 ML 预测器;\n")
     f.write("          仅表示与已知活性肽的相似度, 不等同预测活性; 需湿实验验证。\n")
 
 print(open(summary, encoding="utf-8").read())

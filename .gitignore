@@ -25,3 +25,6 @@ Thumbs.db
 docking/_*.pdb
 _*.pdb
 docking/_mgbsa_*
+
+# 手稿正文（本地撰写中，暂不推送远程；需要时 git add -f 强制纳入）
+docs/manuscript_draft.md
