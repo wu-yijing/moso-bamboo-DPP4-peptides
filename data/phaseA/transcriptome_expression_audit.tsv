@@ -1,0 +1,6 @@
+dataset	tissue	stage_resolution	id_scheme	shoot_specific	uniprot_keyed	joinable_now	notes
+Peng 2013 (PMC3820679 / PLoS One e78944)	shoots (6 heights) + culms	height-graded	de novo unigenes	YES	NO	NO (needs BLAST vs our 253 proteins)	6076 up / 4613 down DEGs; Suppl Table S4 putative genes (XLS); 81% reads to genome
+MDPI 2020 Forests 11(8):861 ('Pachyloen' shoots)	shoots (H1-H12 young, M1-M12 mature)	developmental stage	reference-genome gene models (PH0100...)	YES	NO	INDIRECT (needs acc<->PH0100 map, currently blocked)	mapping rates Table 2; GO of shoot-specific genes Table 3; Suppl likely has expr matrix
+GSE104596 (Zhang 2018 BMC Plant Biol 18:125)	seedlings / culms (Mock vs GA)	GA treatment	platform/transcript IDs	NO (culm/seedling)	NO	PARTIAL	GA-response; 6 samples; aligned to P.heterocycla-v1.0; not shoot
+GSE90517 / PRJNA354950 (Wang 2017 Plant J 91:684)	rhizome	rhizome-associated	transcript/AS	NO (rhizome)	NO	NO	alternative splicing / polyadenylation; 16 samples
+GSE104951 (circRNA in culms)	culms	culm growth	circRNA	NO (culm)	NO	NO	circular RNAs in rapidly growing culms
