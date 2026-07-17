@@ -1,0 +1,32 @@
+{
+  "title": "A Reproducible, Offline Computational Framework for Proteome-Scale Antidiabetic Peptide Discovery with Quantified Predictor Length Bias — Moso Bamboo (Phyllostachys edulis) Case Study",
+  "description": "Scripts, benchmark datasets, and intermediate/final data products for a fully offline, reproducible computational framework that mines antidiabetic (DPP4-inhibitory) peptides at proteome scale from the moso bamboo (Phyllostachys edulis) proteome. Includes: offline reproductions of iDPPIV-SCM and iDPPIV-SI-style predictors; quantitative exposure and Tier0 length-matched debiasing of predictor length bias; multi-target (DPP4/ACE/alpha-glucosidase) same-proteome prioritization; genome-existence mapping and edible-shoot transcriptome bridging; AutoDock Vina docking and pocket-restricted MM-GBSA. No external API or online-service dependency.",
+  "upload_type": "software",
+  "access_right": "open",
+  "license": "MIT",
+  "keywords": [
+    "DPP-IV inhibitory peptides",
+    "antidiabetic peptides",
+    "proteome-scale peptide mining",
+    "moso bamboo",
+    "Phyllostachys edulis",
+    "predictor length bias",
+    "iDPPIV-SCM",
+    "molecular docking",
+    "MM-GBSA",
+    "reproducible computational framework"
+  ],
+  "creators": [
+    {
+      "name": "Wu, Yijing",
+      "affiliation": ""
+    }
+  ],
+  "related_identifiers": [
+    {
+      "identifier": "https://github.com/wu-yijing/moso-bamboo-DPP4-peptides",
+      "relation": "isSupplementTo",
+      "scheme": "url"
+    }
+  ]
+}

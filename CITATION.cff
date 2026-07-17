@@ -1,0 +1,20 @@
+cff-version: 1.2.0
+message: "If you use this software or its data products, please cite the archived Zenodo record and the associated article."
+title: "A Reproducible, Offline Computational Framework for Proteome-Scale Antidiabetic Peptide Discovery with Quantified Predictor Length Bias — Moso Bamboo (Phyllostachys edulis) Case Study"
+type: software
+authors:
+  - family-names: "Wu"
+    given-names: "Yijing"
+repository-code: "https://github.com/wu-yijing/moso-bamboo-DPP4-peptides"
+license: MIT
+keywords:
+  - "DPP-IV inhibitory peptides"
+  - "antidiabetic peptides"
+  - "proteome-scale peptide mining"
+  - "moso bamboo"
+  - "Phyllostachys edulis"
+  - "predictor length bias"
+  - "molecular docking"
+  - "MM-GBSA"
+# DOI to be filled after the first Zenodo deposit (concept DOI):
+# doi: 10.5281/zenodo.XXXXXXX
