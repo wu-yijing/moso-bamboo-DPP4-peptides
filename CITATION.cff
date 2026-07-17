@@ -5,6 +5,20 @@ type: software
 authors:
   - family-names: "Wu"
     given-names: "Yijing"
+    affiliation: "Department of Endocrinology, The First Affiliated Hospital of Anhui Medical University, Hefei 230022, Anhui Province, China; Department of Endocrinology, Bengbu First People's Hospital, Bengbu 233000, Anhui Province, China"
+  - family-names: "Chen"
+    given-names: "Mingwei"
+    affiliation: "Department of Endocrinology, The First Affiliated Hospital of Anhui Medical University, Hefei 230022, Anhui Province, China"
+  - family-names: "Wu"
+    given-names: "Qiuyan"
+    affiliation: "Department of Endocrinology, The First Affiliated Hospital of Bengbu Medical University, No. 287 Changhuai Road, Bengbu 233004, Anhui Province, China"
+  - family-names: "Zhao"
+    given-names: "Jingyi"
+    affiliation: "Department of Endocrinology, The First Affiliated Hospital of Bengbu Medical University, No. 287 Changhuai Road, Bengbu 233004, Anhui Province, China"
+  - family-names: "Jin"
+    given-names: "Guoxi"
+    affiliation: "Department of Endocrinology, The First Affiliated Hospital of Bengbu Medical University, No. 287 Changhuai Road, Bengbu 233004, Anhui Province, China"
+    orcid: "https://orcid.org/0000-0002-2364-0364"
 repository-code: "https://github.com/wu-yijing/moso-bamboo-DPP4-peptides"
 license: MIT
 keywords:
@@ -16,5 +30,4 @@ keywords:
   - "predictor length bias"
   - "molecular docking"
   - "MM-GBSA"
-# DOI to be filled after the first Zenodo deposit (concept DOI):
-# doi: 10.5281/zenodo.XXXXXXX
+doi: 10.5281/zenodo.21414111
